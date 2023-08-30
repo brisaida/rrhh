@@ -7,7 +7,7 @@ if (empty($_GET['section'])) {
 } else {
     $_GET['section'] == 'listadoEmpleados' ? include "./sections/empleado/listadoEmpleados.php" : false;
     $_GET['section'] == 'empleado' ? include "./sections/empleado/empleado.php" : false;
-    $_GET['section'] == 'perfilEmpleado' ? include "./sections/empleado/perfilEmpleado.php" : false;
+    $_GET['section'] == 'perfilPuesto' ? include "./sections/empleado/perfilPuesto.php" : false;
 }
 
 

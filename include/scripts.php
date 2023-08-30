@@ -15,7 +15,6 @@
 
 	<!-- jquery -->
 	<script src="./assets/js/jquery-3.7.1.min.js"></script>
-	<script src="./assets/js/select.js"></script>
 
 	<!-- sweet alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -35,6 +34,9 @@
 
          else if($_GET['section'] == 'empleado' || $_GET['section']=='empleado'){
             echo '<script src="./assets/js/sections/perfilEmpleado.js"></script>';
+        }
+         else if($_GET['section'] == 'perfilPuesto' || $_GET['section']=='perfilPuesto'){
+            echo '<script src="./assets/js/sections/perfilPuesto.js"></script>';
         }
 
 
