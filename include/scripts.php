@@ -38,6 +38,13 @@
          else if($_GET['section'] == 'perfilPuesto' || $_GET['section']=='perfilPuesto'){
             echo '<script src="./assets/js/sections/perfilPuesto.js"></script>';
         }
+        
+         else if($_GET['section'] == 'historialEmpleado' || $_GET['section']=='historialEmpleado'){
+            echo '<script src="./assets/js/sections/historialEmpleado.js"></script>';
+        }
+         else if($_GET['section'] == 'historialEmpleado' || $_GET['section']=='historialEmpleado'){
+            echo '<script src="./assets/js/sections/config.js"></script>';
+        }
 
 
         

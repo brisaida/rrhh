@@ -9,17 +9,9 @@
 
 					<div class="app-card-header p-3 border-bottom-0">
 						<div class="row align-items-center gx-3">
-							<div class="col-auto">
-								<div class="app-icon-holder">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
-										<path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-										<path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
-									</svg>
-								</div>
-
-							</div>
-							<div class="col-auto">
-								<h4 class="app-card-title">Perfil de Puesto</h4>
+						
+							<div class="col-12 ">
+									<h4 class="app-card-title text-center" >PERFIL DE PUESTO</h4>
 							</div>
 						</div>
 					</div>
@@ -41,25 +33,23 @@
 						<!--Objetivo-->
 						<div class="row g-2">
 							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control" id="objetivoInput">
-										<label for="objetivoInput">Objetivo</label>
-									</div>
+							<div class="form-floating">
+									<textarea class="form-control" id="objetivoInput" style="height: 100px"></textarea>
+									<label for="objetivoInput">Objetivos</label>
 								</div>
 							</div>
 						</div>
 
 						<!--Responsabilidades-->
-						<div class="row g-2 align-items-center">
+						<div class="row g-2 mt-2 align-items-center">
 							<div class="col-md">
 								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control" id="responsabilidadInput">
-										<label for="responsabilidadInput">Responsabilidades</label>
-									</div>
+									<textarea class="form-control" id="responsabilidadInput" style="height: 100px"></textarea>
+									<label for="responsabilidadInput">Responsabilidades</label>
 								</div>
+								
 							</div>
+
 							<!-- Boton agregar -->
 							<div class="col-auto align-items-center ">
 								<a class="btn app-btn-secondary" id="addResponsabilidad">
@@ -75,7 +65,7 @@
 							<div class="app-card app-card-orders-table shadow-sm mb-5">
 								<div class="app-card-body">
 									<div class="table-responsive">
-										<table class="table app-table-hover mb-0 text-left" id="responsabilidadTabla">
+										<table class="table app-table-hover mb-0 text-left table-striped " id="responsabilidadTabla">
 											<thead>
 												<tr>
 													<th class="cell"></th>
@@ -101,6 +91,14 @@
 									<div class="form-floating mb-3">
 										<input type="input" class="form-control" id="formacionInput">
 										<label for="formacionInput">Formación y experiencia</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-floating">
+									<div class="form-floating mb-3">
+										<input type="number" class="form-control" id="ponderacion1Number" max="10" min="1">
+										<label for="ponderacion1Number">Ponderación (1 al 10)</label>
 									</div>
 								</div>
 							</div>
