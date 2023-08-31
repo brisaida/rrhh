@@ -142,7 +142,6 @@
                             <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
                                     <li class="submenu-item"><a class="submenu-link" href="?section=listadoEmpleados">Perfil de empleado</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="?section=historialEmpleados">Historial de empleado</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="?section=perfilPuesto">Perfil de Puesto</a></li>
                                 </ul>
                             </div>
