@@ -9,7 +9,12 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'empleado' ? include "./sections/empleado/view/empleado.php" : false;
     $_GET['section'] == 'perfilPuesto' ? include "./sections/empleado/view/perfilPuesto.php" : false;
     $_GET['section'] == 'historialEmpleados' ? include "./sections/empleado/view/historialEmpleados.php" : false;
+
+
+    /* Mantenimientos */
     $_GET['section'] == 'configuracion' ? include "./sections/config.php" : false;
+    $_GET['section'] == 'profesion' ? include "./sections/mantenimientos/view/profesion.php" : false;
+    $_GET['section'] == 'tipoAccion' ? include "./sections/mantenimientos/view/accionesPersonal.php" : false;
 }
 
 
