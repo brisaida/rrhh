@@ -34,13 +34,13 @@
             //echo '<script src="./sections/home/js/inicio.js"></script>';
 
         } else if ($_GET['section'] == 'empleado' || $_GET['section'] == 'empleado') {
-            echo '<script src="./assets/js/sections/perfilEmpleado.js"></script>';
+            echo '<script src="./sections/empleado/functions/perfilEmpleado.js"></script>';
         } else if ($_GET['section'] == 'perfilPuesto' || $_GET['section'] == 'perfilPuesto') {
-            echo '<script src="./assets/js/sections/perfilPuesto.js"></script>';
+            echo '<script src="./sections/empleado/functions/perfilPuesto.js"></script>';
         } else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
-            echo '<script src="./assets/js/sections/historialEmpleado.js"></script>';
+            echo '<script src="./sections/empleado/functions/historialEmpleado.js"></script>';
         } else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
-            echo '<script src="./assets/js/sections/config.js"></script>';
+            echo '<script src="./sections/empleado/functions/config.js"></script>';
         }
     } else {
         echo '<script src="./sections/home/js/inicio.js"></script>';
