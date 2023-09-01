@@ -35,10 +35,27 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md">
+								<div class="form-floating">
+									<div class="form-floating mb-3">
+										<input type="input" class="form-control " id="nombreInput" disabled>
+										<label for="nombreInput">Código de empleado</label>
+									</div>
+								</div>
+							</div>
 
 						</div>
+
 						<div class="row g-2">
-							<div class="col-md-3">
+							<div class="col-md">
+								<div class="form-floating">
+									<div class="form-floating mb-3">
+										<input type="input" class="form-control" id="nombreInput">
+										<label for="nombreInput">Código de SAP</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md">
 								<div class="form-floating">
 									<div class="form-floating mb-3">
 										<input type="date" class="form-control text-end" id="iniciodate">
@@ -46,7 +63,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md">
 								<div class="form-floating">
 									<div class="form-floating mb-3">
 										<input type="date" class="form-control text-end" id="retiroInput">
@@ -54,7 +71,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md">
+							
+
+						</div>
+						<div class="row g-2">
+						<div class="col-md">
 								<div class="form-floating">
 									<div class="form-floating mb-3">
 										<select class="form-select " id="tipoSangreSelect" aria-label="Floating label select example">
@@ -69,9 +90,6 @@
 									</div>
 								</div>
 							</div>
-
-						</div>
-						<div class="row g-2">
 							<div class="col-md-3">
 								<div class="form-floating">
 									<div class="form-floating mb-3">

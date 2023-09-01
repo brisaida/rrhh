@@ -958,24 +958,7 @@
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<div class="app-card-body">
 
-									<div class="row g-3 align-items-end ">
-										<div class="col-md">
-										<div class=" mb-3">
-													<label for="idInput" class="text-center">&nbsp Código de Empleado</label>
-													<input type="input" class="form-control" id="idInput">
-												</div>
-										</div>
-										<div class="col-md">
-											<div class="form-floating">
-												<div class=" mb-3">
-													<label for="idInput" class="text-center">&nbsp Código SAP</label>
-													<input type="input" class="form-control" id="idInput">
-
-												</div>
-											</div>
-										</div>
-									</div>
-
+									
 
 									<!--FOTO DE PERFIL-->
 									<div class="row g-5 align-items-center mb-5">
