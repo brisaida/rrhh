@@ -159,8 +159,8 @@
                             </a><!--//nav-link-->
                             <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link" href="login.html">Solicitud</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="signup.html">Estado</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=solicitudAccion">Solicitud</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=estadoSolicitud">Estado</a></li>
                                 </ul>
                             </div>
                         </li>

@@ -11,7 +11,7 @@
 						<div class="row align-items-center gx-3">
 
 							<div class="col-12 ">
-								<h4 class="app-card-title text-center">Profesión</h4>
+								<h4 class="app-card-title text-center">Proyectos</h4>
 							</div>
 						</div>
 					</div>
@@ -21,7 +21,7 @@
 						<div class="row g-2 align-items-center">
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="perfilPuestoInput">Profesión</label>
+									<label for="perfilPuestoInput">Proyecto</label>
 									<input type="input" class="form-control" id="perfilPuestoInput"></input>
 								</div>
 							</div>
@@ -51,7 +51,7 @@
 											<thead>
 												<tr>
 													<th class="cell">Id</th>
-													<th class="cell">Profesión</th>
+													<th class="cell">Proyecto</th>
 													<th class="cell">Descripción</th>
 													<th class="cell">Acciones</th>
 												</tr>
@@ -61,8 +61,38 @@
 
 												<tr>
 													<td class="cell">01</td>
-													<td class="cell"><span class="truncate">Ingenieria Agroindustrial</span></td>
-													<td class="cell">Diseñar, dirigir y administrar proyectos de investigación tendientes a aprovechar industrialmente materias primas, desechos agroindustriales y subproductos.</td>
+													<td class="cell"><span class="truncate">La Alianza para el café</span></td>
+													<td class="cell">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, illum molestiae consectetur autem quo amet repellendus alias culpa repellat aliquam officia odio, laborum, expedita obcaecati mollitia velit ex temporibus voluptates?</td>
+													<td class="cell">
+
+														<a href="?section=empleado" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Editar" data-bs-html="true">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+																<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+															</svg>
+														</a>
+
+													</td>
+													</td>
+												</tr>
+												<tr>
+													<td class="cell">02</td>
+													<td class="cell"><span class="truncate">Secadoras Solares Nestle</span></td>
+													<td class="cell">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, illum molestiae consectetur autem quo amet repellendus alias culpa repellat aliquam officia odio, laborum, expedita obcaecati mollitia velit ex temporibus voluptates?</td>
+													<td class="cell">
+
+														<a href="?section=empleado" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Editar" data-bs-html="true">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+																<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+															</svg>
+														</a>
+
+													</td>
+													</td>
+												</tr>
+												<tr>
+													<td class="cell">03</td>
+													<td class="cell"><span class="truncate">Iniciativa por los Jóvenes Caficultores, Nestlé</span></td>
+													<td class="cell">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, illum molestiae consectetur autem quo amet repellendus alias culpa repellat aliquam officia odio, laborum, expedita obcaecati mollitia velit ex temporibus voluptates?</td>
 													<td class="cell">
 
 														<a href="?section=empleado" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Editar" data-bs-html="true">

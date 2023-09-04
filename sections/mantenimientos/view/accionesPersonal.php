@@ -91,7 +91,7 @@
 												</tr>
 												<tr>
 													<td class="cell">03</td>
-													<td class="cell"><span class="truncate">Falta Justigicada</span></td>
+													<td class="cell"><span class="truncate">Falta injustigicada</span></td>
 													<td class="cell"> inasistencias sin aviso de los trabajadores al desempeño de sus funciones</td>
 													<td class="cell">
 
@@ -106,8 +106,8 @@
 												</tr>
 												<tr>
 													<td class="cell">04</td>
-													<td class="cell"><span class="truncate">Falta Injustificada</span></td>
-													<td class="cell"></td>
+													<td class="cell"><span class="truncate">Falta Justificada</span></td>
+													<td class="cell">tiempo fuera del trabajo que ha sido aprobado por tu supervisor o gerente de empleo</td>
 													<td class="cell">
 
 														<a href="?section=empleado" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Editar" data-bs-html="true">

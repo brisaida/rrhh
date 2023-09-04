@@ -75,6 +75,21 @@
 
 						</div>
 						<div class="row g-2">
+							<div class="col-md-2 align-items-center mb-5">
+								<div class="form-floating">
+									<div class="form-floating mb-3">
+										<select class="form-select  " id="tipoSangreSelect" aria-label="Floating label select example">
+											<option selected class="text-end"></option>
+											<option value="1" class="text-end">Cortés &nbsp</option>
+											<option value="2" class="text-end">Copán &nbsp</option>
+											<option value="2" class="text-end">Siguatepeque &nbsp</option>
+											<option value="3" class="text-end">Santa Barbara &nbsp</option>
+											<option value="4" class="text-end">Intibuca &nbsp</option>
+										</select>
+										<label for="tipoSangreSelect">Zona Asignada</label>
+									</div>
+								</div>
+							</div>
 							<div class="col-md align-items-center mb-5">
 								<div class="form-floating">
 									<div class="form-floating mb-3">
