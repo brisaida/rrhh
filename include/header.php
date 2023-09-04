@@ -52,17 +52,18 @@
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
-                                                    <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
+                                                    <img class="profile-image" src="assets/images/birthday-cake.png" alt="">
                                                 </div> 
                                                 <div class="col">
                                                     <div class="info">
-                                                        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-                                                        <div class="meta"> 2 hrs ago</div>
+                                                        <div class="desc">Hoy esta de cumpleaños Marcos Sorto y Douglas Palma</div>
                                                     </div>
                                                 </div> 
                                             </div>
                                             <a class="link-mask" href="notifications.html"></a>
                                         </div>
+                                        
+                                        
                                     </div>
                                     <div class="dropdown-menu-footer p-2 text-center">
                                         <a href="notifications.html">Ver más</a>
@@ -254,7 +255,7 @@
                                         <path d="M5.56 7.646a.5.5 0 1 1-.706.708.5.5 0 0 1 .707-.708Zm1.415-1.414a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707ZM8.39 4.818a.5.5 0 1 1-.708.707.5.5 0 0 1 .707-.707Zm0 5.657a.5.5 0 1 1-.708.707.5.5 0 0 1 .707-.707ZM9.803 9.06a.5.5 0 1 1-.707.708.5.5 0 0 1 .707-.707Zm1.414-1.414a.5.5 0 1 1-.706.708.5.5 0 0 1 .707-.708ZM6.975 9.06a.5.5 0 1 1-.707.708.5.5 0 0 1 .707-.707ZM8.39 7.646a.5.5 0 1 1-.708.708.5.5 0 0 1 .707-.708Zm1.413-1.414a.5.5 0 1 1-.707.707.5.5 0 0 1 .707-.707Z" />
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Seguridad y Salud</span>
+                                <span class="nav-link-text">Seguro Médico</span>
                                 <span class="submenu-arrow">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
@@ -263,8 +264,8 @@
                             </a><!--//nav-link-->
                             <div id="submenu-7" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link" href="login.html">Seguro Médico</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="signup.html">Medidas de Seguridad</a></li>
+                                    <li class="submenu-item"><a class="submenu-link"  href="?section=docs">Documentos</a></li>
+                                    <li class="submenu-item"><a class="submenu-link"  href="?section=solicitudesSeguro">Solicitudes</a></li>
                                 </ul>
                             </div>
                         </li>
