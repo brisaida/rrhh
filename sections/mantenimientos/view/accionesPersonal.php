@@ -1,53 +1,51 @@
 <div class="app-wrapper">
-
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
-
 			<div class="row gy-4">
-				<!--DATOS GENERALES-->
 				<div class="app-card app-card-settings shadow-sm p-4">
-
 					<div class="app-card-header p-3 border-bottom-0">
+						<!-- ---------------------------------- -->
 						<div class="row align-items-center gx-3">
-
 							<div class="col-12 ">
 								<h4 class="app-card-title text-center">Tipo de Acción de Personal</h4>
 							</div>
 						</div>
 					</div>
-					<div class="app-card-body">
 
-						<!--Nombre del perfil-->
+					<div class="app-card-body">
+						<!-- ---------------------------------- -->
 						<div class="row g-2 align-items-center">
+							<!-- Acción -->
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="perfilPuestoInput">Acción</label>
-									<input type="input" class="form-control" id="perfilPuestoInput"></input>
+									<label for="accionInput">Acción</label>
+									<input type="input" class="form-control" id="accionInput"></input>
 								</div>
 							</div>
+							<!-- Descripción -->
 							<div class="col-md">
 								<div class="mb-3">
-									<label for="perfilPuestoInput">Descripción</label>
-									<input type="input" class="form-control" id="perfilPuestoInput"></input>
+									<label for="descripcionInput">Descripción</label>
+									<input type="input" class="form-control" id="descripcionInput"></input>
 								</div>
 							</div>
-
 						</div>
+						<!-- ---------------------------------- -->
 						<div class="row  mb-4 align-items-center justify-content-end">
+							<!-- Guardar -->
 							<div class="col-auto">
 								<a class="btn app-btn-primary" id="guardarBtn">
 									Guardar
 								</a>
 							</div>
-
 						</div>
 
-						<!--TABLE 1-->
+						<!--Tabla tipo de acción-->
 						<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 							<div class="app-card app-card-orders-table shadow-sm mb-5">
 								<div class="app-card-body">
 									<div class="table-responsive">
-										<table class="table app-table-hover mb-0 text-left">
+										<table class="table app-table-hover mb-0 text-left" id="tipoAccionTabla">
 											<thead>
 												<tr>
 													<th class="cell">Id</th>
@@ -119,7 +117,7 @@
 													</td>
 													</td>
 												</tr>
-												
+
 
 
 
@@ -144,13 +142,6 @@
 							</nav>
 
 						</div>
-
-
-
-
-
-
-
 					</div>
 				</div>
 			</div>

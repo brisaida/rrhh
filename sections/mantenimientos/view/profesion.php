@@ -1,53 +1,52 @@
 <div class="app-wrapper">
-
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
-
 			<div class="row gy-4">
-				<!--DATOS GENERALES-->
 				<div class="app-card app-card-settings shadow-sm p-4">
-
 					<div class="app-card-header p-3 border-bottom-0">
+						<!-- ---------------------------------- -->
 						<div class="row align-items-center gx-3">
-
 							<div class="col-12 ">
 								<h4 class="app-card-title text-center">Profesión</h4>
 							</div>
 						</div>
 					</div>
+					
 					<div class="app-card-body">
 
-						<!--Nombre del perfil-->
+						<!-- ---------------------------------- -->
 						<div class="row g-2 align-items-center">
+							<!-- Profesión -->
 							<div class="col-md-4">
 								<div class="mb-3">
-									<label for="perfilPuestoInput">Profesión</label>
-									<input type="input" class="form-control" id="perfilPuestoInput"></input>
+									<label for="profesionInput">Profesión</label>
+									<input type="input" class="form-control" id="profesionInput"></input>
 								</div>
 							</div>
+							<!-- Descripción -->
 							<div class="col-md">
 								<div class="mb-3">
-									<label for="perfilPuestoInput">Descripción</label>
-									<input type="input" class="form-control" id="perfilPuestoInput"></input>
+									<label for="descripcionInput">Descripción</label>
+									<input type="input" class="form-control" id="descripcionInput"></input>
 								</div>
 							</div>
-
 						</div>
+						<!-- ---------------------------------- -->
 						<div class="row  mb-4 align-items-center justify-content-end">
+							<!-- Guardar -->
 							<div class="col-auto">
 								<a class="btn app-btn-primary" id="guardarBtn">
 									Guardar
 								</a>
 							</div>
-
 						</div>
 
-						<!--TABLE 1-->
+						<!--Tabla de Profesiones-->
 						<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 							<div class="app-card app-card-orders-table shadow-sm mb-5">
 								<div class="app-card-body">
 									<div class="table-responsive">
-										<table class="table app-table-hover mb-0 text-left">
+										<table class="table app-table-hover mb-0 text-left" id="profesionesTablas">
 											<thead>
 												<tr>
 													<th class="cell">Id</th>
@@ -55,10 +54,8 @@
 													<th class="cell">Descripción</th>
 													<th class="cell">Acciones</th>
 												</tr>
-
 											</thead>
 											<tbody>
-
 												<tr>
 													<td class="cell">01</td>
 													<td class="cell"><span class="truncate">Ingenieria Agroindustrial</span></td>
@@ -74,15 +71,12 @@
 													</td>
 													</td>
 												</tr>
-
-
-
 											</tbody>
 										</table>
 									</div>
-
 								</div>
 							</div>
+							<!-- ---------------------------------- -->
 							<nav class="app-pagination">
 								<ul class="pagination justify-content-center">
 									<li class="page-item disabled">
@@ -96,15 +90,8 @@
 									</li>
 								</ul>
 							</nav>
-
 						</div>
-
-
-
-
-
-
-
+						
 					</div>
 				</div>
 			</div>

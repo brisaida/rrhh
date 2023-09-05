@@ -7,14 +7,10 @@
 				<!--DATOS GENERALES-->
 				<div class="app-card app-card-settings shadow-sm p-4">
 
-					<div class="app-card-header p-3 border-bottom-0">
-						<div class="row align-items-center gx-3">
-
-							<div class="col-12 ">
-								<h4 class="app-card-title text-center">PERFIL DE PUESTO</h4>
+				<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
+								Perfil de Puesto
 							</div>
-						</div>
-					</div>
+					<div class="app-card-body">
 					<div class="app-card-body">
 
 						<!--Nombre del perfil-->

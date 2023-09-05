@@ -1,6 +1,7 @@
 <div class="app-wrapper">
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
+			<!-- ---------------------------------- -->
 			<div class="row g-3 mb-4 align-items-center justify-content-between">
 
 				<!--TITLE-->
@@ -40,14 +41,14 @@
 				</div>
 
 			</div>
-
+			<!-- ---------------------------------- -->
 			<div class="tab-content" id="orders-table-tab-content">
-				<!--TABLE 1-->
+				<!--Tabla Listado de empelados-->
 				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 					<div class="app-card app-card-orders-table shadow-sm mb-5">
 						<div class="app-card-body">
 							<div class="table-responsive">
-								<table class="table app-table-hover mb-0 text-left">
+								<table class="table app-table-hover mb-0 text-left" id="ListadoEmpleadoTabla">
 									<thead>
 										<tr>
 											<th class="cell">No. de Empleado</th>

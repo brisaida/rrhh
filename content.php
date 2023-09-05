@@ -23,7 +23,6 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'estadoSolicitud' ? include "./sections/accionPersonal/views/estadoSolicitud.php" : false;
 
 
-
     /* Seguro Médico */
     $_GET['section'] == 'docs' ? include "./sections/seguro/docs.php" : false;
 }

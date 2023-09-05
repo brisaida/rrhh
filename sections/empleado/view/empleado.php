@@ -1,7 +1,6 @@
 <div class="app-wrapper">
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
-
 			<!--NAV HEADER -->
 			<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
 				<a class="flex-sm-fill text-sm-center nav-link active" id="datos-personales-tab" data-bs-toggle="tab" href="#datos-personales" role="tab" aria-controls="datos-personales" aria-selected="true">Datos Generales</a>
@@ -12,7 +11,6 @@
 				<a class="flex-sm-fill text-sm-center nav-link" id="referencias-tab" data-bs-toggle="tab" href="#referencias" role="tab" aria-controls="referencias" aria-selected="false">Referencias</a>
 				<a class="flex-sm-fill text-sm-center nav-link" id="adjuntos-tab" data-bs-toggle="tab" href="#adjuntos" role="tab" aria-controls="adjuntos" aria-selected="false">Adjuntos</a>
 			</nav>
-
 			<!-- NAV BODY -->
 			<div class="tab-content" id="orders-table-tab-content">
 
