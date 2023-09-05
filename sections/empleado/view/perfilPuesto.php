@@ -189,11 +189,9 @@
 							<label for="remuneracionInput">Condiciones de trabajo </label>
 
 							<select class="form-control js-example-basic-multiple" data-toggle="select" multiple="multiple">
-								<option value="1">Salario según capacidad</option>
-								<option value="1">Beneficios de ley</option>
-								<option value="1">Excelente clima laboral</option>
-								<option value="1">Oportunidad de crecimiento</option>
-								<option value="1">Seguro medico privado</option>
+								<option value="1">Sede laboral: Instalaciones Fundación COHONDUCAFÉ </option>
+								<option value="1">Horario de 7:00 am a 5:00 pm</option>
+								<option value="1">Disponibilidad para viajar a nivel nacional. </option>
 							</select>
 						</div>
 						<!--Condiciones de trabajo-->
