@@ -16,6 +16,8 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'profesion' ? include "./sections/mantenimientos/view/profesion.php" : false;
     $_GET['section'] == 'tipoAccion' ? include "./sections/mantenimientos/view/accionesPersonal.php" : false;
     $_GET['section'] == 'proyectos' ? include "./sections/mantenimientos/view/proyectos.php" : false;
+    $_GET['section'] == 'condicionTrabajo' ? include "./sections/mantenimientos/view/condicionesTrabajo.php" : false;
+    $_GET['section'] == 'remuneraciones' ? include "./sections/mantenimientos/view/remuneraciones.php" : false;
 
 
     /* Accion de personal */
@@ -24,7 +26,7 @@ if (empty($_GET['section'])) {
 
 
     /* Seguro Médico */
-    $_GET['section'] == 'docs' ? include "./sections/seguro/docs.php" : false;
+    $_GET['section'] == 'docs' ? include "./sections/seguro/views/docs.php" : false;
 }
 
 

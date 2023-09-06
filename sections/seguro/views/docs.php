@@ -43,10 +43,10 @@
 							<span class="icon-holder">
 								<i class="fas fa-file-alt text-file"></i>
 							</span>
-							<a class="app-card-link-mask" href="./sections/seguro/archivos/CartaDependenciaEconomica.pdf"  target="_blank"></a>
+							<a class="app-card-link-mask" href="./sections/seguro/archivos/CartaDependenciaEconomica.doc"  target="_blank"></a>
 						</div>
 						<div class="app-card-body p-3 ">
-							<h4 class="app-doc-title text-center"><a href="./sections/seguro/archivos/CartaDependenciaEconomica.pdf"  target="_blank">Formato de Carta de dependencia economica</a></h4>
+							<h4 class="app-doc-title text-center"><a href="./sections/seguro/archivos/CartaDependenciaEconomica.doc"  target="_blank">Formato de Carta de dependencia economica</a></h4>
 						</div>
 					</div>
 				</div>		
