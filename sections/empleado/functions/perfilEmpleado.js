@@ -1,18 +1,38 @@
 
 /* Esconder controles */
-$("#fechaVenceSection").hide();
+
 $(".esconder").hide();
 $(".esconderEstudios").hide();
 
 /* Mostrar información si tiene pasaporte */
 $("#pasaporteCheck").on("click", function () {
     if ($("#pasaporteCheck:checked").val()) {
-        $("#fechaVenceSection").show();
+        $(".pasaporteDate").show();
     } else {
-        $("#fechaVenceSection").hide();
-        $("#fechaVenceSection").val("");
+        $(".pasaporteDate").hide();
+        $(".pasaporteDate").val("");
     }
 });
+/* Mostrar información si tiene licencia de vehiculo */
+$("#licenciaCheck").on("click", function () {
+    if ($("#licenciaCheck:checked").val()) {
+        $(".carroDate").show();
+    } else {
+        $(".carroDate").hide();
+        $(".carroDate").val("");
+    }
+});
+/* Mostrar información si tiene licencia de moto */
+$("#motoCheck").on("click", function () {
+    if ($("#motoCheck:checked").val()) {
+        $(".motoDate").show();
+        console.log("hola");
+    } else {
+        $(".motoDate").hide();
+        $(".motoDate").val("");
+    }
+});
+
 
 /* Mostrar información si estudia */
 $("#estudioActualCheck").on("click", function () {
@@ -228,6 +248,36 @@ $('#licenciaFotoInput').change(function (e) {
 
         // get loaded data and render thumbnail.
         document.getElementById("licenciafotoImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* Previsualizar pasaporte */
+$('#pasaporteFotoInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("pasaportefotoImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* Previsualizar licencia de moto */
+$('#licenciaMotoFotoInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("licenciaMotofotoImg").src = e.target.result;
     };
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);

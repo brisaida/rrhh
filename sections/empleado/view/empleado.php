@@ -155,15 +155,39 @@
 												<label class="form-check-label" for="pasaporteCheck">¿Posee Pasaporte?</label>
 
 											</div>
-										</div>
-										<div class="col-md" id="fechaVenceSection">
 											<div class="form-floating">
-												<div class="form-floating mb-3">
-													<input type="date" class="form-control" id="fechaVenceInput">
-													<label for="fechaVenceInput">Fecha de vencimiento</label>
+												<div class="form-floating mb-3 esconder pasaporteDate" >
+													<input type="date" class="form-control" id="fechaVencePasaporteInput">
+													<label for="fechaVencePasaporteInput">Fecha de vencimiento</label>
 												</div>
 											</div>
 										</div>
+										<div class="col-md g-2">
+											<div class="form-check form-switch mb-3 ">
+												<input class="form-check-input" type="checkbox" role="switch" id="licenciaCheck">
+												<label class="form-check-label" for="licenciaCheck">¿Posee Licencia de Vehiculo?</label>
+											</div>
+											<div class="form-floating"  >
+												<div class="form-floating mb-3 esconder carroDate">
+													<input type="date" class="form-control" id="fechaVenceLicenciaInput">
+													<label for="fechaVenceLicenciaInput">Fecha de vencimiento</label>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md g-2">
+											<div class="form-check form-switch mb-3 ">
+												<input class="form-check-input" type="checkbox" role="switch" id="motoCheck">
+												<label class="form-check-label" for="motoCheck">¿Posee Licencia de Motocicleta?</label>
+											</div>
+											<div class="form-floating" >
+												<div class="form-floating mb-3 esconder motoDate" >
+													<input type="date" class="form-control" id="fechaVenceMotoInput">
+													<label for="fechaVenceMotoInput">Fecha de vencimiento</label>
+												</div>
+											</div>
+										</div>
+
 									</div>
 
 									<!-- SIGUIENTE -->
@@ -325,7 +349,7 @@
 									<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 										<div class="app-card app-card-orders-table shadow-sm mb-5">
 											<div class="app-card-body">
-												<div class="table-responsive esconder" id="parentescoTabla">
+												<div class="table-responsive esconder" id="parentescoConocidosTabla">
 													<table class="table app-table-hover mb-0 text-left">
 														<thead>
 															<tr>
@@ -958,7 +982,7 @@
 
 									
 
-									<!--FOTO DE PERFIL-->
+									<!--FOTO DE IDENTIDAD-->
 									<div class="row g-5 align-items-center mb-5">
 										<div class="col-md-3">
 											<img src="./assets/images/id-card.png" class="img-fluid  rounded " alt="..." id="idfotoImg">
@@ -971,14 +995,41 @@
 										</div>
 
 									</div>
-									<div class="row g-5 align-items-center ">
+									<!--FOTO DE PASAPORTE-->
+									<div class="row g-5 align-items-center esconder pasaporteDate mb-5">
+										<div class="col-md-3">
+											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="pasaportefotoImg">
+										</div>
+										<div class="col-md">
+											<div class="mb-3">
+												<label for="licenciaFotoInput">&nbspCargar foto de Pasaporte</label>
+												<input type="file" class="form-control " id="pasaporteFotoInput" accept=".jpg,.png,.jpeg">
+											</div>
+										</div>
+
+									</div>
+									<!--FOTO DE LICENCIA DE CARRO-->
+									<div class="row g-5 align-items-center esconder carroDate mb-5 ">
 										<div class="col-md-3">
 											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciafotoImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
-												<label for="licenciaFotoInput">&nbspCargar foto de Licencia</label>
+												<label for="licenciaFotoInput">&nbspCargar foto de Licencia de Vehiculo</label>
 												<input type="file" class="form-control " id="licenciaFotoInput" accept=".jpg,.png,.jpeg">
+											</div>
+										</div>
+
+									</div>
+									<!--FOTO DE LICENCIA DE MOTO-->
+									<div class="row g-5 align-items-center esconder motoDate mb-5 ">
+										<div class="col-md-3">
+											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciaMotofotoImg">
+										</div>
+										<div class="col-md">
+											<div class="mb-3">
+												<label for="licenciaFotoInput">&nbspCargar foto de Licencia de Motocicleta</label>
+												<input type="file" class="form-control " id="licenciaMotoFotoInput" accept=".jpg,.png,.jpeg">
 											</div>
 										</div>
 
