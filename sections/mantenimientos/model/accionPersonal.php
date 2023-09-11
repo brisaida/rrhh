@@ -19,30 +19,51 @@
 
         public function agregarRegistro($losDatos){
             
-            $sql = "INSERT INTO rrhh.tipoAccionesPersonal(nombre,descripcion) 
-                    VALUES(:nombre,:descripcion) ";
+            $sql = "insert into rrhh.tipoAccionesPersonal(nombre,descripcion) 
+                    values(:nombre,:descripcion) ";
             $stmt = $this->conn->prepare($sql);
-
 
             $stmt->bindParam(":nombre", $losDatos->nombre);
             $stmt->bindParam(":descripcion", $losDatos->descripcion);
+           
 
-            
+
+
             try {
                 # Iniciamos una transacción.
-                $this->conn->beginTransaction();                
-                
-                echo $stmt->execute(); 
-                $resultado = "exito";   
+                $this->conn->beginTransaction();                 
+                $resultado = $stmt->execute(); 
+                $this->conn->commit();
+
+
             } catch (PDOException $e) {
                 //$this->conn->rollBack();
                 $res = $stmt->errorInfo();           
-                $resultado = json_encode($res);                             
+                $resultado = json_encode($res);  
             }
             
             $stmt->closeCursor();
             return $resultado;
         }
+
+        
+        public function listarRegistros(){
+            $sql = "SELECT *FROM rrhh.tipoAccionesPersonal";
+            $stmt = $this->conn->prepare($sql);
+
+            try {
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+            } catch (PDOException $e) {
+                $resultado = $e->getMessage();
+            }
+            $stmt->closeCursor();
+            return $resultado;
+        }
+
+
+
     }
     
 ?>
