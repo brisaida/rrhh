@@ -136,8 +136,8 @@
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="nacionalidadInput">
-												<label for="nacionalidadInput">No. de cuenta bancaria (BAC)</label>
+												<input type="input" class="form-control" id="cuentaBancoInput">
+												<label for="cuentaBancoInput">No. de cuenta bancaria (BAC)</label>
 											</div>
 										</div>
 									</div>
@@ -152,6 +152,9 @@
 												</div>
 											</div>
 										</div>
+										<input type="input" class="form-control esconder" id="latInput">
+										<input type="input" class="form-control esconder" id="longInput">
+
 										<div class="col-md-8">
 											<div id="map" style="  height: 400px!important"></div>
 										</div>
@@ -291,6 +294,7 @@
 																<th class="cell">Nombre</th>
 																<th class="cell">Edad</th>
 																<th class="cell">Dirección</th>
+																<th class="cell">Acciones</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -377,6 +381,7 @@
 																<th class="cell">Profesión</th>
 																<th class="cell">Tiempo de conocerle</th>
 																<th class="cell">Empresa en que labora</th>
+																<th class="cell">Acciones</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -478,7 +483,7 @@
 													<input type="tel" class="form-control" id="enfermedadesInput">
 													<label for="enfermedadesInput">Enfermedades de base</label>
 													<span class="peque">
-														*En caso de padecer
+														*En caso de padecer de lo contrario escribir N/A
 													</span>
 												</div>
 											</div>
@@ -492,7 +497,7 @@
 												<div class="form-floating mb-3">
 													<input type="input" class="form-control" id="medicoCabeceraInput">
 													<label for="medicoCabeceraInput">Médico de cabecera</label>
-													<span class="peque">*En caso de tener</span>
+													<span class="peque">*En caso de tener de lo contrario escribir N/A</span>
 												</div>
 											</div>
 										</div>
@@ -613,6 +618,7 @@
 																<th class="cell">De</th>
 																<th class="cell">Hasta</th>
 																<th class="cell">Lugar</th>
+																<th style="width: 100px;">Acciones</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -648,7 +654,7 @@
 										<div class="col-md-2 esconderEstudios">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="time" class="form-control" id="horarioInput">
+													<input type="time" class="form-control" id="horarioDesdeInput">
 													<label for="horarioInput">Horario desde</label>
 												</div>
 											</div>
@@ -656,7 +662,7 @@
 										<div class="col-md-2 esconderEstudios">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="time" class="form-control" id="horarioInput">
+													<input type="time" class="form-control" id="horarioHastaInput">
 													<label for="horarioInput">Horario hasta</label>
 												</div>
 											</div>
@@ -991,13 +997,14 @@
 										<div class="app-card app-card-orders-table shadow-sm mb-5">
 											<div class="app-card-body">
 												<div class="table-responsive">
-													<table class="table app-table-hover mb-0 text-left" id="referenciasTabla">
+													<table class="table app-table-hover mb-0 text-center" id="referenciasTabla">
 														<thead>
 															<tr>
 																<th class="cell">Nombre</th>
 																<th class="cell">Profesión</th>
 																<th class="cell">Teléfono</th>
-																<th class="cell">Dirección</th>
+																<th class="cell">Dirección</th> 
+																<th class="cell" style="width: 100px">Acciones</th> 
 															</tr>
 														</thead>
 														<tbody>
@@ -1040,7 +1047,7 @@
 										Curriculum Vitae </div>
 									<div class="col-md">
 										<div class="mb-3">
-											<input type="file" class="form-control " id="policialesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
+											<input type="file" class="form-control " id="cvInput" accept=".jpg,.png,.jpeg,.pdf">
 										</div>
 									</div>
 									<!--FOTO DE IDENTIDAD-->
@@ -1164,7 +1171,7 @@
 									<!-- ------------------------------------ -->
 									<div class="row g-2 justify-content-end">
 										<div class="col-12 col-lg-2">
-											<a class="btn app-btn-primary">
+											<a class="btn app-btn-primary" id="revisarBtn">
 												Revisar todo
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
 													<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />

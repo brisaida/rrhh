@@ -24,7 +24,9 @@ myMap.on('click', function (event) {
     }
     // Crea un nuevo marcador en la ubicación del clic
     marker = L.marker(latlng,{ icon: customIcon }).addTo(myMap);
-    console.log(latlng); 
+    $("#latInput").val(event.latlng.lat);
+    $("#longInput").val(event.latlng.lng);
+
 
   
 

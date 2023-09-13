@@ -79,6 +79,7 @@ $("#agregarEducacion").on("click", function () {
             '<td>' + de + '</td>' +
             '<td>' + hasta + '</td>' +
             '<td>' + lugar + '</td>' +
+            '<td> <button class="btn btn-danger" accion="eliminar" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button> </td>' +
             '</tr>';
 
         $("#nivelEducativoSelect").val("");
@@ -111,13 +112,14 @@ $("#agregarReferenciaBtn").on("click", function () {
         direccion.length > 0
     ) {
         var htmlTags = '<tr>' +
-            '<td>' + profesion + '</td>' +
             '<td>' + nombre + '</td>' +
+            '<td>' + profesion + '</td>' +
             '<td>' + telefono + '</td>' +
             '<td>' + direccion + '</td>' +
+            '<td> <button class="btn btn-danger" accion="eliminar" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button> </td>' +
             '</tr>';
 
-        $("#profesionSelect").val("");
+        $("#nombreReferenciaInput").val("");
         $("#profesionReferenciaInput").val("");
         $("#telReferenciaInput").val("");
         $("#dirReferenciaInput").val("");
@@ -151,6 +153,7 @@ $("#AgregarParentescoBtn").on("click", function () {
             '<td>' + nombre + '</td>' +
             '<td>' + edad + '</td>' +
             '<td>' + direccion + '</td>' +
+            '<td> <button class="btn btn-danger" accion="eliminar" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button> </td>' +
             '</tr>';
 
         $("#parentescoSelect").val("");
@@ -187,6 +190,7 @@ $("#conocidosTrabajandoBtn").on("click", function () {
             '<td>' + parentesco + '</td>' +
             '<td>' + tiempoConocerlo + '</td>' +
             '<td>' + empresa + '</td>' +
+            '<td> <button class="btn btn-danger" accion="eliminar" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button> </td>' +
             '</tr>';
 
         $("#parentescoInput").val("");
@@ -206,6 +210,47 @@ $("#conocidosTrabajandoBtn").on("click", function () {
 
 
 });
+
+// !Eliminar datos de las tablas
+// !------------------------------------------------
+
+$("#parentescoTabla tbody").on("click", "td button", function () {
+    // Obtener la acción a realizar
+    const accion = $(this).attr("accion");
+    if (accion == "eliminar") {
+        $(this).closest("tr").remove();
+        
+    }
+});
+
+$("#parentescoConocidosTabla tbody").on("click", "td button", function () {
+    // Obtener la acción a realizar
+    const accion = $(this).attr("accion");
+    if (accion == "eliminar") {
+        $(this).closest("tr").remove();
+        
+    }
+});
+
+$("#educacionTabla tbody").on("click", "td button", function () {
+    // Obtener la acción a realizar
+    const accion = $(this).attr("accion");
+    if (accion == "eliminar") {
+        $(this).closest("tr").remove();
+        
+    }
+});
+
+$("#referenciasTabla tbody").on("click", "td button", function () {
+    // Obtener la acción a realizar
+    const accion = $(this).attr("accion");
+    if (accion == "eliminar") {
+        $(this).closest("tr").remove();
+        
+    }
+});
+
+
 
 
 // !Previsualicación de fotos
@@ -337,40 +382,40 @@ $('#licenciaMotoFotoBackInput').change(function (e) {
 // !Pasar a la siguiente página.
 // !------------------------------------------------
 
-$("#siguienteHfBtn").on("click",function(){
-    siguiente("datos-personales","historial-familiar")
+$("#siguienteHfBtn").on("click", function () {
+    siguiente("datos-personales", "historial-familiar")
 });
 
-$("#siguienteSBtn").on("click",function(){
-   siguiente("historial-familiar","salud")
+$("#siguienteSBtn").on("click", function () {
+    siguiente("historial-familiar", "salud")
 });
 
-$("#siguienteEBtn").on("click",function(){
-    siguiente("salud","educacion")
- });
+$("#siguienteEBtn").on("click", function () {
+    siguiente("salud", "educacion")
+});
 
- $("#siguienteAlBtn").on("click",function(){
-    siguiente("educacion","antecedentes-laborales")
- });
+$("#siguienteAlBtn").on("click", function () {
+    siguiente("educacion", "antecedentes-laborales")
+});
 
- $("#siguienteRBtn").on("click",function(){
-    siguiente("antecedentes-laborales","referencias")
- });
+$("#siguienteRBtn").on("click", function () {
+    siguiente("antecedentes-laborales", "referencias")
+});
 
- $("#siguienteABtn").on("click",function(){
-    siguiente("referencias","adjuntos")
- });
+$("#siguienteABtn").on("click", function () {
+    siguiente("referencias", "adjuntos")
+});
 
 
 // !Funciones
 // !------------------------------------------------
 
 /* Pasar a la siguiente página */
-function siguiente(anterior, siguiente){
-    $("#"+siguiente+"-tab").addClass("active");
-    $("#"+anterior+"-tab").removeClass("active");
-    $("#"+siguiente).addClass("active");
-    $("#"+anterior).removeClass("active");
+function siguiente(anterior, siguiente) {
+    $("#" + siguiente + "-tab").addClass("active");
+    $("#" + anterior + "-tab").removeClass("active");
+    $("#" + siguiente).addClass("active");
+    $("#" + anterior).removeClass("active");
 }
 
 /* Calcular edad en base a una fecha */

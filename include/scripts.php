@@ -39,6 +39,7 @@
 		} else if ($_GET['section'] == 'empleado' || $_GET['section'] == 'empleado') {
 			echo '<script src="./sections/empleado/functions/perfilEmpleado.js"></script>';
 			echo '<script src="./sections/empleado/functions/maps.js"></script>';
+			echo '<script src="./sections/empleado/functions/validacionesPerfil.js"></script>';
 		} else if ($_GET['section'] == 'perfilPuesto' || $_GET['section'] == 'perfilPuesto') {
 			echo '<script src="./sections/empleado/functions/perfilPuesto.js"></script>';
 		} else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
