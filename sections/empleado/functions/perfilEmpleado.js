@@ -1,10 +1,13 @@
 
 /* Esconder controles */
-
 $(".esconder").hide();
 $(".esconderEstudios").hide();
 
-/* Mostrar información si tiene pasaporte */
+
+// !Mostrar información
+// !------------------------------------------------
+
+/* Si tiene pasaporte */
 $("#pasaporteCheck").on("click", function () {
     if ($("#pasaporteCheck:checked").val()) {
         $(".pasaporteDate").show();
@@ -13,7 +16,7 @@ $("#pasaporteCheck").on("click", function () {
         $(".pasaporteDate").val("");
     }
 });
-/* Mostrar información si tiene licencia de vehiculo */
+/* Si tiene licencia de vehiculo */
 $("#licenciaCheck").on("click", function () {
     if ($("#licenciaCheck:checked").val()) {
         $(".carroDate").show();
@@ -22,7 +25,7 @@ $("#licenciaCheck").on("click", function () {
         $(".carroDate").val("");
     }
 });
-/* Mostrar información si tiene licencia de moto */
+/* Si tiene licencia de moto */
 $("#motoCheck").on("click", function () {
     if ($("#motoCheck:checked").val()) {
         $(".motoDate").show();
@@ -32,9 +35,7 @@ $("#motoCheck").on("click", function () {
         $(".motoDate").val("");
     }
 });
-
-
-/* Mostrar información si estudia */
+/* Si estudia */
 $("#estudioActualCheck").on("click", function () {
     if ($("#estudioActualCheck:checked").val()) {
         $(".esconderEstudios").show();
@@ -43,8 +44,7 @@ $("#estudioActualCheck").on("click", function () {
         $(".esconderEstudios").val("");
     }
 });
-
-/* Mostrar información si tiene parientes conocidos en la empresa */
+/* Si tiene parientes conocidos en la empresa */
 $("#parientesConocidosCheck").on("click", function () {
     if ($("#parientesConocidosCheck:checked").val()) {
         $(".esconder").show();
@@ -53,6 +53,10 @@ $("#parientesConocidosCheck").on("click", function () {
         $(".esconder").val("");
     }
 });
+
+
+// !Agregar datos a las tablas
+// !------------------------------------------------
 
 /* Agregar información en la tabla educación} */
 $("#agregarEducacion").on("click", function () {
@@ -93,7 +97,6 @@ $("#agregarEducacion").on("click", function () {
 
     $('#educacionTabla tbody').append(htmlTags);
 });
-
 /* Agregar información en la tabla de referencias */
 $("#agregarReferenciaBtn").on("click", function () {
     let profesion = $.trim($("#profesionReferenciaInput").val());
@@ -166,9 +169,8 @@ $("#AgregarParentescoBtn").on("click", function () {
 
     $('#parentescoTabla tbody').append(htmlTags);
 });
-
 /* Agregar información en la tabla de parientes conocidos que trabajan en la empresa */
-$("#agregarConocidosBtn").on("click", function () {
+$("#conocidosTrabajandoBtn").on("click", function () {
     let parentesco = $.trim($("#parentescoInput").val());
     let nombre = $.trim($("#nombreConocidoInput").val());
     let tiempoConocerlo = $.trim($("#tiempoConocerleInput").val());
@@ -181,8 +183,8 @@ $("#agregarConocidosBtn").on("click", function () {
         empresa.length > 0
     ) {
         var htmlTags = '<tr>' +
-            '<td>' + parentesco + '</td>' +
             '<td>' + nombre + '</td>' +
+            '<td>' + parentesco + '</td>' +
             '<td>' + tiempoConocerlo + '</td>' +
             '<td>' + empresa + '</td>' +
             '</tr>';
@@ -191,6 +193,8 @@ $("#agregarConocidosBtn").on("click", function () {
         $("#nombreConocidoInput").val("");
         $("#tiempoConocerleInput").val("");
         $("#empresaLaboraInput").val("");
+
+        $('#parentescoConocidosTabla tbody').append(htmlTags);
 
     } else {
         Swal.fire({
@@ -201,11 +205,13 @@ $("#agregarConocidosBtn").on("click", function () {
     }
 
 
-
-    $('#parentescoTabla tbody').append(htmlTags);
 });
 
-/* Previsualizar Foto */
+
+// !Previsualicación de fotos
+// !------------------------------------------------
+
+/* Foto */
 $('#archivoInput').change(function (e) {
 
     var fileName = e.target.files[0].name;
@@ -220,25 +226,8 @@ $('#archivoInput').change(function (e) {
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 });
-
-/* Previsualizar id */
-$('#idFotoInput').change(function (e) {
-
-    var fileName = e.target.files[0].name;
-    $("#file").val(fileName);
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-
-        // get loaded data and render thumbnail.
-        document.getElementById("idfotoImg").src = e.target.result;
-    };
-    // read the image file as a data URL.
-    reader.readAsDataURL(this.files[0]);
-});
-
-/* Previsualizar licencia */
-$('#licenciaFotoInput').change(function (e) {
+/* Id front*/
+$('#idfotoFrontInput').change(function (e) {
 
     var fileName = e.target.files[0].name;
     $("#file").val(fileName);
@@ -247,12 +236,57 @@ $('#licenciaFotoInput').change(function (e) {
     reader.onload = function (e) {
 
         // get loaded data and render thumbnail.
-        document.getElementById("licenciafotoImg").src = e.target.result;
+        document.getElementById("idfotoFrontImg").src = e.target.result;
     };
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 });
-/* Previsualizar pasaporte */
+/* Id back*/
+$('#idfotoBackInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("idfotoBackImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* licencia front*/
+$('#licenciaFotoFrontInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("licenciafotoFrontImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* licencia back*/
+$('#licenciaFotoBackInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("licenciafotoBackImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* pasaporte */
 $('#pasaporteFotoInput').change(function (e) {
 
     var fileName = e.target.files[0].name;
@@ -267,8 +301,8 @@ $('#pasaporteFotoInput').change(function (e) {
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 });
-/* Previsualizar licencia de moto */
-$('#licenciaMotoFotoInput').change(function (e) {
+/* licencia de moto front*/
+$('#licenciaMotoFotoFrontInput').change(function (e) {
 
     var fileName = e.target.files[0].name;
     $("#file").val(fileName);
@@ -277,12 +311,31 @@ $('#licenciaMotoFotoInput').change(function (e) {
     reader.onload = function (e) {
 
         // get loaded data and render thumbnail.
-        document.getElementById("licenciaMotofotoImg").src = e.target.result;
+        document.getElementById("licenciaMotofotoFrontImg").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+/* licencia de moto back*/
+$('#licenciaMotoFotoBackInput').change(function (e) {
+
+    var fileName = e.target.files[0].name;
+    $("#file").val(fileName);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        // get loaded data and render thumbnail.
+        document.getElementById("licenciaMotoBackfotoImg").src = e.target.result;
     };
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 });
 
+
+
+// !Pasar a la siguiente página.
+// !------------------------------------------------
 
 $("#siguienteHfBtn").on("click",function(){
     siguiente("datos-personales","historial-familiar")
@@ -309,10 +362,10 @@ $("#siguienteEBtn").on("click",function(){
  });
 
 
+// !Funciones
+// !------------------------------------------------
 
-
-
-
+/* Pasar a la siguiente página */
 function siguiente(anterior, siguiente){
     $("#"+siguiente+"-tab").addClass("active");
     $("#"+anterior+"-tab").removeClass("active");

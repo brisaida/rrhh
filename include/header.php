@@ -20,7 +20,11 @@
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
     <link id="theme-style" rel="stylesheet" href="assets/css/mine.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+    <!-- Leaflet -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 </head>
 
@@ -53,17 +57,17 @@
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
                                                     <img class="profile-image" src="assets/images/birthday-cake.png" alt="">
-                                                </div> 
+                                                </div>
                                                 <div class="col">
                                                     <div class="info">
                                                         <div class="desc">Hoy esta de cumpleaños Marcos Sorto y Douglas Palma</div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </div>
                                             <a class="link-mask" href="notifications.html"></a>
                                         </div>
-                                        
-                                        
+
+
                                     </div>
                                     <div class="dropdown-menu-footer p-2 text-center">
                                         <a href="notifications.html">Ver más</a>
@@ -264,8 +268,8 @@
                             </a><!--//nav-link-->
                             <div id="submenu-7" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link"  href="?section=docs">Documentos</a></li>
-                                    <li class="submenu-item"><a class="submenu-link"  href="?section=solicitudesSeguro">Solicitudes</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=docs">Documentos</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=solicitudesSeguro">Solicitudes</a></li>
                                 </ul>
                             </div>
                         </li>
