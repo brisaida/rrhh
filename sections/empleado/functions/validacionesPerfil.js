@@ -31,7 +31,7 @@ $("#revisarBtn").on("click", function () {
 
     if ($("#pasaporteCheck:checked").val()) {
         pasaporte = $("#fechaVencePasaporteInput").val();
-        pasaporteFoto = $("#pasaportefotoImg").val();
+        pasaporteFoto = $("#pasaporteFotoInput").val();
     }
     if ($("#licenciaCheck:checked").val()) {
         licenciaCarro = $("#fechaVenceLicenciaInput").val();
@@ -206,6 +206,10 @@ $("#revisarBtn").on("click", function () {
     let penales = $.trim($("#penalesFotoInput").val());
     let policiales = $.trim($("#policialesFotoInput").val());
 
+    if (!idCv) { falta += " - Curriculum" }
+    if (!idFront || !idBack) { falta += " - Foto de Identidad" }
+    if (!penales) { falta += " - Antecentes Penales" }
+    if (!policiales) { falta += " - Antecedentes Policiales" }
 
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
