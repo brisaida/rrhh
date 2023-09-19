@@ -95,6 +95,20 @@
 												<label for="nacionalidadInput">Nacionalidad</label>
 											</div>
 										</div>
+										<div class="col-md">
+											<div class="form-floating">
+												<select class="form-select" id="estadoCivilSelect" aria-label="Floating label select example">
+													<option selected class="text-end"></option>
+													<option value="1" class="text-end">Soltero &nbsp</option>
+													<option value="2" class="text-end">Casado &nbsp</option>
+													<option value="2" class="text-end">Viudo &nbsp</option>
+													<option value="3" class="text-end">Divorciado &nbsp</option>
+													<option value="4" class="text-end">Separado &nbsp</option>
+													<option value="5" class="text-end">Union Libre &nbsp</option>
+												</select>
+												<label for="estadoCivilSelect">Estado Civil</label>
+											</div>
+										</div>
 
 									</div>
 
@@ -108,18 +122,11 @@
 												</div>
 											</div>
 										</div>
+
 										<div class="col-md">
-											<div class="form-floating">
-												<select class="form-select" id="estadoCivilSelect" aria-label="Floating label select example">
-													<option selected class="text-end"></option>
-													<option value="1" class="text-end">Soltero &nbsp</option>
-													<option value="2" class="text-end">Casado &nbsp</option>
-													<option value="2" class="text-end">Viudo &nbsp</option>
-													<option value="3" class="text-end">Divorciado &nbsp</option>
-													<option value="4" class="text-end">Separado &nbsp</option>
-													<option value="5" class="text-end">Union Libre &nbsp</option>
-												</select>
-												<label for="estadoCivilSelect">Estado Civil</label>
+											<div class="form-floating mb-3">
+												<input type="input" class="form-control" id="emailInput">
+												<label for="emailInput">Correo Electronico</label>
 											</div>
 										</div>
 										<div class="col-md ">
@@ -621,7 +628,7 @@
 										<!-- Boton agregar -->
 										<div class="col-auto ">
 											<a class="btn btn app-btn-primary" id="agregarEducacion">
-											Agregar
+												Agregar
 											</a>
 										</div>
 									</div>
@@ -652,6 +659,75 @@
 											</div>
 										</div>
 									</div>
+
+									<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
+										Idiomas
+									</div>
+
+									<div class="row g-2 align-items-center  ">
+										<div class="col-md-3">
+											<div class="form-floating">
+												<div class="form-floating mb-3">
+													<input type="input" min="1970" class="form-control" id="idiomaInput">
+													<label for="idiomaInput">Idioma</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-1">
+											<div class="form-floating">
+												<div class="form-floating mb-3">
+													<input type="number" min="0" max="100" class="form-control" id="porcentajeInput">
+													<label for="porcentajeInput">%</label>
+												</div>
+											</div>
+										</div>
+										<!-- Boton agregar -->
+										<div class="col-md-1 align-items-center">
+											<a class="btn btn app-btn-primary" id="agregarIdioma">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+													<path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+												</svg>
+											</a>
+										</div>
+										<div class="col-md">
+											<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+												<div class="app-card app-card-orders-table shadow-sm mb-5">
+													<div class="app-card-body">
+														<div class="table-responsive">
+															<table class="table app-table-hover mb-0 text-left" id="idiomasTabla">
+																<thead>
+																	<tr>
+																		<th class="cell text-center">Idioma</th>
+																		<th class="cell text-center">%</th>
+																		<th class="cell text-center" style="width: 50px;">Acciones</th>
+																	</tr>
+																</thead>
+																<tbody>
+													
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!--TABLA-->
+
+									</div>
+
+
+
+
+
+
+									<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
+										Estudios Actuales
+									</div>
+
+
 
 									<!-- Estudios actuales -->
 									<div class="col-md ">
@@ -701,7 +777,7 @@
 									</div>
 
 									<div class="row g-2 justify-content-end">
-									<div class="col-6 d-flex justify-content-start align-items-center">
+										<div class="col-6 d-flex justify-content-start align-items-center">
 											<a class="btn app-btn-primary" id="anteriorAlBtn">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
 													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
@@ -947,7 +1023,7 @@
 										</div>
 									</div>
 									<div class="row g-2 justify-content-end">
-									<div class="col-6 d-flex justify-content-start align-items-center">
+										<div class="col-6 d-flex justify-content-start align-items-center">
 											<a class="btn app-btn-primary" id="anteriorRBtn">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
 													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
@@ -1024,7 +1100,7 @@
 										</div>
 										<div class="col-auto ">
 											<a class="btn btn app-btn-primary" id="agregarReferenciaBtn">
-											Agregar
+												Agregar
 											</a>
 										</div>
 									</div>
@@ -1057,7 +1133,7 @@
 
 									</div>
 									<div class="row g-2 justify-content-end">
-									<div class="col-6 d-flex justify-content-start align-items-center">
+										<div class="col-6 d-flex justify-content-start align-items-center">
 											<a class="btn app-btn-primary" id="anteriorABtn">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
 													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
@@ -1214,7 +1290,7 @@
 
 									<!-- ------------------------------------ -->
 									<div class="row g-2 justify-content-end">
-									<div class="col-6 d-flex justify-content-start align-items-center">
+										<div class="col-6 d-flex justify-content-start align-items-center">
 											<a class="btn app-btn-primary" id="anteriorBtn">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
 													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />

@@ -57,6 +57,7 @@ $("#revisarBtn").on("click", function () {
         lugarNacimiento: $.trim($("#lugarNacimientoInput").val()),
         nacionalidad: $.trim($("#nacionalidadInput").val()),
         telefono: $.trim($("#telefonoInput").val()),
+        email: $.trim($("#emailInput").val()),
         estadoCivil: $.trim($("#estadoCivilSelect").val()),
         genero: $.trim($("#generoSelect").val()),
         cuentaBancaria: $.trim($("#cuentaBancoInput").val()),
@@ -82,6 +83,7 @@ $("#revisarBtn").on("click", function () {
     if (!datosGenerales.lugarNacimiento) { falta += " - Lugar de Nacimiento" }
     if (!datosGenerales.nacionalidad) { falta += " - Nacionalidad" }
     if (!datosGenerales.telefono) { falta += " - telefono" }
+    if (!datosGenerales.email) { falta += " - Correo Electronico" }
     if (!datosGenerales.estadoCivil) { falta += " - Estado Civil" }
     if (!datosGenerales.genero) { falta += " - Género" }
     if (!datosGenerales.cuentaBancaria) { falta += " - Cuenta Bancaria" }
@@ -214,6 +216,26 @@ $("#revisarBtn").on("click", function () {
 
         // Agrega el registro al arreglo "parentesco"
         educacion.push(registro);
+    });
+
+    var filasIdiomas = $('#idiomasTabla tr');
+    var cantidadFilasIdiomas = filasIdiomas.length - 1;
+    if (cantidadFilasIdiomas == 0) {
+        falta += " - Información sobre los idiomas";
+    }
+
+    var idiomas = [];
+
+    $('#idiomasTabla tbody tr').each(function () {
+        var fila = $(this);
+        var registro = {};
+
+        // Obtiene los valores de las celdas y los almacena en el arreglo
+        registro.idioma = fila.find('td:eq(0)').text();
+        registro.porcentaje = fila.find('td:eq(1)').text();
+
+        // Agrega el registro al arreglo "parentesco"
+        idiomas.push(registro);
     });
 
 
