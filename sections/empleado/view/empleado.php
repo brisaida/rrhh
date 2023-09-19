@@ -95,7 +95,7 @@
 												<label for="nacionalidadInput">Nacionalidad</label>
 											</div>
 										</div>
-										
+
 									</div>
 
 									<!--NUMERO DE TELEFONO -- GENERO -- ESTADO CIVIL-->
@@ -144,6 +144,9 @@
 
 									<!--DIRECCIÓN-->
 									<div class="row g-2">
+										<div class="col-md-8">
+											<div id="map" style="  height: 400px!important"></div>
+										</div>
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
@@ -155,9 +158,7 @@
 										<input type="input" class="form-control esconder" id="latInput">
 										<input type="input" class="form-control esconder" id="longInput">
 
-										<div class="col-md-8">
-											<div id="map" style="  height: 400px!important"></div>
-										</div>
+
 									</div>
 
 									<!-- PASAPORTE -->
@@ -274,10 +275,8 @@
 										</div>
 										<!-- Boton agregar -->
 										<div class="col-auto ">
-											<a class="btn app-btn-secondary" id="AgregarParentescoBtn">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-													<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-												</svg>
+											<a class="btn btn app-btn-primary" id="AgregarParentescoBtn">
+												Agregar
 											</a>
 										</div>
 									</div>
@@ -361,10 +360,8 @@
 											</div>
 										</div>
 										<div class="col-auto esconder align-items-end">
-											<a class="btn app-btn-secondary" id="conocidosTrabajandoBtn">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-													<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-												</svg>
+											<a class="btn btn app-btn-primary" id="conocidosTrabajandoBtn">
+												Agregar
 											</a>
 										</div>
 									</div>
@@ -395,8 +392,17 @@
 									</div>
 
 									<!-- Siguiente -->
-									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="row g-2 ">
+										<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorSBtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="siguienteSBtn">
 												Siguiente
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -427,7 +433,7 @@
 											<div class="form-floating">
 												<div class="form-floating mb-3">
 													<input type="input" class="form-control" id="contacto1Input">
-													<label for="contacto1Input">Contacto de Emergencia</label>
+													<label for="contacto1Input">1. Contacto de Emergencia</label>
 												</div>
 											</div>
 										</div>
@@ -445,7 +451,7 @@
 											<div class="form-floating">
 												<div class="form-floating mb-3">
 													<input type="input" class="form-control" id="contacto2Input">
-													<label for="contacto2Input">Contacto de Emergencia</label>
+													<label for="contacto2Input">2. Contacto de Emergencia</label>
 												</div>
 											</div>
 										</div>
@@ -465,14 +471,14 @@
 											<div class="form-floating">
 												<select class="form-select " id="tipoSangreSelect" aria-label="Floating label select example">
 													<option selected class="text-end"></option>
-													<option value="1" class="text-end">A Positivo &nbsp</option>
-													<option value="2" class="text-end">A Negativo &nbsp</option>
-													<option value="2" class="text-end">B Positivo&nbsp</option>
-													<option value="3" class="text-end">B Negativo &nbsp</option>
-													<option value="4" class="text-end">AB Positivo &nbsp</option>
-													<option value="5" class="text-end">AB Negativo &nbsp</option>
-													<option value="5" class="text-end">O Positivo &nbsp</option>
-													<option value="5" class="text-end">O Negativo &nbsp</option>
+													<option value="AP" class="text-end">A Positivo &nbsp</option>
+													<option value="AN" class="text-end">A Negativo &nbsp</option>
+													<option value="BP" class="text-end">B Positivo&nbsp</option>
+													<option value="BN" class="text-end">B Negativo &nbsp</option>
+													<option value="ABP" class="text-end">AB Positivo &nbsp</option>
+													<option value="ABN" class="text-end">AB Negativo &nbsp</option>
+													<option value="OP" class="text-end">O Positivo &nbsp</option>
+													<option value="ON" class="text-end">O Negativo &nbsp</option>
 												</select>
 												<label for="tipoSangreSelect">Tipo de Sangre</label>
 											</div>
@@ -518,8 +524,17 @@
 											</div>
 										</div>
 									</div>
-									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="row g-2">
+										<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorEBtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="siguienteEBtn">
 												Siguiente
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -547,16 +562,16 @@
 									</div>
 									<!-- Nivel educativo -- Centro Educativo-->
 									<div class="row g-2">
-										<div class="col-md-4">
+										<div class="col-md-2">
 											<div class="form-floating">
 												<select class="form-select" id="nivelEducativoSelect" aria-label="Floating label select example">
 													<option selected class="text-end"> </option>
-													<option value="Padre" class="text-end">Primaria &nbsp</option>
-													<option value="Madre" class="text-end">Sencundaria &nbsp</option>
-													<option value="Conyuge" class="text-end">Pregrado &nbsp</option>
-													<option value="Conyuge" class="text-end">Posgrado &nbsp</option>
-													<option value="Hijo" class="text-end">Curso &nbsp</option>
-													<option value="Hijo" class="text-end">Seminario &nbsp</option>
+													<option value="Primaria" class="text-end">Primaria &nbsp</option>
+													<option value="Secundaria" class="text-end">Sencundaria &nbsp</option>
+													<option value="Pregrado" class="text-end">Pregrado &nbsp</option>
+													<option value="Postgrado" class="text-end">Posgrado &nbsp</option>
+													<option value="curso" class="text-end">Curso &nbsp</option>
+													<option value="diplomado" class="text-end">Seminario &nbsp</option>
 												</select>
 												<label for="nivelEducativoSelect">Nivel Educativo</label>
 											</div>
@@ -566,6 +581,14 @@
 												<div class="form-floating mb-3">
 													<input type="input" class="form-control" id="centroEducativoInput">
 													<label for="centroEducativoInput">Centro Educativo</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md">
+											<div class="form-floating">
+												<div class="form-floating mb-3">
+													<input type="input" class="form-control" id="carreraInput">
+													<label for="carreraInput">Estudios en:</label>
 												</div>
 											</div>
 										</div>
@@ -597,10 +620,8 @@
 										</div>
 										<!-- Boton agregar -->
 										<div class="col-auto ">
-											<a class="btn app-btn-secondary" id="agregarEducacion">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-													<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-												</svg>
+											<a class="btn btn app-btn-primary" id="agregarEducacion">
+											Agregar
 											</a>
 										</div>
 									</div>
@@ -615,6 +636,7 @@
 															<tr>
 																<th class="cell">Nivel</th>
 																<th class="cell">Centro Educativo</th>
+																<th class="cell">Estudios en:</th>
 																<th class="cell">De</th>
 																<th class="cell">Hasta</th>
 																<th class="cell">Lugar</th>
@@ -679,7 +701,16 @@
 									</div>
 
 									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorAlBtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="siguienteAlBtn">
 												Siguiente
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -811,7 +842,6 @@
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
 										Trabajo anterior al último
 									</div>
-									<div class="row m-5 border-top"></div>
 
 									<!-- Nombre y tipo de empresa -->
 									<div class="row g-2">
@@ -917,7 +947,16 @@
 										</div>
 									</div>
 									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorRBtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="siguienteRBtn">
 												Siguiente
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -984,10 +1023,8 @@
 											</div>
 										</div>
 										<div class="col-auto ">
-											<a class="btn app-btn-secondary" id="agregarReferenciaBtn">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-													<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-												</svg>
+											<a class="btn btn app-btn-primary" id="agregarReferenciaBtn">
+											Agregar
 											</a>
 										</div>
 									</div>
@@ -1003,8 +1040,8 @@
 																<th class="cell">Nombre</th>
 																<th class="cell">Profesión</th>
 																<th class="cell">Teléfono</th>
-																<th class="cell">Dirección</th> 
-																<th class="cell" style="width: 100px">Acciones</th> 
+																<th class="cell">Dirección</th>
+																<th class="cell" style="width: 100px">Acciones</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -1020,7 +1057,16 @@
 
 									</div>
 									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorABtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="siguienteABtn">
 												Siguiente
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -1047,7 +1093,7 @@
 										Curriculum Vitae </div>
 									<div class="col-md">
 										<div class="mb-3">
-											<input type="file" class="form-control " id="cvInput" accept=".jpg,.png,.jpeg,.pdf">
+											<input type="file" class="form-control " id="cvInput" accept=".pdf,.doc,.docx">
 										</div>
 									</div>
 									<!--FOTO DE IDENTIDAD-->
@@ -1094,10 +1140,8 @@
 												<input type="file" class="form-control " id="policialesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
 											</div>
 										</div>
-
-
-
 									</div>
+
 									<!--FOTO DE PASAPORTE-->
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success esconder pasaporteDate">
 										Pasaporte
@@ -1170,7 +1214,16 @@
 
 									<!-- ------------------------------------ -->
 									<div class="row g-2 justify-content-end">
-										<div class="col-12 col-lg-2">
+									<div class="col-6 d-flex justify-content-start align-items-center">
+											<a class="btn app-btn-primary" id="anteriorBtn">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+													<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+												</svg>
+												Anterior
+											</a>
+										</div>
+										<div class="col-6 d-flex justify-content-end align-items-center">
 											<a class="btn app-btn-primary" id="revisarBtn">
 												Revisar todo
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">

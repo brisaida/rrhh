@@ -29,7 +29,6 @@ $("#licenciaCheck").on("click", function () {
 $("#motoCheck").on("click", function () {
     if ($("#motoCheck:checked").val()) {
         $(".motoDate").show();
-        console.log("hola");
     } else {
         $(".motoDate").hide();
         $(".motoDate").val("");
@@ -62,6 +61,7 @@ $("#parientesConocidosCheck").on("click", function () {
 $("#agregarEducacion").on("click", function () {
     let nivel = $.trim($("#nivelEducativoSelect").val());
     let centro = $.trim($("#centroEducativoInput").val());
+    let estudios = $.trim($("#carreraInput").val());
     let de = $.trim($("#desdeNumber").val());
     let hasta = $.trim($("#hastaNumber").val());
     let lugar = $.trim($("#lugarInput").val());
@@ -69,6 +69,7 @@ $("#agregarEducacion").on("click", function () {
 
     if (nivel.length > 0 &&
         centro.length > 0 &&
+        estudios.length > 0 &&
         de.length > 0 &&
         hasta.length > 0 &&
         lugar.length > 0
@@ -76,6 +77,7 @@ $("#agregarEducacion").on("click", function () {
         var htmlTags = '<tr>' +
             '<td>' + nivel + '</td>' +
             '<td>' + centro + '</td>' +
+            '<td>' + estudios + '</td>' +
             '<td>' + de + '</td>' +
             '<td>' + hasta + '</td>' +
             '<td>' + lugar + '</td>' +
@@ -384,26 +386,47 @@ $('#licenciaMotoFotoBackInput').change(function (e) {
 
 $("#siguienteHfBtn").on("click", function () {
     siguiente("datos-personales", "historial-familiar")
+    
+});
+$("#anteriorSBtn").on("click", function () {
+    console.log("CLICK");
+    siguiente( "historial-familiar","datos-personales")
+    
 });
 
 $("#siguienteSBtn").on("click", function () {
     siguiente("historial-familiar", "salud")
 });
+$("#anteriorEBtn").on("click", function () {
+    siguiente( "salud","historial-familiar")
+});
 
 $("#siguienteEBtn").on("click", function () {
     siguiente("salud", "educacion")
+});
+$("#anteriorAlBtn").on("click", function () {
+    siguiente( "educacion","salud")
 });
 
 $("#siguienteAlBtn").on("click", function () {
     siguiente("educacion", "antecedentes-laborales")
 });
+$("#anteriorRBtn").on("click", function () {
+    siguiente( "antecedentes-laborales","educacion")
+});
 
 $("#siguienteRBtn").on("click", function () {
     siguiente("antecedentes-laborales", "referencias")
 });
+$("#anteriorABtn").on("click", function () {
+    siguiente( "referencias","antecedentes-laborales")
+});
 
 $("#siguienteABtn").on("click", function () {
     siguiente("referencias", "adjuntos")
+});
+$("#anteriorBtn").on("click", function () {
+    siguiente( "adjuntos","referencias")
 });
 
 
@@ -414,9 +437,21 @@ $("#siguienteABtn").on("click", function () {
 function siguiente(anterior, siguiente) {
     $("#" + siguiente + "-tab").addClass("active");
     $("#" + anterior + "-tab").removeClass("active");
+
     $("#" + siguiente).addClass("active");
     $("#" + anterior).removeClass("active");
+    $("#" + anterior).addClass("show");
+    $("#" + anterior).addClass("show");
+    
+    $("#" + siguiente+ "-tab").attr('aria-selected', 'true');
+    $("#" + anterior+ "-tab").attr('aria-selected', 'false');
+
+    $("#" + siguiente+ "-tab").removeAttr('tabindex');
+    $("#" + anterior+ "-tab").attr('tabindex', '-1');
+
+
 }
+
 
 /* Calcular edad en base a una fecha */
 function calcularEdad(fecha) {
