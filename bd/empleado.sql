@@ -1,10 +1,10 @@
 /* Ficha de empleado */
 
+
 CREATE TABLE rrhh.empleados (
 	idEmpleado INT IDENTITY (1,1) NOT NULL
 		CONSTRAINT PK_Empleado_id
 		PRIMARY KEY CLUSTERED (idEmpleado),
-	foto VARCHAR(100) NOT NULL,
 	DNI VARCHAR(20) NOT NULL,
 	primerNombre VARCHAR(100) NOT NULL,
 	segundoNombre VARCHAR(100) NULL,
@@ -16,8 +16,11 @@ CREATE TABLE rrhh.empleados (
 	nacionalidad VARCHAR(100) NULL,
 	estadoCivil VARCHAR(100) NULL,
 	genero VARCHAR(100) NULL,
-	ciudad VARCHAR(100) NULL,
 	email VARCHAR(100) NOT NULL,
+	cuentaBancaria VARCHAR(20) NOT NULL,
+	vencimientoLicencia DATE  NULL,
+	vencimientoLicenciaMoto DATE  NULL,
+	vencimientoPasaporte DATE  NULL,
 	estado BIT NOT NULL,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
@@ -178,3 +181,28 @@ CREATE TABLE rrhh.referencias (
 	usuarioModificado VARCHAR(100) NULL
 );
 GO
+
+
+CREATE TABLE rrhh.adjuntos (
+	idAdjunto INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_Adjuntos_id
+		PRIMARY KEY CLUSTERED (idAdjunto),
+	idEmpleado INT NOT NULL,
+	foto VARCHAR(100) NULL,
+	dniFront VARCHAR(100) NULL,
+	dniBack VARCHAR(100) NOT NULL,
+	cv VARCHAR(100) NOT NULL,
+	penales VARCHAR(100) NOT NULL,
+	policiales VARCHAR(100) NOT NULL,
+	pasaporte VARCHAR(100) NULL,
+	licenciaCarroFront VARCHAR(100) NULL,
+	licenciaCarroBack VARCHAR(100) NULL,
+	licenciaMotoFront VARCHAR(100) NULL,
+	licenciaMotoBack VARCHAR(100) NULL,
+	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
+	fechaModificado DATETIME NULL,
+	usuarioCreado VARCHAR(100) NOT NULL,
+	usuarioModificado VARCHAR(100) NULL
+);
+GO
+

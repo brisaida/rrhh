@@ -86,6 +86,7 @@ $("#agregarEducacion").on("click", function () {
 
         $("#nivelEducativoSelect").val("");
         $("#centroEducativoInput").val("");
+        $("#carreraInput").val("");
         $("#desdeNumber").val("");
         $("#hastaNumber").val("");
         $("#lugarInput").val("");
@@ -194,6 +195,7 @@ $("#AgregarParentescoBtn").on("click", function () {
         $("#parentescoSelect").val("");
         $("#parentescoSelect").val("");
         $("#nombreFamiliarInput").val("");
+        $("#familiarTel").val("");
         $("#nacimientoFamiliarDate").val("");
         $("#direccionFamiliarInput").val("");
 

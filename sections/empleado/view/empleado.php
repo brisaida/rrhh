@@ -752,8 +752,8 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="carreraInput">
-													<label for="carreraInput">Carrera/Diplomado</label>
+													<input type="input" class="form-control" id="carreraActualInput">
+													<label for="carreraActualInput">Carrera/Diplomado</label>
 												</div>
 											</div>
 										</div>

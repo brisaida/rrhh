@@ -1,6 +1,7 @@
 // !Este archivo contiene las validaciones que se realizaran al perfil del empleado antes de guardar(dicha del empleado)
 
 var falta = "";
+var usuario=1; 
 
 $("#revisarBtn").on("click", function () {
 
@@ -19,14 +20,19 @@ $("#revisarBtn").on("click", function () {
 
     const fotoEmpleado = document.querySelector("#archivoInput");
     const foto = fotoEmpleado.files;
+
     const fotoPasaporte = document.querySelector("#pasaporteFotoInput");
     const fotoPass = fotoPasaporte.files;
+
     const fotoLicencia1 = document.querySelector("#licenciaFotoFrontInput");
     const foto1 = fotoLicencia1.files;
+
     const fotoLicencia2 = document.querySelector("#licenciaFotoBackInput");
     const foto2 = fotoLicencia2.files;
+
     const fotoMoto1 = document.querySelector("#licenciaMotoFotoFrontInput");
     const moto1 = fotoMoto1.files;
+
     const fotoMoto2 = document.querySelector("#licenciaMotoFotoBackInput");
     const moto2 = fotoMoto2.files;
 
@@ -34,7 +40,9 @@ $("#revisarBtn").on("click", function () {
     if ($("#pasaporteCheck:checked").val()) {
         pasaporte = $("#fechaVencePasaporteInput").val();
         pasaporteFoto = fotoPass;
-    }                         
+    }else{
+        pasaporte
+    }
     if ($("#licenciaCheck:checked").val()) {
         licenciaCarro = $("#fechaVenceLicenciaInput").val();
         licenciaCarroFoto1 = foto1;
@@ -47,7 +55,6 @@ $("#revisarBtn").on("click", function () {
     }
 
     var datosGenerales = {
-        foto: foto,
         id: $.trim($("#idInput").val()),
         primerNombre: $.trim($("#primerNombreInput").val()),
         segundoNombre: $.trim($("#segundoNombreInput").val()),
@@ -61,21 +68,17 @@ $("#revisarBtn").on("click", function () {
         estadoCivil: $.trim($("#estadoCivilSelect").val()),
         genero: $.trim($("#generoSelect").val()),
         cuentaBancaria: $.trim($("#cuentaBancoInput").val()),
-        dirección: $.trim($("#direccionInput").val()),
+        direccion: $.trim($("#direccionInput").val()),
         lat: $.trim($("#latInput").val()),
         long: $.trim($("#longInput").val()),
         pasaporte: pasaporte,
         licenciaCarro: licenciaCarro,
-        licenciaCarroFoto1: licenciaCarroFoto1,
-        licenciaCarroFoto2: licenciaCarroFoto2,
         licenciaMoto: licenciaMoto,
-        licenciaMotoFoto1: licenciaMotoFoto1,
-        licenciaMotoFoto2: licenciaMotoFoto2,
-        pasaporteFoto: pasaporteFoto,
+        usuario: usuario,
     }
 
 
-    if (!datosGenerales.foto) { falta += " - Foto" }
+    if (!foto) { falta += " - Foto" }
     if (!datosGenerales.id) { falta += " - No. de identidad" }
     if (!datosGenerales.primerNombre) { falta += " - Primer Nombre" }
     if (!datosGenerales.primerApellido) { falta += " - Primer Apellido" }
@@ -87,7 +90,7 @@ $("#revisarBtn").on("click", function () {
     if (!datosGenerales.estadoCivil) { falta += " - Estado Civil" }
     if (!datosGenerales.genero) { falta += " - Género" }
     if (!datosGenerales.cuentaBancaria) { falta += " - Cuenta Bancaria" }
-    if (!datosGenerales.dirección) { falta += " - Dirección" }
+    if (!datosGenerales.direccion) { falta += " - Dirección" }
     if (!datosGenerales.lat || !datosGenerales.long) { falta += " - La ubicación de tu casa en el mapa" }
 
     // En el caso de los siguientes campos al ser opcionales solo les agrega el N/A
@@ -97,15 +100,15 @@ $("#revisarBtn").on("click", function () {
 
     if ($("#pasaporteCheck:checked").val()) {
         if (!datosGenerales.pasaporte) { falta += " - Fecha de vencimiento de pasaporte" }
-        if (!datosGenerales.pasaporteFoto) { falta += " - Foto de Pasaporte" }
+        if (!pasaporteFoto) { falta += " - Foto de Pasaporte" }
     }
     if ($("#licenciaCheck:checked").val()) {
         if (!datosGenerales.licenciaCarro) { falta += " - Fecha de Vencimiento de la licencia de vehiculo" }
-        if (!datosGenerales.licenciaCarroFoto1 || !datosGenerales.licenciaCarroFoto2) { falta += " - Foto de Licencia Vehículo" }
+        if (!licenciaCarroFoto1 || !licenciaCarroFoto2) { falta += " - Foto de Licencia Vehículo" }
     }
     if ($("#motoCheck:checked").val()) {
         if (!datosGenerales.licenciaMoto) { falta += " - Fecha de vencimiento de la licencia de motocicleta" }
-        if (!datosGenerales.licenciaMotoFoto1 || !datosGenerales.licenciaMotoFoto2) { falta += " - Foto de Licencia Motocicleta" }
+        if (!licenciaMotoFoto1 || !licenciaMotoFoto2) { falta += " - Foto de Licencia Motocicleta" }
     }
 
 
@@ -128,7 +131,8 @@ $("#revisarBtn").on("click", function () {
         registro.parentesco = fila.find('td:eq(0)').text();
         registro.nombreCompleto = fila.find('td:eq(1)').text();
         registro.fechaNacimiento = fila.find('td:eq(2)').text();
-        registro.direccion = fila.find('td:eq(3)').text();
+        registro.telefono = fila.find('td:eq(3)').text();
+        registro.direccion = fila.find('td:eq(43)').text();
 
         // Agrega el registro al arreglo "parentesco"
         parentesco.push(registro);
@@ -189,8 +193,6 @@ $("#revisarBtn").on("click", function () {
 
 
 
-
-
     // *Sección de Educación
     // *---------------------------------------------------------
 
@@ -243,12 +245,12 @@ $("#revisarBtn").on("click", function () {
     if ($("#estudioActualCheck:checked").val()) {
 
         var estudiosActuales = {
-            carrera: $.trim($("#carreraInput").val()),
+            carrera: $.trim($("#carreraActualInput").val()),
             desde: $.trim($("#horarioDesdeInput").val()),
             hasta: $.trim($("#horarioHastaInput").val()),
             fechaFinalizacion: $.trim($("#finalizaDate").val()),
         }
-
+        console.log($("#carreraActualInput").val());
 
         if (!estudiosActuales.carrera) { falta += " - Carrera o diploma que estudia actualmente " }
         if (!estudiosActuales.desde || !estudiosActuales.hasta) { falta += " - Horario de estudio" }
@@ -345,41 +347,106 @@ $("#revisarBtn").on("click", function () {
     const policialesFoto = policiales.files;
 
 
-    var adjunto = {
-        idCv: cv1,
-        idFront: id1,
-        idBack: id2,
-        penales: penalesFoto,
-        policiales: policialesFoto,
-    }
+    
 
-
-    if (!adjunto.idCv) { falta += " - Curriculum" }
-    if (!adjunto.idFront || !adjunto.idBack) { falta += " - Foto de Identidad" }
-    if (!adjunto.penales) { falta += " - Antecentes Penales" }
-    if (!adjunto.policiales) { falta += " - Antecedentes Policiales" }
+    if (!cv1) { falta += " - Curriculum" }
+    if (!id1 || !id2) { falta += " - Foto de Identidad" }
+    if (!penalesFoto) { falta += " - Antecentes Penales" }
+    if (!policialesFoto) { falta += " - Antecedentes Policiales" }
 
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
-    console.log(falta);
+
     if (falta) {
         Swal.fire({
             icon: 'error',
             title: 'Oops... Parece que falta información',
             text: falta
         })
+    } else {
+        AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,educacion,estudiosActuales,historialLaboral,referencias,idiomas);
     }
 
 
-    console.log(datosGenerales);
+    /* console.log(datosGenerales);
     console.log(parentesco);
     console.log(parentescoConocidos);
     console.log(salud);
     console.log(educacion);
     console.log(estudiosActuales);
     console.log(historialLaboral);
-    console.log(referencias);
-    console.log(adjunto);
+    console.log(referencias);; */
 
 
 });
+
+
+// *Funciones 
+// *---------------------------------------------------------
+
+
+function subirFoto(archivos, idRegistro, nombreControlador) {
+    var formData = new FormData();
+
+    for (const archivo of archivos) {
+        formData.append("archivos[]", archivo);
+    }
+
+    formData.append("idRegistro", idRegistro);
+
+    // Realizamos petición
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/" + nombreControlador + ".php",
+        data: formData,
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Foto del productor",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+            // console.log("convenio", respuesta);
+
+        },
+    });
+}
+
+function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,educacion,estudiosActuales,historialLaboral,referencias,idiomas) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/agregarEmpleado.php",
+        data: {
+            datosGenerales: datosGenerales,
+            parentesco: parentesco, 
+            parentescoConocidos: parentescoConocidos,
+            salud: salud,
+            educacion: educacion,
+            estudiosActuales: estudiosActuales,
+            historialLaboral: historialLaboral,
+            referencias: referencias,
+        },
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Ficha del empelado",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+            
+
+        },
+    });
+}
+
+
