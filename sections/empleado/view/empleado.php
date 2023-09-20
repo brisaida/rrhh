@@ -239,7 +239,7 @@
 								<div class="app-card-body">
 									<!-- PARENTESCO -- NOMBRE -- FECHA DE NACIMIENTO -->
 									<div class="row g-2">
-										<div class="col-md-4">
+										<div class="col-md-2">
 											<div class="form-floating">
 												<select class="form-select" id="parentescoSelect" aria-label="Floating label select example">
 													<option selected class="text-end"></option>
@@ -274,6 +274,13 @@
 									<!-- DIRECCION -- BOTON AGREGAR -->
 									<div class="row g-2 align-items-center  ">
 										<!-- Dirección -->
+										<div class="col-md-2">
+											<div class="form-floating mb-3">
+												<input type="input" class="form-control" id="familiarTel">
+												<label for="familiarTel">Teléfono</label>
+											</div>
+										</div>
+										<!-- Dirección -->
 										<div class="col-md">
 											<div class="form-floating mb-3">
 												<input type="input" class="form-control" id="direccionFamiliarInput">
@@ -299,6 +306,7 @@
 																<th class="cell">Parentesco</th>
 																<th class="cell">Nombre</th>
 																<th class="cell">Edad</th>
+																<th class="cell">Teléfono</th>
 																<th class="cell">Dirección</th>
 																<th class="cell">Acciones</th>
 															</tr>
@@ -382,7 +390,7 @@
 														<thead>
 															<tr>
 																<th class="cell">Nombre</th>
-																<th class="cell">Profesión</th>
+																<th class="cell">Parentesco</th>
 																<th class="cell">Tiempo de conocerle</th>
 																<th class="cell">Empresa en que labora</th>
 																<th class="cell">Acciones</th>
