@@ -324,7 +324,7 @@
 									<!-- PARIENTES CONOCIDOS -->
 									<div class="col-md ">
 										<div class="form-check form-switch mb-3">
-											<input class="form-check-input" type="checkbox" role="switch" id="parientesConocidosCheck">
+											<input class="form-check-input" type="checkbox" role="switch" id="parientesConocidosCheck" conocidos=0>
 											<label class="form-check-label" for="parientesConocidosCheck">¿Tiene parientes o conocidos laborando en esta empresa?</label>
 										</div>
 									</div>
@@ -740,7 +740,7 @@
 									<!-- Estudios actuales -->
 									<div class="col-md ">
 										<div class="form-check form-switch mb-3">
-											<input class="form-check-input" type="checkbox" role="switch" id="estudioActualCheck">
+											<input class="form-check-input" type="checkbox" role="switch" id="estudioActualCheck" actual="0">
 											<label class="form-check-label" for="estudioActualCheck">¿Estudia Actualmente? <br> <span>Carrera o Diplomado</span>
 										</div></label>
 
@@ -895,13 +895,13 @@
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" id="sueldoInicialNumber">
+												<input type="number" min="0" class="form-control" id="sueldoInicialNumber">
 												<label for="sueldoInicialNumber">Sueldo Inicial</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" id="sueldoFinalNumber">
+												<input type="number" min="0" class="form-control" id="sueldoFinalNumber">
 												<label for="sueldoFinalNumber">Sueldo Final</label>
 											</div>
 										</div>
@@ -1002,13 +1002,13 @@
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" id="sueldoInicialNumber2">
+												<input type="number" class="form-control" min="0" id="sueldoInicialNumber2">
 												<label for="sueldoInicialNumber2">Sueldo Inicial</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" id="sueldoFinalNumber2">
+												<input type="number" class="form-control" min="0" id="sueldoFinalNumber2">
 												<label for="sueldoFinalNumber2">Sueldo Final</label>
 											</div>
 										</div>

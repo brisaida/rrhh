@@ -38,18 +38,25 @@
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : null;
     $datosIdiomas = (object) $idiomas;
 
+    $conocidos = isset($_POST['conocidos']) ? $_POST['conocidos'] : null;
+
+    $actual = isset($_POST['actual']) ? $_POST['actual'] : null;
+
 
     // *Instancia al modelo yllamada al método correspondiente
     // *-------------------------------------------------------
     $conexion = new mdlEmpleado();
     $elRegistro = $conexion->agregarRegistro(   $datosGenerales,
                                                 $datosParentesco,
+                                                $datosParentescoConocidos,
                                                 $datosSalud,
                                                 $datosEducacion,
                                                 $datosEstudiosActuales,
                                                 $datosHistorialLaboral,
                                                 $datosReferencias,
                                                 $datosIdiomas,
+                                                $conocidos,
+                                                $actual,
                                             ); 
     
 ?>
