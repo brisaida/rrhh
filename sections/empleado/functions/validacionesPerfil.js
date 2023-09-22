@@ -184,7 +184,7 @@ $("#revisarBtn").on("click", function () {
         centroMedico: $.trim($("#centroMedicoInput").val()),
     }
 
-    if (!salud.emergenia1 || !salud.emergencia2) { falta += " - Contacto de emergencia" }
+    if (!salud.emergencia1 || !salud.emergencia2) { falta += " - Contacto de emergencia" }
     if (!salud.tel1 || !salud.tel2) { falta += " - Teléfono del contacto de emergenia" }
     if (!salud.tiposangre) { falta += " - Tipo de Sangre" }
     // En el caso de los siguientes campos al ser opcionales solo les agrega el N/A
@@ -271,18 +271,18 @@ $("#revisarBtn").on("click", function () {
     var historial = [];
     
     if (!$.trim($("#nombreEmpresaInput").val()) || !$.trim($("#nombreEmpresaInput2").val())) { falta += " - Nombre de la empresa anterior" }
-    if (!$.trim($("#tipoEmpresaInput").val()) || !$.trim($("#tipoEmpresaInput").val())) { falta += " - Tipo de la empresa anterior" }
-    if (!$.trim($("#dirEmpresaInput").val()) || !$.trim($("#dirEmpresaInput").val())) { falta += " - Dirección de la empresa anterior" }
-    if (!$.trim($("#telEmpresaInput").val()) || !$.trim($("#telEmpresaInput").val())) { falta += " - Teléfono de la empresa anterior" }
-    if (!$.trim($("#ultimoPuestoInput").val())|| !$.trim($("#ultimoPuestoInput").val())) { falta += " - Último puesto desempeñado de la empresa anterior" }
-    if (!$.trim($("#jefeInmediatoInput").val()) || !$.trim($("#jefeInmediatoInput").val())) { falta += " - Nombre dedel jefe anterior" }
-    if (!$.trim($("#telJefeInput").val()) || !$.trim($("#telJefeInput").val())) { falta += " - Teléfono jefe anterior" }
-    if (!$.trim($("#ingresoDate").val()) || !$.trim($("#ingresoDate").val())) { falta += " - Fecha de ingreso a la empresa anterior" }
-    if (!$.trim($("#retiroDate").val()) || !$.trim($("#retiroDate").val())) { falta += " - Fecha de egreso de la empresa anterior" }
-    if (!$.trim($("#sueldoInicialNumber").val()) || !$.trim($("#sueldoInicialNumber").val())) { falta += " - Sueldo inicial en la empresa anterior" }
-    if (!$.trim($("#sueldoFinalNumber").val()) || !$.trim($("#sueldoFinalNumber").val())) { falta += " - Sueldo final en la empresa anterior" }
-    if (!$.trim($("#causaRetiroInput").val()) || !$.trim($("#causaRetiroInput").val())) { falta += " - Causas de retiro de la empresa anterior" }
-    if (!$.trim($("#descripcionPuestoInput").val()) || !$.trim($("#descripcionPuestoInput").val())) { falta += " - Descripcion del puesto en la empresa anterior" }
+    if (!$.trim($("#tipoEmpresaInput").val()) || !$.trim($("#tipoEmpresaInput2").val())) { falta += " - Tipo de la empresa anterior" }
+    if (!$.trim($("#dirEmpresaInput").val()) || !$.trim($("#dirEmpresaInput2").val())) { falta += " - Dirección de la empresa anterior" }
+    if (!$.trim($("#telEmpresaInput").val()) || !$.trim($("#telEmpresaInput2").val())) { falta += " - Teléfono de la empresa anterior" }
+    if (!$.trim($("#ultimoPuestoInput").val())|| !$.trim($("#ultimoPuestoInput2").val())) { falta += " - Último puesto desempeñado de la empresa anterior" }
+    if (!$.trim($("#jefeInmediatoInput").val()) || !$.trim($("#jefeInmediatoInput2").val())) { falta += " - Nombre dedel jefe anterior" }
+    if (!$.trim($("#telJefeInput").val()) || !$.trim($("#telJefeInput2").val())) { falta += " - Teléfono jefe anterior" }
+    if (!$.trim($("#ingresoDate").val()) || !$.trim($("#ingresoDate2").val())) { falta += " - Fecha de ingreso a la empresa anterior" }
+    if (!$.trim($("#retiroDate").val()) || !$.trim($("#retiroDate2").val())) { falta += " - Fecha de egreso de la empresa anterior" }
+    if (!$.trim($("#sueldoInicialNumber").val()) || !$.trim($("#sueldoInicialNumber2").val())) { falta += " - Sueldo inicial en la empresa anterior" }
+    if (!$.trim($("#sueldoFinalNumber").val()) || !$.trim($("#sueldoFinalNumber2").val())) { falta += " - Sueldo final en la empresa anterior" }
+    if (!$.trim($("#causaRetiroInput").val()) || !$.trim($("#causaRetiroInput2").val())) { falta += " - Causas de retiro de la empresa anterior" }
+    if (!$.trim($("#descripcionPuestoInput").val()) || !$.trim($("#descripcionPuestoInput2").val())) { falta += " - Descripcion del puesto en la empresa anterior" }
 
 
     var historialLaboral = {
@@ -371,15 +371,15 @@ $("#revisarBtn").on("click", function () {
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
 
-    /* if (falta) {
+    if (falta) {
         Swal.fire({
             icon: 'error',
             title: 'Oops... Parece que falta información',
             text: falta
         })
-    } else { */
+    } else {
        AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,educacion,estudiosActuales,historial,referencias,idiomas,conocidos,actual);
-    /* } */
+    }
 
 
     /* console.log(datosGenerales);
@@ -460,8 +460,14 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,e
             });
         },
         success: function (respuesta) {
-            
-
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Guardado exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              
         },
     });
 }

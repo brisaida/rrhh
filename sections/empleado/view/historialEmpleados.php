@@ -113,6 +113,21 @@
 									</div>
 								</div>
 							</div>
+							<!-- Jefé Inmediato -->
+							<div class="col-md-3">
+								<div class="form-floating">
+										<div class="form-floating mb-3"><select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
+											<option selected class="text-end"></option>
+											<option value="1" class="text-end">Cortés &nbsp</option>
+											<option value="2" class="text-end">Copán &nbsp</option>
+											<option value="2" class="text-end">Siguatepeque &nbsp</option>
+											<option value="3" class="text-end">Santa Barbara &nbsp</option>
+											<option value="4" class="text-end">Intibuca &nbsp</option>
+										</select>
+										<label for="salarioInput">Jefe Inmediato</label>
+									</div>
+								</div>
+							</div>
 							<!-- Guardar -->
 							<div class="col-12 col-lg-2">
 								<a class="btn app-btn-primary" id="guardarBtn">
