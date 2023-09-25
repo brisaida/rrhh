@@ -14,6 +14,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
+
+	<!-- Incluye DataTables.js -->
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+
 	<!-- Enable tooltips -->
 	<script>
 		$(document).ready(function() {
@@ -24,7 +30,7 @@
 		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 	</script>
 
-	
+
 	<?php
 
 
@@ -40,6 +46,8 @@
 			echo '<script src="./sections/empleado/functions/perfilEmpleado.js"></script>';
 			echo '<script src="./sections/empleado/functions/maps.js"></script>';
 			echo '<script src="./sections/empleado/functions/validacionesPerfil.js"></script>';
+		} else if ($_GET['section'] == 'listadoEmpleados' || $_GET['section'] == 'listadoEmpleados') {
+			echo '<script src="./sections/empleado/functions/listadoEmpleados.js"></script>';
 		} else if ($_GET['section'] == 'perfilPuesto' || $_GET['section'] == 'perfilPuesto') {
 			echo '<script src="./sections/empleado/functions/perfilPuesto.js"></script>';
 		} else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {

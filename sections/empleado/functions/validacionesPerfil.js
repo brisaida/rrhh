@@ -1,4 +1,5 @@
-// !Este archivo contiene las validaciones que se realizaran al perfil del empleado antes de guardar(dicha del empleado)
+
+
 
 var falta = "";
 var usuario=1; 

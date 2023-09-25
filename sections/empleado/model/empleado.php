@@ -17,7 +17,7 @@ class mdlEmpleado
         }
     }
 
-
+    // *--------Agregar
     public function agregarRegistro($datosGenerales, $datosParentesco, $datosParentescoConocidos, $datosSalud, $datosEducacion, $datosEstudiosActuales, $datosHistorialLaboral, $datosReferencias, $datosIdiomas, $conocidos, $actual)
     {
 
@@ -282,4 +282,27 @@ class mdlEmpleado
         }
         $stmt->closeCursor();
     }
+
+    // *--------Listar
+    public function listarTodo(){
+
+            $sql = "SELECT  idEmpleado,DNI, 
+                            CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
+                            telefono 
+                    FROM rrhh.empleados 
+                    WHERE estado=1";
+
+            $stmt = $this->conn->prepare($sql);
+               
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
 }
