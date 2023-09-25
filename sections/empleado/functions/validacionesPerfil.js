@@ -2,11 +2,10 @@
 
 
 var falta = "";
-var usuario=1; 
-var conocidos=0; 
-var actual=0; 
-var usuario=1; 
-var usuario=1; 
+var usuario = 1;
+var conocidos = 0;
+var actual = 0;
+var usuario = 1;
 
 $("#revisarBtn").on("click", function () {
 
@@ -45,7 +44,7 @@ $("#revisarBtn").on("click", function () {
     if ($("#pasaporteCheck:checked").val()) {
         pasaporte = $("#fechaVencePasaporteInput").val();
         pasaporteFoto = fotoPass;
-    }else{
+    } else {
         pasaporte
     }
     if ($("#licenciaCheck:checked").val()) {
@@ -143,9 +142,9 @@ $("#revisarBtn").on("click", function () {
         parentesco.push(registro);
     });
 
-    conocidos=$("#parientesConocidosCheck").attr("conocidos");
+    conocidos = $("#parientesConocidosCheck").attr("conocidos");
     if ($("#parientesConocidosCheck:checked").val()) {
-        
+
         var tablafilas = $('#parentescoConocidosTabla tr');
         var noFilas = tablafilas.length - 1;
         if (noFilas == 0) { falta += " - Información de conocidos trabajando en la empresa" }
@@ -247,7 +246,7 @@ $("#revisarBtn").on("click", function () {
     });
 
 
-    actual=$("#estudioActualCheck").attr("actual");
+    actual = $("#estudioActualCheck").attr("actual");
     if ($("#estudioActualCheck:checked").val()) {
 
         var estudiosActuales = {
@@ -270,12 +269,12 @@ $("#revisarBtn").on("click", function () {
     // *---------------------------------------------------------
 
     var historial = [];
-    
+
     if (!$.trim($("#nombreEmpresaInput").val()) || !$.trim($("#nombreEmpresaInput2").val())) { falta += " - Nombre de la empresa anterior" }
     if (!$.trim($("#tipoEmpresaInput").val()) || !$.trim($("#tipoEmpresaInput2").val())) { falta += " - Tipo de la empresa anterior" }
     if (!$.trim($("#dirEmpresaInput").val()) || !$.trim($("#dirEmpresaInput2").val())) { falta += " - Dirección de la empresa anterior" }
     if (!$.trim($("#telEmpresaInput").val()) || !$.trim($("#telEmpresaInput2").val())) { falta += " - Teléfono de la empresa anterior" }
-    if (!$.trim($("#ultimoPuestoInput").val())|| !$.trim($("#ultimoPuestoInput2").val())) { falta += " - Último puesto desempeñado de la empresa anterior" }
+    if (!$.trim($("#ultimoPuestoInput").val()) || !$.trim($("#ultimoPuestoInput2").val())) { falta += " - Último puesto desempeñado de la empresa anterior" }
     if (!$.trim($("#jefeInmediatoInput").val()) || !$.trim($("#jefeInmediatoInput2").val())) { falta += " - Nombre dedel jefe anterior" }
     if (!$.trim($("#telJefeInput").val()) || !$.trim($("#telJefeInput2").val())) { falta += " - Teléfono jefe anterior" }
     if (!$.trim($("#ingresoDate").val()) || !$.trim($("#ingresoDate2").val())) { falta += " - Fecha de ingreso a la empresa anterior" }
@@ -300,10 +299,10 @@ $("#revisarBtn").on("click", function () {
         sueldoFinal: $.trim($("#sueldoFinalNumber").val()),
         causaRetiro: $.trim($("#causaRetiroInput").val()),
         descripcionPuesto: $.trim($("#descripcionPuestoInput").val()),
-        
+
     }
     historial.push(historialLaboral);
-    historialLaboral={
+    historialLaboral = {
         empresa: $.trim($("#nombreEmpresaInput2").val()),
         tipoEmpresa: $.trim($("#tipoEmpresaInput2").val()),
         direccionEmpresa: $.trim($("#dirEmpresaInput2").val()),
@@ -320,7 +319,7 @@ $("#revisarBtn").on("click", function () {
 
     }
     historial.push(historialLaboral);
-   
+
 
 
     // *Sección de Referencias
@@ -362,7 +361,7 @@ $("#revisarBtn").on("click", function () {
     const policialesFoto = policiales.files;
 
 
-    
+
 
     if (!cv1) { falta += " - Curriculum" }
     if (!id1 || !id2) { falta += " - Foto de Identidad" }
@@ -379,7 +378,7 @@ $("#revisarBtn").on("click", function () {
             text: falta
         })
     } else {
-       AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,educacion,estudiosActuales,historial,referencias,idiomas,conocidos,actual);
+        AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
     }
 
 
@@ -393,6 +392,10 @@ $("#revisarBtn").on("click", function () {
     console.log(referencias);; */
 
 
+});
+
+$("#idInput").on("blur", function () {
+    cargarInfoCenso($("#idInput").val())
 });
 
 
@@ -434,13 +437,13 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
     });
 }
 
-function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,educacion,estudiosActuales,historialLaboral,referencias,idiomas,conocidos,actual) {
+function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historialLaboral, referencias, idiomas, conocidos, actual) {
     $.ajax({
         type: "POST",
         url: "./sections/empleado/controller/agregarEmpleado.php",
         data: {
             datosGenerales: datosGenerales,
-            parentesco: parentesco, 
+            parentesco: parentesco,
             parentescoConocidos: parentescoConocidos,
             salud: salud,
             educacion: educacion,
@@ -461,14 +464,60 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,salud,e
             });
         },
         success: function (respuesta) {
+
+            console.log(respuesta);
+
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
                 title: 'Guardado exitosamente',
                 showConfirmButton: false,
                 timer: 1500
-              })
-              
+            })
+
+        },
+    });
+}
+
+function cargarInfoCenso(id) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/buscarEnCenso.php",
+        data: {
+            dni: id
+        },
+        dataType: "json",
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Empleados",
+                icon: "error",
+                text: `Error`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+            if (respuesta.length > 0) {
+                let datos = respuesta[0];
+                $("#primerNombreInput").val(datos.nombre).change();
+                $("#segundoNombreInput").val(datos.segundoNombre).change();
+                $("#primerApellidoInput").val(datos.apellido).change();
+                $("#SegundoApellidoInput").val(datos.segundoApellido).change();
+                $("#fechaNacimientoDate").val(datos.fechaNacimiento).change();
+                if (datos.sexo == 'Femenino') {
+
+                    $("#generoSelect").val(1).change();
+                    $("#lugarNacimientoInput").focus();
+
+                } else {
+                    $("#generoSelect").val(2).change();
+
+                }
+                $("#lugarNacimientoInput").focus();
+            }
+
+
         },
     });
 }

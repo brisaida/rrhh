@@ -21,9 +21,7 @@ class mdlEmpleado
     public function agregarRegistro($datosGenerales, $datosParentesco, $datosParentescoConocidos, $datosSalud, $datosEducacion, $datosEstudiosActuales, $datosHistorialLaboral, $datosReferencias, $datosIdiomas, $conocidos, $actual)
     {
 
-        echo '<pre>';
-        print_r($datosEstudiosActuales);
-        echo '</pre>';
+
 
 
         $sql = "INSERT INTO rrhh.empleados(	DNI,primerNombre,segundoNombre,primerApellido,segundoApellido,telefono,fechaNacimiento,lugarNacimiento,nacionalidad,estadoCivil,genero,email,estado,usuarioCreado,cuentaBancaria,vencimientoPasaporte,vencimientoLicencia,vencimientoLicenciaMoto) 
@@ -272,15 +270,20 @@ class mdlEmpleado
                     $resultado = json_encode($res);
                 }
             }
+            $response[0] = array(
+                'mensaje' => 'Empleado registrado correctamente.',
+                'idEmpleado' => $idEmpleado,
+            );           
+            $resultado = json_encode($response);
         } catch (PDOException $e) {
             //$this->conn->rollBack();
             $res = $stmt->errorInfo();
             $resultado = json_encode($res);
 
-            echo "resultdo consulta>" . $resultado . "<br>";
-            echo $resultado;
+           
         }
         $stmt->closeCursor();
+        return $resultado;
     }
 
     // *--------Listar
@@ -302,7 +305,39 @@ class mdlEmpleado
             $resultado = $e->getMessage();
         }
         $stmt->closeCursor();
+
+        echo "<pre>";
+        print_r($resultado);
+        echo "</pre>";
+
         return $resultado;
     }
+
+
+    // *--------Buscar nombre en censo
+    public function buscarEnCenso($dni){
+
+        $sql = "SELECT  nombre,
+                        segundoNombre,
+                        apellido,
+                        segundoApellido,
+                        sexo,
+                        fechaNacimiento 
+                FROM perfilcliente.tblCensoGeneral  
+                WHERE numeroDNI	=:dni";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":dni", $dni);
+           
+    try {
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (PDOException $e) {
+        $resultado = $e->getMessage();
+    }
+    $stmt->closeCursor();
+    return $resultado;
+}
 
 }

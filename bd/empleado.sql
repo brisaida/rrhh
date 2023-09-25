@@ -209,3 +209,41 @@ CREATE TABLE rrhh.adjuntos (
 );
 GO
 
+
+
+
+/*HISTORIAL*/
+
+
+CREATE TABLE rrhh.historial (
+	idHistorial INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_Historial_id
+		PRIMARY KEY CLUSTERED (idHistorial),
+	idEmpleado INT NOT NULL,
+	codigoInterno VARCHAR(50) NOT NULL,
+	codigoSAP VARCHAR(50) NOT NULL,
+	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
+	fechaModificado DATETIME NULL,
+	usuarioCreado VARCHAR(100) NOT NULL,
+	usuarioModificado VARCHAR(100) NULL
+);
+GO
+
+CREATE TABLE rrhh.historialDetalle (
+	idHistorialDetalle INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_HistorialDetalle_id
+		PRIMARY KEY CLUSTERED (idHistorialDetalle),
+	idHistorial INT NOT NULL,
+	fechaInicio DATE NOT NULL,
+	fechaRetiro DATE NULL,	
+	idProyecto INT NOT NULL,	
+	zona VARCHAR(100) NOT NULL,	
+	idTDR INT NOT NULL,
+	salario decimal(13,2) NOT NULL,
+	idJefe INT NOT NULL,
+	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
+	fechaModificado DATETIME NULL,
+	usuarioCreado VARCHAR(100) NOT NULL,
+	usuarioModificado VARCHAR(100) NULL
+);
+GO

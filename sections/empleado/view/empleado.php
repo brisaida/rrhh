@@ -35,7 +35,7 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class=" mb-3">
-													<label for="idInput">&nbsp No. de Identidad</label>
+													<label for="idInput">&nbsp No. de Identidad (Sin guiones) </label>
 													<input type="input" class="form-control" id="idInput">
 
 												</div>
