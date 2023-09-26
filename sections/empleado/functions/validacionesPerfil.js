@@ -345,10 +345,6 @@ $("#revisarBtn").on("click", function () {
         referencias.push(registro);
     });
 
-
-    // *Sección de Adjuntos
-    // *---------------------------------------------------------
-
     const cv = document.querySelector("#cvInput");
     const cv1 = cv.files;
     const dn1 = document.querySelector("#idfotoFrontInput");
@@ -359,7 +355,6 @@ $("#revisarBtn").on("click", function () {
     const penalesFoto = penales.files;
     const policiales = document.querySelector("#policialesFotoInput");
     const policialesFoto = policiales.files;
-
 
 
 
@@ -382,16 +377,6 @@ $("#revisarBtn").on("click", function () {
     }
 
 
-    /* console.log(datosGenerales);
-    console.log(parentesco);
-    console.log(parentescoConocidos);
-    console.log(salud);
-    console.log(educacion);
-    console.log(estudiosActuales);
-    console.log(historialLaboral);
-    console.log(referencias);; */
-
-
 });
 
 $("#idInput").on("blur", function () {
@@ -403,7 +388,8 @@ $("#idInput").on("blur", function () {
 // *---------------------------------------------------------
 
 
-function subirFoto(archivos, idRegistro, nombreControlador) {
+
+function subirFoto(archivos, idRegistro, nombreControlador, idAdjunto) {
     var formData = new FormData();
 
     for (const archivo of archivos) {
@@ -423,12 +409,7 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
         // Error en la petición
         error: function (error) {
             console.log(error);
-            Swal.fire({
-                title: "Foto del productor",
-                icon: "error",
-                text: `${error.responseText}`,
-                confirmButtonColor: "#3085d6",
-            });
+
         },
         success: function (respuesta) {
             // console.log("convenio", respuesta);
@@ -437,7 +418,9 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
     });
 }
 
-function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historialLaboral, referencias, idiomas, conocidos, actual) {
+function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
+    salud, educacion, estudiosActuales, historialLaboral,
+    referencias, idiomas, conocidos, actual) {
     $.ajax({
         type: "POST",
         url: "./sections/empleado/controller/agregarEmpleado.php",
@@ -465,7 +448,54 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud,
         },
         success: function (respuesta) {
 
-            console.log(respuesta);
+            let datos = JSON.parse(respuesta);
+            console.log(datos);
+            let idAdjuntos = (datos[0].idAdjuntos);
+
+            const fotoEmpleado = document.querySelector("#archivoInput");
+            const foto = fotoEmpleado.files;
+            subirFoto(foto, idAdjuntos, "agregarFotoEmpleado");
+
+            const cv = document.querySelector("#cvInput");
+            const cv1 = cv.files;
+            subirFoto(cv1, idAdjuntos, "agregarCV");
+
+
+            const dn1 = document.querySelector("#idfotoFrontInput");
+            const id1 = dn1.files;
+            subirFoto(id1, idAdjuntos, "agregarDNI");
+
+            const dn2 = document.querySelector("#idfotoBackInput");
+            const id2 = dn2.files;
+            subirFoto(id2, idAdjuntos, "agregarDNIBack");
+
+            const penales = document.querySelector("#penalesFotoInput");
+            const penalesFoto = penales.files;
+            subirFoto(penalesFoto, idAdjuntos, "agregarPenales");
+
+            const policiales = document.querySelector("#policialesFotoInput");
+            const policialesFoto = policiales.files;
+            subirFoto(policialesFoto, idAdjuntos, "agregarPoliciales");
+
+            const fotoPasaporte = document.querySelector("#pasaporteFotoInput");
+            const fotoPass = fotoPasaporte.files;
+            subirFoto(fotoPass, idAdjuntos, "agregarPasaporte");
+
+            const fotoLicencia1 = document.querySelector("#licenciaFotoFrontInput");
+            const foto1 = fotoLicencia1.files;
+            subirFoto(foto1, idAdjuntos, "agregarCarro");
+
+            const fotoLicencia2 = document.querySelector("#licenciaFotoBackInput");
+            const foto2 = fotoLicencia2.files;
+            subirFoto(foto2, idAdjuntos, "agregarCarroBack");
+
+            const fotoMoto1 = document.querySelector("#licenciaMotoFotoFrontInput");
+            const moto1 = fotoMoto1.files;
+            subirFoto(moto1, idAdjuntos, "agregarMoto");
+
+            const fotoMoto2 = document.querySelector("#licenciaMotoFotoBackInput");
+            const moto2 = fotoMoto2.files;
+            subirFoto(moto2, idAdjuntos, "agregarMotoBack");
 
             Swal.fire({
                 position: 'top-end',

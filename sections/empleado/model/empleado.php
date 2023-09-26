@@ -270,37 +270,62 @@ class mdlEmpleado
                     $resultado = json_encode($res);
                 }
             }
+
+            #Agregar información de los estudios actuales
+            $sql = "INSERT INTO rrhh.adjuntos(idEmpleado,usuarioCreado)
+                    VALUES (:id,:usuario)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":id", $idEmpleado);
+            $stmt->bindParam(":usuario", $datosGenerales->usuario);
+
+            try {
+                $stmt->execute();
+
+                # Captura del ultimo id insertado
+                $idAdjuntos = $this->conn->lastInsertId();
+
+            } catch (PDOException $e) {
+
+                $this->conn->rollBack();
+                $res = $stmt->errorInfo();
+                $resultado = json_encode($res);
+            }
+
+
             $response[0] = array(
                 'mensaje' => 'Empleado registrado correctamente.',
                 'idEmpleado' => $idEmpleado,
-            );           
+                'idAdjuntos' => $idAdjuntos,
+            );
+
             $resultado = json_encode($response);
         } catch (PDOException $e) {
             //$this->conn->rollBack();
             $res = $stmt->errorInfo();
             $resultado = json_encode($res);
-
-           
         }
         $stmt->closeCursor();
+
+        echo $resultado;
+
         return $resultado;
     }
 
     // *--------Listar
-    public function listarTodo(){
+    public function listarTodo()
+    {
 
-            $sql = "SELECT  idEmpleado,DNI, 
+        $sql = "SELECT  idEmpleado,DNI, 
                             CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
                             telefono 
                     FROM rrhh.empleados 
                     WHERE estado=1";
 
-            $stmt = $this->conn->prepare($sql);
-               
+        $stmt = $this->conn->prepare($sql);
+
         try {
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -315,7 +340,8 @@ class mdlEmpleado
 
 
     // *--------Buscar nombre en censo
-    public function buscarEnCenso($dni){
+    public function buscarEnCenso($dni)
+    {
 
         $sql = "SELECT  nombre,
                         segundoNombre,
@@ -328,16 +354,267 @@ class mdlEmpleado
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":dni", $dni);
-           
-    try {
-        $stmt->execute();
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-    } catch (PDOException $e) {
-        $resultado = $e->getMessage();
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
     }
-    $stmt->closeCursor();
-    return $resultado;
-}
+
+
+
+
+
+    
+    // *--------actualizar foto------------
+    public function actualizarFoto($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET foto=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *--------actualizar CV-------------
+    public function actualizarCV($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET cv=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *--------actualizar penales-------------
+    public function actualizarPenales($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET penales=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *--------actualizar policiales-------------------
+    public function actualizarPoliciales($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET policiales=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *--------actualizar pasaporte------------
+    public function actualizarPasaporte($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET pasaporte=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+    // *--------actualizar DNI---------------
+    //** FRONT */
+    public function DNIFront($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET dniFront=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    // * BACK *//
+    public function DNIBack($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET dniBack=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+    // *--------actualizar Licencia -----------
+    //* FRONT */
+    public function licenciaFront($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET licenciaCarroFront=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    
+    // *BACK */
+    public function licenciaBack($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET licenciaCarroBack=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+    // *--------actualizar Licencia -----------
+    //* FRONT */
+    public function motoFront($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET licenciaMotoFront=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    
+    // *BACK */
+    public function motoBack($foto,$id)
+    {
+
+        $sql = "UPDATE rrhh.adjuntos
+                SET licenciaMotoBack=:foto
+                WHERE idAdjunto=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":foto", $foto);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
 
 }

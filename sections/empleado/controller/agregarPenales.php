@@ -23,7 +23,7 @@ $fileExtension = strtolower(end($fileNameCmps));
 #Reestrucutrando nombre del archivo
 $nombreArchivo = md5(time() . $fileName) . '.' . $fileExtension;
 
-$uploadFileDir = '../archivos/empleado/';
+$uploadFileDir = '../archivos/antecedentes_penales/';
 $dest_path = $uploadFileDir . $nombreArchivo;
 
 // Mover del temporal al directorio actual
@@ -31,6 +31,6 @@ move_uploaded_file($fileTmpPath, $dest_path);
 
 // Instanciamos el modelo y llamamos al método correspondiente
 $conexion = new mdlEmpleado();
-$nombres = $conexion->actualizarFoto($nombreArchivo, $idRegistro);
+$nombres = $conexion->actualizarPenales($nombreArchivo, $idRegistro);
 
 ?>
