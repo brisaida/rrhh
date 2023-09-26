@@ -17,7 +17,7 @@ class mdlEmpleado
         }
     }
 
-    // *--------Agregar
+    // *Agregar
     public function agregarRegistro($datosGenerales, $datosParentesco, $datosParentescoConocidos, $datosSalud, $datosEducacion, $datosEstudiosActuales, $datosHistorialLaboral, $datosReferencias, $datosIdiomas, $conocidos, $actual)
     {
 
@@ -311,15 +311,16 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *--------Listar
+    // *Listar
     public function listarTodo()
     {
 
-        $sql = "SELECT  idEmpleado,DNI, 
+        $sql = "    SELECT  idEmpleado,DNI, 
                             CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
                             telefono 
                     FROM rrhh.empleados 
-                    WHERE estado=1";
+                    WHERE estado=1
+                    ORDER BY idEmpleado DESC";
 
         $stmt = $this->conn->prepare($sql);
 
@@ -331,15 +332,12 @@ class mdlEmpleado
         }
         $stmt->closeCursor();
 
-        echo "<pre>";
-        print_r($resultado);
-        echo "</pre>";
 
         return $resultado;
     }
 
 
-    // *--------Buscar nombre en censo
+    // *Buscar nombre en censo
     public function buscarEnCenso($dni)
     {
 
@@ -365,12 +363,33 @@ class mdlEmpleado
         return $resultado;
     }
 
+    // *Buscar si existe
+    public function existe($id)
+    {
+
+        $sql = "SELECT  idEmpleado 
+                FROM rrhh.empleados 
+                WHERE dni=:id AND estado=1" ;
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
 
 
 
 
     
-    // *--------actualizar foto------------
+    // *-------- foto------------
     public function actualizarFoto($foto,$id)
     {
 
@@ -392,7 +411,7 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *--------actualizar CV-------------
+    // *-------- CV-------------
     public function actualizarCV($foto,$id)
     {
 
@@ -414,7 +433,7 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *--------actualizar penales-------------
+    // *-------- Penales-------------
     public function actualizarPenales($foto,$id)
     {
 
@@ -436,7 +455,7 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *--------actualizar policiales-------------------
+    // *-------- policiales-------------------
     public function actualizarPoliciales($foto,$id)
     {
 
@@ -458,7 +477,7 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *--------actualizar pasaporte------------
+    // *-------- Pasaporte------------
     public function actualizarPasaporte($foto,$id)
     {
 
@@ -481,7 +500,7 @@ class mdlEmpleado
     }
 
 
-    // *--------actualizar DNI---------------
+    // *-------- DNI---------------
     //** FRONT */
     public function DNIFront($foto,$id)
     {
@@ -526,7 +545,7 @@ class mdlEmpleado
     }
 
 
-    // *--------actualizar Licencia -----------
+    // *-------- Licencia Carro -----------
     //* FRONT */
     public function licenciaFront($foto,$id)
     {
@@ -572,7 +591,7 @@ class mdlEmpleado
     }
 
 
-    // *--------actualizar Licencia -----------
+    // *-------- Licencia Moto -----------
     //* FRONT */
     public function motoFront($foto,$id)
     {

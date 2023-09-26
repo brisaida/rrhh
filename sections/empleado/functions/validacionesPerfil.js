@@ -8,7 +8,7 @@ var actual = 0;
 var usuario = 1;
 
 $("#revisarBtn").on("click", function () {
-
+    
     // *Sección de datos generales
     // *---------------------------------------------------------
 
@@ -363,6 +363,8 @@ $("#revisarBtn").on("click", function () {
     if (!penalesFoto) { falta += " - Antecentes Penales" }
     if (!policialesFoto) { falta += " - Antecedentes Policiales" }
 
+
+
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
 
@@ -373,23 +375,27 @@ $("#revisarBtn").on("click", function () {
             text: falta
         })
     } else {
+        $("#revisarBtn").hide();
         AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
     }
 
 
 });
 
+
+// *Corroborar que el registro no exista en BD y cargar información del censo
 $("#idInput").on("blur", function () {
-    cargarInfoCenso($("#idInput").val())
+    existe($("#idInput").val())
 });
+
+
 
 
 // *Funciones 
 // *---------------------------------------------------------
 
 
-
-function subirFoto(archivos, idRegistro, nombreControlador, idAdjunto) {
+function subirFoto(archivos, idRegistro, nombreControlador) {
     var formData = new FormData();
 
     for (const archivo of archivos) {
@@ -505,6 +511,10 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
                 timer: 1500
             })
 
+            setTimeout(function(){
+                window.location.href ='?section=listadoEmpleados';
+            }, 1500);
+
         },
     });
 }
@@ -551,5 +561,45 @@ function cargarInfoCenso(id) {
         },
     });
 }
+
+function existe(id) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/existe.php",
+        data: {
+            id: id
+        },
+        dataType: "json",
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Empleados",
+                icon: "error",
+                text: `Error`,
+                confirmButtonColor: "#3085d6",
+            });
+            $("#lugarNacimientoInput").focus();
+        },
+        success: function (respuesta) {
+            if (respuesta.length == 0) {
+                cargarInfoCenso(id)
+            }else{
+                console.log("Empleado ya existe")
+                Swal.fire({
+                    title: "¡Ups! ",
+                    icon: "error",
+                    text: `Este empleado ya existe.`,
+                    confirmButtonColor: "#3085d6",
+                }); 
+                $("#idInput").val("");
+                $("#idInput").focus();
+            }
+           
+
+        },
+    });
+}
+
 
 
