@@ -3,7 +3,13 @@
 	<script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 
-	<!-- Charts JS -->
+
+
+    <!-- Charts JS -->
+    <script src="assets/plugins/chart.js/chart.min.js"></script> 
+    
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script> 
 
 
 	<!-- jquery -->
@@ -29,6 +35,7 @@
 		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 	</script>
+	<script src="./sections/home/js/inicio.js"></script>
 
 
 	<?php

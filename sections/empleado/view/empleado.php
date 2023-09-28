@@ -35,8 +35,8 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class=" mb-3">
-													<label for="idInput">&nbsp No. de Identidad (Sin guiones) </label>
-													<input type="input" class="form-control" id="idInput">
+													<label for="idInput" >&nbsp No. de Identidad (Sin guiones) </label>
+													<input type="input" class="form-control no-editable" id="idInput">
 
 												</div>
 											</div>
@@ -48,26 +48,26 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="primerNombreInput">
+													<input type="input" class="form-control no-editable" id="primerNombreInput">
 													<label for="primerNombreInput">Primer Nombre</label>
 												</div>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="segundoNombreInput">
+												<input type="input" class="form-control no-editable" id="segundoNombreInput">
 												<label for="segundoNombreInput">Segundo Nombre</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="primerApellidoInput">
+												<input type="input" class="form-control no-editable" id="primerApellidoInput">
 												<label for="primerApellidoInput">Primer Apellido</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="SegundoApellidoInput">
+												<input type="input" class="form-control no-editable" id="SegundoApellidoInput">
 												<label for="SegundoApellidoInput">Segundo Apellido</label>
 											</div>
 										</div>
@@ -78,20 +78,20 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="date" class="form-control" id="fechaNacimientoDate">
+													<input type="date" class="form-control no-editable" id="fechaNacimientoDate">
 													<label for="fechaNacimientoDate">Fecha de Nacimiento</label>
 												</div>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="lugarNacimientoInput">
+												<input type="input" class="form-control no-editable" id="lugarNacimientoInput">
 												<label for="lugarNacimientoInput">Lugar de Nacimiento</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="nacionalidadInput">
+												<input type="input" class="form-control no-editable" id="nacionalidadInput">
 												<label for="nacionalidadInput">Nacionalidad</label>
 											</div>
 										</div>
@@ -132,7 +132,7 @@
 										<div class="col-md ">
 											<div class="form-floating mb-3">
 												<div class="form-floating">
-													<select class="form-select" id="generoSelect" aria-label="Floating label select example">
+													<select class="form-select no-editable" id="generoSelect" aria-label="Floating label select example">
 														<option selected class="text-end"></option>
 														<option value="1" class="text-end">Femenino &nbsp</option>
 														<option value="2" class="text-end">Masculino &nbsp</option>
@@ -385,8 +385,8 @@
 									<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 										<div class="app-card app-card-orders-table shadow-sm mb-5">
 											<div class="app-card-body">
-												<div class="table-responsive esconder" id="parentescoConocidosTabla">
-													<table class="table app-table-hover mb-0 text-left">
+												<div class="table-responsive esconder" >
+													<table class="table app-table-hover mb-0 text-left" id="parentescoConocidosTabla">
 														<thead>
 															<tr>
 																<th class="cell">Nombre</th>

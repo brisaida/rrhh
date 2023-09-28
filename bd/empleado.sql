@@ -39,6 +39,7 @@ CREATE TABLE rrhh.direcciones(
 		longitud VARCHAR(50) NOT NULL,
 		fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 		usuarioCreado VARCHAR(100) NOT NULL,
+		estado INT NOT NULL DEFAULT 1
 );
 GO
 

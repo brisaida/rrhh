@@ -24,75 +24,82 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Datatable -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-    
-
-
 
     <!-- Leaflet -->
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 </head>
 
 <body class="app">
     <header class="app-header fixed-top">
-
-
-        <!-- NAV BAR -->
         <div class="app-header-inner">
             <div class="container-fluid py-2">
                 <div class="app-header-content">
-                    <div class="row justify-content-end align-items-end">
+                    <div class="row justify-content-between align-items-center">
+
+                        <div class="col-auto">
+                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img">
+                                    <title>Menu</title>
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="search-mobile-trigger d-sm-none col">
+                            <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="app-search-box col">
+                            <form class="app-search-form">
+                                <input type="text" placeholder="Search..." name="search" class="form-control search-input">
+                                <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
 
                         <div class="app-utilities col-auto">
                             <div class="app-utility-item app-notifications-dropdown dropdown">
                                 <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
+                    
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
                                         <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                     </svg>
                                     <span class="icon-badge">3</span>
                                 </a>
-
                                 <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                                     <div class="dropdown-menu-header p-3">
-                                        <h5 class="dropdown-menu-title mb-0">Notificaciones</h5>
+                                        <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                                     </div>
                                     <div class="dropdown-menu-content">
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
-                                                    <img class="profile-image" src="assets/images/birthday-cake.png" alt="">
-                                                </div>
+                                                    <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
+                                                </div> 
                                                 <div class="col">
                                                     <div class="info">
-                                                        <div class="desc">Hoy esta de cumpleaños Marcos Sorto y Douglas Palma</div>
+                                                        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+                                                        <div class="meta"> 2 hrs ago</div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
                                             <a class="link-mask" href="notifications.html"></a>
                                         </div>
-
-
                                     </div>
+
                                     <div class="dropdown-menu-footer p-2 text-center">
-                                        <a href="notifications.html">Ver más</a>
+                                        <a href="notifications.html">View all</a>
                                     </div>
-                                </div>
-                            </div>
+
+                                </div><!--//dropdown-menu-->
+                            </div><!--//app-utility-item-->
+
 
 
 
                             <div class="app-utility-item app-user-dropdown dropdown">
                                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="assets/images/user.png" alt="user profile"></a>
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                    <li><a class="dropdown-item" href="account.html">Account</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                                    <li><a class="dropdown-item" href="login.html">Cerrar Sesión</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -102,7 +109,7 @@
         </div>
 
 
-        <!--SIDE PANEL-->
+          <!--SIDE PANEL-->
 
         <div id="app-sidepanel" class="app-sidepanel">
             <div id="sidepanel-drop" class="sidepanel-drop"></div>
@@ -146,14 +153,15 @@
                             </a><!--//nav-link-->
                             <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item"><a class="submenu-link" href="?section=listadoEmpleados">Perfil de empleado</a></li>
-                                    <li class="submenu-item"><a class="submenu-link" href="?section=perfilPuesto">Perfil de Puesto</a></li>
+                                    <li class="submenu-item todos"><a class="submenu-link" href="?section=empleado">Perfil de empleado</a></li>
+                                    <li class="submenu-item todos"><a class="submenu-link" href="?section=listadoEmpleados">Listado de Empleados</a></li>
+                                    <li class="submenu-item admin"><a class="submenu-link" href="?section=perfilPuesto">Perfil de Puesto</a></li>
                                 </ul>
                             </div>
                         </li>
 
                         <!--//Accion de personal-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
                                 <span class="nav-icon">
@@ -178,7 +186,7 @@
                         </li>
 
                         <!--//Evaluación-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-4">
                                 <span class="nav-icon">
@@ -205,7 +213,7 @@
                         </li>
 
                         <!--//Reclutamiento-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-5">
                                 <span class="nav-icon">
@@ -231,7 +239,7 @@
                         </li>
 
                         <!--//Gestión de tiempo-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-6">
                                 <span class="nav-icon">
@@ -258,7 +266,7 @@
                         </li>
 
                         <!--//Seguridad y salud -->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-7">
                                 <span class="nav-icon">
@@ -283,7 +291,7 @@
                         </li>
 
                         <!--//Capacitación-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-8" aria-expanded="false" aria-controls="submenu-8">
                                 <span class="nav-icon">
@@ -307,7 +315,7 @@
                         </li>
 
                         <!--//Nomina-->
-                        <li class="nav-item has-submenu">
+                        <li class="nav-item has-submenu admin">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-9">
                                 <span class="nav-icon">
@@ -361,4 +369,4 @@
 
             </div>
         </div>
-    </header>
+    </header><!--//app-header-->

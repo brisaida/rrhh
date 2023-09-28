@@ -8,7 +8,7 @@ var actual = 0;
 var usuario = 1;
 
 $("#revisarBtn").on("click", function () {
-    
+
     // *Sección de datos generales
     // *---------------------------------------------------------
 
@@ -44,8 +44,6 @@ $("#revisarBtn").on("click", function () {
     if ($("#pasaporteCheck:checked").val()) {
         pasaporte = $("#fechaVencePasaporteInput").val();
         pasaporteFoto = fotoPass;
-    } else {
-        pasaporte
     }
     if ($("#licenciaCheck:checked").val()) {
         licenciaCarro = $("#fechaVenceLicenciaInput").val();
@@ -81,8 +79,8 @@ $("#revisarBtn").on("click", function () {
         usuario: usuario,
     }
 
-
-    if (!foto) { falta += " - Foto" }
+    console.log("foto =>",foto)
+    if (foto.length==0) { falta += " - Foto" }
     if (!datosGenerales.id) { falta += " - No. de identidad" }
     if (!datosGenerales.primerNombre) { falta += " - Primer Nombre" }
     if (!datosGenerales.primerApellido) { falta += " - Primer Apellido" }
@@ -255,7 +253,6 @@ $("#revisarBtn").on("click", function () {
             hasta: $.trim($("#horarioHastaInput").val()),
             fechaFinalizacion: $.trim($("#finalizaDate").val()),
         }
-        console.log($("#carreraActualInput").val());
 
         if (!estudiosActuales.carrera) { falta += " - Carrera o diploma que estudia actualmente " }
         if (!estudiosActuales.desde || !estudiosActuales.hasta) { falta += " - Horario de estudio" }
@@ -327,7 +324,7 @@ $("#revisarBtn").on("click", function () {
 
     var filasRef = $('#referenciasTabla tr');
     var cantidadFilasRef = filasRef.length - 1;
-    if (cantidadFilasRef > 2) {
+    if (cantidadFilasRef < 2) {
         falta += " - Faltan referencias personales, al menos 2";
     }
     var referencias = [];
@@ -375,8 +372,9 @@ $("#revisarBtn").on("click", function () {
             text: falta
         })
     } else {
-        $("#revisarBtn").hide();
-        AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
+       // $("#revisarBtn").hide();
+        console.log(datosGenerales);
+    AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
     }
 
 
@@ -385,7 +383,12 @@ $("#revisarBtn").on("click", function () {
 
 // *Corroborar que el registro no exista en BD y cargar información del censo
 $("#idInput").on("blur", function () {
-    existe($("#idInput").val())
+    const location = window.location.search;
+    const elementos = location.split("&");
+    if (elementos.length == 1) {
+
+        existe($("#idInput").val())
+    }
 });
 
 
@@ -407,7 +410,7 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
     // Realizamos petición
     $.ajax({
         type: "POST",
-        url: "./sections/empleado/controller/" + nombreControlador + ".php",
+        url: "./sections/empleado/controller/fotos/" + nombreControlador + ".php",
         data: formData,
         dataType: "json",
         contentType: false,
@@ -511,9 +514,9 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
                 timer: 1500
             })
 
-            setTimeout(function(){
-                window.location.href ='?section=listadoEmpleados';
-            }, 1500);
+            /* setTimeout(function () {
+                window.location.href = '?section=listadoEmpleados';
+            }, 1500); */
 
         },
     });
@@ -572,7 +575,6 @@ function existe(id) {
         dataType: "json",
         // Error en la petición
         error: function (error) {
-            console.log(error);
             Swal.fire({
                 title: "Empleados",
                 icon: "error",
@@ -584,22 +586,23 @@ function existe(id) {
         success: function (respuesta) {
             if (respuesta.length == 0) {
                 cargarInfoCenso(id)
-            }else{
-                console.log("Empleado ya existe")
+            } else {
                 Swal.fire({
                     title: "¡Ups! ",
                     icon: "error",
                     text: `Este empleado ya existe.`,
                     confirmButtonColor: "#3085d6",
-                }); 
+                });
                 $("#idInput").val("");
                 $("#idInput").focus();
             }
-           
+
 
         },
     });
 }
+
+
 
 
 

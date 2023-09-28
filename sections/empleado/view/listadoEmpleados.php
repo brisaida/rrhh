@@ -30,13 +30,13 @@
 
 			</div>
 			<!-- ---------------------------------- -->
-			<div class="tab-content" id="orders-table-tab-content">
+
 				<!--Tabla Listado de empelados-->
-				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+				<div class="row">
 					<div class="app-card app-card-orders-table shadow-sm mb-5">
 						<div class="app-card-body">
-							<div class="table-responsive">
-								<table class="table p3 mb-3 text-left  " id="ListadoEmpleadoTabla">
+							<div class="table-responsive pt-3 ">
+								<table class="table mb-3 text-left  " id="ListadoEmpleadoTabla">
 									<thead>
 										<tr>
 											<th class="cell">No. de Empleado</th>
@@ -57,7 +57,6 @@
 					</div>
 					
 
-				</div>
 			</div>
 		</div>
 	</div>

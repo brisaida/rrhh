@@ -17,7 +17,353 @@ class mdlEmpleado
         }
     }
 
-    // *Agregar
+
+
+    // *Listar
+    public function listarTodo()
+    {
+
+        $sql = "    SELECT  idEmpleado,DNI, 
+                                CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
+                                telefono 
+                        FROM rrhh.empleados 
+                        WHERE estado=1
+                        ORDER BY idEmpleado DESC";
+
+        $stmt = $this->conn->prepare($sql);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+
+
+        return $resultado;
+    }
+
+    // *Buscar datos generalesde un empleado
+    public function buscarDatosGenerales($id)
+    {
+
+        $sql = "SELECT	e.idEmpleado,
+                        DNI, 
+                        primerNombre,
+                        segundoNombre,
+                        primerApellido,
+                        segundoApellido,
+                        telefono,
+                        fechaNacimiento,
+                        lugarNacimiento,
+                        nacionalidad,
+                        estadoCivil,
+                        genero,
+                        email,
+                        cuentaBancaria,
+                        vencimientoLicencia,
+                        vencimientoLicenciaMoto,
+                        vencimientoPasaporte,
+                        d.direccion,
+                        d.latitud,
+                        d.longitud,
+                        a.foto,
+                        a.dniFront,
+                        a.dniBack,
+                        a.cv,
+                        a.pasaporte,
+                        a.licenciaCarroFront,
+                        a.licenciaCarroBack,
+                        a.licenciaMotoFront,
+                        a.licenciaMotoBack
+                FROM rrhh.empleados e
+                INNER JOIN rrhh.direcciones d ON e.idEmpleado=d.idEmpleado
+                LEFT JOIN rrhh.adjuntos a ON e.idEmpleado=a.idEmpleado
+                WHERE e.idEmpleado=:id AND d.estado=1
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *Buscar datos generalesde un empleado
+    public function buscarHistoriaFamiliar($id)
+    {
+
+        $sql = "SELECT  nombre,parentesco,
+                        fechaNacimiento,
+                        direccion,
+                        telefono 
+                FROM rrhh.historiaFamiliar
+                WHERE idEmpleado=:id
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+     // *Buscar datos generalesde un empleado
+     public function buscarInfoSalud($id)
+     {
+ 
+         $sql = "SELECT	idSalud
+                        contactoEmergencia1,
+                        tel1,
+                        contactoEmergencia2,
+                        tel2,
+                        tipoSangre,
+                        enfermedades,
+                        medico,
+                        telMedico,
+                        centroMedico
+                FROM rrhh.salud 
+                WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     
+     // *Buscar datos generalesde un empleado
+     public function buscarConocidos($id)
+     {
+ 
+         $sql = "   SELECT idConocido,
+                            nombre,
+                            parentesco,
+                            tiempoConocerlo,
+                            empresaLabora
+                    FROM rrhh.conocidos
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     // *Buscar datos generalesde un empleado
+     public function buscarIdiomas($id)
+     {
+ 
+         $sql = "   SELECT	idIdioma,
+                            idioma,
+                            porcentaje
+                    FROM rrhh.idiomas
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     // *Buscar datos generalesde un empleado
+     public function buscarEducación($id)
+     {
+ 
+         $sql = "   SELECT idEducacion,
+                            nivel,
+                            centroEducativo,
+                            estudio,
+                            desde,
+                            hasta,
+                            lugar
+                    FROM rrhh.educacion
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     // *Buscar datos generalesde un empleado
+     public function buscarAntecedentes($id)
+     {
+ 
+         $sql = "   SELECT	idAntecedentes,
+                            empresa,
+                            tipoEmpresa,
+                            direccion,
+                            telefono,
+                            ultimoPuesto,
+                            jefeInmediato,
+                            telJefe,
+                            ingreso,
+                            retiro,
+                            sueldoInicial,
+                            sueldoFinal,
+                            causaRetiro,
+                            obligaciones
+                    FROM rrhh.antecedentesLaborales
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     public function buscarEstudios($id)
+     {
+ 
+         $sql = "   SELECT	idEstudiante,
+                            carrera,
+                            horaEntrada,
+                            horaSalida,
+                            finalizacion
+                    FROM rrhh.estudiosActuales
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+     public function buscarReferencias($id)
+     {
+ 
+         $sql = "   SELECT  idReferencia,
+                            nombre,
+                            profesion,
+                            direccion,
+                            telefono
+                    FROM rrhh.referencias
+                    WHERE idEmpleado=:id
+         ";
+ 
+         $stmt = $this->conn->prepare($sql);
+         $stmt->bindParam(":id", $id);
+ 
+         try {
+             $stmt->execute();
+             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             $resultado = $e->getMessage();
+         }
+         $stmt->closeCursor();
+         return $resultado;
+     }
+
+
+    // *Buscar nombre en censo
+    public function buscarEnCenso($dni)
+    {
+
+        $sql = "SELECT  nombre,
+                            segundoNombre,
+                            apellido,
+                            segundoApellido,
+                            sexo,
+                            fechaNacimiento 
+                    FROM perfilcliente.tblCensoGeneral  
+                    WHERE numeroDNI	=:dni";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":dni", $dni);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *Buscar si existe
+    public function existe($id)
+    {
+
+        $sql = "SELECT  idEmpleado 
+                    FROM rrhh.empleados 
+                    WHERE dni=:id AND estado=1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+
+
+
+
+    // *Agregar registro
     public function agregarRegistro($datosGenerales, $datosParentesco, $datosParentescoConocidos, $datosSalud, $datosEducacion, $datosEstudiosActuales, $datosHistorialLaboral, $datosReferencias, $datosIdiomas, $conocidos, $actual)
     {
 
@@ -283,7 +629,6 @@ class mdlEmpleado
 
                 # Captura del ultimo id insertado
                 $idAdjuntos = $this->conn->lastInsertId();
-
             } catch (PDOException $e) {
 
                 $this->conn->rollBack();
@@ -311,86 +656,9 @@ class mdlEmpleado
         return $resultado;
     }
 
-    // *Listar
-    public function listarTodo()
-    {
-
-        $sql = "    SELECT  idEmpleado,DNI, 
-                            CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
-                            telefono 
-                    FROM rrhh.empleados 
-                    WHERE estado=1
-                    ORDER BY idEmpleado DESC";
-
-        $stmt = $this->conn->prepare($sql);
-
-        try {
-            $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-
-
-        return $resultado;
-    }
-
-
-    // *Buscar nombre en censo
-    public function buscarEnCenso($dni)
-    {
-
-        $sql = "SELECT  nombre,
-                        segundoNombre,
-                        apellido,
-                        segundoApellido,
-                        sexo,
-                        fechaNacimiento 
-                FROM perfilcliente.tblCensoGeneral  
-                WHERE numeroDNI	=:dni";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":dni", $dni);
-
-        try {
-            $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-        return $resultado;
-    }
-
-    // *Buscar si existe
-    public function existe($id)
-    {
-
-        $sql = "SELECT  idEmpleado 
-                FROM rrhh.empleados 
-                WHERE dni=:id AND estado=1" ;
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $id);
-
-        try {
-            $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-        return $resultado;
-    }
-
-
-
-
-
-    
+    // *Agregar fotos
     // *-------- foto------------
-    public function actualizarFoto($foto,$id)
+    public function actualizarFoto($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -412,7 +680,7 @@ class mdlEmpleado
     }
 
     // *-------- CV-------------
-    public function actualizarCV($foto,$id)
+    public function actualizarCV($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -434,7 +702,7 @@ class mdlEmpleado
     }
 
     // *-------- Penales-------------
-    public function actualizarPenales($foto,$id)
+    public function actualizarPenales($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -456,7 +724,7 @@ class mdlEmpleado
     }
 
     // *-------- policiales-------------------
-    public function actualizarPoliciales($foto,$id)
+    public function actualizarPoliciales($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -478,7 +746,7 @@ class mdlEmpleado
     }
 
     // *-------- Pasaporte------------
-    public function actualizarPasaporte($foto,$id)
+    public function actualizarPasaporte($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -502,7 +770,7 @@ class mdlEmpleado
 
     // *-------- DNI---------------
     //** FRONT */
-    public function DNIFront($foto,$id)
+    public function DNIFront($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -523,7 +791,7 @@ class mdlEmpleado
         return $resultado;
     }
     // * BACK *//
-    public function DNIBack($foto,$id)
+    public function DNIBack($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -547,7 +815,7 @@ class mdlEmpleado
 
     // *-------- Licencia Carro -----------
     //* FRONT */
-    public function licenciaFront($foto,$id)
+    public function licenciaFront($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -567,9 +835,9 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
-    
+
     // *BACK */
-    public function licenciaBack($foto,$id)
+    public function licenciaBack($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -593,7 +861,7 @@ class mdlEmpleado
 
     // *-------- Licencia Moto -----------
     //* FRONT */
-    public function motoFront($foto,$id)
+    public function motoFront($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -613,9 +881,9 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
-    
+
     // *BACK */
-    public function motoBack($foto,$id)
+    public function motoBack($foto, $id)
     {
 
         $sql = "UPDATE rrhh.adjuntos
@@ -635,5 +903,4 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
-
 }
