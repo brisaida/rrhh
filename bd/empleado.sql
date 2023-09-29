@@ -248,3 +248,11 @@ CREATE TABLE rrhh.historialDetalle (
 	usuarioModificado VARCHAR(100) NULL
 );
 GO
+
+CREATE TABLE rrhh.estadoCivil (
+	idEstadoCivil INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_EstadoCivil_id
+		PRIMARY KEY CLUSTERED (idEstadoCivil),
+	descripcion VARCHAR(100) NOT NULL
+);
+GO

@@ -59,6 +59,7 @@ class mdlEmpleado
                         lugarNacimiento,
                         nacionalidad,
                         estadoCivil,
+                        ec.descripcion as descEstadoCivil,
                         genero,
                         email,
                         cuentaBancaria,
@@ -80,6 +81,7 @@ class mdlEmpleado
                 FROM rrhh.empleados e
                 INNER JOIN rrhh.direcciones d ON e.idEmpleado=d.idEmpleado
                 LEFT JOIN rrhh.adjuntos a ON e.idEmpleado=a.idEmpleado
+                INNER JOIN rrhh.estadoCivil ec ON ec.idEstadoCivil=e.estadoCivil 
                 WHERE e.idEmpleado=:id AND d.estado=1
                 ";
 
