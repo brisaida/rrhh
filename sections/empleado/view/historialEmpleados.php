@@ -100,7 +100,7 @@
 											<option value="3" class="text-end">Gerente de Comunicaciones &nbsp</option>
 											<option value="4" class="text-end">Asistente de Contabilidad &nbsp</option>
 										</select>
-										<label for="TDRSelect">TDR</label>
+										<label for="TDRSelect">Puesto</label>
 									</div>
 								</div>
 							</div>

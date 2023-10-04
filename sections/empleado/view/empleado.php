@@ -35,7 +35,7 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class=" mb-3">
-													<label for="idInput" >&nbsp No. de Identidad (Sin guiones) </label>
+													<label for="idInput">&nbsp No. de Identidad (Sin guiones) </label>
 													<input type="input" class="form-control no-editable" id="idInput">
 
 												</div>
@@ -155,15 +155,42 @@
 											<div id="map" style="  height: 400px!important"></div>
 										</div>
 										<div class="col-md">
-											<div class="form-floating">
-												<div class="form-floating mb-3">
-													<textarea type="input" class="form-control" id="direccionInput" style="  height: 400px!important">></textarea>
-													<label for="direccionInput">Dirección</label>
+											
+											<div class="row">
+												<div class="form-floating">
+													<div class="form-floating mb-3">
+														<input type="input" class="form-control " id="latInput" disabled>
+														<label for="direccionInput">Latitud</label>
+													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="form-floating">
+													<div class="form-floating mb-3">
+														<input type="input" class="form-control " id="longInput" disabled>
+														<label for="direccionInput">Longitud</label>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-floating">
+													<div class="form-floating mb-3">
+														<textarea disabled type="input" class="form-control" id="direccionInput" style="  height: 100px!important"></textarea>
+														<label for="direccionInput">Zona</label>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-floating">
+													<div class="form-floating mb-3">
+														<textarea type="input" class="form-control" id="direccion1Input" style="  height: 140px!important"></textarea>
+														<label for="direccionInput">Dirección</label>
+													</div>
+												</div>
+											</div>
+											
+
 										</div>
-										<input type="input" class="form-control esconder" id="latInput">
-										<input type="input" class="form-control esconder" id="longInput">
 
 
 									</div>
@@ -385,7 +412,7 @@
 									<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 										<div class="app-card app-card-orders-table shadow-sm mb-5">
 											<div class="app-card-body">
-												<div class="table-responsive esconder" >
+												<div class="table-responsive esconder">
 													<table class="table app-table-hover mb-0 text-left" id="parentescoConocidosTabla">
 														<thead>
 															<tr>
@@ -712,7 +739,7 @@
 																	</tr>
 																</thead>
 																<tbody>
-													
+
 
 																</tbody>
 															</table>
@@ -818,7 +845,7 @@
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<div class="app-card-body">
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
-										Trabajo Anterior
+										Último trabajo
 									</div>
 									<!-- Nombre y tipo de empresa -->
 									<div class="row g-2">
@@ -924,7 +951,7 @@
 										</div>
 									</div>
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success">
-										Trabajo anterior al último
+										Penúltimo Trabajo
 									</div>
 
 									<!-- Nombre y tipo de empresa -->
@@ -1186,7 +1213,7 @@
 									</div>
 									<div class="row g-5 align-items-center mb-5">
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid  rounded " alt="..." id="idfotoFrontImg">
+											<img src="./assets/images/ID1.png" class="img-fluid  rounded " alt="..." id="idfotoFrontImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1195,7 +1222,7 @@
 											</div>
 										</div>
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid  rounded " alt="..." id="idfotoBackImg">
+											<img src="./assets/images/ID2.png" class="img-fluid  rounded " alt="..." id="idfotoBackImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1232,7 +1259,7 @@
 									</div>
 									<div class="row g-5 align-items-center esconder pasaporteDate mb-5">
 										<div class="col-md-2">
-											<img src="./assets/images/pasaporte.png" class="img-fluid rounded  " alt="..." id="pasaportefotoImg">
+											<img src="./assets/images/PASS.png" class="img-fluid rounded  " alt="..." id="pasaportefotoImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1250,7 +1277,7 @@
 									</div>
 									<div class="row g-5 align-items-center esconder carroDate mb-5 ">
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciafotoFrontImg">
+											<img src="./assets/images/C1.png" class="img-fluid rounded  " alt="..." id="licenciafotoFrontImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1259,7 +1286,7 @@
 											</div>
 										</div>
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciafotoBackImg">
+											<img src="./assets/images/C2.png" class="img-fluid rounded  " alt="..." id="licenciafotoBackImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1275,7 +1302,7 @@
 									</div>
 									<div class="row g-5 align-items-center esconder motoDate mb-5 ">
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciaMotofotoFrontImg">
+											<img src="./assets/images/C1.png" class="img-fluid rounded  " alt="..." id="licenciaMotofotoFrontImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">
@@ -1284,7 +1311,7 @@
 											</div>
 										</div>
 										<div class="col-md-2">
-											<img src="./assets/images/id-card.png" class="img-fluid rounded  " alt="..." id="licenciaMotoBackfotoImg">
+											<img src="./assets/images/C2.png" class="img-fluid rounded  " alt="..." id="licenciaMotoBackfotoImg">
 										</div>
 										<div class="col-md">
 											<div class="mb-3">

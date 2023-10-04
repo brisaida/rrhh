@@ -37,6 +37,7 @@ CREATE TABLE rrhh.direcciones(
 		direccion VARCHAR(MAX) NOT NULL,
 		latitud VARCHAR(50) NOT NULL,
 		longitud VARCHAR(50) NOT NULL,
+		ZONA VARCHAR(MAX)  NULL,
 		fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 		usuarioCreado VARCHAR(100) NOT NULL,
 		estado INT NOT NULL DEFAULT 1

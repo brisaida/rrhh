@@ -67,6 +67,7 @@ class mdlEmpleado
                         vencimientoLicenciaMoto,
                         vencimientoPasaporte,
                         d.direccion,
+                        d.zona,
                         d.latitud,
                         d.longitud,
                         a.foto,
@@ -127,7 +128,7 @@ class mdlEmpleado
      public function buscarInfoSalud($id)
      {
  
-         $sql = "SELECT	idSalud
+         $sql = "SELECT	idSalud,
                         contactoEmergencia1,
                         tel1,
                         contactoEmergencia2,
@@ -404,14 +405,15 @@ class mdlEmpleado
             $idEmpleado = $this->conn->lastInsertId();
 
             # Agregamos la dirección
-            $sqlDireccion = "INSERT INTO rrhh.direcciones(idEmpleado,direccion,latitud,longitud,usuarioCreado) 
-                    VALUES(:id,:direccion,:latitud,:longitud,:usuario);";
+            $sqlDireccion = "INSERT INTO rrhh.direcciones(idEmpleado,direccion,latitud,longitud,zona,usuarioCreado) 
+                    VALUES(:id,:direccion,:latitud,:longitud,:zona:usuario);";
 
             $stmt = $this->conn->prepare($sqlDireccion);
             $stmt->bindParam(":id", $idEmpleado);
             $stmt->bindParam(":direccion", $datosGenerales->direccion);
             $stmt->bindParam(":latitud", $datosGenerales->lat);
             $stmt->bindParam(":longitud", $datosGenerales->long);
+            $stmt->bindParam(":zona", $datosGenerales->zona);
             $stmt->bindParam(":usuario", $datosGenerales->usuario);
 
             try {

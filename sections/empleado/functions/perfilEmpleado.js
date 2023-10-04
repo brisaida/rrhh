@@ -564,7 +564,8 @@ function cargarEmpleado(id) {
                 $("#emailInput").val(datos.email).change();
                 $("#generoSelect").val(datos.genero).change();
                 $("#cuentaBancoInput").val(datos.cuentaBancaria).change();
-                $("#direccionInput").val(datos.direccion).change();
+                $("#direccion1Input").val(datos.direccion).change();
+                $("#direccionInput").val(datos.zona).change();
 
 
                 if (datos.vencimientoLicencia = ! '1900-01-01') {

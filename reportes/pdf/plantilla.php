@@ -12,8 +12,8 @@
         function Header() {
 	        $this->SetFillColor(255); 
 	        $this->SetTextColor(0); 
-	        $this->SetXY(0, 0);
-	        $this->Cell(300, 30, "", 0, 1, 'R', true);
+	        $this->SetXY(0,0);
+	        $this->Cell(300, 30, "", 0, 1, 'C', true);
 
             // coordenadas(x,y para posicionamiento)
            /*  
@@ -63,6 +63,8 @@
 			$this->setxy(15,275);
 			$this->Cell(0,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Página').$this->PageNo(),0,0,'C');
         }
+
+
 
 		var $widths;
 		var $aligns;
