@@ -670,14 +670,9 @@
     $pdf->Rect(54, 149, 87, 58, 'D');
     $pdf->Image($dniFront, 55, 70, 85, 55);
     $pdf->Image($dniBack, 55, 150, 85, 55);
-    if($pasaporte=='X'){
-        $pdf->AddPage();
-      
-        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
-        $pdf->Rect(54, 69, 87, 58, 'D');
-        $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
-    }
-    if(($carro=='X')){
+
+
+  if(($carro=='X')){
         $pdf->AddPage();
       
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
@@ -686,16 +681,26 @@
         $pdf->Image($carroFront, 55, 70, 85, 55, '', '', '', false, 1);
         $pdf->Image($carroBack, 55, 150, 85, 55, '', '', '', false, 1);
     }
+    if(($moto=='X')){
+            $pdf->AddPage();
+        
+            $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+            $pdf->Rect(54, 69, 87, 58, 'D');
+            $pdf->Rect(54, 149, 87, 58, 'D');
+            $pdf->Image($motoFront, 55, 70, 85, 55, '', '', '', false, 1);
+            $pdf->Image($motoBack, 55, 150, 85, 55, '', '', '', false, 1);
+        }
 
-  if(($moto=='X')){
+    if($pasaporte=='X'){
         $pdf->AddPage();
       
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
-        $pdf->Rect(54, 149, 87, 58, 'D');
-        $pdf->Image($motoFront, 55, 70, 85, 55, '', '', '', false, 1);
-        $pdf->Image($motoBack, 55, 150, 85, 55, '', '', '', false, 1);
+        $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
     }
+  
+
+  
      
 
     $pdf->Output('Ficha empleado '.$nombreCompleto.'.pdf','I');
