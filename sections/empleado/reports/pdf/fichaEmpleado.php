@@ -85,6 +85,14 @@
 
 
     $edad=calcularEdad($datosGenerales[0]['fechaNacimiento']);
+    $foto="../../../../sections/empleado/archivos/empleado/".$datosGenerales[0]['foto'];
+    $dniFront="../../../../sections/empleado/archivos/dni/".$datosGenerales[0]['dniFront'];
+    $dniBack="../../../../sections/empleado/archivos/dni/".$datosGenerales[0]['dniBack'];
+    $carroFront="../../../../sections/empleado/archivos/licencia_carro/".$datosGenerales[0]['licenciaCarroFront'];
+    $carroBack="../../../../sections/empleado/archivos/licencia_carro/".$datosGenerales[0]['licenciaCarroBack'];
+    $motoFront="../../../../sections/empleado/archivos/licencia_moto/".$datosGenerales[0]['licenciaMotoFront'];
+    $motoBack="../../../../sections/empleado/archivos/licencia_moto/".$datosGenerales[0]['licenciaMotoBack'];
+    $pasaporteFoto="../../../../sections/empleado/archivos/pasaporte/".$datosGenerales[0]['pasaporte'];
 
     $nombreCompleto=$datosGenerales[0]['primerNombre'].' '.$datosGenerales[0]['segundoNombre'].' '.$datosGenerales[0]['primerApellido'].' '.$datosGenerales[0]['segundoApellido'];
     /*   $asistenciaTecnica = $asistencias->obtenerDetalle($idCapacitacion);
@@ -103,13 +111,13 @@
      $pdf->Ln(4);
      $pdf->SetXY(15,50);
      $pdf->SetFont('Arial','B',9);
-     $pdf->Cell(100,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'I.   DATOS GENERALES'));
+     $pdf->Cell(100,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'I.   DATOS GENERALES '));
     $pdf->Line(15, 59, 195, 59); // H. aariba
      //$pdf->Line(15, 150, 195, 150); // H. abaho
      $pdf->Line(15, 59, 15, 110); // V. izquierda // V. derecha
 
     $pdf->Ln(4);
-    $pdf->Image('../../../../sections/empleado/archivos/empleado/'.$datosGenerales[0]['foto'], 20, 60, 30, 33 );
+    $pdf->Image($foto, 20, 60, 30, 33);
     $pdf->Line(55, 100, 55, 59);
     $pdf->Line(15, 106, 55, 106); 
 
@@ -443,8 +451,8 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['ingreso'] ), 1, 0, 'C', 1);
     $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['retiro'] ),1, 0, 'C', 1);
-    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['sueldoInicial'] ),1, 0, 'C', 1);
-    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['sueldoFinal'] ),1, 0, 'C', 1);
+    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",number_format($antecedentes[0]['sueldoInicial'] , 2, '.', ',')),1, 0, 'C', 1);
+    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",number_format($antecedentes[0]['sueldoFinal'] , 2, '.', ',')),1, 0, 'C', 1);
 
     $pdf->Ln();
     $fila+=12;
@@ -546,8 +554,9 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[1]['ingreso'] ), 1, 0, 'C', 1);
     $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[1]['retiro'] ),1, 0, 'C', 1);
-    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[1]['sueldoInicial'] ),1, 0, 'C', 1);
-    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[1]['sueldoFinal'] ),1, 0, 'C', 1);
+    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",number_format($antecedentes[1]['sueldoInicial'] , 2, '.', ',')),1, 0, 'C', 1);
+    $pdf->Cell(45,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",number_format($antecedentes[1]['sueldoFinal'] , 2, '.', ',')),1, 0, 'C', 1);
+
 
     $pdf->Ln();
     $fila+=12;
@@ -654,10 +663,41 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(180,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Firma:__________________________ lugar y Fecha: __________________________________________________________'));
 
+    $pdf->AddPage();
+      
+    $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+    $pdf->Rect(54, 69, 87, 58, 'D');
+    $pdf->Rect(54, 149, 87, 58, 'D');
+    $pdf->Image($dniFront, 55, 70, 85, 55);
+    $pdf->Image($dniBack, 55, 150, 85, 55);
+    if($pasaporte=='X'){
+        $pdf->AddPage();
+      
+        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+        $pdf->Rect(54, 69, 87, 58, 'D');
+        $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
+    }
+    if(($carro=='X')){
+        $pdf->AddPage();
+      
+        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+        $pdf->Rect(54, 69, 87, 58, 'D');
+        $pdf->Rect(54, 149, 87, 58, 'D');
+        $pdf->Image($carroFront, 55, 70, 85, 55, '', '', '', false, 1);
+        $pdf->Image($carroBack, 55, 150, 85, 55, '', '', '', false, 1);
+    }
 
+  if(($moto=='X')){
+        $pdf->AddPage();
+      
+        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+        $pdf->Rect(54, 69, 87, 58, 'D');
+        $pdf->Rect(54, 149, 87, 58, 'D');
+        $pdf->Image($motoFront, 55, 70, 85, 55, '', '', '', false, 1);
+        $pdf->Image($motoBack, 55, 150, 85, 55, '', '', '', false, 1);
+    }
+     
 
-
- 
     $pdf->Output('Ficha empleado '.$nombreCompleto.'.pdf','I');
 
     function formatearFecha($fecha) {

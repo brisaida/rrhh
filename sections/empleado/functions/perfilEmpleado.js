@@ -2,15 +2,19 @@
 /* Esconder controles */
 $(".esconder").hide();
 $(".esconderEstudios").hide();
+$(".adjuntos").hide();
 
 $(document).ready(function () {
-    console.log("AJA! Y ENTONCES")
 
     const location = window.location.search;
     const elementos = location.split("&");
     if (elementos.length > 1) {
         idRegistro = parseInt(elementos[1]);
         editar = true;
+        $('.no-editable').attr('disabled');
+        $('#revisarBtn').hide();
+        $('.adjuntos').show();
+        $('.no-mostrar').hide();
         cargarEmpleado(elementos[1]);
     }
 });
@@ -447,10 +451,10 @@ $('#licenciaMotoFotoBackInput').change(function (e) {
 
 $("#siguienteHfBtn").on("click", function () {
     siguiente("datos-personales", "historial-familiar")
+    //$("#siguienteHfBtn").click();
 
 });
 $("#anteriorSBtn").on("click", function () {
-    console.log("CLICK");
     siguiente("historial-familiar", "datos-personales")
 
 });
@@ -513,7 +517,6 @@ function siguiente(anterior, siguiente) {
 
 }
 
-
 /* Calcular edad en base a una fecha */
 function calcularEdad(fecha) {
     var hoy = new Date();
@@ -551,6 +554,9 @@ function cargarEmpleado(id) {
             console.log(respuesta);
             if (respuesta.length > 0) {
                 let datos = respuesta[0];
+                let penales='./sections/empleado/archivos/antecedentes_penales/'+datos.penales;
+                let policiales='./sections/empleado/archivos/antecedentes_policiales/'+datos.policiales;
+
                 $("#idInput").val(datos.DNI).change();
                 $("#primerNombreInput").val(datos.primerNombre).change();
                 $("#segundoNombreInput").val(datos.segundoNombre).change();
@@ -566,19 +572,24 @@ function cargarEmpleado(id) {
                 $("#cuentaBancoInput").val(datos.cuentaBancaria).change();
                 $("#direccion1Input").val(datos.direccion).change();
                 $("#direccionInput").val(datos.zona).change();
+                $("#latInput").val(datos.latitud).change();
+                $("#longInput").val(datos.longitud).change();
+                $("#penalesDescargar").attr('href',penales).change();
+                $("#policialesDescargar").attr('href',policiales).change();
 
 
-                if (datos.vencimientoLicencia = ! '1900-01-01') {
+                if (datos.vencimientoLicencia != '1900-01-01') {
+                    console.log(datos.vencimientoLicencia);
                     $("#licenciaCheck").prop("checked", true).change();
                     $("#fechaVenceLicenciaInput").val(datos.vencimientoLicencia);
                     $(".carroDate").show();
                 }
-                if (datos.vencimientoLicenciaMoto = ! '1900-01-01') {
+                if (datos.vencimientoLicenciaMoto != '1900-01-01') {
                     $("#motoCheck").prop("checked", true).change();
                     $("#fechaVenceMotoInput").val(datos.vencimientoLicencia);
                     $(".motoDate").show();
                 }
-                if (datos.vencimientoPasaporte = ! '1900-01-01') {
+                if (datos.vencimientoPasaporte != '1900-01-01') {
                     $("#pasaporteCheck").prop("checked", true).change();
                     $("#fechaVencePasaporteInput").val(datos.vencimientoLicencia);
                     $(".pasaporteDate").show();
@@ -610,8 +621,12 @@ function cargarEmpleado(id) {
 
                 //*Cargar la dirección en el mapa y hacerlo arrastable
                 $(".no-editable").attr("disabled", true);
+
                 // Crea un marcador y hazlo arrastrable
                 var marker = L.marker([datos.latitud, datos.longitud], { icon: customIcon, draggable: true }).addTo(myMap);
+
+                // Centra el mapa en las coordenadas iniciales
+                myMap.setView([datos.latitud, datos.longitud], 13); // Puedes ajustar el nivel de zoom (13 en este ejemplo) según tus necesidades
 
                 // Agrega un evento para detectar cuando el marcador se arrastra
                 marker.on('dragend', function (event) {
@@ -625,6 +640,7 @@ function cargarEmpleado(id) {
                         });
                 });
 
+
                 cargarHistoriaFamiliar(id);
                 cargaInfoSalud(id);
                 cargarConocidos(id);
@@ -634,7 +650,7 @@ function cargarEmpleado(id) {
                 cargarAntecedentes(id);
                 cargarReferencias(id);
             } else {
-                console.log("NO HAY NADA, ¿POR QUE NO HAY NADA? ... QUE BUENA PREGUNTA")
+                console.log("No se cargaron los datos del empleado")
             }
 
 
@@ -686,7 +702,7 @@ function cargarHistoriaFamiliar(id) {
 
 
             } else {
-                console.log("NADA! NADA TRAE ESTA PUERCADA!")
+                console.log("NADA! No hay datos en parientes conocidos.!")
             }
 
 
@@ -711,12 +727,12 @@ function cargarConocidos(id) {
                 confirmButtonColor: "#3085d6",
             });
         },
-        success: function (respuesta) { 
+        success: function (respuesta) {
             console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla2 = $("#parentescoConocidosTabla");
-    
+
 
                 $("#parientesConocidosCheck").trigger("click");
                 $.each(respuesta, function (index, registro) {
@@ -802,12 +818,12 @@ function cargarEducacion(id) {
                 confirmButtonColor: "#3085d6",
             });
         },
-        success: function (respuesta) { 
+        success: function (respuesta) {
             console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla = $("#educacionTabla");
-    
+
                 $.each(respuesta, function (index, registro) {
 
                     var fila = $("<tr>");
@@ -817,7 +833,7 @@ function cargarEducacion(id) {
                     fila.append($("<td>").text(registro.desde));
                     fila.append($("<td>").text(registro.hasta));
                     fila.append($("<td>").text(registro.lugar));
-                    fila.append($("<td>").html('<button class="btn btn-outline-danger" accion="eliminar" ><svg xmlns="http://www.w3.org/000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button>'));
+                    fila.append($("<td>").html(' '));
                     // Agrega más celdas según sea necesario
 
                     // Agrega la fila2 a la tabla
@@ -853,12 +869,12 @@ function cargarReferencias(id) {
                 confirmButtonColor: "#3085d6",
             });
         },
-        success: function (respuesta) { 
+        success: function (respuesta) {
             console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla = $("#referenciasTabla");
-    
+
                 $.each(respuesta, function (index, registro) {
 
                     var fila = $("<tr>");
@@ -901,12 +917,12 @@ function cargarIdiomas(id) {
                 confirmButtonColor: "#3085d6",
             });
         },
-        success: function (respuesta) { 
+        success: function (respuesta) {
             console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla = $("#idiomasTabla");
-    
+
                 $.each(respuesta, function (index, registro) {
 
                     var fila = $("<tr>");
@@ -956,7 +972,7 @@ function cargarEstudiosActuales(id) {
                 $("#horarioDesdeInput").val(datos.horaEntrada).change();
                 $("#horarioHastaInput").val(datos.horaSalida).change();
                 $("#finalizaDate").val(datos.finalizacion).change();
-               
+
             } else {
                 console.log("NO HAY NADA, ¿POR QUE NO HAY NADA? ... QUE BUENA PREGUNTA")
             }
@@ -1015,7 +1031,7 @@ function cargarAntecedentes(id) {
                 $("#sueldoFinalNumber2").val(datos2.sueldoFinal).change();
                 $("#causaRetiroInput2").val(datos2.causaRetiro).change();
                 $("#descripcionPuestoInput2").val(datos2.obligaciones).change();
-             
+
             } else {
                 console.log("NO HAY NADA, ¿POR QUE NO HAY NADA? ... QUE BUENA PREGUNTA")
             }

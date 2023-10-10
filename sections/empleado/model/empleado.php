@@ -78,12 +78,14 @@ class mdlEmpleado
                         a.licenciaCarroFront,
                         a.licenciaCarroBack,
                         a.licenciaMotoFront,
-                        a.licenciaMotoBack
+                        a.licenciaMotoBack,
+						a.penales,
+						a.policiales
                 FROM rrhh.empleados e
                 INNER JOIN rrhh.direcciones d ON e.idEmpleado=d.idEmpleado
                 LEFT JOIN rrhh.adjuntos a ON e.idEmpleado=a.idEmpleado
                 INNER JOIN rrhh.estadoCivil ec ON ec.idEstadoCivil=e.estadoCivil 
-                WHERE e.idEmpleado=:id AND d.estado=1
+                WHERE e.idEmpleado=:id AND e.estado=1
                 ";
 
         $stmt = $this->conn->prepare($sql);
@@ -406,7 +408,7 @@ class mdlEmpleado
 
             # Agregamos la dirección
             $sqlDireccion = "INSERT INTO rrhh.direcciones(idEmpleado,direccion,latitud,longitud,zona,usuarioCreado) 
-                    VALUES(:id,:direccion,:latitud,:longitud,:zona:usuario);";
+                    VALUES(:id,:direccion,:latitud,:longitud,:zona,:usuario);";
 
             $stmt = $this->conn->prepare($sqlDireccion);
             $stmt->bindParam(":id", $idEmpleado);

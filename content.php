@@ -9,6 +9,7 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'empleado' ? include "./sections/empleado/view/empleado.php" : false;
     $_GET['section'] == 'perfilPuesto' ? include "./sections/empleado/view/perfilPuesto.php" : false;
     $_GET['section'] == 'historialEmpleados' ? include "./sections/empleado/view/historialEmpleados.php" : false;
+    $_GET['section'] == 'completado' ? include "./sections/empleado/view/completado.php" : false;
     $_GET['section'] == 'fichaEmpleado' ? include "./sections/empleado/reports/pdf/fichaEmpleado.php" : false;
     $_GET['section'] == 'autorizacionBancaria' ? include "./sections/empleado/reports/pdf/permisoBanco.php" : false;
 

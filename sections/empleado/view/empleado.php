@@ -739,6 +739,11 @@
 																	</tr>
 																</thead>
 																<tbody>
+																	<tr>
+																		<td class="text-center">Español</td>
+																		<td class="text-center">100%</td>
+																		<td></td>
+																	</tr>
 
 
 																</tbody>
@@ -852,7 +857,7 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="nombreEmpresaInput">
+													<input type="input" class="form-control no-editable" id="nombreEmpresaInput">
 													<label for="nombreEmpresaInput">Nombre de la empresa</label>
 												</div>
 											</div>
@@ -860,7 +865,7 @@
 										<div class="col-md-3">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="tipoEmpresaInput">
+													<input type="input" class="form-control no-editable" id="tipoEmpresaInput">
 													<label for="tipoEmpresaInput">Tipo de Empresa</label>
 												</div>
 											</div>
@@ -871,13 +876,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="dirEmpresaInput">
+												<input type="input" class="form-control no-editable" id="dirEmpresaInput">
 												<label for="dirEmpresaInput">Dirección</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="telEmpresaInput">
+												<input type="input" class="form-control no-editable" id="telEmpresaInput">
 												<label for="telEmpresaInput">Teléfono</label>
 											</div>
 										</div>
@@ -888,19 +893,19 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="ultimoPuestoInput">
+												<input type="input" class="form-control no-editable" id="ultimoPuestoInput">
 												<label for="ultimoPuestoInput">Último puesto desempeñado</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="jefeInmediatoInput">
+												<input type="input" class="form-control no-editable" id="jefeInmediatoInput">
 												<label for="jefeInmediatoInput">Nombre Jefe Inmediato</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="telJefeInput">
+												<input type="input" class="form-control no-editable" id="telJefeInput">
 												<label for="telJefeInput">Número Jefe Inmediato</label>
 											</div>
 										</div>
@@ -910,25 +915,25 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="date" class="form-control" id="ingresoDate">
+												<input type="date" class="form-control no-editable" id="ingresoDate">
 												<label for="ingresoDate">Fecha de Ingreso</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="date" class="form-control" id="retiroDate">
+												<input type="date" class="form-control no-editable" id="retiroDate">
 												<label for="retiroDate">Fecha de Retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" min="0" class="form-control" id="sueldoInicialNumber">
+												<input type="number" min="0" class="form-control no-editable" id="sueldoInicialNumber">
 												<label for="sueldoInicialNumber">Sueldo Inicial</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" min="0" class="form-control" id="sueldoFinalNumber">
+												<input type="number" min="0" class="form-control no-editable" id="sueldoFinalNumber">
 												<label for="sueldoFinalNumber">Sueldo Final</label>
 											</div>
 										</div>
@@ -939,13 +944,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="causaRetiroInput">
+												<input type="input" class="form-control no-editable" id="causaRetiroInput">
 												<label for="causaRetiroInput">Causas de retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="descripcionPuestoInput">
+												<input type="input" class="form-control no-editable" id="descripcionPuestoInput">
 												<label for="descripcionPuestoInput">Descripción de Puesto</label>
 											</div>
 										</div>
@@ -959,7 +964,7 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="nombreEmpresaInput2">
+													<input type="input" class="form-control no-editable" id="nombreEmpresaInput2">
 													<label for="nombreEmpresaInput2">Nombre de la empresa</label>
 												</div>
 											</div>
@@ -967,7 +972,7 @@
 										<div class="col-md-3">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control" id="tipoEmpresaInput2">
+													<input type="input" class="form-control no-editable" id="tipoEmpresaInput2">
 													<label for="tipoEmpresaInput2">Tipo de Empresa</label>
 												</div>
 											</div>
@@ -978,13 +983,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="dirEmpresaInput2">
+												<input type="input" class="form-control no-editable" id="dirEmpresaInput2">
 												<label for="dirEmpresaInput2">Dirección</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="telEmpresaInput2">
+												<input type="input" class="form-control no-editable" id="telEmpresaInput2">
 												<label for="telEmpresaInput2">Teléfono</label>
 											</div>
 										</div>
@@ -995,19 +1000,19 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="ultimoPuestoInput2">
+												<input type="input" class="form-control no-editable" id="ultimoPuestoInput2">
 												<label for="ultimoPuestoInput2">Último puesto desempeñado</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="jefeInmediatoInput2">
+												<input type="input" class="form-control no-editable" id="jefeInmediatoInput2">
 												<label for="jefeInmediatoInput2">Nombre Jefe Inmediato</label>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="telJefeInput2">
+												<input type="input" class="form-control no-editable" id="telJefeInput2">
 												<label for="telJefeInput2">Número Jefe Inmediato</label>
 											</div>
 										</div>
@@ -1017,25 +1022,25 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="date" class="form-control" id="ingresoDate2">
+												<input type="date" class="form-control no-editable" id="ingresoDate2">
 												<label for="ingresoDate2">Fecha de Ingreso</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="date" class="form-control" id="retiroDate2">
+												<input type="date" class="form-control no-editable" id="retiroDate2">
 												<label for="retiroDate2">Fecha de Retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" min="0" id="sueldoInicialNumber2">
+												<input type="number" class="form-control no-editable" min="0" id="sueldoInicialNumber2">
 												<label for="sueldoInicialNumber2">Sueldo Inicial</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="number" class="form-control" min="0" id="sueldoFinalNumber2">
+												<input type="number" class="form-control no-editable" min="0" id="sueldoFinalNumber2">
 												<label for="sueldoFinalNumber2">Sueldo Final</label>
 											</div>
 										</div>
@@ -1046,13 +1051,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="causaRetiroInput2">
+												<input type="input" class="form-control no-editable" id="causaRetiroInput2">
 												<label for="causaRetiroInput2">Causas de retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control" id="descripcionPuestoInput2">
+												<input type="input" class="form-control no-editable" id="descripcionPuestoInput2">
 												<label for="descripcionPuestoInput2">Descripción de Puesto</label>
 											</div>
 										</div>
@@ -1238,17 +1243,19 @@
 									</div>
 									<div class="row g-5 align-items-center mb-5">
 
-										<div class="col-md">
+										<div class="col-md text-center">
 											<div class="mb-3">
-												<label for="licenciaFotoInput">&nbsp Antecedentes Penales</label>
-												<input type="file" class="form-control " id="penalesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
+												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Penales</label>
+												<input type="file" class="form-control no-mostrar" id="penalesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
+												<a href="" class="adjuntos text-center" target="_blank" id="penalesDescargar">Descargar Antecendentes Penales</a>
 											</div>
 										</div>
 
-										<div class="col-md">
+										<div class="col-md text-center">
 											<div class="mb-3">
-												<label for="licenciaFotoInput">&nbsp Antecedentes Policiales</label>
-												<input type="file" class="form-control " id="policialesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
+												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Policiales</label>
+												<input type="file" class="form-control no-mostrar" id="policialesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
+												<a href="" class="adjuntos text-center" target="_blank" id="policialesDescargar">Descargar Antecendentes Policiales</a>
 											</div>
 										</div>
 									</div>

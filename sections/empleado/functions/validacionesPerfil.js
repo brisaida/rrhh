@@ -80,8 +80,8 @@ $("#revisarBtn").on("click", function () {
         usuario: usuario,
     }
 
-    console.log("foto =>",foto)
-    if (foto.length==0) { falta += " - Foto" }
+    console.log("foto =>", foto)
+    if (foto.length == 0) { falta += " - Foto" }
     if (!datosGenerales.id) { falta += " - No. de identidad" }
     if (!datosGenerales.primerNombre) { falta += " - Primer Nombre" }
     if (!datosGenerales.primerApellido) { falta += " - Primer Apellido" }
@@ -365,18 +365,17 @@ $("#revisarBtn").on("click", function () {
 
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
-
+/* 
     if (falta) {
         Swal.fire({
             icon: 'error',
             title: 'Oops... Parece que falta información',
             text: falta
         })
-    } else {
-       // $("#revisarBtn").hide();
+    } else { */
         console.log(datosGenerales);
-    AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
-    }
+        AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
+    //}
 
 
 });
@@ -515,9 +514,9 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
                 timer: 1500
             })
 
-            /* setTimeout(function () {
-                window.location.href = '?section=listadoEmpleados';
-            }, 1500); */
+           setTimeout(function () {
+                window.location.href = '?section=completado';
+            }, 1500); 
 
         },
     });
