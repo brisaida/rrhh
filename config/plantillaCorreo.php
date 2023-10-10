@@ -6,10 +6,10 @@ $cc= 'brisaida.06@gmail.com';
 
  $body = 'Esto es una prueba ';
    // i'm running windows, so i had to update this:
-    //ini_set("SMTP", "my-mail-server");
+    ini_set("SMTP", "smtp.gmail.com");
 
 
- sendEmail($emailusername,'brisaz.hn@gmail.com', 'Successful Charge!', $body, true);
+ echo sendEmail($emailusername,'brisaz.hn@gmail.com', 'Successful Charge!', $body, true);
 
 
    function sendEmail($to, $from, $subject, $body, $isHtml) {
@@ -26,7 +26,7 @@ $cc= 'brisaida.06@gmail.com';
         $headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
     }
 
-    mail($to, $subject, $message, $headers);
+    echo mail($to, $subject, $message, $headers);
 }
     
 

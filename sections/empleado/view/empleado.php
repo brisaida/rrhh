@@ -741,7 +741,7 @@
 																<tbody>
 																	<tr>
 																		<td class="text-center">Español</td>
-																		<td class="text-center">100%</td>
+																		<td class="text-center" porcentaje="1">100%</td>
 																		<td></td>
 																	</tr>
 

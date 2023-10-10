@@ -239,6 +239,7 @@ $("#revisarBtn").on("click", function () {
         // Obtiene los valores de las celdas y los almacena en el arreglo
         registro.idioma = fila.find('td:eq(0)').text();
         registro.porcentaje = fila.find('td:eq(1)').attr("porcentaje");
+        console.log(fila.find('td:eq(1)'));
 
         // Agrega el registro al arreglo "parentesco"
         idiomas.push(registro);
@@ -370,7 +371,8 @@ $("#revisarBtn").on("click", function () {
             text: falta
         })
     } else { */
-        console.log(datosGenerales);
+        console.log(parentesco);
+        console.log(idiomas);
         AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
     //}
 
@@ -511,9 +513,9 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
                 timer: 1500
             })
 
-           setTimeout(function () {
+           /* setTimeout(function () {
                 window.location.href = '?section=completado';
-            }, 1500); 
+            }, 1500);  */
 
         },
     });
