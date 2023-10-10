@@ -1,18 +1,37 @@
 <?php 
-$para = "brisaida.06@gmail.com";
-$asunto = "Asunto del correo";
-$mensaje = "Este es el contenido del correo.";
 
-// Cabeceras del correo
-$cabeceras = "From: blopez@honducafeproyectos.com" . "\r\n" .
-             "Reply-To: blopez@honducafeproyectos.com" . "\r\n" .
-             "X-Mailer: PHP/" . phpversion();
+// Este $emailusername podria ser el $to
+$emailusername= 'blopez@honducafeproyectos.com';
+$cc= 'brisaida.06@gmail.com';
 
-// Envío del correo
-if (mail($para, $asunto, $mensaje, $cabeceras)) {
-    echo "Correo enviado con éxito";
-} else {
-    echo "Error al enviar el correo";
+ $body = 'Esto es una prueba ';
+   // i'm running windows, so i had to update this:
+    //ini_set("SMTP", "my-mail-server");
+
+
+ sendEmail($emailusername,'brisaz.hn@gmail.com', 'Successful Charge!', $body, true);
+
+
+   function sendEmail($to, $from, $subject, $body, $isHtml) {
+    $message = '<html><body>';
+    $message .= $body;
+    $message .= '</body></html>';
+
+    $headers = "From: $from\r\n";
+    $headers .= "Reply-To: $from\r\n";
+    //$headers .= "Cc: \r\n";
+
+    if ($isHtml) {
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
+    }
+
+    mail($to, $subject, $message, $headers);
 }
+    
+
+// $isHtml se usa cuando incluis HTML en el correo
+
+
 
 ?>
