@@ -1241,11 +1241,12 @@
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success ">
 										Antecedentes
 									</div>
+									
 									<div class="row g-5 align-items-center mb-5">
 
 										<div class="col-md text-center">
 											<div class="mb-3">
-												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Penales</label>
+												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Penales (Opcional)</label>
 												<input type="file" class="form-control no-mostrar" id="penalesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
 												<a href="" class="adjuntos text-center" target="_blank" id="penalesDescargar">Descargar Antecendentes Penales</a>
 											</div>
@@ -1253,12 +1254,14 @@
 
 										<div class="col-md text-center">
 											<div class="mb-3">
-												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Policiales</label>
+												<label for="licenciaFotoInput" class="no-mostrar">&nbsp Antecedentes Policiales (Opcional)</label>
 												<input type="file" class="form-control no-mostrar" id="policialesFotoInput" accept=".jpg,.png,.jpeg,.pdf">
 												<a href="" class="adjuntos text-center" target="_blank" id="policialesDescargar">Descargar Antecendentes Policiales</a>
 											</div>
 										</div>
 									</div>
+									
+								
 
 									<!--FOTO DE PASAPORTE-->
 									<div class="h5 pb-2 mb-4 text-success border-bottom border-success esconder pasaporteDate">

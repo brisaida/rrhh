@@ -358,9 +358,6 @@ $("#revisarBtn").on("click", function () {
 
     if (!cv1) { falta += " - Curriculum" }
     if (!id1 || !id2) { falta += " - Foto de Identidad" }
-    if (!penalesFoto) { falta += " - Antecentes Penales" }
-    if (!policialesFoto) { falta += " - Antecedentes Policiales" }
-
 
 
     // * Modal en caso de faltar información
