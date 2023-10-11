@@ -12,7 +12,7 @@ $(document).ready(function () {
         idRegistro = parseInt(elementos[1]);
         editar = true;
         $('.no-editable').attr('disabled');
-        //$('#revisarBtn').hide();
+        $('#revisarBtn').hide();
         $('.adjuntos').show();
         $('.no-mostrar').hide();
         cargarEmpleado(elementos[1]);
@@ -586,12 +586,12 @@ function cargarEmpleado(id) {
                 }
                 if (datos.vencimientoLicenciaMoto != '1900-01-01') {
                     $("#motoCheck").prop("checked", true).change();
-                    $("#fechaVenceMotoInput").val(datos.vencimientoLicencia);
+                    $("#fechaVenceMotoInput").val(datos.vencimientoLicenciaMoto);
                     $(".motoDate").show();
                 }
                 if (datos.vencimientoPasaporte != '1900-01-01') {
                     $("#pasaporteCheck").prop("checked", true).change();
-                    $("#fechaVencePasaporteInput").val(datos.vencimientoLicencia);
+                    $("#fechaVencePasaporteInput").val(datos.vencimientoPasaporte);
                     $(".pasaporteDate").show();
                 }
 

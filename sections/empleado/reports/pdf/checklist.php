@@ -17,54 +17,176 @@
     $datosGenerales = $empleados->buscarDatosGenerales($idEmpleado);
     $nombreCompleto=  $datosGenerales[0]['primerNombre'].' '.$datosGenerales[0]['segundoNombre'].' '.$datosGenerales[0]['primerApellido'].' '.$datosGenerales[0]['segundoApellido'];
     $nombreCompleto=capitalizarPalabras($nombreCompleto);
+
+    $documentos = array(
+        "Contrato laboral y acuerdo de confidencialidad",
+        "Fotografía tamaño carnet",
+        "Solicitud de empleo",
+        "Croquis domicilio",
+        "Cuenta bancaria y carta de autorización",
+        "Copia de DNI",
+        "Copia de licencia - Fecha de Vencimiento: _____________________",
+        "Correo de oferta laboral y aceptación",
+        "Antecedentes Penales",
+        "Antecedentes Policiales",
+        "Tarjeta de salud (tipo de sangre)",
+        "Carnet de vacuna COVID-19",
+        "Formato de evaluación de candidatos",
+        "Política de ética",
+        "Política de uso de vehículo e incidencia",
+        "Currículum Vitae",
+        "Copia de título",
+        "Referencia Personal"
+    );
+
+    $informacionEmpleado = array(
+        "e.idEmpleado",
+        "DNI",
+        "primerNombre",
+        "segundoNombre",
+        "primerApellido",
+        "segundoApellido",
+        "telefono",
+        "fechaNacimiento",
+        "lugarNacimiento",
+        "nacionalidad",
+        "estadoCivil",
+        "descripcion as descEstadoCivil",
+        "genero",
+        "email",
+        "cuentaBancaria",
+        "vencimientoLicencia",
+        "vencimientoLicenciaMoto",
+        "vencimientoPasaporte",
+        "direccion",
+        "zona",
+        "latitud",
+        "longitud",
+        "foto",
+        "dniFront",
+        "dniBack",
+        "cv",
+        "pasaporte",
+        "licenciaCarroFront",
+        "licenciaCarroBack",
+        "licenciaMotoFront",
+        "licenciaMotoBack",
+        "penales",
+        "policiales"
+    );
+    
+    
     
     $pdf->AddPage();
+
+    
+    $fila=33;
 
     $pdf->Ln(); 
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','B',12);
-	$pdf->SetXY(18,40);
+	$pdf->SetXY(18,$fila);
 	$pdf->Cell(175, 7,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'FUNDACIÓN COHONDUCAFE' ),0, 0, 'C', 1);
     $pdf->Ln(); 
+    $fila+=6;
     $pdf->SetFont('Arial','B',12);
-	$pdf->SetXY(18,47);
+	$pdf->SetXY(18,$fila);
 	$pdf->Cell(175, 7,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'CHECK-LIST' ),0, 0, 'C', 1);
+    $fila+=10;
 
     $pdf->Ln(); 
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(18,55);
+    $pdf->SetXY(30,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nombre del Colaborador' ), 1, 0, 'C', 1);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$nombreCompleto ), 1, 0, 'l', 1);
+    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$nombreCompleto ), 1, 0, 'l', 1);
+    $fila+=6;
 
     $pdf->Ln(); 
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(18,61);
+    $pdf->SetXY(30,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Cargo' ), 1, 0, 'C', 1);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
+    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
+    $fila+=6;
 
     $pdf->Ln(); 
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(18,67);
+    $pdf->SetXY(30,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Fecha de Ingreso' ), 1, 0, 'C', 1);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
-    
-    
+    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
+    $fila+=10;
+
+    foreach ($documentos as $documento) {
+        
+        $pdf->Ln(); 
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetXY(40,$fila);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(10,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'C', 1);
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(160,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '   '.$documento ), 'L', 0, 'l', 1);
+        $fila+=8;
+    }
+
+        $fila+=2;
+        $pdf->Ln(); 
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetXY(40,$fila);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(25,5, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Comentarios' ), 0, 0, 'C', 1);
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(105,5,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '' ), 'B', 0, 'C', 1);
+        $fila+=6;
+        $pdf->SetXY(42,$fila);
+        $pdf->SetFillColor(255, 255, 255);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(128,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '' ), 'B', 0, 'C', 1);
+       
+
+        $fila+=30;
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(30,$fila);
+        $pdf->Cell(80, 5,iconv("UTF-8", "ISO-8859-1//TRANSLIT","Revisado por"),0, 0, 'C', 1);
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(133,$fila);
+        $pdf->MultiCell(180,8,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Aprobado por'),0, 0, 'C', 1);
+        $fila+=5;
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(30,$fila);
+        $pdf->Cell(80, 5,iconv("UTF-8", "ISO-8859-1//TRANSLIT","Sania Alvarenga"),0, 0, 'C', 1);
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(133,$fila);
+        $pdf->MultiCell(180,8,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Hugo Ávila'),0, 0, 'C', 1);
+      
+        $fila+=5;
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(30,$fila);
+        $pdf->Cell(80, 5,iconv("UTF-8", "ISO-8859-1//TRANSLIT","Contador"),0, 0, 'C', 1);
+        $pdf->SetFont('Arial','',9);
+        $pdf->SetXY(133,$fila);
+        $pdf->MultiCell(180,8,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Director de Proyecto'),0, 0, 'C', 1);
       
 
 
