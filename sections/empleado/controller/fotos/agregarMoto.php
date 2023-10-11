@@ -31,7 +31,7 @@ move_uploaded_file($fileTmpPath, $dest_path);
 
 // Instanciamos el modelo y llamamos al método correspondiente
 $conexion = new mdlEmpleado();
-$nombres = $conexion->$motoFront($nombreArchivo, $idRegistro);
+$nombres = $conexion->motoFront($nombreArchivo, $idRegistro);
 
 ?>
 

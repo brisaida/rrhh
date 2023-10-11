@@ -369,6 +369,7 @@ $("#revisarBtn").on("click", function () {
             text: falta
         })
     } else { 
+        $('#revisarBtn').hide();
         AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
     }
 

@@ -31,7 +31,7 @@ move_uploaded_file($fileTmpPath, $dest_path);
 
 // Instanciamos el modelo y llamamos al método correspondiente
 $conexion = new mdlEmpleado();
-$nombres = $conexion->$DNIFront($nombreArchivo, $idRegistro);
+$nombres = $conexion->DNIFront($nombreArchivo, $idRegistro);
 
 ?>
 
