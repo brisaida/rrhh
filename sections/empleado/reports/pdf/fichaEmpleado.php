@@ -95,9 +95,7 @@
     $pasaporteFoto="../../../../sections/empleado/archivos/pasaporte/".$datosGenerales[0]['pasaporte'];
 
     $nombreCompleto=$datosGenerales[0]['primerNombre'].' '.$datosGenerales[0]['segundoNombre'].' '.$datosGenerales[0]['primerApellido'].' '.$datosGenerales[0]['segundoApellido'];
-    /*   $asistenciaTecnica = $asistencias->obtenerDetalle($idCapacitacion);
-     $losParticipantes = $participantes->listarRegistros($idAsistencia); */ 
- 
+
       // Adicionamos una página en blanco
     $pdf->AddPage();
       

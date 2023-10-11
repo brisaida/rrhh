@@ -16,7 +16,7 @@
                             <div class="col-md text-center">
                                 <h5>PROCESO COMPLETADO</h5>
                                 <h1>Gracias por tu apoyo.</h1>
-                                <p>Recibiras un correo con el resumen de la información brindada.</p>
+                                <p></p>
                             </div>
                         </div>
                     </div>

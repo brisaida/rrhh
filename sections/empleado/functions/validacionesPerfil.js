@@ -80,7 +80,6 @@ $("#revisarBtn").on("click", function () {
         usuario: usuario,
     }
 
-    console.log("foto =>", foto)
     if (foto.length == 0) { falta += " - Foto" }
     if (!datosGenerales.id) { falta += " - No. de identidad" }
     if (!datosGenerales.primerNombre) { falta += " - Primer Nombre" }
@@ -239,7 +238,6 @@ $("#revisarBtn").on("click", function () {
         // Obtiene los valores de las celdas y los almacena en el arreglo
         registro.idioma = fila.find('td:eq(0)').text();
         registro.porcentaje = fila.find('td:eq(1)').attr("porcentaje");
-        console.log(fila.find('td:eq(1)'));
 
         // Agrega el registro al arreglo "parentesco"
         idiomas.push(registro);
@@ -363,18 +361,16 @@ $("#revisarBtn").on("click", function () {
 
     // * Modal en caso de faltar información
     // *---------------------------------------------------------
-/* 
+
     if (falta) {
         Swal.fire({
             icon: 'error',
             title: 'Oops... Parece que falta información',
             text: falta
         })
-    } else { */
-        console.log(parentesco);
-        console.log(idiomas);
+    } else { 
         AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos, salud, educacion, estudiosActuales, historial, referencias, idiomas, conocidos, actual);
-    //}
+    }
 
 
 });
@@ -416,11 +412,10 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
         processData: false,
         // Error en la petición
         error: function (error) {
-            console.log(error);
 
         },
         success: function (respuesta) {
-            // console.log("convenio", respuesta);
+        
 
         },
     });
@@ -446,7 +441,6 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
             actual: actual,
         },
         error: function (error) {
-            console.log(error);
             Swal.fire({
                 title: "Ficha del empelado",
                 icon: "error",
@@ -457,7 +451,6 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
         success: function (respuesta) {
 
             let datos = JSON.parse(respuesta);
-            console.log(datos);
             let idAdjuntos = (datos[0].idAdjuntos);
 
             const fotoEmpleado = document.querySelector("#archivoInput");
@@ -531,7 +524,6 @@ function cargarInfoCenso(id) {
         dataType: "json",
         // Error en la petición
         error: function (error) {
-            console.log(error);
             Swal.fire({
                 title: "Empleados",
                 icon: "error",
