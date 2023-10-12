@@ -1,11 +1,12 @@
 <?php
+
+    ini_set('max_execution_time', 1200);
     include '../../../../reportes/pdf/plantilla.php';
     include_once '../../../../config/Connection.php';     
     include_once '../../model/empleado.php';
   
      // Creamos el objeto
     $pdf = new PDF();
-
    
 
      # caputa e instanciamientos
@@ -85,19 +86,25 @@
 
 
     $edad=calcularEdad($datosGenerales[0]['fechaNacimiento']);
-    $foto="../../../../sections/empleado/archivos/empleado/".$datosGenerales[0]['foto'];
+   
+    // Ruta de la imagen original
+    $imagePath = '../../../../sections/empleado/archivos/empleado/' . $datosGenerales[0]['foto'];
     $dniFront="../../../../sections/empleado/archivos/dni/".$datosGenerales[0]['dniFront'];
     $dniBack="../../../../sections/empleado/archivos/dni/".$datosGenerales[0]['dniBack'];
     $carroFront="../../../../sections/empleado/archivos/licencia_carro/".$datosGenerales[0]['licenciaCarroFront'];
     $carroBack="../../../../sections/empleado/archivos/licencia_carro/".$datosGenerales[0]['licenciaCarroBack'];
     $motoFront="../../../../sections/empleado/archivos/licencia_moto/".$datosGenerales[0]['licenciaMotoFront'];
     $motoBack="../../../../sections/empleado/archivos/licencia_moto/".$datosGenerales[0]['licenciaMotoBack'];
-    $pasaporteFoto="../../../../sections/empleado/archivos/pasaporte/".$datosGenerales[0]['pasaporte'];
+    $pasaporteFoto="../../../../sections/empleado/archivos/pasaporte/".$datosGenerales[0]['pasaporte'];  
 
     $nombreCompleto=$datosGenerales[0]['primerNombre'].' '.$datosGenerales[0]['segundoNombre'].' '.$datosGenerales[0]['primerApellido'].' '.$datosGenerales[0]['segundoApellido'];
 
-      // Adicionamos una página en blanco
+
     $pdf->AddPage();
+
+
+
+    convertirPNG($pdf,$imagePath,20,60,30,33);
       
 
      // Contenido del documento (Título)
@@ -111,11 +118,10 @@
      $pdf->SetFont('Arial','B',9);
      $pdf->Cell(100,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'I.   DATOS GENERALES '));
     $pdf->Line(15, 59, 195, 59); // H. aariba
-     //$pdf->Line(15, 150, 195, 150); // H. abaho
      $pdf->Line(15, 59, 15, 110); // V. izquierda // V. derecha
 
     $pdf->Ln(4);
-    $pdf->Image($foto, 20, 60, 30, 33);
+
     $pdf->Line(55, 100, 55, 59);
     $pdf->Line(15, 106, 55, 106); 
 
@@ -666,8 +672,8 @@
     $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
     $pdf->Rect(54, 69, 87, 58, 'D');
     $pdf->Rect(54, 149, 87, 58, 'D');
-    $pdf->Image($dniFront, 55, 70, 85, 55);
-    $pdf->Image($dniBack, 55, 150, 85, 55);
+    convertirPNG($pdf,$dniFront,55, 70, 85, 55);
+    convertirPNG($pdf,$dniBack, 55, 150, 85, 55);
 
 
   if(($carro=='X')){
@@ -676,8 +682,8 @@
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
         $pdf->Rect(54, 149, 87, 58, 'D');
-        $pdf->Image($carroFront, 55, 70, 85, 55, '', '', '', false, 1);
-        $pdf->Image($carroBack, 55, 150, 85, 55, '', '', '', false, 1);
+        convertirPNG($pdf,$carroFront,55, 70, 85, 55);
+        convertirPNG($pdf,$carroBack, 55, 150, 85, 55);
     }
     if(($moto=='X')){
             $pdf->AddPage();
@@ -685,8 +691,8 @@
             $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
             $pdf->Rect(54, 69, 87, 58, 'D');
             $pdf->Rect(54, 149, 87, 58, 'D');
-            $pdf->Image($motoFront, 55, 70, 85, 55, '', '', '', false, 1);
-            $pdf->Image($motoBack, 55, 150, 85, 55, '', '', '', false, 1);
+            convertirPNG($pdf,$motoFront, 55, 70, 85, 55);
+            convertirPNG($pdf,$motoBack, 55, 150, 85, 55);
         }
 
     if($pasaporte=='X'){
@@ -694,7 +700,9 @@
       
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
-        $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
+        
+        convertirPNG($pdf,$pasaporteFoto, 55, 70, 85, 55);
+      //  $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
     }
   
 
@@ -703,6 +711,12 @@
 
     $pdf->Output('Ficha empleado '.$nombreCompleto.'.pdf','I');
 
+
+
+
+
+
+    /* Funciones */
     function formatearFecha($fecha) {
         // Establecer la configuración regional en español
         setlocale(LC_TIME, 'es_ES.utf8', 'es_ES', 'es');
@@ -741,3 +755,27 @@
         
         return $edad;
     }
+    function convertirPNG($pdf, $imagePath, $x, $y, $width, $height) {
+        if (extension_loaded('gd')) {
+            $originalImage = imagecreatefromjpeg($imagePath);
+            $pngImage = imagecreatetruecolor(imagesx($originalImage), imagesy($originalImage));
+    
+            // Generar un nombre de archivo temporal único
+            $pngImagePath = tempnam(sys_get_temp_dir(), 'temp_image_') . '.png';
+    
+            imagecopy($pngImage, $originalImage, 0, 0, 0, 0, imagesx($originalImage), imagesy($originalImage));
+            imagepng($pngImage, $pngImagePath);
+    
+            $pdf->Image($pngImagePath, $x, $y, $width, $height, 'PNG');
+    
+            imagedestroy($originalImage);
+            imagedestroy($pngImage);
+    
+            // No es necesario eliminar el archivo temporal, ya que se eliminará automáticamente
+            // cuando el script termine o cuando el archivo ya no esté en uso.
+        } else {
+            $pdf->SetFont('Arial', '', 14);
+            $pdf->Cell(0, 10, 'La extensión GD no está disponible en el servidor.', 0, 1);
+        }
+    }
+    

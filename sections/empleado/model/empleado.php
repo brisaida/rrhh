@@ -44,6 +44,27 @@ class mdlEmpleado
         return $resultado;
     }
 
+    public function listarTodoReporte()
+    {
+
+        $sql = "SELECT DNI,CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido) as nombreCompleto
+                FROM rrhh.empleados
+                ORDER BY nombreCompleto";
+
+        $stmt = $this->conn->prepare($sql);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+
+
+        return $resultado;
+    }
+
     // *Buscar datos generalesde un empleado
     public function buscarDatosGenerales($id)
     {
