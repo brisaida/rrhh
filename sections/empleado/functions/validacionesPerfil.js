@@ -117,11 +117,11 @@ $("#revisarBtn").on("click", function () {
 
     // *Sección de historial familiar
     // *---------------------------------------------------------
-    var filas = $('#parentescoTabla tr');
+    /* var filas = $('#parentescoTabla tr');
     var cantidadFilas = filas.length - 1;
     if (cantidadFilas == 0) {
         falta += " - Información del historial familiar";
-    }
+    } */
 
     var parentesco = [];
 
