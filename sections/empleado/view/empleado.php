@@ -893,7 +893,7 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="ultimoPuestoInput">
+												<input type="input" class="form-control no-editable" id="ultimoPuestoInput" maxlength="70">
 												<label for="ultimoPuestoInput">Último puesto desempeñado</label>
 											</div>
 										</div>
@@ -944,13 +944,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="causaRetiroInput">
+												<input type="input" class="form-control no-editable" id="causaRetiroInput" maxlength="70">
 												<label for="causaRetiroInput">Causas de retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="descripcionPuestoInput">
+												<input type="input" class="form-control no-editable" id="descripcionPuestoInput" maxlength="70">
 												<label for="descripcionPuestoInput">Descripción de Puesto</label>
 											</div>
 										</div>
@@ -1000,7 +1000,7 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="ultimoPuestoInput2">
+												<input type="input" class="form-control no-editable" id="ultimoPuestoInput2" maxlength="70">
 												<label for="ultimoPuestoInput2">Último puesto desempeñado</label>
 											</div>
 										</div>
@@ -1051,13 +1051,13 @@
 									<div class="row g-2">
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="causaRetiroInput2">
+												<input type="input" class="form-control no-editable" id="causaRetiroInput2" maxlength="70">
 												<label for="causaRetiroInput2">Causas de retiro</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="descripcionPuestoInput2">
+												<input type="input" class="form-control no-editable" id="descripcionPuestoInput2" maxlength="70">
 												<label for="descripcionPuestoInput2">Descripción de Puesto</label>
 											</div>
 										</div>
