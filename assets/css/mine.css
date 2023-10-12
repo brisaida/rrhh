@@ -12,4 +12,15 @@ input,select,textarea{
 .peque{
     font-size: 12px!important;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
+.bg-hover {
+    transition: background-color 0.3s!important; /* Agregar una transición suave */
+}
+
+.bg-hover:hover {
+    background-color: #15a362!important; /* Cambiar el color de fondo cuando el cursor está sobre el elemento */
+}
+
 
