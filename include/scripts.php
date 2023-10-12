@@ -69,6 +69,5 @@
 			echo '<script src="./sections/mantenimientos/functions/tipoAccionPersonal.js"></script>';
 		}
 	} else {
-		echo '<script src="./sections/home/js/inicio.js"></script>';
 	}
 	?>
