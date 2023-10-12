@@ -372,7 +372,7 @@
 
     $pdf->AddPage();
 
-    $fila=35;
+    $fila=40;
     $pdf->Ln(4);
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','B',9);
@@ -380,7 +380,7 @@
 
 
     $pdf->Ln();
-    $fila+=7;
+    $fila+=10;
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,$fila);
@@ -623,14 +623,14 @@
     }
     
 
-    $fila+=1;
+    $fila+=3;
     $pdf->Ln(4);
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'VI.   REFERENCIAS PERSONALES'));
 
 
-    $fila+=7;
+    $fila+=10;
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
@@ -661,14 +661,22 @@
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Declaro que la información aqui sumisnistrada es fidedigna y faculto a su posterior comprobación.'));
-    $fila+=10;
+    $fila+=13;
     $pdf->Ln(4);
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(180,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Firma:__________________________ lugar y Fecha: __________________________________________________________'));
+    $pdf->Cell(180,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Firma:__________________________ Lugar y Fecha: __________________________________________________________'));
 
     $pdf->AddPage();
-      
+    
+    $fila=50;
+    $pdf->Ln(4);
+    $pdf->SetXY(15,$fila);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'TARJETA DE IDENTIDAD'),0,0,'C');
+    
+    
+
     $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
     $pdf->Rect(54, 69, 87, 58, 'D');
     $pdf->Rect(54, 149, 87, 58, 'D');
@@ -678,7 +686,11 @@
 
   if(($carro=='X')){
         $pdf->AddPage();
-      
+        $fila=50;
+        $pdf->Ln(4);
+        $pdf->SetXY(15,$fila);
+        $pdf->SetFont('Arial','B',11);
+        $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'LICENCIA VEHÍCULO'),0,0,'C');
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
         $pdf->Rect(54, 149, 87, 58, 'D');
@@ -687,7 +699,11 @@
     }
     if(($moto=='X')){
             $pdf->AddPage();
-        
+            $fila=50;
+            $pdf->Ln(4);
+            $pdf->SetXY(15,$fila);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'LICENCIA MOTOCICLETA'),0,0,'C');
             $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
             $pdf->Rect(54, 69, 87, 58, 'D');
             $pdf->Rect(54, 149, 87, 58, 'D');
@@ -697,7 +713,11 @@
 
     if($pasaporte=='X'){
         $pdf->AddPage();
-      
+        $fila=50;
+        $pdf->Ln(4);
+        $pdf->SetXY(15,$fila);
+        $pdf->SetFont('Arial','B',11);
+        $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'PASAPORTE'),0,0,'C');
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
         
