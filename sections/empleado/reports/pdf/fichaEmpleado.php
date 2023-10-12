@@ -66,18 +66,19 @@
     }
 
     // *Identificar licencia
-    if($datosGenerales[0]['vencimientoLicencia']=='1900-01-01'){
+    if($datosGenerales[0]['vencimientoLicencia']=='1900-01-01' || empty( $datosGenerales[0]['vencimientoLicencia'])){
         $carro='';
     }else{
         $carro='X';
     }
 
-    if($datosGenerales[0]['vencimientoLicenciaMoto']=='1900-01-01'){
+    if($datosGenerales[0]['vencimientoLicenciaMoto']=='1900-01-01' || empty( $datosGenerales[0]['vencimientoLicenciaMoto'])){
         $moto='';
     }else{
         $moto='X';
     }
-    if($datosGenerales[0]['pasaporte']=='1900-01-01'){
+    if($datosGenerales[0]['pasaporte']=='1900-01-01' || empty( $datosGenerales[0]['pasaporte'])){
+    
         $pasaporte='';
     }else{
         $pasaporte='X';
@@ -103,7 +104,7 @@
     $pdf->AddPage();
 
 
-
+    
     convertirPNG($pdf,$imagePath,20,60,30,33);
       
 
@@ -479,8 +480,10 @@
     $pdf->Cell(45,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Descripción del Puesto' ), 1, 0, 'C', 1);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(60,$fila);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(135,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['obligaciones'] ), 1, 0, 'l', 1);
+  //  $pdf->Cell(135,6,), 1, 0, 'l', 1);
+    $pdf->MultiCell(135, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$antecedentes[0]['obligaciones'] ), 1, 'L', 1);
 
     $pdf->Ln();
     $fila+=6;
@@ -722,7 +725,6 @@
         $pdf->Rect(54, 69, 87, 58, 'D');
         
         convertirPNG($pdf,$pasaporteFoto, 55, 70, 85, 55);
-      //  $pdf->Image($pasaporteFoto, 55, 70, 85, 55, '', '', '', false, 1);
     }
   
 
@@ -776,7 +778,7 @@
         return $edad;
     }
     function convertirPNG($pdf, $imagePath, $x, $y, $width, $height) {
-        if (extension_loaded('gd')) {
+        if (extension_loaded('gd') && file_exists($imagePath)==true) {
             $originalImage = imagecreatefromjpeg($imagePath);
             $pngImage = imagecreatetruecolor(imagesx($originalImage), imagesy($originalImage));
     
@@ -794,8 +796,8 @@
             // No es necesario eliminar el archivo temporal, ya que se eliminará automáticamente
             // cuando el script termine o cuando el archivo ya no esté en uso.
         } else {
-            $pdf->SetFont('Arial', '', 14);
-            $pdf->Cell(0, 10, 'La extensión GD no está disponible en el servidor.', 0, 1);
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell(0, 10, '', 0, 1);
         }
     }
     
