@@ -67,6 +67,8 @@
 			echo '<script src="./sections/empleado/functions/profesion.js"></script>';
 		} else if ($_GET['section'] == 'tipoAccion' || $_GET['section'] == 'tipoAccion') {
 			echo '<script src="./sections/mantenimientos/functions/tipoAccionPersonal.js"></script>';
+		} else if ($_GET['section'] == 'puestos' || $_GET['section'] == 'puestos') {
+			echo '<script src="./sections/mantenimientos/functions/puestos.js"></script>';
 		}
 	} else {
 	}

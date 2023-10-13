@@ -14,68 +14,66 @@
 						<div class="row g-2">
 							<!-- No. de identidad -->
 							<div class="col-md-3">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control" id="noIdentidad">
-										<label for="noIdentidad">No. de Identidad</label>
+								<div>
+									<div class=" mb-3">
+										<label for="noIdentidad" >No. de Identidad</label>
+										<input type="input" class="form-control" id="noIdentidad" disabled>
 									</div>
 								</div>
 							</div>
 							<!-- Nombre -->
-							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control" id="nombreInput">
-										<label for="nombreInput">Nombre</label>
+							<div class="col-md-5">
+								<div >
+									<div class=" mb-3">
+										<label for="nombreInput" >Nombre</label>
+										<input type="input" class="form-control" id="nombreInput" disabled>
 									</div>
 								</div>
 							</div>
 							<!-- Codigo de empleado -->
 							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control " id="codigoEmpleadoInput">
+								<div >
+									<div class=" mb-3">
 										<label for="codigoEmpleadoInput">Código de empleado</label>
+										<input type="input" class="form-control " id="codigoEmpleadoInput">
+									</div>
+								</div>
+							</div>
+							<!-- Codigo SAP -->
+							<div class="col-md">
+								<div >
+									<div class=" mb-3">
+										<label for="codigoSAPInput">Código de SAP</label>
+										<input type="input" class="form-control" id="codigoSAPInput">
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- ---------------------------------- -->
 						<div class="row g-2">
-							<!-- Codigo SAP -->
-							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control" id="codigoSAPInput">
-										<label for="codigoSAPInput">Código de SAP</label>
-									</div>
-								</div>
-							</div>
+							
 							<!-- Fecha de Inicio -->
-							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="date" class="form-control text-end" id="inicioDate">
+							<div class="col-md-2">
+								<div >
+									<div class=" mb-3">
 										<label for="inicioDate">Fecha de Inicio</label>
+										<input type="date" class="form-control text-end" id="inicioDate">
 									</div>
 								</div>
 							</div>
 							<!-- Fecha de Retiro -->
-							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="date" class="form-control text-end" id="retiroInput">
+							<div class="col-md-2">
+								<div >
+									<div class=" mb-3">
 										<label for="retiroInput">Fecha de Retiro</label>
+										<input type="date" class="form-control text-end" id="retiroInput">
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- ---------------------------------- -->
-						<div class="row g-2">
-							<!-- Zona -->
-							<div class="col-md-2 align-items-center mb-5">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
+							<div class="col-md-2 align-items-center ">
+								<div >
+									<div >
+										<label for="zonaSelect">Zona Asignada</label>
 										<select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
 											<option selected class="text-end"></option>
 											<option value="1" class="text-end">Cortés &nbsp</option>
@@ -84,14 +82,34 @@
 											<option value="3" class="text-end">Santa Barbara &nbsp</option>
 											<option value="4" class="text-end">Intibuca &nbsp</option>
 										</select>
-										<label for="zonaSelect">Zona Asignada</label>
 									</div>
 								</div>
 							</div>
+							<div class="col-md align-items-center">
+								<div >
+									<div class="">
+										<label for="zonaSelect">Proyecto</label>
+										<select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
+											<option selected class="text-end"></option>
+											<option value="1" class="text-end">Cortés &nbsp</option>
+											<option value="2" class="text-end">Copán &nbsp</option>
+											<option value="2" class="text-end">Siguatepeque &nbsp</option>
+											<option value="3" class="text-end">Santa Barbara &nbsp</option>
+											<option value="4" class="text-end">Intibuca &nbsp</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ---------------------------------- -->
+						<div class="row g-2">
+							<!-- Zona -->
+							
 							<!-- TDR -->
-							<div class="col-md align-items-center mb-5">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
+							<div class="col-md align-items-center ">
+								<div >
+									<div class=" mb-3">
+										<label for="TDRSelect">Puesto</label>
 										<select class="form-select  " id="TDRSelect" aria-label="Floating label select example">
 											<option selected class="text-end"></option>
 											<option value="1" class="text-end">Especialista IT &nbsp</option>
@@ -100,23 +118,23 @@
 											<option value="3" class="text-end">Gerente de Comunicaciones &nbsp</option>
 											<option value="4" class="text-end">Asistente de Contabilidad &nbsp</option>
 										</select>
-										<label for="TDRSelect">Puesto</label>
 									</div>
 								</div>
 							</div>
 							<!-- Salario -->
 							<div class="col-md-3">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="number" class="form-control text-end" id="salarioInput">
+								<div >
+									<div class=" mb-3">
 										<label for="salarioInput">Salario</label>
+										<input type="number" class="form-control text-end" id="salarioInput">
 									</div>
 								</div>
 							</div>
 							<!-- Jefé Inmediato -->
 							<div class="col-md-3">
-								<div class="form-floating">
-										<div class="form-floating mb-3"><select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
+								<div >
+									<label for="salarioInput">Jefe Inmediato</label>
+										<div class=" mb-3"><select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
 											<option selected class="text-end"></option>
 											<option value="1" class="text-end">Cortés &nbsp</option>
 											<option value="2" class="text-end">Copán &nbsp</option>
@@ -124,7 +142,6 @@
 											<option value="3" class="text-end">Santa Barbara &nbsp</option>
 											<option value="4" class="text-end">Intibuca &nbsp</option>
 										</select>
-										<label for="salarioInput">Jefe Inmediato</label>
 									</div>
 								</div>
 							</div>
