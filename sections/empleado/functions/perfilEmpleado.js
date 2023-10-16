@@ -4,6 +4,14 @@ $(".esconder").hide();
 $(".esconderEstudios").hide();
 $(".adjuntos").hide();
 
+let tabs = ['datos-personales',
+            'historial-familiar',
+            'salud',
+            'educacion',
+            'antecedentes-laborales',
+            'referencias',
+            'adjuntos'];
+
 $(document).ready(function () {
 
     const location = window.location.search;
@@ -450,48 +458,48 @@ $('#licenciaMotoFotoBackInput').change(function (e) {
 // !------------------------------------------------
 
 $("#siguienteHfBtn").on("click", function () {
-    siguiente("datos-personales", "historial-familiar")
-    //$("#siguienteHfBtn").click();
+    siguiente(1)
+    //$("#historial-familiar-tab").show();
 
 });
 $("#anteriorSBtn").on("click", function () {
-    siguiente("historial-familiar", "datos-personales")
+    siguiente(0)
 
 });
 
 $("#siguienteSBtn").on("click", function () {
-    siguiente("historial-familiar", "salud")
+    siguiente(2)
 });
 $("#anteriorEBtn").on("click", function () {
-    siguiente("salud", "historial-familiar")
+    siguiente(1)
 });
 
 $("#siguienteEBtn").on("click", function () {
-    siguiente("salud", "educacion")
+    siguiente(3)
 });
 $("#anteriorAlBtn").on("click", function () {
-    siguiente("educacion", "salud")
+    siguiente(2)
 });
 
 $("#siguienteAlBtn").on("click", function () {
-    siguiente("educacion", "antecedentes-laborales")
+    siguiente(4)
 });
 $("#anteriorRBtn").on("click", function () {
-    siguiente("antecedentes-laborales", "educacion")
+    siguiente(3)
 });
 
 $("#siguienteRBtn").on("click", function () {
-    siguiente("antecedentes-laborales", "referencias")
+    siguiente(5)
 });
 $("#anteriorABtn").on("click", function () {
-    siguiente("referencias", "antecedentes-laborales")
+    siguiente(4)
 });
 
 $("#siguienteABtn").on("click", function () {
-    siguiente("referencias", "adjuntos")
+    siguiente(6)
 });
 $("#anteriorBtn").on("click", function () {
-    siguiente("adjuntos", "referencias")
+    siguiente(5)
 });
 
 
@@ -499,22 +507,27 @@ $("#anteriorBtn").on("click", function () {
 // !------------------------------------------------
 
 /* Pasar a la siguiente página */
-function siguiente(anterior, siguiente) {
-    $("#" + siguiente + "-tab").addClass("active");
-    $("#" + anterior + "-tab").removeClass("active");
+function siguiente( siguiente) {
+    let activo=tabs[siguiente]; 
 
-    $("#" + siguiente).addClass("active");
-    $("#" + anterior).removeClass("active");
-    $("#" + anterior).addClass("show");
-    $("#" + anterior).addClass("show");
+    $("#" + activo  + "-tab").addClass("active");
+    $("#" + activo  + "-tab").attr('aria-selected', 'true');
+    $("#" + activo  + "-tab").removeAttr('tabindex');
+    $("#" + activo ).addClass("active");
+    $("#" + activo ).addClass("show");
 
-    $("#" + siguiente + "-tab").attr('aria-selected', 'true');
-    $("#" + anterior + "-tab").attr('aria-selected', 'false');
-
-    $("#" + siguiente + "-tab").removeAttr('tabindex');
-    $("#" + anterior + "-tab").attr('tabindex', '-1');
-
-
+    for (let i = 0; i < tabs.length; i++) {
+        if (i!=siguiente){
+            $("#" + tabs[i] + "-tab").removeClass("active");
+            $("#" + tabs[i]).removeClass("active");
+            $("#" + tabs[i]).addClass("show");
+            $("#" + tabs[i]).addClass("show");
+            $("#" + tabs[i] + "-tab").attr('aria-selected', 'false');
+            $("#" + tabs[i] + "-tab").attr('tabindex', '-1'); 
+        }
+       
+    }
+    
 }
 
 /* Calcular edad en base a una fecha */
