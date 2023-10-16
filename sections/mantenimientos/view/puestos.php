@@ -13,6 +13,7 @@
 					</div>
 
 					<div class="accordion" id="accordionExample">
+						<!-- Directores -->
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -28,18 +29,52 @@
 										</div>
 										<div class="col-md">
 											<label for="proyectoSelect">Proyecto</label>
-											<select class="form-select  proyecto" id="proyectoSelect" aria-label="Floating label select example">
+											<select class="form-select  proyecto" id="directorSelect" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
 										<div class="col-md-1 d-flex justify-content-center">
-											<button type="button" class="btn btn-light">Guardar</button>
+											<button type="button" class="btn btn-light" id="directoresBTN">Guardar</button>
 										</div>
 
 									</div>
 								</div>
 							</div>
 						</div>
+						<!-- Administrativos -->
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+									Administrativos
+								</button>
+							</h2>
+							<div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+								<div class="accordion-body">
+									<div class="row d-flex align-items-end">
+										<div class="col-md">
+											<label for="nombrePuestoAdmin">Nombre del puesto</label>
+											<input type="input" class="form-control text-end" id="nombrePuestoAdmin">
+										</div>
+										<div class="col-md">
+											<label for="proyectoSelectAdmin">Proyecto</label>
+											<select class="form-select proyecto " id="adminSelect" aria-label="Floating label select example">
+												<option selected class="text-end"></option>
+											</select>
+										</div>
+										<div class="col-md">
+											<label for="adminLevel">Depende de</label>
+											<select class="form-select  " id="adminLevel" aria-label="Floating label select example">
+												<option selected class="text-end"></option>
+											</select>
+										</div>
+										<div class="col-md-1 d-flex justify-content-center">
+											<button type="button" class="btn btn-light" id="adminBTN">Guardar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Gerentes -->
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -61,17 +96,18 @@
 										</div>
 										<div class="col-md">
 											<label for="proyectoSelectN3">Proyecto</label>
-											<select class="form-select proyecto " id="proyectoSelectN3" aria-label="Floating label select example">
+											<select class="form-select proyecto " id="gerenciaSelect" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
 										<div class="col-md-1 d-flex justify-content-center">
-											<button type="button" class="btn btn-light">Guardar</button>
+											<button type="button" class="btn btn-light" id="gerentesBTN">Guardar</button>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>				
+						<!-- Especialistas -->
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -86,24 +122,25 @@
 											<input type="input" class="form-control text-end" id="nombrePuestoN4">
 										</div>
 										<div class="col-md">
+											<label for="proyectoSelectN4">Proyecto</label>
+											<select class="form-select  proyecto" id="especialistaSelect" aria-label="Floating label select example">
+												<option selected class="text-end"></option>
+											</select>
+										</div>
+										<div class="col-md">
 											<label for="nivel4">Depende de</label>
 											<select class="form-select  " id="nivel4" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
-										<div class="col-md">
-											<label for="proyectoSelectN4">Proyecto</label>
-											<select class="form-select  proyecto" id="proyectoSelectN4" aria-label="Floating label select example">
-												<option selected class="text-end"></option>
-											</select>
-										</div>
 										<div class="col-md-1 d-flex justify-content-center">
-											<button type="button" class="btn btn-light">Guardar</button>
+											<button type="button" class="btn btn-light" id="especialistasBTN">Guardar</button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<!-- Técnicos -->
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -118,20 +155,20 @@
 											<input type="input" class="form-control text-end" id="nombrePuestoN5">
 										</div>
 										<div class="col-md">
+											<label for="proyectoSelect5">Proyecto</label>
+											<select class="form-select proyecto" id="tecnicoSelect" aria-label="Floating label select example">
+												<option selected class="text-end"></option>
+											</select>
+										
+										</div>
+										<div class="col-md">
 											<label for="nivel5">Depende de</label>
 											<select class="form-select  " id="nivel5" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
-										<div class="col-md">
-											<label for="proyectoSelect5">Proyecto</label>
-											<select class="form-select proyecto" id="proyectoSelect5" aria-label="Floating label select example">
-												<option selected class="text-end"></option>
-											</select>
-										
-										</div>
 										<div class="col-md-1 d-flex justify-content-center">
-											<button type="button" class="btn btn-light">Guardar</button>
+											<button type="button" class="btn btn-light" id="tecnicosBTN">Guardar</button>
 										</div>
 									</div>
 								</div>
