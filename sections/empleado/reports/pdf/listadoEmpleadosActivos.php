@@ -43,27 +43,34 @@
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(20,$fila);
+    $pdf->SetFont('Arial','',10);
+    $pdf->Cell(10,6, iconv("UTF-8","ISO-8859-1//TRANSLIT", 'No'), 1, 0, 'C', 1);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(30,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'DNI' ), 1, 0, 'C', 1);
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(130,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'NOMBRE COMPLETO' ), 1, 0, 'C', 1);
+    $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'NOMBRE COMPLETO' ), 1, 0, 'C', 1);
     $fila+=6;
 
-
+    $i=0;
     foreach ($datosGenerales as $datosGenerales) {
-        
+        $i++;
         $pdf->Ln(); 
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetXY(20,$fila);
         $pdf->SetFont('Arial','',10);
+        $pdf->Cell(10,6, iconv("UTF-8","ISO-8859-1//TRANSLIT", $i), 1, 0, 'C', 1);
+        $pdf->SetXY(30,$fila);
+        $pdf->SetFont('Arial','',10);
         $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales['DNI']), 1, 0, 'C', 1);
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0,0,0);
         $pdf->SetFont('Arial','',10);
-        $pdf->Cell(130,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '   '. capitalizarPalabras( $datosGenerales['nombreCompleto']) ), 1, 0, 'l', 1);
+        $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '   '. capitalizarPalabras( $datosGenerales['nombreCompleto']) ), 1, 0, 'l', 1);
         $fila+=6;
 
     }

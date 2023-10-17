@@ -48,26 +48,26 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="input" class="form-control no-editable" id="primerNombreInput">
+													<input type="input" class="form-control no-editable" id="primerNombreInput" disabled>
 													<label for="primerNombreInput">Primer Nombre</label>
 												</div>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="segundoNombreInput">
+												<input type="input" class="form-control no-editable" id="segundoNombreInput" disabled>
 												<label for="segundoNombreInput">Segundo Nombre</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="primerApellidoInput">
+												<input type="input" class="form-control no-editable" id="primerApellidoInput" disabled>
 												<label for="primerApellidoInput">Primer Apellido</label>
 											</div>
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="SegundoApellidoInput">
+												<input type="input" class="form-control no-editable" id="SegundoApellidoInput" disabled
 												<label for="SegundoApellidoInput">Segundo Apellido</label>
 											</div>
 										</div>
@@ -78,7 +78,7 @@
 										<div class="col-md">
 											<div class="form-floating">
 												<div class="form-floating mb-3">
-													<input type="date" class="form-control no-editable" id="fechaNacimientoDate">
+													<input type="date" class="form-control no-editable" id="fechaNacimientoDate" disabled>
 													<label for="fechaNacimientoDate">Fecha de Nacimiento</label>
 												</div>
 											</div>

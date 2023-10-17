@@ -22,6 +22,12 @@ $(document).ready(function () {
             `./sections/empleado/reports/pdf/permisoBanco.php?id=${idEmpleado}`
         );
     });
+    $('#imprimirTodo').on("click", function () {
+        //var idEmpleado = $(this).closest('tr').find('[data-id-empleado]').data('id-empleado');
+        window.open(
+            `./sections/empleado/reports/pdf/listadoEmpleadosActivos.php`
+        );
+    });
 
 
 });

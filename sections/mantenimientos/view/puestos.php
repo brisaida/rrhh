@@ -88,15 +88,16 @@
 											<label for="nombrePuestoN3">Nombre del puesto</label>
 											<input type="input" class="form-control text-end" id="nombrePuestoN3">
 										</div>
+										
 										<div class="col-md">
-											<label for="nivel3">Depende de</label>
-											<select class="form-select  " id="nivel3" aria-label="Floating label select example">
+											<label for="proyectoSelectN3">Proyecto</label>
+											<select class="form-select proyecto " id="gerenciaSelect" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
 										<div class="col-md">
-											<label for="proyectoSelectN3">Proyecto</label>
-											<select class="form-select proyecto " id="gerenciaSelect" aria-label="Floating label select example">
+											<label for="nivel3">Depende de</label>
+											<select class="form-select  " id="nivel3" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
 										</div>
