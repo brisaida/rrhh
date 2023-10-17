@@ -1498,7 +1498,7 @@ function traerDeLocalStorage() {
 
 
 
-setInterval(guardarEnLocalStorage, 60000);
+setInterval(guardarEnLocalStorage, 300000);
 
 
 
