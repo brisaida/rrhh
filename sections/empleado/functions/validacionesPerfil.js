@@ -506,10 +506,11 @@ function AgregarEmpleado(datosGenerales, parentesco, parentescoConocidos,
                 showConfirmButton: false,
                 timer: 1500
             })
+            localStorage.clear();
 
-           /* setTimeout(function () {
+            setTimeout(function () {
                 window.location.href = '?section=completado';
-            }, 1500);  */
+            }, 1500);  
 
         },
     });
