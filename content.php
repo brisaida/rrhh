@@ -18,6 +18,7 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'configuracion' ? include "./sections/config.php" : false;
     $_GET['section'] == 'profesion' ? include "./sections/mantenimientos/view/profesion.php" : false;
     $_GET['section'] == 'puestos' ? include "./sections/mantenimientos/view/puestos.php" : false;
+    $_GET['section'] == 'verPuestos' ? include "./sections/mantenimientos/view/listadoPuestos.php" : false;
     $_GET['section'] == 'tipoAccion' ? include "./sections/mantenimientos/view/accionesPersonal.php" : false;
     $_GET['section'] == 'proyectos' ? include "./sections/mantenimientos/view/proyectos.php" : false;
     $_GET['section'] == 'condicionTrabajo' ? include "./sections/mantenimientos/view/condicionesTrabajo.php" : false;

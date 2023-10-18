@@ -3,10 +3,12 @@ $(document).ready(function(){
     listarProyectos(); 
 });
 
+
+// *Botón guardar
 $("#directoresBTN").click(function(){
 
 	let puesto = $.trim($("#nombrePuesto").val());
-	let proyecto = $("#adminSelect").find("option:selected").data("id");
+	let proyecto = $("#directorSelect").find("option:selected").data("id");
 
 	var director = {
         puesto: puesto,
@@ -29,22 +31,63 @@ $("#adminBTN").click(function(){
     }
 	agregarAdmin(admin);
 }); 
-
 $("#gerentesBTN").click(function(){
 
 	let puesto = $.trim($("#nombrePuestoN3").val());
 	let proyecto = $("#gerenciaSelect").find("option:selected").data("id");
 	let dependencia = $("#nivel3").find("option:selected").data("id");
+	let origen = $("#nivel3").find("option:selected").data("origen");
 
-	var admin = {
+	var datos = {
         puesto: puesto,
         proyecto: proyecto,
         dependencia: dependencia,
+        origen: origen,
         usuario: usuario,
     }
-	agregarGerentes(admin);
+	agregarGerentes(datos);
 }); 
+$("#especialistasBTN").click(function(){
 
+	let puesto = $.trim($("#nombrePuestoN4").val());
+	let proyecto = $("#especialistaSelect").find("option:selected").data("id");
+	let dependencia = $("#nivel4").find("option:selected").data("id");
+	let origen = $("#nivel4").find("option:selected").data("origen");
+
+	var datos = {
+        puesto: puesto,
+        proyecto: proyecto,
+        dependencia: dependencia,
+        origen: origen,
+        usuario: usuario,
+    }
+	agregarEspecialistas(datos);
+});
+$("#tecnicosBTN").click(function(){
+
+	let puesto = $.trim($("#nombrePuestoN5").val());
+	let proyecto = $("#tecnicoSelect").find("option:selected").data("id");
+	let dependencia = $("#nivel5").find("option:selected").data("id");
+	let origen = $("#nivel5").find("option:selected").data("origen");
+
+	var datos = {
+        puesto: puesto,
+        proyecto: proyecto,
+        dependencia: dependencia,
+        origen: origen,
+        usuario: usuario,
+    }
+	agregarTecnicos(datos);
+});
+
+
+// *Poner dependencias de acuerdo a al proyecto
+$("#proyectosSelect").change(function(){
+    var selectedOption = $(this).find("option:selected");
+    var dataId = selectedOption.data("id");
+    
+    listarPuestosPorProyectos(dataId);
+});
 $("#gerenciaSelect").change(function(){
     var selectedOption = $(this).find("option:selected");
     var dataId = selectedOption.data("id");
@@ -55,9 +98,23 @@ $("#adminSelect").change(function(){
     var selectedOption = $(this).find("option:selected");
     var dataId = selectedOption.data("id");
     
-    listarPuestosPorProyectos("adminLevel",dataId);
+    listarPuestosPorProyectos(dataId);
+});
+$("#especialistaSelect").change(function(){
+    var selectedOption = $(this).find("option:selected");
+    var dataId = selectedOption.data("id");
+    
+    listarPuestosParaEspecialistas(dataId);
+});
+$("#tecnicoSelect").change(function(){
+    var selectedOption = $(this).find("option:selected");
+    var dataId = selectedOption.data("id");
+    
+    listarPuestosParaTecnicos(dataId);
 });
 
+
+// *Funciones para agregar puestos
 function agregarDirector(directores) {
     $.ajax({
         type: "POST",
@@ -74,15 +131,20 @@ function agregarDirector(directores) {
             });
         },
         success: function (respuesta) {
-
-
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Guardado exitosamente',
-                showConfirmButton: false,
-                timer: 1500
-            })
+			Swal.fire({
+				title: 'Agregado Exitosamente',
+				text: "¿Continuar agregando más puestos de trabajo?",
+				showDenyButton: true,
+				confirmButtonText: 'Continuar Agregando',
+				denyButtonText: `No gracias`,
+			  }).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					window.location.href = '?section=puestos';
+				} else if (result.isDenied) {
+					window.location.href = '?section=verPuestos';
+				}
+			  })
 
         },
     });
@@ -104,14 +166,20 @@ function agregarAdmin(admin) {
         },
         success: function (respuesta) {
 
-
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Guardado exitosamente',
-                showConfirmButton: false,
-                timer: 1500
-            })
+			Swal.fire({
+				title: 'Agregado Exitosamente',
+				text: "¿Continuar agregando más puestos de trabajo?",
+				showDenyButton: true,
+				confirmButtonText: 'Continuar Agregando',
+				denyButtonText: `No gracias`,
+			  }).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					window.location.href = '?section=puestos';
+				} else if (result.isDenied) {
+					window.location.href = '?section=verPuestos';
+				}
+			  })
 
         },
     });
@@ -135,17 +203,96 @@ function agregarGerentes(gerentes) {
 
 
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Guardado exitosamente',
-                showConfirmButton: false,
-                timer: 1500
-            })
+				title: 'Agregado Exitosamente',
+				text: "¿Continuar agregando más puestos de trabajo?",
+				showDenyButton: true,
+				confirmButtonText: 'Continuar Agregando',
+				denyButtonText: `No gracias`,
+			  }).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					window.location.href = '?section=puestos';
+				} else if (result.isDenied) {
+					window.location.href = '?section=verPuestos';
+				}
+			  })
+
+        },
+    });
+}
+function agregarEspecialistas(especialistas) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/mantenimientos/controller/agregarEspecialistas.php",
+        data: {
+            especialistas: especialistas,
+        },
+        error: function (error) {
+            Swal.fire({
+                title: "Puestos de trabajo",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+
+
+			Swal.fire({
+				title: 'Agregado Exitosamente',
+				text: "¿Continuar agregando más puestos de trabajo?",
+				showDenyButton: true,
+				confirmButtonText: 'Continuar Agregando',
+				denyButtonText: `No gracias`,
+			  }).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					window.location.href = '?section=puestos';
+				} else if (result.isDenied) {
+					window.location.href = '?section=verPuestos';
+				}
+			  })
+
+        },
+    });
+}
+function agregarTecnicos(tecnicos) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/mantenimientos/controller/agregarTecnicos.php",
+        data: {
+            tecnicos: tecnicos,
+        },
+        error: function (error) {
+            Swal.fire({
+                title: "Puestos de trabajo",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+
+			Swal.fire({
+				title: 'Agregado Exitosamente',
+				text: "¿Continuar agregando más puestos de trabajo?",
+				showDenyButton: true,
+				confirmButtonText: 'Continuar Agregando',
+				denyButtonText: `No gracias`,
+			  }).then((result) => {
+				/* Read more about isConfirmed, isDenied below */
+				if (result.isConfirmed) {
+					window.location.href = '?section=puestos';
+				} else if (result.isDenied) {
+					window.location.href = '?section=verPuestos';
+				}
+			  })
 
         },
     });
 }
 
+//* Listar todos los proyectos en los select
 function listarProyectos() {
 	$.ajax({
 		type: "POST",
@@ -180,7 +327,8 @@ function listarProyectos() {
 	});
 }
 
-function listarPuestosPorProyectos(nombreSelect,id) {
+// *Listas puestos de trabajo dependiendo del proyecto
+function listarPuestosPorProyectos(id) {
 	$.ajax({
 		type: "POST",
 		url: "./sections/mantenimientos/controller/listarPuestosPorProyectos.php",
@@ -199,8 +347,8 @@ function listarPuestosPorProyectos(nombreSelect,id) {
 			});
 		},
 		success: function (respuesta) {
-			$('#'+nombreSelect).html('');
-			$('#'+nombreSelect).html('<option></option>');
+			$('#adminLevel,#DirectoresSelect').html('');
+			$('#adminLevel,#DirectoresSelect').html('<option></option>');
 			if (respuesta.length > 0) {
 				
 				$.each(respuesta, function (index, registro) {
@@ -209,7 +357,7 @@ function listarPuestosPorProyectos(nombreSelect,id) {
 								    `;
 
 					// Agregar el contenido al div 'espacioNotificaciones'
-					$('#'+nombreSelect).append(contenido);
+					$('#adminLevel,#DirectoresSelect').append(contenido);
 				});
 
 			} 
@@ -241,7 +389,7 @@ function listarPuestosParaGerente(id) {
 				
 				$.each(respuesta, function (index, registro) {
 					var contenido = `
-                                        <option data-id='${registro.id}'>${registro.puesto}</option>
+                                        <option data-id='${registro.id}' data-origen='${registro.Origen}'>${registro.puesto}</option>
 								    `;
 
 					// Agregar el contenido al div 'espacioNotificaciones'
@@ -252,3 +400,76 @@ function listarPuestosParaGerente(id) {
 		},
 	});
 }
+function listarPuestosParaEspecialistas(id) {
+	$.ajax({
+		type: "POST",
+		url: "./sections/mantenimientos/controller/listarPuestosParaEspecialistas.php",
+		data: {
+            id: id,
+		},
+		dataType: "json",
+		// Error en la petición
+		error: function (error) {
+			console.log(error);
+			Swal.fire({
+				title: "Puestos de trabajo",
+				icon: "error",
+				text: `Error`,
+				confirmButtonColor: "#3085d6",
+			});
+		},
+		success: function (respuesta) {
+			$('#nivel4').html('');
+			$('#nivel4').html('<option></option>');
+			if (respuesta.length > 0) {
+				
+				$.each(respuesta, function (index, registro) {
+					var contenido = `
+                                        <option data-id='${registro.id}' data-origen='${registro.Origen}'>${registro.puesto}</option>
+								    `;
+
+					// Agregar el contenido al div 'espacioNotificaciones'
+					$('#nivel4').append(contenido);
+				});
+
+			} 
+		},
+	});
+}
+function listarPuestosParaTecnicos(id) {
+	$.ajax({
+		type: "POST",
+		url: "./sections/mantenimientos/controller/listarPuestosParaTecnicos.php",
+		data: {
+            id: id,
+		},
+		dataType: "json",
+		// Error en la petición
+		error: function (error) {
+			console.log(error);
+			Swal.fire({
+				title: "Puestos de trabajo",
+				icon: "error",
+				text: `Error`,
+				confirmButtonColor: "#3085d6",
+			});
+		},
+		success: function (respuesta) {
+			$('#nivel5').html('');
+			$('#nivel5').html('<option></option>');
+			if (respuesta.length > 0) {
+				
+				$.each(respuesta, function (index, registro) {
+					var contenido = `
+                                        <option data-id='${registro.id}' data-origen='${registro.Origen}'>${registro.puesto}</option>
+								    `;
+
+					// Agregar el contenido al div 'espacioNotificaciones'
+					$('#nivel5').append(contenido);
+				});
+
+			} 
+		},
+	});
+}
+

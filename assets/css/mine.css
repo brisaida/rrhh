@@ -22,5 +22,17 @@ input,select,textarea{
 .bg-hover:hover {
     background-color: #15a362!important; /* Cambiar el color de fondo cuando el cursor está sobre el elemento */
 }
-
+.node {
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+.label {
+    font: 12px sans-serif;
+    fill: #000;
+}
 

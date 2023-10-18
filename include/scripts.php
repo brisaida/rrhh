@@ -19,6 +19,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+	<!-- D3 -->
+
+
+
 
 
 	<!-- Incluye DataTables.js -->
@@ -69,6 +73,10 @@
 			echo '<script src="./sections/mantenimientos/functions/tipoAccionPersonal.js"></script>';
 		} else if ($_GET['section'] == 'puestos' || $_GET['section'] == 'puestos') {
 			echo '<script src="./sections/mantenimientos/functions/puestos.js"></script>';
+		} else if ($_GET['section'] == 'verPuestos' || $_GET['section'] == 'verPuestos') {
+			echo'<script src="https://d3js.org/d3.v7.min.js"></script>';
+			echo '<script src="./sections/mantenimientos/functions/puestos.js"></script>';
+			echo '<script src="./sections/mantenimientos/functions/listadoPuestos.js"></script>';
 		}
 	} else {
 	}

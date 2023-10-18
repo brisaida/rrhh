@@ -49,7 +49,9 @@ class mdlEmpleado
 
         $sql = "SELECT DNI,CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido) as nombreCompleto
                 FROM rrhh.empleados
-                ORDER BY nombreCompleto";
+                WHERE estado=1
+                ORDER BY nombreCompleto
+                ";
 
         $stmt = $this->conn->prepare($sql);
 

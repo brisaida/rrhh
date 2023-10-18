@@ -88,7 +88,7 @@
 											<label for="nombrePuestoN3">Nombre del puesto</label>
 											<input type="input" class="form-control text-end" id="nombrePuestoN3">
 										</div>
-										
+
 										<div class="col-md">
 											<label for="proyectoSelectN3">Proyecto</label>
 											<select class="form-select proyecto " id="gerenciaSelect" aria-label="Floating label select example">
@@ -107,7 +107,7 @@
 									</div>
 								</div>
 							</div>
-						</div>				
+						</div>
 						<!-- Especialistas -->
 						<div class="accordion-item">
 							<h2 class="accordion-header">
@@ -145,7 +145,7 @@
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-									Técnicos
+									Técnicos y Oficiales
 								</button>
 							</h2>
 							<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -160,7 +160,7 @@
 											<select class="form-select proyecto" id="tecnicoSelect" aria-label="Floating label select example">
 												<option selected class="text-end"></option>
 											</select>
-										
+
 										</div>
 										<div class="col-md">
 											<label for="nivel5">Depende de</label>
@@ -182,5 +182,4 @@
 			</div>
 		</div>
 	</div>
-</div>
 </div>
