@@ -1,3 +1,30 @@
+
+<?php
+
+
+    $idUsuario =isset($_GET['i']) ? $_GET['i'] : null;
+
+    if(intval($idUsuario)>0){
+       // echo "hola bienvenido recio";
+       /*  include_once('./config/Connection.php');
+        include_once('./modules/usuarios/models/usuarios.php');
+        $usuario = new mdlUsuario();
+        $accede = $usuario->validarUsuarioSIMFCO($idUsuario);
+
+        if($accede){
+            $nuevaURL = 'inicio.php';
+            header("Location: $nuevaURL");
+        }else{
+            $nuevaURL = 'https://prb.simfcoh.com/';
+            header("Location: $nuevaURL");
+        } */
+
+    }else{
+        $nuevaURL = 'https://prb.simfcoh.com/';
+        header("Location: $nuevaURL"); 
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
