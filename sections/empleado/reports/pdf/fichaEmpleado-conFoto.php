@@ -106,7 +106,9 @@
     $pdf->AddPage();
 
 
-
+    
+    // Mostrar la imagen
+    convertirPNG($pdf,$imagePath,20,60,30,33);
     
      // Contenido del documento (Título)
      $pdf->Ln(4);
@@ -118,119 +120,118 @@
      $pdf->SetXY(15,50);
      $pdf->SetFont('Arial','B',9);
      $pdf->Cell(100,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'I.   DATOS GENERALES '));
+    $pdf->Line(15, 59, 195, 59); // H. aariba
+     $pdf->Line(15, 59, 15, 110); // V. izquierda // V. derecha
 
+    $pdf->Ln(4);
 
-
+    $pdf->Line(55, 100, 55, 59);
+    $pdf->Line(15, 106, 55, 106); 
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,59);
+    $pdf->SetXY(55,59);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Identidad' ), 1, 0, 'C', 1);
-    $pdf->Cell(120, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nombre Completo' ),1, 0, 'C', 1);
+    $pdf->Cell(40, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Identidad' ), 1, 0, 'C', 1);
+    $pdf->Cell(100, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nombre Completo' ),1, 0, 'C', 1);
 
     $pdf->Ln(); 
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->SetX(15);
-    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['DNI']), 1, 0, 'C', 1);
-    $pdf->Cell(120, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($nombreCompleto)),1, 0, 'C', 1);
+    $pdf->SetX(55);
+    $pdf->Cell(40, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['DNI']), 1, 0, 'C', 1);
+    $pdf->Cell(100, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($nombreCompleto)),1, 0, 'C', 1);
 
     
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,71);
+    $pdf->SetXY(55,71);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Lugar de Nacimiento' ), 1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Fecha de Nacimiento' ),1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nacionalidad' ),1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Lugar de Nacimiento' ), 1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Fecha de Nacimiento' ),1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nacionalidad' ),1, 0, 'C', 1);
     
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetX(15);
+    $pdf->SetX(55);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['lugarNacimiento'] ), 1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",formatearFecha($datosGenerales[0]['fechaNacimiento']) ),1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['nacionalidad'] ),1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['lugarNacimiento'] ), 1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",formatearFecha($datosGenerales[0]['fechaNacimiento']) ),1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['nacionalidad'] ),1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,83);
+    $pdf->SetXY(55,83);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Género' ), 1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Estado civil' ),1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Telefono' ),1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Género' ), 1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Estado civil' ),1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Telefono' ),1, 0, 'C', 1);
     
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetX(15);
+    $pdf->SetX(55);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['descEstadoCivil'] ), 1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$genero),1, 0, 'C', 1);
-    $pdf->Cell(60,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['telefono'] ),1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['descEstadoCivil'] ), 1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$genero),1, 0, 'C', 1);
+    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['telefono'] ),1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,95);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Código Empleado' ), 1, 0, 'C', 1);
-    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Pasaporte' ), 1, 0, 'C', 1);
-    $pdf->Cell(40,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Vehiculo' ),1, 0, 'C', 1);
-    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Moto' ), 1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Código Empleado' ), 1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Cuenta BAC' ), 1, 0, 'C', 1);
+    $pdf->Cell(34,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Pasaporte' ), 1, 0, 'C', 1);
+    $pdf->Cell(33,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Vehiculo' ),1, 0, 'C', 1);
+    $pdf->Cell(33,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Moto' ), 1, 0, 'C', 1);
     
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetX(15);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'C', 1);
-    $pdf->Cell(10,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$pasaporte  ), 1, 0, 'C', 1);
-    $pdf->Cell(30,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaVPasaporte  ), 1, 0, 'C', 1);
-    $pdf->Cell(10,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$carro),1, 0, 'C', 1);
-    $pdf->Cell(30,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaCarro),1, 0, 'C', 1);
-    $pdf->Cell(10,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$moto ), 1, 0, 'C', 1);
-    $pdf->Cell(30,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaMoto ), 1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'C', 1);
+    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['cuentaBancaria'] ), 1, 0, 'C', 1);
+    $pdf->Cell(7,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$pasaporte  ), 1, 0, 'C', 1);
+    $pdf->Cell(27,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaVPasaporte  ), 1, 0, 'C', 1);
+    $pdf->Cell(7,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$carro),1, 0, 'C', 1);
+    $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaCarro),1, 0, 'C', 1);
+    $pdf->Cell(7,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$moto ), 1, 0, 'C', 1);
+    $pdf->Cell(26,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaMoto ), 1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,107);
     $pdf->SetFont('Arial','B',9);
-    
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Cuenta BAC' ), 1, 0, 'C', 1);
-    $pdf->Cell(120,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Correo Electronico' ), 1, 0, 'C', 1);
+    $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Correo Electronico' ), 1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetX(15);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(60,6, iconv("UTF-8", "ISO-8859-1//TRA
-    NSLIT",$datosGenerales[0]['cuentaBancaria'] ), 1, 0, 'C', 1);
-    $pdf->Cell(120,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['email'] ), 1, 0, 'C', 1);
+    $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['email'] ), 1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,119);
     $pdf->SetFont('Arial','B',9);
-    
     $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Dirección' ), 1, 0, 'C', 1);
-
 
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetX(15);
     $pdf->SetFont('Arial','',9);
-    
     $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['direccion'] ), 1, 0, 'C', 1);
 
 
@@ -719,7 +720,64 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(180,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Firma:__________________________ Lugar y Fecha: __________________________________________________________'));
 
-   
+    $pdf->AddPage();
+    
+    $fila=50;
+    $pdf->Ln(4);
+    $pdf->SetXY(15,$fila);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'TARJETA DE IDENTIDAD'),0,0,'C');
+    
+    
+
+    $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+    $pdf->Rect(54, 69, 87, 58, 'D');
+    $pdf->Rect(54, 149, 87, 58, 'D');
+    convertirPNG($pdf,$dniFront,55, 70, 85, 55);
+    convertirPNG($pdf,$dniBack, 55, 150, 85, 55);
+
+
+  if(($carro=='X')){
+        $pdf->AddPage();
+        $fila=50;
+        $pdf->Ln(4);
+        $pdf->SetXY(15,$fila);
+        $pdf->SetFont('Arial','B',11);
+        $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'LICENCIA VEHÍCULO'),0,0,'C');
+        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+        $pdf->Rect(54, 69, 87, 58, 'D');
+        $pdf->Rect(54, 149, 87, 58, 'D');
+        convertirPNG($pdf,$carroFront,55, 70, 85, 55);
+        convertirPNG($pdf,$carroBack, 55, 150, 85, 55);
+    }
+    if(($moto=='X')){
+            $pdf->AddPage();
+            $fila=50;
+            $pdf->Ln(4);
+            $pdf->SetXY(15,$fila);
+            $pdf->SetFont('Arial','B',11);
+            $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'LICENCIA MOTOCICLETA'),0,0,'C');
+            $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+            $pdf->Rect(54, 69, 87, 58, 'D');
+            $pdf->Rect(54, 149, 87, 58, 'D');
+ /*            convertirPNG($pdf,$motoFront, 55, 70, 85, 55);
+            convertirPNG($pdf,$motoBack, 55, 150, 85, 55); */
+        }
+
+    if($pasaporte=='X'){
+        $pdf->AddPage();
+        $fila=50;
+        $pdf->Ln(4);
+        $pdf->SetXY(15,$fila);
+        $pdf->SetFont('Arial','B',11);
+        $pdf->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'PASAPORTE'),0,0,'C');
+        $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
+        $pdf->Rect(54, 69, 87, 58, 'D');
+        
+        convertirPNG($pdf,$pasaporteFoto, 55, 70, 85, 55);
+    }
+  
+
   
      
 
@@ -768,6 +826,31 @@
         $edad = $diferencia->y;
         
         return $edad;
+    }
+
+    function convertirPNG($pdf, $imagePath, $x, $y, $width, $height) {
+        if (extension_loaded('gd') && file_exists($imagePath)==true) {
+            
+            $originalImage = imagecreatefromjpeg($imagePath);
+            $pngImage = imagecreatetruecolor(imagesx($originalImage), imagesy($originalImage));
+    
+            // Generar un nombre de archivo temporal único
+            $pngImagePath = tempnam(sys_get_temp_dir(), 'temp_image_') . '.png';
+    
+            imagecopy($pngImage, $originalImage, 0, 0, 0, 0, imagesx($originalImage), imagesy($originalImage));
+            imagepng($pngImage, $pngImagePath);
+    
+            $pdf->Image($pngImagePath, $x, $y, $width, $height, 'PNG');
+    
+            imagedestroy($originalImage);
+            imagedestroy($pngImage);
+    
+            // No es necesario eliminar el archivo temporal, ya que se eliminará automáticamente
+            // cuando el script termine o cuando el archivo ya no esté en uso.
+        } else {
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->Cell(0, 10, '', 0, 1);
+        }
     }
 
 

@@ -158,7 +158,7 @@ function cargarTabla(tableID, data, columns) {
         aaData: data,
         aoColumns: columns,
         bSortable: false,
-        ordering: false,
+        ordering: true,
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
