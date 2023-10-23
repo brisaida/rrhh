@@ -14,13 +14,12 @@
 
 	<!-- jquery -->
 	<script src="./assets/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 	<!-- sweet alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-	<!-- D3 -->
-
 
 
 
@@ -61,8 +60,8 @@
 			echo '<script src="./sections/empleado/functions/listadoEmpleados.js"></script>';
 		} else if ($_GET['section'] == 'perfilPuesto' || $_GET['section'] == 'perfilPuesto') {
 			echo '<script src="./sections/empleado/functions/perfilPuesto.js"></script>';
-		} else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
-			echo '<script src="./sections/empleado/functions/historialEmpleado.js"></script>';
+		} else if ($_GET['section'] == 'historialEmpleados' || $_GET['section'] == 'historialEmpleado') {
+			echo '<script src="./sections/empleado/functions/historial.js"></script>';
 		}
 
 		/* Mantenimientos */ else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {

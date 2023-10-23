@@ -42,19 +42,15 @@
 
     //*Estudios actuales
     if (!($estudiosActuales)) {
-        // La variable $estudiosActuales está definida y no es null
         $actual= "";
     } else {
-        // La variable $estudiosActuales no está definida o es null
         $actual= "X";
     }
 
     //*Estudios actuales
     if (!($conocidos)) {
-        // La variable $estudiosActuales está definida y no es null
         $tieneConocidos= "";
     } else {
-        // La variable $estudiosActuales no está definida o es null
         $tieneConocidos= "X";
     }
     
@@ -68,26 +64,32 @@
     // *Identificar licencia
     if($datosGenerales[0]['vencimientoLicencia']=='1900-01-01' || empty( $datosGenerales[0]['vencimientoLicencia'])){
         $carro='';
+        $fechaCarro='';
     }else{
         $carro='X';
+        $fechaCarro=$datosGenerales[0]['vencimientoLicencia'];
     }
 
     if($datosGenerales[0]['vencimientoLicenciaMoto']=='1900-01-01' || empty( $datosGenerales[0]['vencimientoLicenciaMoto'])){
         $moto='';
+        $fechaMoto='';
     }else{
         $moto='X';
+        $fechaMoto=$datosGenerales[0]['vencimientoLicenciaMoto'];
     }
-    if($datosGenerales[0]['pasaporte']=='1900-01-01' || empty( $datosGenerales[0]['pasaporte'])){
-    
+    if($datosGenerales[0]['vencimientoPasaporte']=='1900-01-01' || empty( $datosGenerales[0]['pasaporte'])){
+        $fechaVPasaporte='';
         $pasaporte='';
     }else{
         $pasaporte='X';
+        $fechaVPasaporte=$datosGenerales[0]['vencimientoPasaporte'];
     }
 
 
 
     $edad=calcularEdad($datosGenerales[0]['fechaNacimiento']);
    
+    //*Imagenes
     // Ruta de la imagen original
     $imagePath = '../../../../sections/empleado/archivos/empleado/' . $datosGenerales[0]['foto'];
     $dniFront="../../../../sections/empleado/archivos/dni/".$datosGenerales[0]['dniFront'];
@@ -105,9 +107,9 @@
 
 
     
+    // Mostrar la imagen
     convertirPNG($pdf,$imagePath,20,60,30,33);
-      
-
+    
      // Contenido del documento (Título)
      $pdf->Ln(4);
      $pdf->SetXY(75,40);
@@ -186,10 +188,9 @@
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Código Empleado' ), 1, 0, 'C', 1);
     $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'No. de Cuenta BAC' ), 1, 0, 'C', 1);
-    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Correo Electronico' ),1, 0, 'C', 1);
-    $pdf->Cell(17,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Pasaporte' ), 1, 0, 'C', 1);
-    $pdf->Cell(17,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Vehiculo' ),1, 0, 'C', 1);
-    $pdf->Cell(16,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Moto' ), 1, 0, 'C', 1);
+    $pdf->Cell(34,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Pasaporte' ), 1, 0, 'C', 1);
+    $pdf->Cell(33,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Vehiculo' ),1, 0, 'C', 1);
+    $pdf->Cell(33,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Moto' ), 1, 0, 'C', 1);
     
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
@@ -198,15 +199,31 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'C', 1);
     $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['cuentaBancaria'] ), 1, 0, 'C', 1);
-    $pdf->Cell(50,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['email']),1, 0, 'C', 1);
-    $pdf->Cell(17,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$pasaporte  ), 1, 0, 'C', 1);
-    $pdf->Cell(17,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$carro),1, 0, 'C', 1);
-    $pdf->Cell(16,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$moto ), 1, 0, 'C', 1);
+    $pdf->Cell(7,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$pasaporte  ), 1, 0, 'C', 1);
+    $pdf->Cell(27,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaVPasaporte  ), 1, 0, 'C', 1);
+    $pdf->Cell(7,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$carro),1, 0, 'C', 1);
+    $pdf->Cell(26,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaCarro),1, 0, 'C', 1);
+    $pdf->Cell(7,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$moto ), 1, 0, 'C', 1);
+    $pdf->Cell(26,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fechaMoto ), 1, 0, 'C', 1);
 
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,107);
+    $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Correo Electronico' ), 1, 0, 'C', 1);
+
+    $pdf->Ln();
+    $pdf->SetFillColor(255,255,255);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetX(15);
+    $pdf->SetFont('Arial','',9);
+    $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$datosGenerales[0]['email'] ), 1, 0, 'C', 1);
+
+    $pdf->Ln();
+    $pdf->SetFillColor(209, 209, 209);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(15,119);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(180,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Dirección' ), 1, 0, 'C', 1);
 
@@ -220,7 +237,7 @@
 
 
     $pdf->Ln(4);
-    $pdf->SetXY(15,120);
+    $pdf->SetXY(15,132);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'II.   HISTORIAL ACADÉMICO'));
 
@@ -228,31 +245,46 @@
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,127);
+    $pdf->SetXY(15,140);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(20,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nivel' ), 1, 0, 'C', 1);
-    $pdf->Cell(55,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Centro Educativo' ), 1, 0, 'C', 1);
-    $pdf->Cell(85,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Estudios' ), 1, 0, 'C', 1);
-    $pdf->Cell(10,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Desde' ), 1, 0, 'C', 1);
-    $pdf->Cell(10,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Hasta' ), 1, 0, 'C', 1);
-    $fila=133;
+    $col_widths = array(20, 55, 85, 10, 10);
+    $headers = array('Nivel', 'Centro Educativo', 'Estudios', 'Desde', 'Hasta');
+    for ($i = 0; $i < count($headers); $i++) {
+        $pdf->Cell($col_widths[$i], 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $headers[$i]), 1, 0, 'C', 1);
+    }
     $pdf->Ln();
+    $fila = 146;
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','',8);
+    
     foreach ($educacion as $edu) {
-        $pdf->SetX(15);
-        $pdf->Cell(20,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$edu['nivel'] ),1,0, 'C');
-        $pdf->Cell(55,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$edu['centroEducativo'] ),1,0, 'C');
-        $pdf->Cell(85,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$edu['estudio'] ),1,0, 'L');
-        $pdf->Cell(10,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$edu['desde'] ),1,0, 'C');
-        $pdf->Cell(10,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$edu['hasta'] ),1,0, 'C');
-        $pdf->Ln();
-        $fila+=7; 
-    } 
+        $x = 15;
+        $y = $fila;
+    
+        $lines = array(
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $edu['nivel']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $edu['centroEducativo']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $edu['estudio']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $edu['desde']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $edu['hasta'])
+        );
+    
+        $max_height = 6; // Altura mínima
+        foreach ($lines as $index => $line) {
+            $max_height = max($max_height, $pdf->NbLines($col_widths[$index], $line) * 6);
+        }
+    
+        foreach ($lines as $index => $line) {
+            $pdf->SetXY($x, $y);
+            $pdf->MultiCell($col_widths[$index], $max_height / $pdf->NbLines($col_widths[$index], $line), $line, 1, 'C');
+            $x += $col_widths[$index];
+        }
+        $fila += $max_height;
+    }
+    
+    
     if($actual=='X'){
-        $fila-=4;
         $pdf->Ln();
         $pdf->SetFillColor(209, 209, 209);
         $pdf->SetTextColor(0,0,0);
@@ -278,47 +310,63 @@
         $pdf->SetX(125);
         $pdf->SetFont('Arial','',9);
         $pdf->Cell(70,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",$estudiosActuales[0]['carrera']), 1, 0, 'L', 1);
+        $fila+=9;
     
     }
-    $fila+=9;
+  
     $pdf->Ln(4);
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'III.   HISTORIA FAMILIAR DIRECTA'));
+    $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'III. HISTORIA FAMILIAR DIRECTA'));
     $fila+=7;
     $pdf->Ln();
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(20,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Parentesco' ), 1, 0, 'C', 1);
-    $pdf->Cell(40,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Nombre' ), 1, 0, 'C', 1);
-    $pdf->Cell(15,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Edad' ), 1, 0, 'C', 1);
-    $pdf->Cell(20,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Teléfono' ), 1, 0, 'C', 1);
-    $pdf->Cell(85,6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Dirección' ), 1, 0, 'C', 1);
+    $col_widths = array(20, 40, 15, 20, 85);
+    $headers = array('Parentesco', 'Nombre', 'Edad', 'Teléfono', 'Dirección');
+    for ($i = 0; $i < count($headers); $i++) {
+        $pdf->Cell($col_widths[$i], 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $headers[$i]), 1, 0, 'C', 1);
+    }
     $fila+=6;
     $pdf->Ln();
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','',9);
+
     foreach ($historiaFam as $fam) {
-        $pdf->SetX(15);
-        $pdf->Cell(20,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fam['parentesco'] ),1,0, 'C');
-        $pdf->Cell(40,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fam['nombre'] ),1,0, 'C');
-        $pdf->Cell(15,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",calcularEdad($fam['fechaNacimiento'] )),1,0, 'C');
-        $pdf->Cell(20,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fam['telefono'] ),1,0, 'C');
-        $pdf->Cell(85,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fam['direccion'] ),1,0, 'C');
-        $pdf->Ln();
-        $fila+=7; 
-    } 
+        $x = 15;
+        $y = $fila;
+
+        $lines = array(
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $fam['parentesco']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $fam['nombre']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", calcularEdad($fam['fechaNacimiento'])),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $fam['telefono']),
+            iconv("UTF-8", "ISO-8859-1//TRANSLIT", $fam['direccion'])
+        );
+
+        $max_height = 6; // Altura mínima
+        foreach ($lines as $index => $line) {
+            $max_height = max($max_height, $pdf->NbLines($col_widths[$index], $line) * 6);
+        }
+
+        foreach ($lines as $index => $line) {
+            $pdf->SetXY($x, $y);
+            $pdf->MultiCell($col_widths[$index], $max_height / $pdf->NbLines($col_widths[$index], $line), $line, 1, 'C');
+            $x += $col_widths[$index];
+        }
+        $fila += $max_height;
+    }
+
 
     $pdf->Ln(4);
-    $pdf->SetXY(15,$fila-3);
+    $pdf->SetXY(15,$fila);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(100,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'IV.   DATOS MEDICOS'));
     $pdf->Ln();
-    $fila+=6;
+    $fila+=7;
     $pdf->SetFillColor(209, 209, 209);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetXY(15,$fila);
@@ -371,6 +419,8 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(125,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$salud[0]['enfermedades'] ), 1, 0, 'l', 1);
 
+
+    //* SEGUNDA PAGINA
     $pdf->AddPage();
 
     $fila=40;
@@ -683,8 +733,8 @@
     $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
     $pdf->Rect(54, 69, 87, 58, 'D');
     $pdf->Rect(54, 149, 87, 58, 'D');
-    convertirPNG($pdf,$dniFront,55, 70, 85, 55);
-    convertirPNG($pdf,$dniBack, 55, 150, 85, 55);
+    /* convertirPNG($pdf,$dniFront,55, 70, 85, 55);
+    convertirPNG($pdf,$dniBack, 55, 150, 85, 55); */
 
 
   if(($carro=='X')){
@@ -697,8 +747,8 @@
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
         $pdf->Rect(54, 149, 87, 58, 'D');
-        convertirPNG($pdf,$carroFront,55, 70, 85, 55);
-        convertirPNG($pdf,$carroBack, 55, 150, 85, 55);
+       /*  convertirPNG($pdf,$carroFront,55, 70, 85, 55);
+        convertirPNG($pdf,$carroBack, 55, 150, 85, 55); */
     }
     if(($moto=='X')){
             $pdf->AddPage();
@@ -710,8 +760,8 @@
             $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
             $pdf->Rect(54, 69, 87, 58, 'D');
             $pdf->Rect(54, 149, 87, 58, 'D');
-            convertirPNG($pdf,$motoFront, 55, 70, 85, 55);
-            convertirPNG($pdf,$motoBack, 55, 150, 85, 55);
+           /*  convertirPNG($pdf,$motoFront, 55, 70, 85, 55);
+            convertirPNG($pdf,$motoBack, 55, 150, 85, 55); */
         }
 
     if($pasaporte=='X'){
@@ -724,7 +774,7 @@
         $pdf->SetLineWidth(0.5); // Ancho del borde en puntos
         $pdf->Rect(54, 69, 87, 58, 'D');
         
-        convertirPNG($pdf,$pasaporteFoto, 55, 70, 85, 55);
+/*         convertirPNG($pdf,$pasaporteFoto, 55, 70, 85, 55); */
     }
   
 
@@ -777,6 +827,7 @@
         
         return $edad;
     }
+
     function convertirPNG($pdf, $imagePath, $x, $y, $width, $height) {
         if (extension_loaded('gd') && file_exists($imagePath)==true) {
             $originalImage = imagecreatefromjpeg($imagePath);
@@ -800,4 +851,7 @@
             $pdf->Cell(0, 10, '', 0, 1);
         }
     }
+
+
+    
     

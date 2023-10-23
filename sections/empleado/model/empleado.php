@@ -123,6 +123,29 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
+    // *Buscar datos generalesde un empleado
+    public function buscarInfoEmpleado($id)
+    {
+
+        $sql = "SELECT	idEmpleado,
+                        DNI, 
+                        CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido) nombreCompleto                    
+                FROM rrhh.empleados 
+                WHERE idEmpleado=:id
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
 
     // *Buscar datos generalesde un empleado
     public function buscarHistoriaFamiliar($id)

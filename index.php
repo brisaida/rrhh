@@ -20,8 +20,8 @@
         } */
 
     }else{
-        $nuevaURL = 'https://prb.simfcoh.com/';
-        header("Location: $nuevaURL"); 
+       /*  $nuevaURL = 'https://prb.simfcoh.com/';
+        header("Location: $nuevaURL");  */
     }
 
 ?>
