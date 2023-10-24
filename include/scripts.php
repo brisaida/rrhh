@@ -27,6 +27,11 @@
 	<!-- Incluye DataTables.js -->
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+	<!-- Impresión del mapa -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+	
+
 
 
 	<!-- Enable tooltips -->

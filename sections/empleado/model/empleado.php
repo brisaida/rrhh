@@ -23,8 +23,10 @@ class mdlEmpleado
     public function listarTodo()
     {
 
-        $sql = "    SELECT  idEmpleado,DNI, 
+        $sql = "    SELECT      ROW_NUMBER() OVER (ORDER BY idEmpleado DESC) AS correlativo,
+                                idEmpleado,DNI, 
                                 CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
+                                fechaCreado,
                                 telefono 
                         FROM rrhh.empleados 
                         WHERE estado=1
@@ -51,6 +53,32 @@ class mdlEmpleado
                 FROM rrhh.empleados
                 WHERE estado=1
                 ORDER BY nombreCompleto
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+
+
+        return $resultado;
+    }
+
+    public function pendientes()
+    {
+
+        $sql = "SELECT dni,et.nombre,p.nombre as proyecto,et.viverista
+                FROM rrhh.empleadosTemp et
+                INNER JOIN bosque.proyecto p on p.id=et.proyecto
+                WHERE dni NOT IN (SELECT dni FROM rrhh.empleados)
+                ORDER BY p.nombre;
+        
+                
                 ";
 
         $stmt = $this->conn->prepare($sql);
@@ -103,7 +131,8 @@ class mdlEmpleado
                         a.licenciaMotoFront,
                         a.licenciaMotoBack,
 						a.penales,
-						a.policiales
+						a.policiales,
+                        e.fechaCreado
                 FROM rrhh.empleados e
                 INNER JOIN rrhh.direcciones d ON e.idEmpleado=d.idEmpleado
                 LEFT JOIN rrhh.adjuntos a ON e.idEmpleado=a.idEmpleado

@@ -23,9 +23,13 @@ $(document).ready(function () {
         );
     });
     $('#imprimirTodo').on("click", function () {
-        //var idEmpleado = $(this).closest('tr').find('[data-id-empleado]').data('id-empleado');
         window.open(
             `./sections/empleado/reports/pdf/listadoEmpleadosActivos.php`
+        );
+    });
+    $('#pendientes').on("click", function () {
+        window.open(
+            `./sections/empleado/reports/pdf/pendientes.php`
         );
     });
 
@@ -51,8 +55,13 @@ function listarEmpleados() {
         },
         success: function (respuesta) {
             const datos = JSON.parse(respuesta);
+            console.log(datos);
             if (datos.length > 0) {
                 var columns = [
+                    {
+                        mDataProp: "correlativo",
+                        width: '5%',
+                    },
 
                     {
                         mDataProp: "DNI",
@@ -72,7 +81,7 @@ function listarEmpleados() {
                     },
                     {
                         mDataProp: "nombreCompleto",
-                        width: '35%',
+                        width: '30%',
                     },
                     {
                         className: "text-center",
@@ -157,8 +166,8 @@ function cargarTabla(tableID, data, columns) {
     var params = {
         aaData: data,
         aoColumns: columns,
-        bSortable: false,
         ordering: true,
+        pageLength: 25,
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",
@@ -187,6 +196,13 @@ function cargarTabla(tableID, data, columns) {
             },
 
         },
+        columnDefs: [
+            {
+               /*  targets: 0,  // Índice de la columna Fecha de Nacimiento
+                visible: false */
+            }
+        ],
+        order: [[0, 'asc']]
     };
 
     $(tableID).DataTable(params);
