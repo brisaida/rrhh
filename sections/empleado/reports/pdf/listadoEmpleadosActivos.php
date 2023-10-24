@@ -56,8 +56,10 @@
     $fila+=6;
 
     $i=0;
+    $x=0;
     foreach ($datosGenerales as $datosGenerales) {
         $i++;
+        $x++;
         $pdf->Ln(); 
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0,0,0);
@@ -72,6 +74,11 @@
         $pdf->SetFont('Arial','',10);
         $pdf->Cell(120,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT", '   '. capitalizarPalabras( $datosGenerales['nombreCompleto']) ), 1, 0, 'l', 1);
         $fila+=6;
+        if($x==34){
+            $pdf->AddPage();
+            $fila=50;
+            $x=0;
+        }
 
     }
 

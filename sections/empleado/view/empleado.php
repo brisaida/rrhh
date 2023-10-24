@@ -99,10 +99,10 @@
 											<div class="form-floating">
 												<select class="form-select" id="estadoCivilSelect" aria-label="Floating label select example">
 													<option selected class="text-end"></option>
-													<option value="1" class="text-end">Soltero &nbsp</option>
-													<option value="2" class="text-end">Casado &nbsp</option>
-													<option value="2" class="text-end">Viudo &nbsp</option>
-													<option value="3" class="text-end">Divorciado &nbsp</option>
+													<option value="1" class="text-end">Soltero(a) &nbsp</option>
+													<option value="2" class="text-end">Casado(a) &nbsp</option>
+													<option value="2" class="text-end">Viudo(a) &nbsp</option>
+													<option value="3" class="text-end">Divorciado(a) &nbsp</option>
 													<option value="4" class="text-end">Separado &nbsp</option>
 													<option value="5" class="text-end">Union Libre &nbsp</option>
 												</select>
