@@ -43,6 +43,7 @@
 		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 	</script>
+
 	<script src="./sections/home/js/inicio.js"></script>
 
 
@@ -61,6 +62,11 @@
 			echo '<script src="./sections/empleado/functions/perfilEmpleado.js"></script>';
 			echo '<script src="./sections/empleado/functions/maps.js"></script>';
 			echo '<script src="./sections/empleado/functions/validacionesPerfil.js"></script>';
+		} else if ($_GET['section'] == 'editarAdjuntos' || $_GET['section'] == 'editarAdjuntos') {
+			echo '<script src="./sections/empleado/functions/editarAdjuntos.js"></script>';
+		} else if ($_GET['section'] == 'editar' || $_GET['section'] == 'editar') {
+			echo '<script src="./sections/empleado/functions/editar.js"></script>';
+			echo '<script src="./sections/empleado/functions/mapsEdit.js"></script>';
 		} else if ($_GET['section'] == 'listadoEmpleados' || $_GET['section'] == 'listadoEmpleados') {
 			echo '<script src="./sections/empleado/functions/listadoEmpleados.js"></script>';
 		} else if ($_GET['section'] == 'perfilPuesto' || $_GET['section'] == 'perfilPuesto') {

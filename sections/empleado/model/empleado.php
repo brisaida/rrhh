@@ -5,7 +5,7 @@ class mdlEmpleado
 
     // Variables globales
     public $conn;
-
+    public $usuario=1;
     // Constructores
     public function __construct()
     {
@@ -105,6 +105,10 @@ class mdlEmpleado
                         segundoNombre,
                         primerApellido,
                         segundoApellido,
+                        CONCAT( primerNombre,' ',
+                        segundoNombre,' ',
+                        primerApellido,' ',
+                        segundoApellido) as nombreCompleto,
                         telefono,
                         fechaNacimiento,
                         lugarNacimiento,
@@ -137,7 +141,7 @@ class mdlEmpleado
                 INNER JOIN rrhh.direcciones d ON e.idEmpleado=d.idEmpleado
                 LEFT JOIN rrhh.adjuntos a ON e.idEmpleado=a.idEmpleado
                 INNER JOIN rrhh.estadoCivil ec ON ec.idEstadoCivil=e.estadoCivil 
-                WHERE e.idEmpleado=:id AND e.estado=1
+                WHERE e.idEmpleado=:id AND e.estado=1 AND d.estado=1
                 ";
 
         $stmt = $this->conn->prepare($sql);
@@ -180,12 +184,13 @@ class mdlEmpleado
     public function buscarHistoriaFamiliar($id)
     {
 
-        $sql = "SELECT  nombre,parentesco,
+        $sql = "SELECT  idHistorial,idEmpleado,
+                        nombre,parentesco,
                         fechaNacimiento,
                         direccion,
                         telefono 
                 FROM rrhh.historiaFamiliar
-                WHERE idEmpleado=:id
+                WHERE idEmpleado=:id and estado=1
         ";
 
         $stmt = $this->conn->prepare($sql);
@@ -201,11 +206,11 @@ class mdlEmpleado
         return $resultado;
     }
 
-     // *Buscar datos generalesde un empleado
-     public function buscarInfoSalud($id)
-     {
- 
-         $sql = "SELECT	idSalud,
+    // *Buscar datos generalesde un empleado
+    public function buscarInfoSalud($id)
+    {
+
+        $sql = "SELECT	idSalud,
                         contactoEmergencia1,
                         tel1,
                         contactoEmergencia2,
@@ -218,25 +223,25 @@ class mdlEmpleado
                 FROM rrhh.salud 
                 WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     
-     // *Buscar datos generalesde un empleado
-     public function buscarConocidos($id)
-     {
- 
-         $sql = "   SELECT idConocido,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *Buscar datos generalesde un empleado
+    public function buscarConocidos($id)
+    {
+
+        $sql = "   SELECT idConocido,
                             nombre,
                             parentesco,
                             tiempoConocerlo,
@@ -244,47 +249,47 @@ class mdlEmpleado
                     FROM rrhh.conocidos
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     // *Buscar datos generalesde un empleado
-     public function buscarIdiomas($id)
-     {
- 
-         $sql = "   SELECT	idIdioma,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    // *Buscar datos generalesde un empleado
+    public function buscarIdiomas($id)
+    {
+
+        $sql = "   SELECT	idIdioma,
                             idioma,
                             porcentaje
                     FROM rrhh.idiomas
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     // *Buscar datos generalesde un empleado
-     public function buscarEducación($id)
-     {
- 
-         $sql = "   SELECT idEducacion,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    // *Buscar datos generalesde un empleado
+    public function buscarEducación($id)
+    {
+
+        $sql = "   SELECT idEducacion,
                             nivel,
                             centroEducativo,
                             estudio,
@@ -294,24 +299,24 @@ class mdlEmpleado
                     FROM rrhh.educacion
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     // *Buscar datos generalesde un empleado
-     public function buscarAntecedentes($id)
-     {
- 
-         $sql = "   SELECT	idAntecedentes,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    // *Buscar datos generalesde un empleado
+    public function buscarAntecedentes($id)
+    {
+
+        $sql = "   SELECT	idAntecedentes,
                             empresa,
                             tipoEmpresa,
                             direccion,
@@ -328,23 +333,23 @@ class mdlEmpleado
                     FROM rrhh.antecedentesLaborales
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     public function buscarEstudios($id)
-     {
- 
-         $sql = "   SELECT	idEstudiante,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function buscarEstudios($id)
+    {
+
+        $sql = "   SELECT	idEstudiante,
                             carrera,
                             horaEntrada,
                             horaSalida,
@@ -352,23 +357,23 @@ class mdlEmpleado
                     FROM rrhh.estudiosActuales
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
-     public function buscarReferencias($id)
-     {
- 
-         $sql = "   SELECT  idReferencia,
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function buscarReferencias($id)
+    {
+
+        $sql = "   SELECT  idReferencia,
                             nombre,
                             profesion,
                             direccion,
@@ -376,19 +381,19 @@ class mdlEmpleado
                     FROM rrhh.referencias
                     WHERE idEmpleado=:id
          ";
- 
-         $stmt = $this->conn->prepare($sql);
-         $stmt->bindParam(":id", $id);
- 
-         try {
-             $stmt->execute();
-             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         } catch (PDOException $e) {
-             $resultado = $e->getMessage();
-         }
-         $stmt->closeCursor();
-         return $resultado;
-     }
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
 
 
     // *Buscar nombre en censo
@@ -752,7 +757,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -774,7 +779,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -796,7 +801,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -818,7 +823,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -840,7 +845,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -864,7 +869,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -885,7 +890,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -909,7 +914,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -931,7 +936,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -955,7 +960,7 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -977,7 +982,154 @@ class mdlEmpleado
 
         try {
             $stmt->execute();
-            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+
+
+
+    //* -----------------------------ACTIALIZAR
+    public function actualizarEmpleado($campo, $valor, $id, $usuario, $tabla)
+    {
+
+        $sql = "UPDATE rrhh." . $tabla . "
+                SET     " . $campo . " = :valor,          
+                        fechaModificado = getdate(),
+                        usuarioModificado = :usuario
+                WHERE idEmpleado=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":valor", $valor);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+   
+    public function actualizarEmpleado2($campo, $valor, $campo2, $valor2, $id, $usuario, $tabla)
+    {
+
+        $sql = "UPDATE rrhh." . $tabla . "
+                SET     " . $campo . " = :valor,
+                        " . $campo2 . " = :valor2,            
+                        fechaModificado = getdate(),
+                        usuarioModificado = :usuario
+                WHERE idEmpleado=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":valor", $valor);
+        $stmt->bindParam(":valor2", $valor2);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    // *Agregar registro
+    public function agregarEducacion($dato)
+    {
+        $sql = "  INSERT INTO rrhh.educacion(idEmpleado,nivel,centroEducativo,estudio,desde,hasta,lugar,usuarioCreado)
+                                      VALUES (:id,:nivel,:centroEducativo,:estudio,:desde,:hasta,:lugar,:usuario)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $dato->idEmpleado);
+        $stmt->bindParam(":nivel", $dato->nivel);
+        $stmt->bindParam(":centroEducativo", $dato->centro);
+        $stmt->bindParam(":estudio", $dato->titulo);
+        $stmt->bindParam(":desde", $dato->desde);
+        $stmt->bindParam(":hasta", $dato->hasta);
+        $stmt->bindParam(":lugar", $dato->lugar);
+        $stmt->bindParam(":usuario", $dato->usuario);
+
+        
+        try {
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            error_log($e->getMessage());  // Esto imprimirá el error en el error log de PHP
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+    // *Agregar registro
+    public function agregarDireccion($dato)
+    {
+        $sql = "UPDATE rrhh.direcciones
+                SET estado=0
+                WHERE idEmpleado=:id
+                INSERT INTO rrhh.direcciones(idEmpleado,direccion,latitud,longitud,zona,usuarioCreado) 
+                    VALUES(:id2,:direccion,:latitud,:longitud,:zona,:usuario);";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $dato->idEmpleado);
+        $stmt->bindParam(":id2", $dato->idEmpleado);
+        $stmt->bindParam(":direccion", $dato->direccion);
+        $stmt->bindParam(":latitud", $dato->lat);
+        $stmt->bindParam(":longitud", $dato->long);
+        $stmt->bindParam(":zona", $dato->zona);
+        $stmt->bindParam(":usuario", $dato->usuario);
+
+        
+        try {
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            error_log($e->getMessage());  // Esto imprimirá el error en el error log de PHP
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+
+
+    //* ELIMINAR
+    public function eliminarRegistro($id,$tabla)
+    {
+
+        $sql = "UPDATE rrhh." . $tabla . "
+                SET     estado=0,          
+                        fechaModificado = getdate(),
+                        usuarioModificado = :usuario
+                WHERE idHistorial=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }

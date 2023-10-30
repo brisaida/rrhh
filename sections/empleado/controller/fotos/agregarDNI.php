@@ -7,7 +7,6 @@ include_once "../../../../config/connection.php";
 include_once "../../model/empleado.php";
 
 $nombresArchivos = array();
-
 // Conocer la cantidad de archivos
 $conteo = count($_FILES["archivos"]["name"]);
 $idRegistro = isset($_POST['idRegistro']) ? $_POST['idRegistro'] : null;
@@ -21,7 +20,7 @@ $fileExtension = strtolower(end($fileNameCmps));
 
 
 #Reestrucutrando nombre del archivo
-$nombreArchivo = md5(time() . $fileName) . '.png';
+$nombreArchivo = md5(time() . $fileName) .'.'. $fileExtension;
 
 $uploadFileDir = '../../archivos/dni/';
 $dest_path = $uploadFileDir . $nombreArchivo;
@@ -32,6 +31,11 @@ move_uploaded_file($fileTmpPath, $dest_path);
 // Instanciamos el modelo y llamamos al método correspondiente
 $conexion = new mdlEmpleado();
 $nombres = $conexion->DNIFront($nombreArchivo, $idRegistro);
+if ($nombres === true) {
+    echo json_encode(['ok' => true]);
+} else {
+    echo json_encode(['ok' => false, 'message' => $elRegistro]);
+}
 
 ?>
 

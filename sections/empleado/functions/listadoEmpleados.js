@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     $('#ListadoEmpleadoTabla').on("click", ".btn-editar", function () {
         var idEmpleado = $(this).closest('tr').find('[data-id-empleado]').data('id-empleado');
-        window.location.href = `?section=empleado&${idEmpleado}`
+        window.location.href = `?section=editar&${idEmpleado}`
     });
     $('#ListadoEmpleadoTabla').on("click", ".btn-ficha", function () {
         var idEmpleado = $(this).closest('tr').find('[data-id-empleado]').data('id-empleado');
