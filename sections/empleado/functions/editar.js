@@ -10,7 +10,8 @@ $(document).ready(function () {
         $('.no-editable').attr('disabled');
         $('#revisarBtn').hide();
         $('.adjuntos').show();
-        $('.no-mostrar').hide();
+        $('.esconder').hide();
+        $('.ocultar').hide();
         $('#nuevaDireccion').hide();
         $('#lat').hide();
         $('#long').hide();
@@ -20,35 +21,16 @@ $(document).ready(function () {
         cargarEducacion(idRegistro)
         cargarIdiomas(idRegistro)
         cargarEstudiosActuales(idRegistro)
-
+        cargarAntecedentes(idRegistro) 
     }
 
 
     //* Llamados a la modificación de datos (Botones de modificar)
-    $("#adjuntosPage").click(function(){
+    $("#adjuntosPage").click(function () {
         const location = window.location.search;
         const elementos = location.split("&");
         const idRegistro = parseInt(elementos[1]);
         window.location.href = `?section=editarAdjuntos&${idRegistro}`
-    });
-    $('#educacionTabla tbody').on('click', 'i.fa-trash', function () {
-        var data = table.row($(this).parents('tr')).data();
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "¿Deseas eliminar este registro?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Lógica para eliminar el registro
-                // Por ejemplo, puedes hacer otra llamada AJAX para eliminar el registro basado en "data.id" u otro campo identificador
-                console.log("Eliminar registro con ID:", data.id);
-            }
-        });
     });
     $("#telefonoEdit").click(function () {
         const location = window.location.search;
@@ -66,7 +48,6 @@ $(document).ready(function () {
             preConfirm: (telefono) => {
                 var campo = 'telefono';
                 var tabla = 'empleados';
-                console.log(campo);
 
                 return $.ajax({
                     type: 'POST',
@@ -401,6 +382,47 @@ $(document).ready(function () {
         })
 
     });
+    $("#enfermedadesEdit").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        Swal.fire({
+            title: 'Información Médico',
+            html: `<input type="input" id="enfermedades" class="swal2-input" placeholder="Enfermedades de base">`,
+            confirmButtonText: 'Modificar',
+            focusConfirm: false,
+            preConfirm: () => {
+                const valor = Swal.getPopup().querySelector('#enfermedades').value
+                var campo = 'enfermedades';
+                var tabla = 'salud';
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/modificarEmpleado.php',
+                    data: {
+                        valor: valor,
+                        id: idRegistro,
+                        campo: campo,
+                        usuario: usuario,
+                        tabla: tabla,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+                return { login: login, password: password }
+            }
+        }).then((result) => {
+            cargaInfoSalud(idRegistro)
+        })
+
+    });
     $("#direccionEdit").click(function () {
         const location = window.location.search;
         const elementos = location.split("&");
@@ -411,19 +433,19 @@ $(document).ready(function () {
             showCancelButton: true,
             confirmButtonText: 'Si, guardar',
             denyButtonText: `No, gracias`,
-          }).then((result) => {
+        }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 let datos = {
-                    direccion:$('#nuevaDireccion').val(),
+                    direccion: $('#nuevaDireccion').val(),
                     zona: $('#direccion').text(),
                     lat: $('#lat').text(),
                     long: $('#long').text(),
                     idEmpleado: idRegistro,
                     usuario: 1,
                 }
-                if (datos.direccion === '' || datos.direccion === null 
-                   
+                if (datos.direccion === '' || datos.direccion === null
+
                 ) {
                     Swal.fire('Falta información, intenta de nuevo.')
 
@@ -441,16 +463,16 @@ $(document).ready(function () {
                             throw new Error(response.message);
                         }
                         // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
-                        cargarEmpleado(idRegistro) 
+                        cargarEmpleado(idRegistro)
                         $("#nuevaDireccion").hide();
                     }).catch(error => {
                         Swal.showValidationMessage(`Request failed: ${error}`);
                     });
                 }
             } else if (result.isDenied) {
-              Swal.fire('Los cambios no fueron realizados.', '', 'info')
+                Swal.fire('Los cambios no fueron realizados.', '', 'info')
             }
-          })
+        })
 
 
     });
@@ -459,7 +481,7 @@ $(document).ready(function () {
         const elementos = location.split("&");
         const idRegistro = parseInt(elementos[1]);
         Swal.fire({
-            title: 'Información Médico',
+            title: 'Información Académica',
             html: `
                     <label class="">Nivel</label><br>        
                     <select class="swal2" placeholder="Nivel" id="nivel">
@@ -515,7 +537,13 @@ $(document).ready(function () {
                         if (!response.ok) {
                             throw new Error(response.message);
                         }
-                        // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                        var data = $("#curso").attr("idestudios");
+                        var marca = $("#marcarFinalizado").data("marca");
+
+                        if (marca == 1) {
+                            eliminarRegistro(data, "estudiosActuales", "idEstudiante", marca)
+
+                        }
                         return response;
                     }).catch(error => {
                         Swal.showValidationMessage(`Request failed: ${error}`);
@@ -533,21 +561,187 @@ $(document).ready(function () {
         })
 
     });
-    $('#parentescoTabla tbody').on('click', '.icon-delete', function() {
-        // Localizar el tr padre directo de donde está el icono
-        var childTableTr = $(this).closest('tr');
-        
-        // Ahora, obtenemos el tr que precede a este (el tr principal que tiene el data-idHistorial)
-        var mainTr = childTableTr.prev();
-        
-        // Capturamos el valor de data-idHistorial
-        var idHistorial = mainTr.attr('data-idhistorial');
-        
-        console.log(idHistorial); 
-        eliminarRegistro(idHistorial,"historiaFamiliar");
+    $('#parentescoTabla tbody').on("click", ".delete-icon", function () {
+        var data = $(this).closest("tr").data("idhistorial");
+        var id = $(this).closest("tr").data("idEmpleado");
+        eliminarRegistro(data, "historiaFamiliar", "idHistorial", id)
+
+    });
+    $("#agregarFamiliar").click(function () {
+        $('.esconder').show();
+    });
+    $("#agregarEstudios").click(function () {
+        $('.ocultar').show();
+    });
+    $("#guardarFamiliar").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        let datos = {
+            parentesco: $('#parentesco').val(),
+            nombre: $('#nombre').val(),
+            fecha: $('#fecha').val(),
+            tel: $('#tel').val(),
+            dir: $('#dir').val(),
+            idEmpleado: idRegistro,
+            usuario: 1,
+        }
+        if (datos.parentesco === '' || datos.parentesco === null ||
+            datos.nombre === '' || datos.nombre === null ||
+            datos.fecha === '' || datos.fecha === null ||
+            datos.tel === '' || datos.tel === null ||
+            datos.dir === '' || datos.dir === null ||
+            datos.idEmpleado === '' || datos.idEmpleado === null
+        ) {
+            Swal.fire('Falta información, intenta de nuevo.')
+
+        } else {
+            agregarFamiliar(datos);
+        }
+    });
+    $('#idiomasTabla tbody').on("click", ".edit", function () {
+        var data = $(this).closest("tr").data("id");
+
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+
+        Swal.fire({
+            title: 'Ingrese nivel 1-100',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Modificar',
+            showLoaderOnConfirm: true,
+            preConfirm: (telefono) => {
+                var campo = 'porcentaje';
+                var tabla = 'idiomas';
+                var condicion = 'idIdioma';
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/modificarOtraCampo.php',
+                    data: {
+                        valor: telefono,
+                        id: data,
+                        campo: campo,
+                        usuario: usuario,
+                        tabla: tabla,
+                        condicion: condicion,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Operación exitosa',
+                    text: 'El valor se ha actualizado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+
+                cargarIdiomas(idRegistro);
+            }
+        });
+
+    });
+
+    $("#agregarIdioma").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        Swal.fire({
+            title: 'Agregar Idioma',
+            html: `<input type="input" id="idioma" class="swal2-input" placeholder="Idioma">
+            <input type="input" id="porcentaje" class="swal2-input" placeholder="Porcentaje">`,
+            confirmButtonText: 'Modificar',
+            focusConfirm: false,
+            preConfirm: () => {
+                const idioma = Swal.getPopup().querySelector('#idioma').value
+                const porcentaje = Swal.getPopup().querySelector('#porcentaje').value
+
+                datos = {
+                    idioma: idioma,
+                    porcentaje: porcentaje,
+                    idEmpleado: idRegistro,
+                    usuario: 1
+                }
+
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/agregarIdioma.php',
+                    data: {
+                        datos: datos,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+                return { login: login, password: password }
+            }
+        }).then((result) => {
+            cargarIdiomas(idRegistro)
+        })
+
+    });
+    $('#idiomasTabla tbody').on("click", ".delete", function () {
+        var data = $(this).closest("tr").data("id");
+
+        var id = $(this).closest("tr").data("idEmpleado");
+        eliminarRegistro(data, "idiomas", "idIdioma", id)
+
+    });
+
+    $("#guardarEstudios").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        let datos = {
+            titulo: $('#titulo').val(),
+            horario1: $('#hora1').val(),
+            horario2: $('#hora2').val(),
+            finalizacion: $('#finalizacion').val(),
+            idEmpleado: idRegistro,
+            usuario: 1,
+        }
+        if (datos.titulo === '' || datos.titulo === null ||
+            datos.horario1 === '' || datos.horario1 === null ||
+            datos.horario2 === '' || datos.horario2 === null ||
+            datos.finalizacion === '' || datos.finalizacion === null ||
+            datos.idEmpleado === '' || datos.idEmpleado === null
+        ) {
+            Swal.fire('Falta información, intenta de nuevo.')
+
+        } else {
+            agregarEstudiosActuales(datos);
+        }
+    });
+
+    $("#marcarFinalizado").click(function () {
+        $("#marcarFinalizado").data("marca", "1");
+        $("#educacionEdit").click();
     });
 
 });
+
 
 
 //* Funciones de carga
@@ -589,14 +783,14 @@ function cargarEmpleado(id) {
                 $("#telefono").text(datos.telefono).change();
                 $("#email").text(datos.email).change();
                 $("#genero").text(genero).change();
-                $("#direccion").html( datos.zona).change();
+                $("#direccion").html(datos.zona).change();
                 $("#direccion1").html(datos.direccion).change();
 
                 var marker = L.marker([datos.latitud, datos.longitud], { icon: customIcon, draggable: true }).addTo(myMap);
 
                 // Centra el mapa en las coordenadas iniciales
                 myMap.setView([datos.latitud, datos.longitud], 13); // Puedes ajustar el nivel de zoom (13 en este ejemplo) según tus necesidades
-               
+
                 // Agrega un evento para detectar cuando el marcador se arrastra
                 marker.on('dragend', function (event) {
                     var marker = event.target;  // Obtén el marcador que se arrastró
@@ -646,21 +840,28 @@ function cargarHistoriaFamiliar(id) {
                     { data: 'parentesco' },
                     { data: 'nombre' },
                     { data: 'fechaNacimiento', class: 'text-center' },
-                    // ... Agrega más columnas según sea necesario
+                    { data: 'telefono', class: 'text-center' },
+                    { data: 'direccion', class: 'text-center' },
+                    {
+
+                        render: function (data, types, full, meta) {
+                            let menu = ` <center><a class="delete-icon"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></center> `;
+
+                            return `${menu}`;
+
+                        },
+                    },
                 ],
                 columnDefs: [{
-                    targets: 2, // La columna de fecha de nacimiento (comenzando desde 0)
+                    targets: 2,
                     render: function (data, type, row) {
-                        // Si el tipo es 'display' o 'filter', calcula y muestra la edad
                         if (type === 'display' || type === 'filter') {
                             return calcularEdad(data);
                         }
-                        // De lo contrario, devuelve el valor original (esto es para la ordenación, búsqueda, etc.)
                         return data;
                     }
                 }],
-                createdRow: function(row, data, dataIndex) {
-                    // Aquí añades las clases a la fila basadas en idHistorial e idEmpleado
+                createdRow: function (row, data, dataIndex) {
                     $(row).attr('data-idEmpleado', data.idEmpleado);
                     $(row).attr('data-idHistorial', data.idHistorial);
                 },
@@ -669,26 +870,10 @@ function cargarHistoriaFamiliar(id) {
                 searching: false, // Desactiva la búsqueda
                 paging: false,   // Desactiva la paginación
                 info: false,     // Habilitar DataTables Responsive
-                rowReorder: {
-                    selector: 'td:first-child', // Selector para las filas que se pueden reordenar (primera columna)
-                    update: false, // No permitir la actualización automática del orden
-                },
+                destroy: true,
             });
 
-            // Manejar el clic en una fila para mostrar la información adicional como una child table
-            $('#parentescoTabla tbody').on('click', 'tr', function () {
-                var tr = $(this);
-                var row = table.row(tr);
-                if (row.child.isShown()) {
-                    // Ocultar la child table si ya se muestra
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    // Mostrar la child table
-                    row.child(formatChildTable(row.data())).show();
-                    tr.addClass('shown');
-                }
-            });
+
         },
     });
 }
@@ -711,7 +896,6 @@ function cargarConocidos(id) {
             });
         },
         success: function (respuesta) {
-            console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla2 = $("#parentescoConocidosTabla");
@@ -735,7 +919,7 @@ function cargarConocidos(id) {
 
 
             } else {
-                console.log("NADA! NADA TRAE ESTA PUERCADA!")
+                console.log("Sin información de conocidos")
             }
 
 
@@ -791,7 +975,7 @@ function cargaInfoSalud(id) {
 
 
             } else {
-                console.log("NO HAY NADA, ¿POR QUE NO HAY NADA? ... QUE BUENA PREGUNTA")
+                console.log("Sin información en la tabla de salud")
             }
 
 
@@ -822,8 +1006,11 @@ function cargarEducacion(id) {
                 columns: [
                     { data: 'nivel' },
                     { data: 'centroEducativo' },
-                    { data: 'estudio', class: 'text-center' },
-                    // ... Agrega más columnas según sea necesario
+                    { data: 'estudio', class: 'text-start' },
+                    { data: 'desde', class: 'text-center' },
+                    { data: 'hasta', class: 'text-start' },
+                    { data: 'lugar', class: 'text-center' },
+
                 ],
                 columnDefs: [{
 
@@ -838,21 +1025,6 @@ function cargarEducacion(id) {
                     selector: 'td:first-child', // Selector para las filas que se pueden reordenar (primera columna)
                     update: false, // No permitir la actualización automática del orden
                 },
-            });
-
-            // Manejar el clic en una fila para mostrar la información adicional como una child table
-            $('#educacionTabla tbody').on('click', 'tr', function () {
-                var tr = $(this);
-                var row = table.row(tr);
-                if (row.child.isShown()) {
-                    // Ocultar la child table si ya se muestra
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    // Mostrar la child table
-                    row.child(formatChildTableEducacion(row.data())).show();
-                    tr.addClass('shown');
-                }
             });
 
 
@@ -878,7 +1050,6 @@ function cargarReferencias(id) {
             });
         },
         success: function (respuesta) {
-            console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla = $("#referenciasTabla");
@@ -900,7 +1071,7 @@ function cargarReferencias(id) {
 
 
             } else {
-                console.log("NADA! NADA TRAE ESTA PUERCADA!")
+                console.log("Sin información en referencias")
             }
 
 
@@ -926,7 +1097,6 @@ function cargarIdiomas(id) {
             });
         },
         success: function (respuesta) {
-            console.log(respuesta);
             if (respuesta.length > 0) {
                 // Selecciona la tabla por su ID
                 var tabla = $("#idiomasTabla");
@@ -935,19 +1105,19 @@ function cargarIdiomas(id) {
                     if (registro.porcentaje == 1) {
                         registro.porcentaje = 100;
                     }
-                    var fila = $("<tr>");
+                    var fila = $("<tr data-id=" + registro.idIdioma + " data-idEmpleado=" + registro.idEmpleado + ">");
                     fila.append($("<td class='text-center'>").text(registro.idioma));
                     fila.append($("<td class='text-center' porcentaje='" + registro.porcentaje + "'>").text(registro.porcentaje + "%"));
-                    // Agrega más celdas según sea necesario
-
-                    // Agrega la fila2 a la tabla
+                    if (index !== 0) {
+                        fila.append($("<td class='text-center text-success'>").html('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="edit bi bi-pencil cursor-pointer" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash delete text-danger cursor-pointer ml-1" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/></svg>'));
+                    }
                     tabla.append(fila);
                 });
 
 
 
             } else {
-                console.log("NADA! NADA TRAE ESTA PUERCADA!")
+                console.log("Sin información de idiomas")
             }
 
 
@@ -974,15 +1144,17 @@ function cargarEstudiosActuales(id) {
         },
         success: function (respuesta) {
             if (respuesta.length > 0) {
-
                 let datos = respuesta[0];
-                $("#carrera").val(datos.carrera).change();
-                $("#desde").val(datos.horaEntrada + ' - ' + datos.horaSalida).change();
-                $("#finalizacion").val(datos.finalizacion).change();
+                $("#actual").show();
+                $("#noHayEstudios").hide();
+                $("#curso").text(datos.carrera);
+                $("#curso").attr("idEstudios", datos.idEstudiante);
+                $("#horarios").text(datos.horaEntrada + ' - ' + datos.horaSalida);
+                $("#final").text(datos.finalizacion);
 
             } else {
                 console.log("No hay estudios actuales")
-                $("#estudiosActuales").hide();
+                $("#actual").hide();
             }
 
 
@@ -1011,36 +1183,36 @@ function cargarAntecedentes(id) {
             if (respuesta.length > 0) {
 
                 let datos = respuesta[0];
-                $("#nombreEmpresaInput").val(datos.empresa).change();
-                $("#tipoEmpresaInput").val(datos.tipoEmpresa).change();
-                $("#dirEmpresaInput").val(datos.direccion).change();
-                $("#telEmpresaInput").val(datos.telefono).change();
-                $("#ultimoPuestoInput").val(datos.ultimoPuesto).change();
-                $("#jefeInmediatoInput").val(datos.jefeInmediato).change();
-                $("#telJefeInput").val(datos.telJefe).change();
-                $("#ingresoDate").val(datos.ingreso).change();
-                $("#retiroDate").val(datos.retiro).change();
-                $("#sueldoInicialNumber").val(datos.sueldoInicial).change();
-                $("#sueldoFinalNumber").val(datos.sueldoFinal).change();
-                $("#causaRetiroInput").val(datos.causaRetiro).change();
-                $("#descripcionPuestoInput").val(datos.obligaciones).change();
+                $("#empresa1").text(datos.empresa);
+                $("#tipoEmpresa").text(datos.tipoEmpresa);
+                $("#direccionEmpresa").text(datos.direccion);
+                $("#telEmpresa").text(datos.telefono);
+                $("#ultimoPuesto").text(datos.ultimoPuesto);
+                $("#jefeInmediato").text(datos.jefeInmediato);
+                $("#teljefe").text(datos.telJefe);
+                $("#ingreso").text(datos.ingreso);
+                $("#retiro").text(datos.retiro);
+                $("#sueldoInicio").text(datos.sueldoInicial);
+                $("#sueldoFinal").text(datos.sueldoFinal);
+                $("#causaRetiro").text(datos.causaRetiro);
+                $("#descripcion").text(datos.obligaciones);
                 let datos2 = respuesta[1];
-                $("#nombreEmpresaInput2").val(datos2.empresa).change();
-                $("#tipoEmpresaInput2").val(datos2.tipoEmpresa).change();
-                $("#dirEmpresaInput2").val(datos2.direccion).change();
-                $("#telEmpresaInput2").val(datos2.telefono).change();
-                $("#ultimoPuestoInput2").val(datos2.ultimoPuesto).change();
-                $("#jefeInmediatoInput2").val(datos2.jefeInmediato).change();
-                $("#telJefeInput2").val(datos2.telJefe).change();
-                $("#ingresoDate2").val(datos2.ingreso).change();
-                $("#retiroDate2").val(datos2.retiro).change();
-                $("#sueldoInicialNumber2").val(datos2.sueldoInicial).change();
-                $("#sueldoFinalNumber2").val(datos2.sueldoFinal).change();
-                $("#causaRetiroInput2").val(datos2.causaRetiro).change();
-                $("#descripcionPuestoInput2").val(datos2.obligaciones).change();
+                $("#empresa2").text(datos2.empresa);
+                $("#tipoEmpresa2").text(datos2.tipoEmpresa);
+                $("#direccionEmpresa2").text(datos2.direccion);
+                $("#telEmpresa2").text(datos2.telefono);
+                $("#ultimoPuesto2").text(datos2.ultimoPuesto);
+                $("#jefeInmediato2").text(datos2.jefeInmediato);
+                $("#telJefe2").text(datos2.telJefe);
+                $("#ingreso2").text(datos2.ingreso);
+                $("#retiro2").text(datos2.retiro);
+                $("#sueldoInicio2").text(datos2.sueldoInicial);
+                $("#sueldoFinal2").text(datos2.sueldoFinal);
+                $("#causaRetiro2").text(datos2.causaRetiro);
+                $("#descripcion2").text(datos2.obligaciones);
 
             } else {
-                console.log("NO HAY NADA, ¿POR QUE NO HAY NADA? ... QUE BUENA PREGUNTA")
+                console.log("Sin información en antecedentes laborales")
             }
 
 
@@ -1067,7 +1239,6 @@ function modificarEmpleado(campo, idRegistro) {
         showLoaderOnConfirm: true,
         preConfirm: (telefono) => {
             var campo = campo;
-            console.log(campo);
 
             return $.ajax({
                 type: 'POST',
@@ -1082,7 +1253,6 @@ function modificarEmpleado(campo, idRegistro) {
                 if (!response.ok) {
                     throw new Error(response.message);
                 }
-                // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
                 return response;
             }).catch(error => {
                 Swal.showValidationMessage(`Request failed: ${error}`);
@@ -1101,43 +1271,156 @@ function modificarEmpleado(campo, idRegistro) {
         }
     });
 }
-function eliminarRegistro(id,tabla) {
-    // Confirmación para eliminar
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¡No podrás revertir esto!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '¡Sí, eliminar!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Aquí puedes llamar a un AJAX para eliminar el registro en la base de datos
-            $.ajax({
-                type: "POST",
-                url: "./sections/empleado/controller/modificar/eliminar.php",
-                data: { id: id , tabla:tabla},
-                success: function(response) {
-                    if (response.success) {
+function eliminarRegistro(id, tabla, campo, marca) {
+    if (marca == 1) {
+
+        $.ajax({
+            type: "POST",
+            url: "./sections/empleado/controller/modificar/eliminar.php",
+            data: {
+                id: id,
+                tabla: tabla,
+                campo: campo
+            },
+            error: function (error) {
+                Swal.fire({
+                    title: "Ficha del empelado",
+                    icon: "error",
+                    text: `${error.responseText}`,
+                    confirmButtonColor: "#3085d6",
+                });
+            },
+            success: function (respuesta) {
+    
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Guardado exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                localStorage.clear();
+                cargarHistoriaFamiliar(datos.idEmpleado)
+                $('#actual').hide();
+                $('#noHayEstudios').show();
+    
+    
+            },
+        });
+        
+        
+    } else {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, eliminar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "./sections/empleado/controller/modificar/eliminar.php",
+                    data: {
+                        id: id,
+                        tabla: tabla,
+                        campo: campo
+                    },
+                    dataType: 'json',
+                    success: function (response) {
                         Swal.fire(
                             'Eliminado!',
                             'El registro ha sido eliminado.',
                             'success'
                         );
-                        // Recargar o actualizar la tabla para reflejar el cambio
-                    } else {
-                        Swal.fire('Error', 'Hubo un error al eliminar.', 'error');
+                        const location = window.location.search;
+                        const elementos = location.split("&");
+                        const idRegistro = parseInt(elementos[1]);
+                        if (tabla == 'historiaFamiliar') {
+
+                            cargarHistoriaFamiliar(idRegistro)
+                        }
+                        if (tabla == 'idiomas') {
+                            cargarIdiomas(idRegistro)
+                        }
+                    },
+                    error: function (response) {
+                        Swal.fire('Error', 'Hubo un error en la petición.', response);
                     }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Hubo un error en la petición.', 'error');
-                }
-            });
-        }
-    });
+                });
+            }
+        });
+    }
 }
 
+function agregarFamiliar(datos) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/modificar/agregarFamiliar.php",
+        data: {
+            datos: datos,
+        },
+        error: function (error) {
+            Swal.fire({
+                title: "Ficha del empelado",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Guardado exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            localStorage.clear();
+            cargarHistoriaFamiliar(datos.idEmpleado)
+            $('.esconder').hide();
+            $('.esconder').val('');
+
+
+        },
+    });
+}
+function agregarEstudiosActuales(datos) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/empleado/controller/modificar/agregarEstudios.php",
+        data: {
+            datos: datos,
+        },
+        error: function (error) {
+            Swal.fire({
+                title: "Ficha del empelado",
+                icon: "error",
+                text: `${error.responseText}`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Guardado exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            localStorage.clear();
+            cargarEstudiosActuales(datos.idEmpleado)
+            $('.ocultar').hide();
+            $('.ocultar').val('');
+
+
+        },
+    });
+}
 //* Funciones operativas
 function calcularEdad(fecha) {
     var hoy = new Date();
@@ -1152,28 +1435,3 @@ function calcularEdad(fecha) {
 }
 
 
-//*Crear las filas hijas de las tablas, el colapsar la tabla
-
-function formatChildTable(data) {
-    console.log(data);
-    var html = '<table class="child-table">';
-    html += '<tr><td>Teléfono:</td><td>' + data.telefono + '</td></tr>';
-    html += '<tr><td>Dirección:</td><td>' + data.direccion + '</td></tr>';
-    html += '<tr><td>Eliminar:</td><td><i class="fa fa-trash icon-delete" data-id="'+ data.id +'" style="color:red;cursor:pointer;"></i></td></tr>';
-    html += '</table>';
-    return html;
-}
-function formatChildTableEducacion(data) {
-    // Aquí puedes generar el HTML para tu child table utilizando los datos pasados como parámetro (data)
-    // Por ejemplo, puedes crear una tabla HTML con la información adicional que deseas mostrar
-    // y devolverla como una cadena HTML.
-    // Asegúrate de formatear la tabla de acuerdo a tus necesidades.
-    var html = '<table class="child-table">';
-    // Agrega aquí las filas y columnas para la información adicional
-    html += '<tr><td>Lugar:</td><td>' + data.lugar + '</td></tr>';
-    html += '<tr><td>Desde:</td><td>' + data.desde + '</td></tr>';
-    html += '<tr><td>Hasta:</td><td>' + data.hasta + '</td></tr>';
-    // ... Agrega más filas y columnas según sea necesario
-    html += '</table>';
-    return html;
-}

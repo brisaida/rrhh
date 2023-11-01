@@ -5,7 +5,7 @@ class mdlEmpleado
 
     // Variables globales
     public $conn;
-    public $usuario=1;
+    public $usuario = 1;
     // Constructores
     public function __construct()
     {
@@ -268,9 +268,10 @@ class mdlEmpleado
 
         $sql = "   SELECT	idIdioma,
                             idioma,
-                            porcentaje
+                            porcentaje,
+                            idEmpleado
                     FROM rrhh.idiomas
-                    WHERE idEmpleado=:id
+                    WHERE idEmpleado=:id and estado=1
          ";
 
         $stmt = $this->conn->prepare($sql);
@@ -298,6 +299,7 @@ class mdlEmpleado
                             lugar
                     FROM rrhh.educacion
                     WHERE idEmpleado=:id
+                    order by desde
          ";
 
         $stmt = $this->conn->prepare($sql);
@@ -355,7 +357,7 @@ class mdlEmpleado
                             horaSalida,
                             finalizacion
                     FROM rrhh.estudiosActuales
-                    WHERE idEmpleado=:id
+                    WHERE idEmpleado=:id AND estado=1
          ";
 
         $stmt = $this->conn->prepare($sql);
@@ -1018,7 +1020,30 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
-   
+    public function actualizarRegistro($campo, $valor, $id, $usuario, $tabla, $condicion)
+    {
+
+        $sql = "UPDATE rrhh." . $tabla . "
+                SET     " . $campo . " = :valor,          
+                        fechaModificado = getdate(),
+                        usuarioModificado = :usuario
+                WHERE " . $condicion . "=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":valor", $valor);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
     public function actualizarEmpleado2($campo, $valor, $campo2, $valor2, $id, $usuario, $tabla)
     {
 
@@ -1046,6 +1071,87 @@ class mdlEmpleado
     }
 
     // *Agregar registro
+    public function agregarFamiliar($dato)
+    {
+        $sql = "INSERT INTO rrhh.historiaFamiliar(idEmpleado, nombre,parentesco,fechaNacimiento,direccion,telefono,usuarioCreado)
+        VALUES (:id,:nombre,:parentesco,:fechaNacimiento,:direccion,:telefono,:usuario)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $dato->idEmpleado);
+        $stmt->bindParam(":nombre", $dato->nombre);
+        $stmt->bindParam(":parentesco", $dato->parentesco);
+        $stmt->bindParam(":fechaNacimiento", $dato->fecha);
+        $stmt->bindParam(":direccion", $dato->dir);
+        $stmt->bindParam(":telefono", $dato->tel);
+        $stmt->bindParam(":usuario", $dato->usuario);
+
+
+        try {
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            error_log($e->getMessage());  // Esto imprimirá el error en el error log de PHP
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function agregarEstudios($dato)
+    {
+        $sqlEstudios = "INSERT INTO rrhh.estudiosActuales(idEmpleado,carrera,horaEntrada,horaSalida,finalizacion,usuarioCreado)
+            VALUES(:id,:carrera,:horaEntrada,:horaSalida,:finalizacion,:usuario)
+                        ";
+        $stmt = $this->conn->prepare($sqlEstudios);
+        $stmt->bindParam(":id", $dato->idEmpleado);
+        $stmt->bindParam(":carrera", $dato->titulo);
+        $stmt->bindParam(":horaEntrada", $dato->horario1);
+        $stmt->bindParam(":horaSalida", $dato->horario2);
+        $stmt->bindParam(":finalizacion", $dato->finalizacion);
+        $stmt->bindParam(":usuario", $dato->usuario);
+
+
+        try {
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            error_log($e->getMessage());
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function agregarIdioma($dato)
+    {
+        $sqlIdiomas = "  INSERT INTO rrhh.idiomas(idEmpleado,idioma,porcentaje,usuarioCreado)
+        VALUES(:id,:idioma,:porcentaje,:usuario)";
+        $stmt = $this->conn->prepare($sqlIdiomas);
+        $stmt->bindParam(":id", $dato->idEmpleado);
+        $stmt->bindParam(":idioma",  $dato->idioma);
+        $stmt->bindParam(":porcentaje",  $dato->porcentaje);
+        $stmt->bindParam(":usuario",  $dato->usuario);
+
+
+        try {
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            error_log($e->getMessage());
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
     public function agregarEducacion($dato)
     {
         $sql = "  INSERT INTO rrhh.educacion(idEmpleado,nivel,centroEducativo,estudio,desde,hasta,lugar,usuarioCreado)
@@ -1060,7 +1166,7 @@ class mdlEmpleado
         $stmt->bindParam(":lugar", $dato->lugar);
         $stmt->bindParam(":usuario", $dato->usuario);
 
-        
+
         try {
             $this->conn->beginTransaction();
             $stmt->execute();
@@ -1094,7 +1200,7 @@ class mdlEmpleado
         $stmt->bindParam(":zona", $dato->zona);
         $stmt->bindParam(":usuario", $dato->usuario);
 
-        
+
         try {
             $this->conn->beginTransaction();
             $stmt->execute();
@@ -1114,14 +1220,14 @@ class mdlEmpleado
 
 
     //* ELIMINAR
-    public function eliminarRegistro($id,$tabla)
+    public function eliminarRegistro($tabla, $id, $campo)
     {
-
+        $usuario = 1;
         $sql = "UPDATE rrhh." . $tabla . "
                 SET     estado=0,          
                         fechaModificado = getdate(),
                         usuarioModificado = :usuario
-                WHERE idHistorial=:id; ";
+                WHERE " . $campo . "=:id ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":usuario", $usuario);

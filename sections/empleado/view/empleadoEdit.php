@@ -8,7 +8,7 @@
 					<a class="nav-link active" aria-current="page">MI PERFIL</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link cursor-pointer" id="adjuntosPage" >Adjuntos</a>
+					<a class="nav-link cursor-pointer" id="adjuntosPage">Adjuntos</a>
 				</li>
 			</ul>
 			<div class="row gy-4">
@@ -158,9 +158,8 @@
 
 					</div><!--//app-card-->
 				</div>
-
 				<!-- Información Médica -->
-				<div class="col-12 col-lg-6">
+				<div class="col-12 col-lg-5">
 					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
 						<div class="app-card-header p-3 border-bottom-0">
 							<div class="row align-items-center gx-3">
@@ -190,10 +189,10 @@
 
 
 									</div>
-									<div class="col-md">
+									<div class="col-md text-center">
 										<div class=" item-label"><strong>.</strong></div>
-										<div class=" item-data text-start" id="emergencia2"></div>
-										<div class=" item-data text-start" id="tel2"></div>
+										<div class=" item-data text-center" id="emergencia2"></div>
+										<div class=" item-data text-center" id="tel2"></div>
 										<a class="btn-sm app-btn-secondary" id="emergencias2Edit">Modificar</a>
 
 
@@ -208,6 +207,7 @@
 									<div class="col-md">
 										<div class="item-label "><strong>Enfermedades de base</strong></div>
 										<div class="item-data" id="enfermedades"></div>
+										<a class="btn-sm app-btn-secondary" id="enfermedadesEdit">Modificar</a>
 									</div>
 									<div class="col-md">
 										<div class="item-label text-center"><strong>Tipo de Sangre</strong></div>
@@ -243,119 +243,8 @@
 
 					</div>
 				</div>
-				<!-- Educación -->
-				<div class="col-12 col-lg-6">
-					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-						<div class="app-card-header p-3 border-bottom-0">
-							<div class="row align-items-center gx-3">
-								<div class="col-auto">
-									<div class="app-icon-holder">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-											<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
-										</svg>
-									</div><!--//icon-holder-->
-
-								</div>
-								<div class="col-auto">
-									<h4 class="app-card-title">Educación</h4>
-								</div>
-							</div>
-						</div><!--//app-card-header-->
-						<div class="app-card-body px-4 w-100">
-							<div class="item border-bottom py-3">
-								<table class="table app-table-hover mb-0 text-left" id="educacionTabla">
-									<thead>
-										<tr>
-											<th class="cell">Nivel</th>
-											<th class="cell">Centro Educativo</th>
-											<th class="cell">Titulación</th>
-										</tr>
-									</thead>
-									<tbody>
-
-
-									</tbody>
-								</table>
-								<div class="col text-end mt-3">
-									<a class="btn-sm app-btn-secondary" id="educacionEdit">Agregar nuevo</a>
-								</div>
-
-							</div>
-
-						</div>
-
-
-
-
-					</div><!--//app-card-->
-				</div>
-				<!-- Estudios Actuales -->
-				<div class="col-12 col-lg-3" id="estudiosActuales">
-					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-						<div class="app-card-header p-3 border-bottom-0">
-							<div class="row align-items-center gx-3">
-								<div class="col-auto">
-									<div class="app-icon-holder">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
-											<path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-											<path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
-										</svg>
-									</div><!--//icon-holder-->
-
-								</div>
-								<div class="col-auto">
-									<h4 class="app-card-title">Estudiando</h4>
-								</div>
-							</div>
-						</div><!--//app-card-header-->
-
-
-					</div>
-				</div>
-				<!-- Idiomas -->
-				<div class="col-12 col-lg">
-					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-						<div class="app-card-header p-3 border-bottom-0">
-							<div class="row align-items-center gx-3">
-								<div class="col-auto">
-									<div class="app-icon-holder">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-											<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-										</svg>
-									</div><!--//icon-holder-->
-
-								</div>
-								<div class="col-auto">
-									<h4 class="app-card-title">Idiomas</h4>
-								</div>
-							</div>
-						</div><!--//app-card-header-->
-						<div class="app-card-body px-4 w-100">
-
-							<div class="item border-bottom py-3" id="idiomas">
-								<table class="table app-table-hover mb-0 text-left" id="idiomasTabla">
-									<thead>
-										<tr>
-											<th class="cell text-center">Idioma</th>
-											<th class="cell text-center">Nivel</th>
-										</tr>
-									</thead>
-									<tbody>
-
-
-									</tbody>
-								</table>
-								<div class="col text-end mt-3">
-									<a class="btn-sm app-btn-secondary">Modificar</a>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
 				<!-- Hisotrial Familiar -->
-				<div class="col-12 col-lg-6">
+				<div class="col-12 col-lg-7">
 					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
 						<div class="app-card-header p-3 border-bottom-0">
 							<div class="row align-items-center gx-3">
@@ -380,6 +269,9 @@
 											<th class="cell">Parentesco</th>
 											<th class="cell">Nombre</th>
 											<th class="cell">Edad</th>
+											<th class="cell">Teléfono</th>
+											<th class="cell">Dirección</th>
+											<th class="cell">Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -388,13 +280,464 @@
 									</tbody>
 								</table>
 								<div class="col text-end mt-3">
-									<a class="btn-sm app-btn-secondary">Modificar</a>
+									<a class="btn-sm app-btn-secondary" id="agregarFamiliar">Agregar nuevo</a>
+								</div>
+							</div>
+						</div>
+						<div class="app-card-body px-4 w-100">
+							<div class="item  py-3">
+								<div class="row">
+									<div class="col-md">
+										<select class="form-select form-select-sm esconder" id="parentesco" aria-label="Small select example">
+											<option selected>Parentesco</option>
+											<option value="Padre">Padre</option>
+											<option value="Madre">Madre</option>
+											<option value="Conyugue">Conyugué</option>
+											<option value="Hijo">Hijo(a)</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mt-2">
+									<div class="col-md">
+										<input class="form-control form-control-sm esconder" type="text" id="nombre" placeholder="Nombre">
+
+									</div>
+									<div class="col-md">
+										<input class="form-control form-control-sm esconder" type="date" id="fecha">
+									</div>
+								</div>
+								<div class="row mt-2">
+									<div class="col-md">
+										<input class="form-control form-control-sm esconder" type="text" id="tel" placeholder="Teléfono">
+
+									</div>
+									<div class="col-md">
+										<input class="form-control form-control-sm esconder" type="text" id="dir" placeholder="Dirección">
+									</div>
+								</div>
+								<div class="col text-end mt-3">
+									<a class="btn-sm esconder app-btn-secondary" id="guardarFamiliar">Guardar</a>
 								</div>
 							</div>
 						</div>
 
 
 
+
+					</div><!--//app-card-->
+				</div>
+				<!-- Educación -->
+				<div class="col-12 col-lg-12">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+											<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div>
+								<div class="col-auto">
+									<h4 class="app-card-title">Educación</h4>
+								</div>
+							</div>
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+							<div class="item border-bottom py-3">
+								<table class="table app-table-hover mb-0 text-left" id="educacionTabla">
+									<thead>
+										<tr>
+											<th class="cell">Nivel</th>
+											<th class="cell">Centro Educativo</th>
+											<th class="cell">Titulación</th>
+											<th class="cell">desde</th>
+											<th class="cell">hasta</th>
+											<th class="cell">Lugar</th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+									</tbody>
+								</table>
+								<div class="col text-end mt-3">
+									<a class="btn-sm app-btn-secondary" id="educacionEdit">Agregar nuevo</a>
+								</div>
+
+							</div>
+
+						</div>
+
+
+
+
+					</div><!--//app-card-->
+				</div>
+
+				<!-- Idiomas -->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+											<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div>
+								<div class="col-auto">
+									<h4 class="app-card-title">Idiomas</h4>
+								</div>
+							</div>
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+
+							<div class="item border-bottom py-3" id="idiomas">
+								<table class="table app-table-hover mb-0 text-left" id="idiomasTabla">
+									<thead>
+										<tr>
+											<th class="cell text-center">Idioma</th>
+											<th class="cell text-center">Nivel</th>
+											<th class="cell text-center">Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+									</tbody>
+								</table>
+								<div class="col text-end mt-3">
+									<a class="btn-sm app-btn-secondary" id="agregarIdioma">Agregar</a>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+				<!-- Estudios Actuales -->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+											<path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+											<path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div>
+								<div class="col-auto">
+									<h4 class="app-card-title">Estudiando</h4>
+								</div>
+							</div>
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+							<div class="item pb-2 " id="actual">
+								<!-- No. de identidad y nombre -->
+								<div class="item border-bottom ">
+									<div class="row justify-content-between align-items-center">
+										<div class="col-md mb-2">
+											<div class="item-label"><strong>Carrera/Curso</strong></div>
+											<div class="item-data" id="curso"></div>
+										</div>
+										<div class="col-md mb-2">
+											<div class="item-label"><strong>Horario</strong></div>
+											<div class="item-data" id="horarios"></div>
+										</div>
+									</div>
+									<div class="row justify-content-between align-items-center">
+										<div class="col-md mb-2">
+											<div class="item-label"><strong>Fecha Finalización</strong></div>
+											<div class="item-data" id="final"></div>
+										</div>
+									</div>
+									<div class="col text-end mt-3">
+										<a class="btn-sm app-btn-secondary" id="marcarFinalizado">Marcar como Finalizado</a>
+									</div>
+								</div>
+							</div>
+							<div class="item py-3" id="noHayEstudios">
+								<p class="app-card-title text-center" style="font-size: 13px;">No hay estudios actuales</p>
+								<div class="col text-center mt-3">
+									<a class="btn-sm app-btn-secondary" id="agregarEstudios">Agregar</a>
+								</div>
+							</div>
+
+							<div class="app-card-body px-4 w-100">
+								<div class="item  py-3">
+
+									<div class="row mt-2 ocultar">
+										<div class="col-md">
+											<input class="form-control form-control-sm " type="text" id="titulo" placeholder="Curso/Diplomado">
+
+										</div>
+									</div>
+									<div class="row mt-2 ocultar">
+										<div class="col-md">
+											<label class="peque">Horario inicio</label>
+											<input class="form-control form-control-sm " type="time" id="hora1" placeholder="horario1">
+										</div>
+										<div class="col-md">
+											<label class="peque">Horario final</label>
+											<input class="form-control form-control-sm " type="time" id="hora2" placeholder="horario2">
+										</div>
+									</div>
+									<div class="row mt-2 ocultar">
+										<div class="col-md">
+											<label class="peque">Fecha de finalización</label>
+											<input class="form-control form-control-sm " type="date" id="finalizacion">
+
+										</div>
+									</div>
+									<div class="col text-end mt-3 ocultar">
+										<a class="btn-sm  app-btn-secondary" id="guardarEstudios">Guardar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			
+				<!-- Antecedentes Laborales -->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div>
+								<div class="col-auto">
+									<h4 class="app-card-title">Último Trabajo</h4>
+								</div>
+							</div>
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Ultimo Trabajo</strong></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Nombre de la Empresa</strong></div>
+										<div class="item-data" id="empresa1"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Tipo de Empresa</strong></div>
+										<div class="item-data text-start" id="tipoEmpresa"></div>
+									</div>
+
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Dirección</strong></div>
+										<div class="item-data" id="direccionEmpresa"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>No. de Telefono</strong></div>
+										<div class="item-data" id="telEmpresa"></div>
+									</div>
+
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Último puesto desempeñado</strong></div>
+										<div class="item-data" id="ultimoPuesto"></div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Jefe Inmediato</strong></div>
+										<div class="item-data" id="jefeInmediato"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Teléfono Jefe Inmediato</strong></div>
+										<div class="item-data" id="teljefe"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Fecha de Ingreso</strong></div>
+										<div class="item-data" id="ingreso"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Fecha de Retiro</strong></div>
+										<div class="item-data" id="retiro"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Sueldo Inicial</strong></div>
+										<div class="item-data" id="sueldoInicio"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Sueldo Final</strong></div>
+										<div class="item-data" id="sueldoFinal"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Causa de Retiro</strong></div>
+										<div class="item-data" id="causaRetiro"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Descripción del puesto</strong></div>
+										<div class="item-data" id="descripcion"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div><!--//app-card-->
+				</div>
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div>
+								<div class="col-auto">
+									<h4 class="app-card-title">Penúltimo  Trabajo</h4>
+								</div>
+							</div>
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Ultimo Trabajo</strong></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Nombre de la Empresa</strong></div>
+										<div class="item-data" id="empresa2"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Tipo de Empresa</strong></div>
+										<div class="item-data text-start" id="tipoEmpresa2"></div>
+									</div>
+
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Dirección</strong></div>
+										<div class="item-data" id="direccionEmpresa2"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>No. de Telefono</strong></div>
+										<div class="item-data" id="telEmpresa2"></div>
+									</div>
+
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Último puesto desempeñado</strong></div>
+										<div class="item-data" id="ultimoPuesto2"></div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Jefe Inmediato</strong></div>
+										<div class="item-data" id="jefeInmediato2"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Teléfono Jefe Inmediato</strong></div>
+										<div class="item-data" id="telJefe2"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Fecha de Ingreso</strong></div>
+										<div class="item-data" id="ingreso2"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Fecha de Retiro</strong></div>
+										<div class="item-data" id="retiro2"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Sueldo Inicial</strong></div>
+										<div class="item-data" id="sueldoInicio2"></div>
+									</div>
+									<div class="col-md">
+										<div class="item-label"><strong>Sueldo Final</strong></div>
+										<div class="item-data" id="sueldoFinal2"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Causa de Retiro</strong></div>
+										<div class="item-data" id="causaRetiro2"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-md">
+										<div class="item-label"><strong>Descripción del puesto</strong></div>
+										<div class="item-data" id="descripcion2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div><!--//app-card-->
 				</div>

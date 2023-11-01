@@ -185,11 +185,11 @@ $("#revisarBtn").on("click", function () {
     if (!salud.emergencia1 || !salud.emergencia2) { falta += " - Contacto de emergencia" }
     if (!salud.tel1 || !salud.tel2) { falta += " - Teléfono del contacto de emergenia" }
     if (!salud.tiposangre) { falta += " - Tipo de Sangre" }
+    if (!salud.centroMedico) { falta += " - Centro médico de preferencia." }
     // En el caso de los siguientes campos al ser opcionales solo les agrega el N/A
     if (!salud.enfermedades) { $("#enfermedadesInput").val("N/A"); salud.enfermedades = "n/a"; }
     if (!salud.medico) { $("#medicoCabeceraInput").val("N/A"); salud.medico = "n/a"; }
     if (!salud.telMedico) { $("#telMedicoInput").val("N/A"); salud.telMedico = "n/a"; }
-    if (!salud.centroMedico) { $("#centroMedicoInput").val("N/A"); salud.centroMedico = "n/a"; }
 
 
 

@@ -67,7 +67,7 @@
 										</div>
 										<div class="col-md">
 											<div class="form-floating mb-3">
-												<input type="input" class="form-control no-editable" id="SegundoApellidoInput" disabled
+												<input type="input" class="form-control no-editable" id="SegundoApellidoInput" disabled>
 												<label for="SegundoApellidoInput">Segundo Apellido</label>
 											</div>
 										</div>
