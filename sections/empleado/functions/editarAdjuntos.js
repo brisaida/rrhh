@@ -3,6 +3,187 @@ $(document).ready(function () {
     const elementos = location.split("&");
     const idRegistro = parseInt(elementos[1]);
     cargarEmpleado(idRegistro)
+    $("#noHayFoto").hide();
+    $("#noHayIdFront").hide();
+    $("#noHayIdBack").hide();
+    $("#noHayCarroFront").hide();
+    $("#noHayCarroBack").hide();
+    $("#noHayMotoFront").hide();
+    $("#noHayMotoBack").hide();
+    $("#noHayPasaporte").hide();
+    if ($('#agregarBoton').text().trim() === '') {
+        $('#agregarContent').hide();
+    }
+
+    $('#agregarBoton').on('click', '#agregarPasaporte', function() {
+        $("#editVencimientoPasaporte").click();
+        cargarEmpleado(idRegistro)
+    });
+    $('#agregarBoton').on('click', '#agregarCarro', function() {
+        $("#editVencimientoCarro").click();
+        cargarEmpleado(idRegistro)
+    });
+    $('#agregarBoton').on('click', '#agregarMoto', function() {
+        $("#editVencimientoMoto").click();
+        cargarEmpleado(idRegistro)
+    });
+
+    $("#editVencimientoCarro").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        Swal.fire({
+            title: 'Ingrese fecha de vencimiento',
+            input: 'date',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Modificar',
+            showLoaderOnConfirm: true,
+            preConfirm: (vencimiento) => {
+                var campo = 'vencimientoLicencia';
+                var tabla = 'empleados';
+                var usuario = 1;
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/modificarEmpleado.php',
+                    data: {
+                        valor: vencimiento,
+                        id: idRegistro,
+                        campo: campo,
+                        usuario: usuario,
+                        tabla: tabla,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Operación exitosa',
+                    text: 'El valor se ha actualizado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                cargarEmpleado(idRegistro);
+            }
+        });
+    });
+    $("#editVencimientoMoto").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        Swal.fire({
+            title: 'Ingrese fecha de vencimiento',
+            input: 'date',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Modificar',
+            showLoaderOnConfirm: true,
+            preConfirm: (vencimiento) => {
+                var campo = 'vencimientoLicenciaMoto';
+                var tabla = 'empleados';
+                var usuario = 1;
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/modificarEmpleado.php',
+                    data: {
+                        valor: vencimiento,
+                        id: idRegistro,
+                        campo: campo,
+                        usuario: usuario,
+                        tabla: tabla,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Operación exitosa',
+                    text: 'El valor se ha actualizado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                cargarEmpleado(idRegistro);
+            }
+        });
+    });
+    $("#editVencimientoPasaporte").click(function () {
+        const location = window.location.search;
+        const elementos = location.split("&");
+        const idRegistro = parseInt(elementos[1]);
+        Swal.fire({
+            title: 'Ingrese fecha de vencimiento',
+            input: 'date',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Modificar',
+            showLoaderOnConfirm: true,
+            preConfirm: (vencimiento) => {
+                var campo = 'vencimientoPasaporte';
+                var tabla = 'empleados';
+                var usuario = 1;
+
+                return $.ajax({
+                    type: 'POST',
+                    url: './sections/empleado/controller/modificar/modificarEmpleado.php',
+                    data: {
+                        valor: vencimiento,
+                        id: idRegistro,
+                        campo: campo,
+                        usuario: usuario,
+                        tabla: tabla,
+                    },
+                    dataType: 'json'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.message);
+                    }
+                    // No es necesario llamar a response.json() aquí, ya que es un objeto JSON.
+                    return response;
+                }).catch(error => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Operación exitosa',
+                    text: 'El valor se ha actualizado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                cargarEmpleado(idRegistro);
+            }
+        });
+    });
 
 });
 
@@ -310,7 +491,7 @@ $('#cvCambiar').click(function () {
     $('#cvFileInput').click();
 });
 
-$(document).on('change', '#cvFileInput', function() {
+$(document).on('change', '#cvFileInput', function () {
     if (this.files && this.files[0]) {
         let fileName = this.files[0].name;
 
@@ -323,9 +504,9 @@ $(document).on('change', '#cvFileInput', function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
-                    guardarCV(idRegistro);
+                const elementos = location.split("&");
+                const idRegistro = parseInt(elementos[1]);
+                guardarCV(idRegistro);
             }
         });
     }
@@ -341,7 +522,7 @@ $('#apCambiar').click(function () {
     $('#penFileInput').click();
 });
 
-$(document).on('change', '#penFileInput', function() {
+$(document).on('change', '#penFileInput', function () {
     if (this.files && this.files[0]) {
         let fileName = this.files[0].name;
 
@@ -354,9 +535,9 @@ $(document).on('change', '#penFileInput', function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
-                    guardarPen(idRegistro);
+                const elementos = location.split("&");
+                const idRegistro = parseInt(elementos[1]);
+                guardarPen(idRegistro);
             }
         });
     }
@@ -372,7 +553,7 @@ $('#apolCambiar').click(function () {
     $('#polFileInput').click();
 });
 
-$(document).on('change', '#polFileInput', function() {
+$(document).on('change', '#polFileInput', function () {
     if (this.files && this.files[0]) {
         let fileName = this.files[0].name;
 
@@ -385,9 +566,9 @@ $(document).on('change', '#polFileInput', function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
-                    guardarPol(idRegistro);
+                const elementos = location.split("&");
+                const idRegistro = parseInt(elementos[1]);
+                guardarPol(idRegistro);
             }
         });
     }
@@ -429,8 +610,12 @@ function subirFoto(archivos, idRegistro, nombreControlador) {
                 title: 'Modificado correctamente.',
                 showConfirmButton: false,
                 timer: 1500
-              })
-              cargarEmpleado(idRegistro)
+            })
+            $("#noHayFoto").hide();
+            $("#fotoCambiar").text("Cambiar");
+            $("#fotoDescargar").show();
+            ocultar();
+            cargarEmpleado(idRegistro)
         },
     });
 }
@@ -458,69 +643,128 @@ function cargarEmpleado(id) {
                 let datos = respuesta[0];
 
 
-             
+
 
                 //*Cargar fotos
+                //*-----------------
                 if (datos.foto) {
                     $("#foto").attr("src", "./sections/empleado/archivos/empleado/" + datos.foto);
                     $("#fotoDescargar").attr("href", "./sections/empleado/archivos/empleado/" + datos.foto);
                 } else {
-                    $("#foto").attr("src", "./assets/images/not.png");
+                    $("#noHayFoto").show();
+                    $("#fotoCambiar").text("Agregar");
+                    $("#fotoDescargar").hide();
                 }
-                if (datos.pasaporte) {
-                    $("#pasaporte").attr("src", "./sections/empleado/archivos/pasaporte/" + datos.pasaporte);
-                    $("#vencimientoPasaporte").text(datos.vencimientoPasaporte);
+                //*-----------------
+                if (datos.vencimientoPasaporte == '1900-01-01') {
+                    $("#pasaporteContent").hide();
+                    $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary " id="agregarPasaporte">Agregar Pasaporte</a></div>');
                 } else {
-                    $("#pasaporte").attr("src", "./assets/images/not.png");
+                    $("#vencimientoPasaporte").text(datos.vencimientoPasaporte)
+                    if (datos.pasaporte) {
+                        $("#pasaporte").attr("src", "./sections/empleado/archivos/pasaporte/" + datos.pasaporte);
+                        $("#pasaporteDescargar").attr("href", "./sections/empleado/archivos/pasaporte/" + datos.pasaporte);
+                    } else {
+                        $("#noHayPasaporte").show();
+                        $("#pasaporteCambiar").text("Agregar");
+                        $("#pasaporteDescargar").hide();
+                    }
                 }
-                if (datos.licenciaCarroFront && datos.licenciaCarroBack) {
-                    $("#vencimientoLicenciaCarro").text(datos.vencimientoLicencia);
-                    $("#carroFrente").attr("src", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroFront);
-                    $("#carroReverso").attr("src", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroBack);
-                    $("#idFrontDescargar").attr("href", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroFront);
-                    $("#idReversoDescargar").attr("href", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroBack);
-                    
+
+                //*-----------------
+                if (datos.vencimientoLicencia == '1900-01-01') {
+                    $("#carroContent").hide();
+                    $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary " id="agregarCarro">Agregar Licencia de Carro</a></div>');
                 } else {
-                    $("#carroFrente").attr("src", "./assets/images/not.png");
-                    $("#carroReverso").attr("src", "./assets/images/not.png");
+                    $("#vencimientoLicenciaCarro").text(datos.vencimientoLicencia)
+                    if (datos.licenciaCarroFront) {
+                        $("#carroFrente").attr("src", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroFront);
+                        $("#carroFrontDescargar").attr("href", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroFront);
+
+                    } else {
+                        $("#noHayCarroFront").show();
+                        $("#carroFrontCambiar").text("Agregar");
+                        $("#carroFrontDescargar").hide();
+                    }
+                    if (datos.licenciaCarroBack) {
+
+                        $("#carroReverso").attr("src", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroBack);
+                        $("#carroReversoDescargar").attr("href", "./sections/empleado/archivos/licencia_carro/" + datos.licenciaCarroBack);
+
+                    } else {
+                        $("#noHayCarroBack").show();
+                        $("#carroReversoCambiar").text("Agregar");
+                        $("#carroReversoDescargar").hide();
+                    }
                 }
-                if (datos.licenciaMotoFront && datos.licenciaMotoBack) {
-                    $("#vencimientoLicenciaMoto").text(datos.vencimientoLicenciaMoto);
-                    $("#motoFrente").attr("src", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoFront);
-                    $("#motoReverso").attr("src", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoBack);
+
+                //*-----------------
+                if (datos.vencimientoLicenciaMoto == '1900-01-01') {
+
+                    $("#motoContent").hide();
+                    $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary" id="agregarMoto">Agregar Licencia de Moto</a></div>');
+
                 } else {
-                    $("#motoFrente").attr("src", "./assets/images/not.png");
-                    $("#motoReverso").attr("src", "./assets/images/not.png");
+
+                    $("#vencimientoLicenciaMoto").text(datos.vencimientoLicenciaMoto)
+                    if (datos.licenciaMotoFront) {
+                        $("#motoFrente").attr("src", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoFront);
+                        $("#motoFrontDescargar").attr("href", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoFront);
+                    } else {
+                        $("#noHayMotoFront").show();
+                        $("#motoFrenteCambiar").text("Agregar");
+                        $("#motoFenteDescargar").hide();
+                    }
+                    if (datos.licenciaMotoBack) {
+                        $("#motoReverso").attr("src", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoBack);
+                        $("#motoReversoDescargar").attr("href", "./sections/empleado/archivos/licencia_moto/" + datos.licenciaMotoBack);
+                    } else {
+                        $("#noHayMotoBack").show();
+                        $("#motoReversoCambiar").text("Agregar");
+                        $("#motoReversoDescargar").hide();
+                    }
                 }
-                if (datos.dniFront && datos.dniBack) {
+
+                //*-----------------
+                if (datos.dniFront) {
                     $("#idFrente").attr("src", "./sections/empleado/archivos/dni/" + datos.dniFront);
+                } else {
+                    $("#noHayIdFront").show();
+                    $("#idFrontCambiar").text("Agregar");
+                    $("#idFrontDescargar").hide();
+                }
+                if (datos.dniBack) {
                     $("#idReverso").attr("src", "./sections/empleado/archivos/dni/" + datos.dniBack);
+                } else {
+                    $("#noHayIdBack").show();
+                    $("#idReversoCambiar").text("Agregar");
+                    $("#idReversoDescargar").hide();
                 }
 
 
                 //* Cargar documentos
                 if (datos.cv) {
                     $("#cvDescargar").attr("href", "./sections/empleado/archivos/cv/" + datos.cv);
-                    $("#cvCambiar").html("<strong>Cambiar</strong>");
+                    $("#cvCambiar").html("Cambiar");
                     $("#cvContent").show();
-                } else { 
-                    $("#cvCambiar").html("<strong>Agregar</strong>");
+                } else {
+                    $("#cvCambiar").html("Agregar");
                     $("#cvContent").hide();
                 }
                 if (datos.penales) {
                     $("#apDescargar").attr("href", "./sections/empleado/archivos/antecedentes_penales/" + datos.penales);
-                    $("#apCambiar").html("<strong>Cambiar</strong>");
+                    $("#apCambiar").html("Cambiar");
                     $("#penContent").show();
                 } else {
-                    $("#apCambiar").html("<strong>Agregar</strong>");
+                    $("#apCambiar").html("Agregar");
                     $("#penContent").hide();
                 }
                 if (datos.policiales) {
                     $("#apolDescargar").attr("href", "./sections/empleado/archivos/antecedentes_policiales/" + datos.policiales);
-                    $("#apolCambiar").html("<strong>Cambiar</strong>");
+                    $("#apolCambiar").html("Cambiar");
                     $("#polContent").show();
                 } else {
-                    $("#apolCambiar").html("<strong>Agregar</strong>");
+                    $("#apolCambiar").html("Agregar");
                     $("#polContent").hide();
                 }
 
@@ -532,4 +776,38 @@ function cargarEmpleado(id) {
 
         },
     });
+}
+
+function ocultar() {
+    $("#noHayFoto").hide();
+    $("#fotoCambiar").text("Cambiar");
+    $("#fotoDescargar").show();
+
+    $("#noHayIdFront").hide();
+    $("#idFrontCambiar").text("Cambiar");
+    $("#idFrontDescargar").show();
+
+    $("#noHayIdBack").hide();
+    $("#idReversoCambiar").text("Cambiar");
+    $("#idReversoDescargar").show();
+
+    $("#noHayCarroFront").hide();
+    $("#carroFrontCambiar").text("Cambiar");
+    $("#carroFrontDescargar").show();
+
+    $("#noHayCarroBack").hide();
+    $("#carroReversoCambiar").text("Cambiar");
+    $("#carroReversoDescargar").show();
+
+    $("#noHayMotoFront").hide();
+    $("#motoFrenteCambiar").text("Cambiar");
+    $("#motoFrentetDescargar").show();
+
+    $("#noHayMotoBack").hide();
+    $("#motoReversoCambiar").text("Cambiar");
+    $("#motoReversoDescargar").show();
+
+    $("#noHayPasaporte").hide();
+    $("#pasaporteCambiar").text("Cambiar");
+    $("#pasaporteDescargar").show();
 }

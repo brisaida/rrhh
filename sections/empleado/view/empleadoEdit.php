@@ -505,7 +505,7 @@
 
 					</div>
 				</div>
-			
+
 				<!-- Antecedentes Laborales -->
 				<div class="col-12 col-lg-6">
 					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
@@ -513,8 +513,8 @@
 							<div class="row align-items-center gx-3">
 								<div class="col-auto">
 									<div class="app-icon-holder">
-										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suitcase-lg" viewBox="0 0 16 16">
+											<path d="M5 2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2h3.5A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5H14a.5.5 0 0 1-1 0H3a.5.5 0 0 1-1 0h-.5A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2H5Zm1 0h4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1ZM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H3V3H1.5ZM15 12.5v-9a.5.5 0 0 0-.5-.5H13v10h1.5a.5.5 0 0 0 .5-.5Zm-3 .5V3H4v10h8Z" />
 										</svg>
 									</div><!--//icon-holder-->
 
@@ -565,7 +565,7 @@
 										<div class="item-label"><strong>Último puesto desempeñado</strong></div>
 										<div class="item-data" id="ultimoPuesto"></div>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="item border-bottom py-3">
@@ -630,14 +630,14 @@
 							<div class="row align-items-center gx-3">
 								<div class="col-auto">
 									<div class="app-icon-holder">
-										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-											<path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suitcase-lg" viewBox="0 0 16 16">
+											<path d="M5 2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2h3.5A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5H14a.5.5 0 0 1-1 0H3a.5.5 0 0 1-1 0h-.5A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2H5Zm1 0h4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1ZM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H3V3H1.5ZM15 12.5v-9a.5.5 0 0 0-.5-.5H13v10h1.5a.5.5 0 0 0 .5-.5Zm-3 .5V3H4v10h8Z" />
 										</svg>
 									</div><!--//icon-holder-->
 
 								</div>
 								<div class="col-auto">
-									<h4 class="app-card-title">Penúltimo  Trabajo</h4>
+									<h4 class="app-card-title">Penúltimo Trabajo</h4>
 								</div>
 							</div>
 						</div><!--//app-card-header-->
@@ -682,7 +682,7 @@
 										<div class="item-label"><strong>Último puesto desempeñado</strong></div>
 										<div class="item-data" id="ultimoPuesto2"></div>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="item border-bottom py-3">

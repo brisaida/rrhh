@@ -103,17 +103,24 @@
 								</div>
 							</div>
 							
-							<!-- Jefé Inmediato -->
+							<!-- Vacaciones Disponibles -->
 							<div class="col-md">
 								<div>
 									<label for="vacaciones">Vacaciones Disponibles</label>
 									<input type="number" min="0" class="form-control text-end" id="vacaciones">
 								</div>
 							</div>
-							<!-- Jefé Inmediato -->
+							<!-- Teléfono Asignado -->
 							<div class="col-md">
 								<div>
 									<label for="TelefonoEmpresa">No. de teléfono asignado</label>
+									<input type="input" class="form-control text-end" id="TelefonoEmpresa">
+								</div>
+							</div>
+							<!-- Teléfono Asignado -->
+							<div class="col-md">
+								<div>
+									<label for="TelefonoEmpresa">Usuario asignado</label>
 									<input type="input" class="form-control text-end" id="TelefonoEmpresa">
 								</div>
 							</div>
