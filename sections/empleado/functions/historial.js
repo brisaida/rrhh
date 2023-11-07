@@ -72,6 +72,8 @@ $("#guardarBtn").click(function () {
 });
 
 $("#retirar").on("click", function () {
+    $('#exampleModal').modal('hide');
+
     let idRegistro = $("#noIdentidad").data('id');
     let idHistorial = $("#noIdentidad").attr('idHistorial');
     Swal.fire({
@@ -215,7 +217,7 @@ function cargarHistorial(id) {
                 }
                 cargarHistorialDetalle(datos.idHistorial)
                 $("#noIdentidad").attr("idHistorial", datos.idHistorial)
-            }else{
+            } else {
                 $("#edicion").hide();
             }
 
@@ -355,8 +357,16 @@ function cargarHistorialDetalle(id) {
                                         showConfirmButton: false,
                                         timer: 1500
                                     })
+
+                                    setTimeout(function () {
+
+                                        $('#exampleModal').modal('show');
+                                    }, 1500);
+
+
                                     $("#contenedorDetalle").html(" ");
                                     var id = $("#noIdentidad").attr("idhistorial");
+
                                     cargarHistorialDetalle(id)
                                 },
                             });
@@ -621,6 +631,7 @@ function agregarDetalle(datos) {
                 showConfirmButton: false,
                 timer: 1500
             })
+            $('#exampleModal').modal('hide');
             $("#contenedorDetalle").html(" ");
             cargarHistorialDetalle(datos.idHistorial)
         },

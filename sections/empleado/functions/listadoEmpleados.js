@@ -22,6 +22,12 @@ $(document).ready(function () {
             `./sections/empleado/reports/pdf/permisoBanco.php?id=${idEmpleado}`
         );
     });
+    $('#ListadoEmpleadoTabla').on("click", ".btn-checklist", function () {
+        var idEmpleado = $(this).closest('tr').find('[data-id-empleado]').data('id-empleado');
+        window.open(
+            `./sections/empleado/reports/pdf/checklist.php?id=${idEmpleado}`
+        );
+    });
     $('#imprimirTodo').on("click", function () {
         window.open(
             `./sections/empleado/reports/pdf/listadoEmpleadosActivos.php`
@@ -133,6 +139,15 @@ function listarEmpleados() {
                                                                 <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"/>
                                                             </svg>
                                                             Carta autorización bancaria (PDF)
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item bg-hover cursor-pointer btn-checklist">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                                                <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                                                                <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                                                            </svg>
+                                                            Checklist (PDF)
                                                         </a>
                                                     </li>
                                                 </ul>

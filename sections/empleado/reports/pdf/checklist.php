@@ -11,12 +11,26 @@
      # caputa e instanciamientos
     $empleados = new mdlEmpleado();
  
-    //$idEmpleado = isset($_GET['id']) ? $_GET['id'] : null;
-    $idEmpleado = 1;
+    $idEmpleado = isset($_GET['id']) ? $_GET['id'] : null;
+   // $idEmpleado = 4;
      
     $datosGenerales = $empleados->buscarDatosGenerales($idEmpleado);
+    $historial = $empleados->buscarHistorial($idEmpleado);
+    $historialDetalle = $empleados->buscarHistorialDetalle($historial[0]['idHistorial']);
     $nombreCompleto=  $datosGenerales[0]['primerNombre'].' '.$datosGenerales[0]['segundoNombre'].' '.$datosGenerales[0]['primerApellido'].' '.$datosGenerales[0]['segundoApellido'];
     $nombreCompleto=capitalizarPalabras($nombreCompleto);
+
+    if(!$historial){
+        $fecha='-';
+    }else{
+        $fecha=formatearFecha($historial[0]['ingreso']);
+    }
+
+    if(!$historialDetalle){
+        $cargo='-';
+    }else{
+        $cargo=$historialDetalle[0]['nombrePuesto'];
+    }
 
     $documentos = array(
         "Contrato laboral y acuerdo de confidencialidad",
@@ -116,7 +130,7 @@
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
+    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$cargo), 1, 0, 'l', 1);
     $fila+=6;
 
     $pdf->Ln(); 
@@ -128,7 +142,7 @@
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
-    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'l', 1);
+    $pdf->Cell(95,6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",$fecha ), 1, 0, 'l', 1);
     $fila+=10;
 
     foreach ($documentos as $documento) {

@@ -58,11 +58,15 @@
 								</div>
 							</div>
 							<!-- Cargo -->
+
 							<div class="col-md">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="input" class="form-control text-end" id="cargoInput">
-										<label for="cargoInput">Cargo</label>
+								<div class="col-md align-items-center mb-5">
+									<div class="form-floating">
+										<div class="form-floating mb-3">
+											<select class="form-select  " id="zonaSelect" aria-label="Floating label select example">
+											</select>
+											<label for="zonaSelect">Puesto</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -104,31 +108,41 @@
 						<!-- ------------------------------------ -->
 						<div class="row g-2">
 							<!-- Tipo de Acción -->
-							<div class="col-md-2">
+							<div class="col-md">
 								<div class="col-md align-items-center mb-3">
-									<div class="form-floating">
-										<div class="form-floating mb-3">
-											<select class="form-select  " id="tipoAccionSelect" aria-label="Floating label select example">
-												<option selected class="text-end"></option>
-												<option value="1" class="text-end">Vacaciones &nbsp</option>
-												<option value="2" class="text-end">Incapacidad &nbsp</option>
-												<option value="2" class="text-end">Permiso sin sueldo&nbsp</option>
-												<option value="4" class="text-end">Permiso por luto&nbsp</option>
-											</select>
-											<label for="tipoAccionSelect">Tipo de Acción</label>
-										</div>
-									</div>
+									<label for="tipoAccionSelect">Tipo de Acción</label>
+									<select class="form-select  " id="tipoAccionSelect" aria-label="Floating label select example">
+										<option selected class="text-end"></option>
+										<option value="1" class="text-end">Vacaciones &nbsp</option>
+										<option value="2" class="text-end">Incapacidad &nbsp</option>
+										<option value="2" class="text-end">Permiso sin sueldo&nbsp</option>
+										<option value="4" class="text-end">Permiso por luto&nbsp</option>
+									</select>
 								</div>
 							</div>
 							<!-- Días a tomar -->
 							<div class="col-md-2">
-								<div class="form-floating">
-									<div class="form-floating mb-3">
-										<input type="number" class="form-control " id="diasTomadosInput">
-										<label for="diasTomadosInput">Días a tomar</label>
-									</div>
+								<label for="diasTomadosInput">Días a tomar</label>
+								<input type="number" class="form-control " id="diasTomadosInput">
+							</div>
+							<!-- Rige desde -->
+							<div class="col-md">
+								<div class=" mb-3">
+									<label for="rigeDesdeDate">Rige desde</label>
+									<input type="datetime-local" class="form-control " id="rigeDesdeDate">
 								</div>
 							</div>
+							<!-- Reanuda -->
+							<div class="col-md">
+								<div class=" mb-3">
+									<label for="reanudaDate">Reanuda</label>
+									<input type="datetime-local" class="form-control " id="reanudaDate">
+								</div>
+							</div>
+						</div>
+						<!-- ------------------------------------ -->
+						<div class="row g-2 align-items-end">
+
 							<!-- Comentarios -->
 							<div class="col-md">
 								<div class="form-floating">
@@ -136,35 +150,6 @@
 										<input type="input" class="form-control" id="comentariosInput">
 										<label for="comentariosInput">Comentarios</label>
 									</div>
-								</div>
-							</div>
-						</div>
-						<!-- ------------------------------------ -->
-						<div class="row g-2 align-items-end">
-							<!-- Rige desde -->
-							<div class="col-md">
-								<div class=" mb-3">
-									<label for="rigeDesdeDate">Rige desde</label>
-									<input type="date" class="form-control " id="rigeDesdeDate">
-								</div>
-							</div>
-							<!-- Hora desde -->
-							<div class="col-md-2">
-								<div class=" mb-3">
-									<input type="time" class="form-control " id="desdeTime">
-								</div>
-							</div>
-							<!-- Reanuda -->
-							<div class="col-md">
-								<div class=" mb-3">
-									<label for="reanudaDate">Reanuda</label>
-									<input type="date" class="form-control " id="reanudaDate">
-								</div>
-							</div>
-							<!-- Hora reanuda -->
-							<div class="col-md-2">
-								<div class=" mb-3">
-									<input type="time" class="form-control " id="reanudaTime">
 								</div>
 							</div>
 						</div>
