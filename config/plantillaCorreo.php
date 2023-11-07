@@ -1,37 +1,39 @@
-<?php 
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// Este $emailusername podria ser el $to
-$emailusername= 'blopez@honducafeproyectos.com';
-$cc= 'brisaida.06@gmail.com';
+require './assets/PHPMailer/src/Exception.php';
+require './assets/PHPMailer/src/PHPMailer.php';
+require './assets/PHPMailer/src/SMTP.php';
 
- $body = 'Esto es una prueba ';
-   // i'm running windows, so i had to update this:
-    ini_set("SMTP", "smtp.gmail.com");
+$mail = new PHPMailer(true);
 
+try {
+    //Configuración del servidor
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.office365.com'; // Servidor SMTP de Microsoft
+    $mail->SMTPAuth   = true;                                   
+    $mail->Username   = 'blopez@honducafeproyectos.com'; // Tu dirección de correo
+    $mail->Password   = 'Lup93130'; // Tu contraseña de correo
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
+    $mail->Port       = 587; // Puerto para TLS/STARTTLS
+                                    
 
- echo sendEmail($emailusername,'brisaz.hn@gmail.com', 'Successful Charge!', $body, true);
+    //Destinatarios
+    $mail->setFrom('blopez@honducafeproyectos.com', 'Tu Nombre'); // Tu correo y nombre
+    $mail->addAddress('brisaida.06@gmail.com', 'Brisaida'); // Dirección de correo y nombre del destinatario
 
+    //Contenido
+    $mail->isHTML(true);                                  
+    $mail->Subject = 'Asunto del correo';
+    $mail->Body    = 'Este es el cuerpo del mensaje en <b>HTML</b>';
+    $mail->AltBody = 'Este es el cuerpo del mensaje en texto plano';
 
-   function sendEmail($to, $from, $subject, $body, $isHtml) {
-    $message = '<html><body>';
-    $message .= $body;
-    $message .= '</body></html>';
-
-    $headers = "From: $from\r\n";
-    $headers .= "Reply-To: $from\r\n";
-    //$headers .= "Cc: \r\n";
-
-    if ($isHtml) {
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
-    }
-
-    echo mail($to, $subject, $message, $headers);
+    $mail->send();
+    echo 'Mensaje enviado con éxito.';
+} catch (Exception $e) {
+    echo "No se pudo enviar el mensaje. Error de PHPMailer: {$mail->ErrorInfo}";
 }
-    
-
-// $isHtml se usa cuando incluis HTML en el correo
-
-
 
 ?>

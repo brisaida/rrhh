@@ -149,29 +149,10 @@ class mdlPuestos
     public function listarPuestosTodos($id)
     {
 
-        $sql = "SELECT idDirector as id, puesto, 'puestosDirectores' AS Origen 
-                FROM rrhh.puestosDirectores WHERE proyecto=:id
-                    UNION
-                SELECT idAdministrativos, puesto, 'puestosAdministrativos' AS Origen 
-                FROM rrhh.puestosAdministrativos WHERE proyecto=:id1
-                    UNION
-                SELECT idGerentes, puesto, 'puestosGerentes' AS Origen 
-                FROM rrhh.puestosGerentes WHERE proyecto=:id2
-                UNION
-                SELECT idEspecialistas, puesto, 'puestosEspecialistas' AS Origen 
-                FROM rrhh.puestosEspecialistas WHERE proyecto=:id3
-                UNION
-                SELECT idTecnicos, puesto, 'puestosTecnicos' AS Origen 
-                FROM rrhh.puestosTecnicos WHERE proyecto=:id4
-                ORDER BY puesto
-                ";
+        $sql = "SELECT idPuesto,nombrePuesto,nivel FROM rrhh.puestos WHERE idproyecto=:id";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":id1", $id);
-        $stmt->bindParam(":id2", $id);
-        $stmt->bindParam(":id3", $id);
-        $stmt->bindParam(":id4", $id);
         try {
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -21,7 +21,7 @@ CREATE TABLE rrhh.empleados (
 	vencimientoLicencia DATE  NULL,
 	vencimientoLicenciaMoto DATE  NULL,
 	vencimientoPasaporte DATE  NULL,
-	estado BIT NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE rrhh.direcciones(
 		ZONA VARCHAR(MAX)  NULL,
 		fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 		usuarioCreado VARCHAR(100) NOT NULL,
-		estado INT NOT NULL DEFAULT 1
+		estado BIT NOT NULL DEFAULT 1
 );
 GO
 
@@ -54,6 +54,7 @@ CREATE TABLE rrhh.historiaFamiliar (
 	fechaNacimiento DATE NULL,
 	direccion VARCHAR(255) NOT NULL,
 	telefono VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -70,6 +71,7 @@ CREATE TABLE rrhh.conocidos (
 	parentesco VARCHAR(100) NULL,
 	tiempoConocerlo VARCHAR(100) NOT NULL,
 	empresaLabora VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -109,6 +111,7 @@ CREATE TABLE rrhh.educacion (
 	desde INT NOT NULL,
 	hasta INT NOT NULL,
 	lugar VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -123,6 +126,7 @@ CREATE TABLE rrhh.idiomas (
 	idEmpleado INT NOT NULL,
 	idioma VARCHAR(100) NULL,
 	porcentaje INT NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -139,6 +143,7 @@ CREATE TABLE rrhh.estudiosActuales (
 	horaEntrada VARCHAR(10) NOT NULL,
 	horaSalida VARCHAR(10) NOT NULL,
 	finalizacion DATE NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -167,7 +172,8 @@ CREATE TABLE rrhh.antecedentesLaborales (
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
-	usuarioModificado VARCHAR(100) NULL
+	usuarioModificado VARCHAR(100) NULL,
+	estado BIT NOT NULL DEFAULT 1
 );
 GO
 
@@ -180,6 +186,7 @@ CREATE TABLE rrhh.referencias (
 	profesion VARCHAR(100) NOT NULL,
 	direccion VARCHAR(100) NOT NULL,
 	telefono VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -204,6 +211,7 @@ CREATE TABLE rrhh.adjuntos (
 	licenciaCarroBack VARCHAR(100) NULL,
 	licenciaMotoFront VARCHAR(100) NULL,
 	licenciaMotoBack VARCHAR(100) NULL,
+	estado BIT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -222,8 +230,13 @@ CREATE TABLE rrhh.historial (
 		CONSTRAINT PK_Historial_id
 		PRIMARY KEY CLUSTERED (idHistorial),
 	idEmpleado INT NOT NULL,
-	codigoInterno VARCHAR(50) NOT NULL,
+	codigoEmpleado VARCHAR(50) NOT NULL,
 	codigoSAP VARCHAR(50) NOT NULL,
+	ingreso DATE NOT NULL,
+	Retiro DATE NULL,
+	vacaciones INT NULL,
+	telefonoAsignado VARCHAR(50),
+	idUsuario INT NOT NULL,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
@@ -239,7 +252,8 @@ CREATE TABLE rrhh.historialDetalle (
 	fechaInicio DATE NOT NULL,
 	fechaRetiro DATE NULL,	
 	idProyecto INT NOT NULL,	
-	zona VARCHAR(100) NOT NULL,	
+	idDepartamento INT NOT NULL,	
+	sitio VARCHAR(100) NOT NULL,	
 	idTDR INT NOT NULL,
 	salario decimal(13,2) NOT NULL,
 	idJefe INT NOT NULL,

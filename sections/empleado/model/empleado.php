@@ -156,7 +156,7 @@ class mdlEmpleado
         $stmt->closeCursor();
         return $resultado;
     }
-    // *Buscar datos generalesde un empleado
+    // *Buscar datos generales de un empleado
     public function buscarInfoEmpleado($id)
     {
 
@@ -165,6 +165,74 @@ class mdlEmpleado
                         CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido) nombreCompleto                    
                 FROM rrhh.empleados 
                 WHERE idEmpleado=:id
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function buscarHistorial($id)
+    {
+
+        $sql = "SELECT  idHistorial,
+                        codigoEmpleado,
+                        codigoSAP,
+                        ingreso,
+                        vacaciones,
+                        telefonoAsignado,
+                        idUsuario,
+                        empleados.estado,
+						Retiro
+                FROM rrhh.historial
+
+                INNER JOIN rrhh.empleados ON empleados.idEmpleado=historial.idEmpleado
+                WHERE historial.idEmpleado=:id
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function buscarHistorialDetalle($id)
+    {
+
+        $sql = "SELECT	idHistorialDetalle,
+                        idHistorial,
+                        fechaInicio,
+                        fechaRetiro,
+                        hd.idProyecto,
+                        p.nombre,
+                        hd.idDepartamento,
+                        d.Descripcion,
+                        sitio,
+                        idTDR,
+                        tdr.nombrePuesto,
+                        salario,
+                        idJefe,
+                        CONCAT(primerNombre,' ', segundoNombre,' ',primerApellido) as nombreJefe
+                FROM rrhh.historialDetalle hd
+                INNER JOIN bosque.proyecto p ON hd.idProyecto=p.id
+                INNER JOIN configuracion.tblDepartamentosEstados d ON d.idDepartamento=hd.idDepartamento
+                INNER JOIN rrhh.puestos tdr ON tdr.idPuesto=hd.idTDR
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=hd.idJefe
+                WHERE hd.idHistorial=:id
+                ORDER BY idHistorialDetalle DESC 
                 ";
 
         $stmt = $this->conn->prepare($sql);
@@ -1183,7 +1251,7 @@ class mdlEmpleado
     }
 
 
-    // *Agregar registro
+    // *Agregar dirección
     public function agregarDireccion($dato)
     {
         $sql = "UPDATE rrhh.direcciones
@@ -1228,8 +1296,153 @@ class mdlEmpleado
                         fechaModificado = getdate(),
                         usuarioModificado = :usuario
                 WHERE " . $campo . "=:id ";
+        echo $sql;
+        echo $id;
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+
+    // *Agregar información en el historial de empleados
+    public function agregarHistorial($datos)
+    {
+
+        $sql = "INSERT INTO rrhh.historial(idEmpleado,codigoEmpleado,codigoSAP,ingreso,vacaciones,telefonoAsignado,idUsuario,usuarioCreado)
+          VALUES(:idEmpleado,:codigoEmpleado,:codigoSAP,:ingreso,:vacaciones,:telefonoAsignado,:idUsuario,:usuario)";
 
         $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idEmpleado", $datos->idEmpleado);
+        $stmt->bindParam(":codigoEmpleado", $datos->codigoEmpleado);
+        $stmt->bindParam(":codigoSAP", $datos->codigoSAP);
+        $stmt->bindParam(":ingreso", $datos->inicio);
+        $stmt->bindParam(":vacaciones", $datos->vacaciones);
+        $stmt->bindParam(":telefonoAsignado", $datos->telefonoAsignado);
+        $stmt->bindParam(":idUsuario", $datos->usuarioAsignado);
+        $stmt->bindParam(":usuario", $datos->usuario);
+
+        try {
+            # Iniciamos una transacción.
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+
+            # Captura del ultimo id insertado
+            $idHistorial = $this->conn->lastInsertId();
+
+            # Agregamos la dirección
+            $sqlDireccion = "INSERT INTO rrhh.historialDetalle(idHistorial,fechaInicio,idProyecto,idDepartamento,sitio,idTDR,salario,usuarioCreado,idJefe) 
+                                VALUES(:id,:fechaInicio,:idProyecto,:idDepartamento,:sitio,:idDTR,:salario,:usuario,:jefe);";
+
+            $stmt = $this->conn->prepare($sqlDireccion);
+            $stmt->bindParam(":id", $idHistorial);
+            $stmt->bindParam(":fechaInicio", $datos->inicioPuesto);
+            $stmt->bindParam(":idProyecto", $datos->proyectos);
+            $stmt->bindParam(":idDepartamento", $datos->zona);
+            $stmt->bindParam(":sitio", $datos->sitio);
+            $stmt->bindParam(":idDTR", $datos->idPuesto);
+            $stmt->bindParam(":salario", $datos->salario);
+            $stmt->bindParam(":usuario", $datos->usuario);
+            $stmt->bindParam(":jefe", $datos->jefeInmediato);
+
+            try {
+                $stmt->execute();
+                $resultado = json_encode(true);
+            } catch (PDOException $e) {
+                $this->conn->rollBack();
+                $res = $stmt->errorInfo();
+                $resultado = json_encode($res);
+            }
+        } catch (PDOException $e) {
+            //$this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+
+        echo $resultado;
+
+        return $resultado;
+    }
+    public function agregarDetalle($datos)
+    {
+
+        $sql = "INSERT INTO rrhh.historialDetalle(idHistorial,fechaInicio,idProyecto,idDepartamento,sitio,idTDR,salario,idJefe,usuarioCreado)
+                VALUES(:idHistorial,:fechaInicio,:idProyecto,:idDepartamento,:sitio,:idTDR,:salario,:idJefe,:usuario)
+                ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":idHistorial", $datos->idHistorial);
+        $stmt->bindParam(":fechaInicio", $datos->fechaInicio);
+        $stmt->bindParam(":idProyecto", $datos->idProyecto);
+        $stmt->bindParam(":idDepartamento", $datos->idDepartamento);
+        $stmt->bindParam(":sitio", $datos->sitio);
+        $stmt->bindParam(":idTDR", $datos->idTDR);
+        $stmt->bindParam(":salario", $datos->salario);
+        $stmt->bindParam(":idJefe", $datos->idJefe);
+        $stmt->bindParam(":usuario", $datos->usuario);
+
+        try {
+            # Iniciamos una transacción.
+            $this->conn->beginTransaction();
+            $stmt->execute();
+            $this->conn->commit();
+            $resultado=true;
+           
+        } catch (PDOException $e) {
+            //$this->conn->rollBack();
+            $res = $stmt->errorInfo();
+            $resultado = json_encode($res);
+        }
+        $stmt->closeCursor();
+
+        echo $resultado;
+
+        return $resultado;
+    }
+
+    public function actualizarRetiroHistortial($fecha, $id, $usuario)
+    {
+
+        $sql = "UPDATE rrhh.historial
+                SET Retiro=:fecha,
+                    usuarioModificado=:usuario
+                WHERE idHistorial=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":fecha", $fecha);
+        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function actualizarRetiro($fecha, $id, $usuario)
+    {
+
+        $sql = "UPDATE rrhh.historialDetalle
+                SET fechaRetiro=:fecha,
+                    usuarioModificado=:usuario
+                WHERE idHistorialDetalle=:id; ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":fecha", $fecha);
         $stmt->bindParam(":usuario", $usuario);
         $stmt->bindParam(":id", $id);
 
