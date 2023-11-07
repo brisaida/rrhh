@@ -550,7 +550,7 @@
 					</div>
 				</div>
 
-				<!-- Documentos -->
+				<!-- Agregar -->
 				<div class="col-12 col-lg-4" id="agregarContent">
 					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
 						<div class="app-card-header p-3 border-bottom-0">

@@ -11,21 +11,22 @@ $(document).ready(function () {
     $("#noHayMotoFront").hide();
     $("#noHayMotoBack").hide();
     $("#noHayPasaporte").hide();
+    
+    setTimeout(function() {
     if ($('#agregarBoton').text().trim() === '') {
-        $('#agregarContent').hide();
-    }
+            $('#agregarContent').hide();
+        } 
+      }, 5000);
+   
 
     $('#agregarBoton').on('click', '#agregarPasaporte', function() {
         $("#editVencimientoPasaporte").click();
-        cargarEmpleado(idRegistro)
     });
     $('#agregarBoton').on('click', '#agregarCarro', function() {
         $("#editVencimientoCarro").click();
-        cargarEmpleado(idRegistro)
     });
     $('#agregarBoton').on('click', '#agregarMoto', function() {
         $("#editVencimientoMoto").click();
-        cargarEmpleado(idRegistro)
     });
 
     $("#editVencimientoCarro").click(function () {
@@ -643,7 +644,7 @@ function cargarEmpleado(id) {
                 let datos = respuesta[0];
 
 
-
+                $("#agregarBoton").html("");
 
                 //*Cargar fotos
                 //*-----------------
@@ -656,14 +657,17 @@ function cargarEmpleado(id) {
                     $("#fotoDescargar").hide();
                 }
                 //*-----------------
+                console.log(datos.vencimientoPasaporte )
                 if (datos.vencimientoPasaporte == '1900-01-01') {
                     $("#pasaporteContent").hide();
-                    $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary " id="agregarPasaporte">Agregar Pasaporte</a></div>');
+                    $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary" id="agregarPasaporte">Agregar Pasaporte</a></div>');
+                    $("#agregarBoton").show();
                 } else {
                     $("#vencimientoPasaporte").text(datos.vencimientoPasaporte)
                     if (datos.pasaporte) {
                         $("#pasaporte").attr("src", "./sections/empleado/archivos/pasaporte/" + datos.pasaporte);
                         $("#pasaporteDescargar").attr("href", "./sections/empleado/archivos/pasaporte/" + datos.pasaporte);
+                        
                     } else {
                         $("#noHayPasaporte").show();
                         $("#pasaporteCambiar").text("Agregar");
@@ -675,6 +679,7 @@ function cargarEmpleado(id) {
                 if (datos.vencimientoLicencia == '1900-01-01') {
                     $("#carroContent").hide();
                     $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary " id="agregarCarro">Agregar Licencia de Carro</a></div>');
+                    $("#agregarBoton").show();
                 } else {
                     $("#vencimientoLicenciaCarro").text(datos.vencimientoLicencia)
                     if (datos.licenciaCarroFront) {
@@ -703,7 +708,7 @@ function cargarEmpleado(id) {
 
                     $("#motoContent").hide();
                     $("#agregarBoton").append('<div class="row mt-2"><a class="btn app-btn-secondary" id="agregarMoto">Agregar Licencia de Moto</a></div>');
-
+                    $("#agregarBoton").show();
                 } else {
 
                     $("#vencimientoLicenciaMoto").text(datos.vencimientoLicenciaMoto)
