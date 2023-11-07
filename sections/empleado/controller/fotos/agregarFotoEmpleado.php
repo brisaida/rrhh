@@ -32,6 +32,7 @@ move_uploaded_file($fileTmpPath, $dest_path);
 // Instanciamos el modelo y llamamos al método correspondiente
 $conexion = new mdlEmpleado();
 $nombres = $conexion->actualizarFoto($nombreArchivo, $idRegistro);
+
 if ($nombres === true) {
     echo json_encode(['ok' => true]);
 } else {

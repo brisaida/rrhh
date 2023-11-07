@@ -819,7 +819,9 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET foto=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
+
+        echo $sql;
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -841,7 +843,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET cv=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -863,7 +865,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET penales=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -885,7 +887,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET policiales=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -907,7 +909,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET pasaporte=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -931,7 +933,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET dniFront=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -952,7 +954,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET dniBack=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -976,7 +978,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET licenciaCarroFront=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -998,7 +1000,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET licenciaCarroBack=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -1022,7 +1024,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET licenciaMotoFront=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);
@@ -1044,7 +1046,7 @@ class mdlEmpleado
 
         $sql = "UPDATE rrhh.adjuntos
                 SET licenciaMotoBack=:foto
-                WHERE idAdjunto=:id; ";
+                WHERE idEmpleado=:id; ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":foto", $foto);

@@ -349,42 +349,12 @@ function cargarHistorialDetalle(id) {
                                 success: function (respuesta) {
 
                                     Swal.fire({
-                                        title: 'Detalles del Empleado',
-                                        html:
-                                          '<select id="proyectos" class="fomr-control proyecto">' +
-        
-                                          '</select>' +
-                                          '<select id="TDRSelect" class="swal2-input">' +
-                                          
-                                          '</select>' +
-                                          '<select id="jefeInmediato" class="swal2-input">' +
-                                         
-                                          '</select>' +
-                                          '<select id="zonaSelect" class="swal2-input">' +
-                                       
-                                          '</select>' +
-                                          '<input id="sitio" type="text" class="swal2-input" placeholder="Sitio">' +
-                                          '<input id="inicioPuesto" type="date" class="swal2-input" placeholder="Inicio en el puesto">' +
-                                          '<input id="salario" type="number" class="swal2-input" placeholder="Salario">',
-                                        focusConfirm: false,
-                                        preConfirm: () => {
-                                          return [
-                                            document.getElementById('proyectos').value,
-                                            document.getElementById('TDRSelect').value,
-                                            document.getElementById('zonaSelect').value,
-                                            document.getElementById('jefeInmediato').value,
-                                            document.getElementById('sitio').value,
-                                            document.getElementById('inicioPuesto').value,
-                                            document.getElementById('salario').value
-                                          ]
-                                        }
-                                      }).then((result) => {
-                                        if (result.value) {
-                                          // Manejo de la información recopilada
-                                          console.log(result.value);
-                                        }
-                                      });
-                                      
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Guardado exitosamente',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                     $("#contenedorDetalle").html(" ");
                                     var id = $("#noIdentidad").attr("idhistorial");
                                     cargarHistorialDetalle(id)
@@ -621,6 +591,9 @@ function agregarHistorial(datos) {
                 showConfirmButton: false,
                 timer: 1500
             })
+            $("#modal").hide();
+            cargarHistorial(datos.idEmpleado);
+
         },
     });
 }
