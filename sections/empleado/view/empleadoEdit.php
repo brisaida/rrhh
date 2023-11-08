@@ -233,6 +233,9 @@
 									<div class="col-md">
 										<div class="item-label"><strong>Centro Médico de Preferencia</strong></div>
 										<div class="item-data" id="centroMedico"></div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+										</div>
 									</div>
 									<div class="col text-center">
 										<a class="btn-sm app-btn-secondary" id="centroMedicoEdit">Modificar</a>
