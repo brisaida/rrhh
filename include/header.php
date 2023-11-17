@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +39,8 @@
 
 <body class="app">
     <header class="app-header fixed-top">
+
+        <!-- NAV BAR -->
         <div class="app-header-inner">
             <div class="container-fluid py-2">
                 <div class="app-header-content">
@@ -52,34 +58,41 @@
                             <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div class="app-utilities col-auto">
+
+                            <!-- Notificaciones -->
                             <div class="app-utility-item app-notifications-dropdown dropdown">
                                 <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
-                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
                                         <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                     </svg>
                                     <span class="icon-badge" id="numeroNorificaciones">0</span>
-                                </a><!--//dropdown-toggle-->
+                                </a>
 
                                 <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                                     <div class="dropdown-menu-header p-3">
                                         <h5 class="dropdown-menu-title mb-0">Notificaciones</h5>
-                                    </div><!--//dropdown-menu-title-->
+                                    </div>
                                     <div class="dropdown-menu-content" id="espacioNotificacion">
+                                    </div>
+                                </div>
+                            </div>
 
-                                    
-                                       
-
-                                    </div><!--//dropdown-menu-content-->
-
-
-                                </div><!--//dropdown-menu-->
-                            </div><!--//app-utility-item-->
+                            <!-- Usuario -->
+                            <div class="app-utility-item app-user-dropdown dropdown">
+                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-id="<?php echo $_SESSION['id'] ?>" data-bs-toggle="dropdown" role="button" aria-expanded="false"><img src="assets/images/user.png" alt="user profile">
+                                    <?php echo $_SESSION['nombreEmpleado'] ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+                                    <li><a class="dropdown-item cursor-pointer" id="miPerfil">Mi Perfil</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item cursor-pointer">Cerrar sesión</a></li>
+                                </ul>
+                            </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
@@ -87,7 +100,6 @@
 
 
         <!--SIDE PANEL-->
-
         <div id="app-sidepanel" class="app-sidepanel">
             <div id="sidepanel-drop" class="sidepanel-drop"></div>
             <div class="sidepanel-inner d-flex flex-column">
@@ -110,7 +122,7 @@
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Inicio</span>
-                            </a><!--//nav-link-->
+                            </a>
                         </li>
 
                         <!--//Empleados-->
@@ -127,16 +139,56 @@
                                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                                     </svg>
                                 </span><!--//submenu-arrow-->
-                            </a><!--//nav-link-->
+                            </a>
                             <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
+                        
                                 <ul class="submenu-list list-unstyled">
-                                    <li class="submenu-item todos"><a class="submenu-link" href="?section=empleado">Perfil de empleado</a></li>
+                                    
+                                    <li class="submenu-item "><a class="submenu-link" href="?section=editar">Perfil de empleado</a></li>
+                                    <?php
+                                        if ($_SESSION['tipoAcceso'] == 1) {
+                                            
+                                            echo '<li class="submenu-item "><a class="submenu-link" href="?section=empleado">Agregar nuevo empleado</a></li>';
+                                            echo "<li class='submenu-item '><a class='submenu-link' href='?section=listadoEmpleados'>Listado de Empleados</a></li>";
+                                            
+                                        }
+                                    ?>
+                               
+                                </ul>
+                            </div>
 
+                        </li>
+                        <li class="nav-item has-submenu ">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+                                <span class="nav-icon">
+                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">Acción de Personal</span>
+                                <span class="submenu-arrow">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </span><!--//submenu-arrow-->
+                            </a><!--//nav-link-->
+                            <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
+                                <ul class="submenu-list list-unstyled">
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=solicitudAccion">Solicitud</a></li>
+                                    <li class="submenu-item"><a class="submenu-link" href="?section=estadoSolicitud">Mis solicitudes</a></li>
+                                    <?php
+                                        if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['accionesPendientes']>0) {
+                                            echo '<li class="submenu-item"><a class="submenu-link" href="?section=aprobarSolicitudes">Arpobar solicitudes</a></li>';
+                                            
+                                        }
+                                    ?>
                                 </ul>
                             </div>
                         </li>
 
-                        
+
 
                     </ul>
                 </nav>

@@ -65,38 +65,39 @@ function listarEmpleados() {
             if (datos.length > 0) {
                 var columns = [
                     {
+                        className:"text-center",
                         mDataProp: "correlativo",
                         width: '5%',
                     },
 
-                    {
-                        mDataProp: "DNI",
-                        width: '15%',
-                        render: function (data, type, full, meta) {
-                            // Aquí puedes acceder al valor de DNI y también al valor de "id de empleado" si lo tienes en tus datos
-                            var dniValue = full.DNI;
-                            var idEmpleado = full.idEmpleado; // Asegúrate de que esta propiedad exista en tus datos
-
-                            // Ahora puedes agregar "id de empleado" como una propiedad de datos personalizada
-                            // Esto te permitirá acceder a ella posteriormente si es necesario
-                            return `
-                                <span data-id-empleado="${idEmpleado}">${dniValue}</span>
-                            `;
-                        },
-
-                    },
+              
                     {
                         mDataProp: "nombreCompleto",
+                        width: '25%',
+                        render: function (data, type, full, meta) {
+                            var nombre = full.nombreCompleto;
+                            var idEmpleado = full.idEmpleado; 
+                            return `
+                                <span data-id-empleado="${idEmpleado}">${capitalizar(nombre)}</span>
+                            `;
+                        },
+                    },
+                    {
+                        mDataProp: "proyecto",
+                        width: '20%',
+                    },
+                    {
+                        mDataProp: "nombrePuesto",
                         width: '30%',
                     },
                     {
                         className: "text-center",
-                        mDataProp: "telefono",
-                        width: '25%',
+                        mDataProp: "telefonoAsignado",
+                        width: '15%',
                     },
                     {
                         className: "text-left",
-                        width: '25%',
+                        width: '5%',
                         render: function (data, types, full, meta) {
                             let menu = `    <center>
                                             <div class="dropdown">
@@ -221,4 +222,12 @@ function cargarTabla(tableID, data, columns) {
     };
 
     $(tableID).DataTable(params);
+}
+
+
+//* Funciones operativas
+function capitalizar(name) {
+    return name.split(' ').map(function (word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
 }

@@ -15,7 +15,7 @@
 						<!-- ---------------------------------- -->
 						<div class="row mt-3">
 							<!-- No. de identidad -->
-							<div class="col-md-3">
+							<div class="col-md">
 								<div>
 									<div class=" mb-3">
 										<label for="noIdentidad">No. de Identidad</label>
@@ -24,7 +24,7 @@
 								</div>
 							</div>
 							<!-- Nombre -->
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<div>
 									<div class=" mb-3">
 										<label for="nombreInput">Nombre</label>
@@ -50,6 +50,7 @@
 									</div>
 								</div>
 							</div>
+
 						</div>
 						<!-- ---------------------------------- -->
 						<div class="row mt-3">
@@ -63,7 +64,7 @@
 								</div>
 							</div>
 							<!-- Vacaciones  -->
-							<div class="col-md">
+							<div class="col-md-2">
 								<div>
 									<label for="vacaciones">Vacaciones</label>
 									<input type="number" min="0" class="form-control text-end" id="vacaciones">
@@ -76,11 +77,16 @@
 									<input type="input" class="form-control text-end" id="telefonoAsignado">
 								</div>
 							</div>
+
 							<!-- Usuario Asignado -->
 							<div class="col-md">
 								<div>
 									<label for="TelefonoEmpresa">Usuario asignado</label>
 									<select class="form-select" id="usuarioAsignado"></select>
+									<div class="form-check form-switch form-check-reverse mt-2">
+										<input class="form-check-input" type="checkbox" id="superUsuario">
+										<label class="form-check-label" for="superUsuario">Super Usuario</label>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -94,7 +100,7 @@
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										
+
 										<!-- ---------------------------------- -->
 										<div class="row mt-3">
 											<div class="col-md align-items-center">
@@ -173,7 +179,7 @@
 											</div>
 
 										</div>
-										
+
 
 
 									</div>
@@ -196,9 +202,21 @@
 							</div>
 						</div>
 
+
+						<div class="row ">
+							<!-- Teléfono Asignado -->
+							<div class="col-md-5">
+								<label for="TelefonoEmpresa">Corrreo Electronico asignado</label>
+								<div class="input-group mb-3">
+									<input type="text" class="form-control text-end" id="emailAsignado">
+								</div>
+							</div>
+						</div>
+
 						<!-- Botón para activar el modal -->
-						<div class="row">
-							<div class="col-md d-flex justify-content-end">
+						<div class="row mt-3 ">
+
+							<div class="col-md d-flex flex-row-reverse">
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modal">
 									Detalle del puesto
 								</button>
@@ -211,15 +229,6 @@
 
 				</div>
 			</div>
-			<!-- <div class="col-auto d-flex justify-content-end">
-				<a class="btn text-primary" id="edicion">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-						<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-					</svg>
-					Editar Empleado
-				</a>
-			</div> -->
-
 
 
 			<div class="h5 pb-2 mt-4 mb-4 text-success border-bottom border-success">

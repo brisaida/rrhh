@@ -40,6 +40,7 @@ $("#guardarBtn").click(function () {
             inicio: $.trim($("#ingreso").val()),
             vacaciones: $.trim($("#vacaciones").val()),
             telefonoAsignado: $.trim($("#telefonoAsignado").val()),
+            emailAsignado: $.trim($("#emailAsignado").val()),
             usuarioAsignado: $.trim($("#usuarioAsignado").val()),
             proyectos: $.trim($("#proyectos").val()),
             idPuesto: value,
@@ -48,7 +49,7 @@ $("#guardarBtn").click(function () {
             sitio: $.trim($("#sitio").val()),
             inicioPuesto: $.trim($("#inicioPuesto").val()),
             salario: $.trim($("#salario").val()),
-            usuario: 1,
+            superUsuario: $(superUsuario).prop('checked'),
         }
         agregarHistorial(historial);
     } else {
@@ -140,6 +141,58 @@ $("#edicion").on("click", function () {
     $("#usuarioAsignado").prop('disabled', false);
 });
 
+$('#superUsuario').click(function(){
+    // Guarda el estado actual del checkbox en una variable
+    var estadoActual = $(this).prop('checked');
+    const location = window.location.search;
+    const elementos = location.split("&");
+
+    idRegistro = parseInt(elementos[1]);
+
+    Swal.fire({
+        title: '¿Estás segura?',
+        text: "¿Quieres cambiar el rol del usuario?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, cambiarlo!',
+        cancelButtonText: 'No, cancelar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: './sections/empleado/controller/modificar/modificarEmpleado.php', 
+                type: 'POST', 
+                data: {
+                    // Tus datos aquí. Por ejemplo, el nuevo estado del checkbox
+                    valor: estadoActual ? 1 : 0,
+                    id: idRegistro,
+                    campo: "superUsuario",
+                    tabla: "historial",
+                    usuario:1
+                },
+                success: function(response) {
+                    Swal.fire(
+                        'Cambiado!',
+                        'El rol del usuario ha sido cambiado.',
+                        'success'
+                    );
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Error!',
+                        'Hubo un problema al cambiar el rol del usuario.',
+                        'error'
+                    );
+                }
+            });
+        } else {
+            // El usuario canceló, revierte el estado del checkbox
+            $('#superUsuario').prop('checked', !estadoActual);
+        }
+    });
+});
+
 
 
 // *Funciones
@@ -198,14 +251,21 @@ function cargarHistorial(id) {
                 $("#ingreso").val(datos.ingreso);
                 $("#vacaciones").val(datos.vacaciones);
                 $("#telefonoAsignado").val(datos.telefonoAsignado);
+                $("#emailAsignado").val(datos.emailAsignado);
                 $("#usuarioAsignado").val(datos.idUsuario);
+                console.log(datos.superUsuario);
+                if(datos.superUsuario==1){
+                    $("#superUsuario").prop('checked', true).change();
+                }
 
                 $("#codigoEmpleado").prop('disabled', true);
                 $("#codigoSAP").prop('disabled', true);
                 $("#ingreso").prop('disabled', true);
                 $("#vacaciones").prop('disabled', true);
                 $("#telefonoAsignado").prop('disabled', true);
+                $("#emailAsignado").prop('disabled', true);
                 $("#usuarioAsignado").prop('disabled', true);
+                //$("#superUsuario").prop('disabled', true);
 
                 if (datos.estado == 0) {
                     $("#edicion").hide();
@@ -249,6 +309,12 @@ function cargarHistorialDetalle(id) {
                                                 <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                             </svg>`;
                 }
+                if (registro.sitio==null || registro.sitio=='') {
+                    registro.sitio="-";
+                }
+                if (registro.salario==null || registro.salario=='') {
+                    registro.salario="-";
+                }
                 var card = `<!-- Datos generales -->
                             <div class="row">
                             <div class="col-lg">
@@ -275,11 +341,11 @@ function cargarHistorialDetalle(id) {
                                             <div class="row justify-content-between align-items-center">
                                                 <div class="col-md">
                                                     <div class="item-label"><strong>Inicio en el puesto</strong></div>
-                                                    <div class="item-data fechaInicio">${registro.fechaInicio}</div>
+                                                    <div class="item-data fechaInicio">${formatearFecha(registro.fechaInicio)}</div>
                                                 </div>
                                                 <div class="col-md">
-                                                    <div class="item-label"><strong>Retiro del puesto</strong></div>
-                                                    <div class="item-data text-start fechaFinal">${registro.fechaRetiro}</div>
+                                                <div class="item-label"><strong>Jefé Inmediato</strong></div>
+                                                    <div class="item-data nombreJefe">${registro.nombreJefe}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -288,7 +354,7 @@ function cargarHistorialDetalle(id) {
                                             <div class="row justify-content-between align-items-center">
                                                 <div class="col-md">
                                                     <div class="item-label"><strong>Zona</strong></div>
-                                                    <div class="item-data text-start nombreZona"> ${registro.zona}</div>
+                                                    <div class="item-data text-start nombreZona"> ${capitalizar(registro.zona)}</div>
                                                 </div>
                                                 <div class="col-md">
                                                     <div class="item-label"><strong>Sitio</strong></div>
@@ -299,10 +365,11 @@ function cargarHistorialDetalle(id) {
                                         <!-- Nacionalidad y Género -->
                                         <div class="item border-bottom py-3">
                                             <div class="row justify-content-between align-items-center">
-                                                <div class="col-md">
-                                                    <div class="item-label"><strong>Jefé Inmediato</strong></div>
-                                                    <div class="item-data nombreJefe">${registro.nombreJefe}</div>
+                                            <div class="col-md">
+                                                    <div class="item-label"><strong>Retiro del puesto</strong></div>
+                                                    <div class="item-data text-start fechaFinal">${registro.fechaRetiro}</div>
                                                 </div>
+                                              
                                                 <div class="col-md">
                                                     <div class="item-label"><strong>Salario</strong></div>
                                                     <div class="item-data salario">${registro.salario}</div>

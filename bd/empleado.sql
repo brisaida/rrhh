@@ -236,6 +236,7 @@ CREATE TABLE rrhh.historial (
 	Retiro DATE NULL,
 	vacaciones INT NULL,
 	telefonoAsignado VARCHAR(50),
+	emailAsignado VARCHAR(80),
 	idUsuario INT NOT NULL,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 	fechaModificado DATETIME NULL,

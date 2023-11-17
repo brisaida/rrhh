@@ -8,13 +8,9 @@
 				<div class="h5 pb-2  text-success border-bottom border-success">
 					<div class="row">
 						<div class="col-md d-flex align-items-center">
-							ACCIÓN DE PERSONAL
+							APROBAR SOLICITUDES
 						</div>
-						<div class="col-md d-flex justify-content-end">
-							<a class="btn app-btn-secondary" href="?section=solicitudAccion">
-								NUEVA SOLICITUD
-							</a>
-						</div>
+						
 					</div>
 				</div>
 
@@ -35,7 +31,8 @@
 									<tr>
 										<th class="cell">No. de Solicitud</th>
 										<th class="cell">Tipo de Solicitud</th>
-										<th class="cell">Fecha de Solicitud</th>
+										<th class="cell">Fecha de retiro</th>
+										<th class="cell">Fecha de reintegro</th>
 										<th class="cell">Estado</th>
 										<th class="cell text-center">Acciones</th>
 									</tr>

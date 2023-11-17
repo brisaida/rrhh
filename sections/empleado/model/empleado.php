@@ -23,14 +23,19 @@ class mdlEmpleado
     public function listarTodo()
     {
 
-        $sql = "    SELECT      ROW_NUMBER() OVER (ORDER BY idEmpleado DESC) AS correlativo,
-                                idEmpleado,DNI, 
-                                CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
-                                fechaCreado,
-                                telefono 
-                        FROM rrhh.empleados 
-                        WHERE estado=1
-                        ORDER BY idEmpleado DESC";
+        $sql = "    SELECT	ROW_NUMBER() OVER (ORDER BY e.idEmpleado DESC) AS correlativo,
+                            e.idEmpleado,codigoEmpleado, 
+                            pro.nombre AS proyecto,
+                            CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido,' ',segundoApellido)as nombreCompleto,
+                            nombrePuesto,
+                            telefonoAsignado
+                    FROM rrhh.empleados e
+                    INNER JOIN rrhh.historial h ON h.idEmpleado=e.idEmpleado
+                    INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
+                    INNER JOIN rrhh.puestos p on p.idPuesto=hd.idTDR
+                    INNER JOIN bosque.proyecto pro on p.idProyecto=pro.id
+                    WHERE e.estado=1
+                    ORDER BY e.idEmpleado DESC";
 
         $stmt = $this->conn->prepare($sql);
 
@@ -190,7 +195,9 @@ class mdlEmpleado
                         telefonoAsignado,
                         idUsuario,
                         empleados.estado,
-						Retiro
+						Retiro,
+                        emailAsignado,
+                        superUsuario
                 FROM rrhh.historial
 
                 INNER JOIN rrhh.empleados ON empleados.idEmpleado=historial.idEmpleado
@@ -219,7 +226,7 @@ class mdlEmpleado
                         hd.idProyecto,
                         p.nombre,
                         hd.idDepartamento,
-                        d.Descripcion,
+                        d.Descripcion zona,
                         sitio,
                         idTDR,
                         tdr.nombrePuesto,
@@ -541,7 +548,7 @@ class mdlEmpleado
         $stmt->bindParam(":estadoCivil", $datosGenerales->estadoCivil);
         $stmt->bindParam(":genero", $datosGenerales->genero);
         $stmt->bindParam(":correo", $datosGenerales->email);
-        $stmt->bindParam(":usuario", $datosGenerales->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":cuentaBancaria", $datosGenerales->cuentaBancaria);
         $stmt->bindParam(":pasaporte", $datosGenerales->pasaporte);
         $stmt->bindParam(":licenciaCarro", $datosGenerales->licenciaCarro);
@@ -566,7 +573,7 @@ class mdlEmpleado
             $stmt->bindParam(":latitud", $datosGenerales->lat);
             $stmt->bindParam(":longitud", $datosGenerales->long);
             $stmt->bindParam(":zona", $datosGenerales->zona);
-            $stmt->bindParam(":usuario", $datosGenerales->usuario);
+            $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
             try {
                 $stmt->execute();
@@ -611,7 +618,7 @@ class mdlEmpleado
                     $stmt->bindParam(":parentesco", $conocidos['parentesco']);
                     $stmt->bindParam(":tiempoConocerlo", $conocidos['tiempoConocerle']);
                     $stmt->bindParam(":empresa", $conocidos['empresa']);
-                    $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                    $stmt->bindParam(":usuario",$_SESSION['usuario']);
 
                     try {
                         $stmt->execute();
@@ -640,7 +647,7 @@ class mdlEmpleado
             $stmt->bindParam(":medico", $datosSalud->medico);
             $stmt->bindParam(":telMedico", $datosSalud->telMedico);
             $stmt->bindParam(":centroMedico", $datosSalud->centroMedico);
-            $stmt->bindParam(":usuario", $datosGenerales->usuario);
+            $stmt->bindParam(":usuario",$_SESSION['usuario']);
 
             try {
                 $stmt->execute();
@@ -664,7 +671,7 @@ class mdlEmpleado
                 $stmt->bindParam(":desde", $educacion['desde']);
                 $stmt->bindParam(":hasta", $educacion['hasta']);
                 $stmt->bindParam(":lugar", $educacion['lugar']);
-                $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
                 try {
                     $stmt->execute();
@@ -687,7 +694,7 @@ class mdlEmpleado
                 $stmt->bindParam(":id", $idEmpleado);
                 $stmt->bindParam(":idioma", $idiomas['idioma']);
                 $stmt->bindParam(":porcentaje", $idiomas['porcentaje']);
-                $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
                 try {
                     $stmt->execute();
@@ -709,7 +716,7 @@ class mdlEmpleado
                 $stmt->bindParam(":horaEntrada", $datosEstudiosActuales->desde);
                 $stmt->bindParam(":horaSalida", $datosEstudiosActuales->hasta);
                 $stmt->bindParam(":finalizacion", $datosEstudiosActuales->fechaFinalizacion);
-                $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
                 try {
                     $stmt->execute();
@@ -739,7 +746,7 @@ class mdlEmpleado
                 $stmt->bindParam(":sueldoFinal", $historial['sueldoFinal']);
                 $stmt->bindParam(":causaRetiro", $historial['causaRetiro']);
                 $stmt->bindParam(":obligaciones", $historial['descripcionPuesto']);
-                $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
                 try {
                     $stmt->execute();
@@ -761,7 +768,7 @@ class mdlEmpleado
                 $stmt->bindParam(":profesion", $referencias['profesion']);
                 $stmt->bindParam(":direccion", $referencias['direccion']);
                 $stmt->bindParam(":telefono", $referencias['telefono']);
-                $stmt->bindParam(":usuario", $datosGenerales->usuario);
+                $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
                 try {
                     $stmt->execute();
@@ -778,7 +785,7 @@ class mdlEmpleado
                     VALUES (:id,:usuario)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":id", $idEmpleado);
-            $stmt->bindParam(":usuario", $datosGenerales->usuario);
+            $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
             try {
                 $stmt->execute();
@@ -1078,7 +1085,7 @@ class mdlEmpleado
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":valor", $valor);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {
@@ -1101,7 +1108,7 @@ class mdlEmpleado
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":valor", $valor);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {
@@ -1127,7 +1134,7 @@ class mdlEmpleado
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":valor", $valor);
         $stmt->bindParam(":valor2", $valor2);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {
@@ -1152,7 +1159,7 @@ class mdlEmpleado
         $stmt->bindParam(":fechaNacimiento", $dato->fecha);
         $stmt->bindParam(":direccion", $dato->dir);
         $stmt->bindParam(":telefono", $dato->tel);
-        $stmt->bindParam(":usuario", $dato->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
 
         try {
@@ -1180,7 +1187,7 @@ class mdlEmpleado
         $stmt->bindParam(":horaEntrada", $dato->horario1);
         $stmt->bindParam(":horaSalida", $dato->horario2);
         $stmt->bindParam(":finalizacion", $dato->finalizacion);
-        $stmt->bindParam(":usuario", $dato->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
 
         try {
@@ -1205,7 +1212,7 @@ class mdlEmpleado
         $stmt->bindParam(":id", $dato->idEmpleado);
         $stmt->bindParam(":idioma",  $dato->idioma);
         $stmt->bindParam(":porcentaje",  $dato->porcentaje);
-        $stmt->bindParam(":usuario",  $dato->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
 
         try {
@@ -1234,7 +1241,7 @@ class mdlEmpleado
         $stmt->bindParam(":desde", $dato->desde);
         $stmt->bindParam(":hasta", $dato->hasta);
         $stmt->bindParam(":lugar", $dato->lugar);
-        $stmt->bindParam(":usuario", $dato->usuario);
+        $stmt->bindParam(":usuario",$_SESSION['usuario']);
 
 
         try {
@@ -1268,7 +1275,7 @@ class mdlEmpleado
         $stmt->bindParam(":latitud", $dato->lat);
         $stmt->bindParam(":longitud", $dato->long);
         $stmt->bindParam(":zona", $dato->zona);
-        $stmt->bindParam(":usuario", $dato->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
 
         try {
@@ -1292,7 +1299,6 @@ class mdlEmpleado
     //* ELIMINAR
     public function eliminarRegistro($tabla, $id, $campo)
     {
-        $usuario = 1;
         $sql = "UPDATE rrhh." . $tabla . "
                 SET     estado=0,          
                         fechaModificado = getdate(),
@@ -1301,7 +1307,7 @@ class mdlEmpleado
         echo $sql;
         echo $id;
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {
@@ -1320,8 +1326,8 @@ class mdlEmpleado
     public function agregarHistorial($datos)
     {
 
-        $sql = "INSERT INTO rrhh.historial(idEmpleado,codigoEmpleado,codigoSAP,ingreso,vacaciones,telefonoAsignado,idUsuario,usuarioCreado)
-          VALUES(:idEmpleado,:codigoEmpleado,:codigoSAP,:ingreso,:vacaciones,:telefonoAsignado,:idUsuario,:usuario)";
+        $sql = "INSERT INTO rrhh.historial(idEmpleado,codigoEmpleado,codigoSAP,ingreso,vacaciones,telefonoAsignado,idUsuario,usuarioCreado,emailAsignado)
+          VALUES(:idEmpleado,:codigoEmpleado,:codigoSAP,:ingreso,:vacaciones,:telefonoAsignado,:idUsuario,:usuario,:email)";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":idEmpleado", $datos->idEmpleado);
@@ -1331,7 +1337,8 @@ class mdlEmpleado
         $stmt->bindParam(":vacaciones", $datos->vacaciones);
         $stmt->bindParam(":telefonoAsignado", $datos->telefonoAsignado);
         $stmt->bindParam(":idUsuario", $datos->usuarioAsignado);
-        $stmt->bindParam(":usuario", $datos->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
+        $stmt->bindParam(":email", $datos->emailAsignado);
 
         try {
             # Iniciamos una transacción.
@@ -1343,8 +1350,8 @@ class mdlEmpleado
             $idHistorial = $this->conn->lastInsertId();
 
             # Agregamos la dirección
-            $sqlDireccion = "INSERT INTO rrhh.historialDetalle(idHistorial,fechaInicio,idProyecto,idDepartamento,sitio,idTDR,salario,usuarioCreado,idJefe) 
-                                VALUES(:id,:fechaInicio,:idProyecto,:idDepartamento,:sitio,:idDTR,:salario,:usuario,:jefe);";
+            $sqlDireccion = "INSERT INTO rrhh.historialDetalle(idHistorial,fechaInicio,idProyecto,idDepartamento,sitio,idTDR,salario,usuarioCreado,idJefe,superUsuario) 
+                                VALUES(:id,:fechaInicio,:idProyecto,:idDepartamento,:sitio,:idDTR,:salario,:usuario,:jefe,:superUsuario);";
 
             $stmt = $this->conn->prepare($sqlDireccion);
             $stmt->bindParam(":id", $idHistorial);
@@ -1354,8 +1361,9 @@ class mdlEmpleado
             $stmt->bindParam(":sitio", $datos->sitio);
             $stmt->bindParam(":idDTR", $datos->idPuesto);
             $stmt->bindParam(":salario", $datos->salario);
-            $stmt->bindParam(":usuario", $datos->usuario);
+            $stmt->bindParam(":usuario", $_SESSION['usuario']);
             $stmt->bindParam(":jefe", $datos->jefeInmediato);
+            $stmt->bindParam(":superUsuario", $datos->superUsario);
 
             try {
                 $stmt->execute();
@@ -1392,7 +1400,7 @@ class mdlEmpleado
         $stmt->bindParam(":idTDR", $datos->idTDR);
         $stmt->bindParam(":salario", $datos->salario);
         $stmt->bindParam(":idJefe", $datos->idJefe);
-        $stmt->bindParam(":usuario", $datos->usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
 
         try {
             # Iniciamos una transacción.
@@ -1423,7 +1431,7 @@ class mdlEmpleado
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":fecha", $fecha);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario",$_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {
@@ -1445,7 +1453,7 @@ class mdlEmpleado
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":fecha", $fecha);
-        $stmt->bindParam(":usuario", $usuario);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         $stmt->bindParam(":id", $id);
 
         try {

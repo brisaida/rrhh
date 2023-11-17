@@ -1,7 +1,12 @@
 $(document).ready(function () {
-	$(".admin").hide();
 	cargarCumples();
+
+	$("#miPerfil").click(function(){
+		window.location.href = `?section=editar`
+	}); 
+	
 });
+
 
 function cargarCumples() {
 	$.ajax({
@@ -72,8 +77,6 @@ function cargarCumples() {
 		},
 	});
 }
-
-
 
 function capitalizarNombre(nombre) {
 	return nombre

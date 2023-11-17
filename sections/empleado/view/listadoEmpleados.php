@@ -58,10 +58,11 @@
 							<table class="table mb-3 text-left  " id="ListadoEmpleadoTabla">
 								<thead>
 									<tr>
-										<th class="cell">No.</th>
-										<th class="cell">No. de Identidad</th>
-										<th class="cell">Nombre</th>
-										<th class="cell">No de Teléfono</th>
+										<th class="cell text-center">No.</th>
+										<th class="cell text-center">Nombre</th>
+										<th class="cell text-center">Proyecto</th>
+										<th class="cell text-center">Cargo</th>
+										<th class="cell text-center">No de Teléfono</th>
 										<th class="cell text-center">Acciones</th>
 									</tr>
 

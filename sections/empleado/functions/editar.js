@@ -1,41 +1,37 @@
 $(document).ready(function () {
-    usuario = 1;
-    const location = window.location.search;
-    const elementos = location.split("&");
-    if (elementos.length > 1) {
-        const idRegistro = parseInt(elementos[1]);
+    var usuario = 1;
 
-        editar = true;
+    var idRegistro=ID();
+    console.log(idRegistro);
+    editar = true;
 
-        $('.no-editable').attr('disabled');
-        $('#revisarBtn').hide();
-        $('.adjuntos').show();
-        $('.esconder').hide();
-        $('.ocultar').hide();
-        $('#nuevaDireccion').hide();
-        $('#lat').hide();
-        $('#long').hide();
-        cargarEmpleado(idRegistro);
-        cargarHistoriaFamiliar(idRegistro)
-        cargaInfoSalud(idRegistro)
-        cargarEducacion(idRegistro)
-        cargarIdiomas(idRegistro)
-        cargarEstudiosActuales(idRegistro)
-        cargarAntecedentes(idRegistro) 
-    }
+    $('.no-editable').attr('disabled');
+    $('#revisarBtn').hide();
+    $('.adjuntos').show();
+    $('.esconder').hide();
+    $('.ocultar').hide();
+    $('#nuevaDireccion').hide();
+    $('#lat').hide();
+    $('#long').hide();
+    cargarEmpleado(idRegistro);
+    cargarHistoriaFamiliar(idRegistro)
+    cargaInfoSalud(idRegistro)
+    cargarEducacion(idRegistro)
+    cargarIdiomas(idRegistro)
+    cargarEstudiosActuales(idRegistro)
+    cargarAntecedentes(idRegistro)
+
 
 
     //* Llamados a la modificación de datos (Botones de modificar)
     $("#adjuntosPage").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
-        window.location.href = `?section=editarAdjuntos&${idRegistro}`
+
+        window.location.href = `?section=editarAdjuntos`
     });
     $("#telefonoEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Ingrese número de teléfono',
             input: 'text',
@@ -84,9 +80,9 @@ $(document).ready(function () {
         });
     });
     $("#emailEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Ingrese correo eléctronico',
             input: 'text',
@@ -136,9 +132,9 @@ $(document).ready(function () {
         });
     });
     $("#estadoCivilEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Seleccione Estado Civil',
             input: 'select',
@@ -194,9 +190,9 @@ $(document).ready(function () {
         });
     });
     $("#centroMedicoEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Ingrese el centro médico de preferencia',
             input: 'text',
@@ -245,9 +241,9 @@ $(document).ready(function () {
         });
     });
     $("#emergenciasEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Información Médico',
             html: `<input type="input" id="contacto" class="swal2-input" placeholder="Médico de cabezera">
@@ -291,9 +287,9 @@ $(document).ready(function () {
 
     });
     $("#emergencias2Edit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Información Médico',
             html: `<input type="input" id="contacto" class="swal2-input" placeholder="Médico de cabezera">
@@ -337,9 +333,9 @@ $(document).ready(function () {
 
     });
     $("#medicoEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Información Médico',
             html: `<input type="input" id="medico" class="swal2-input" placeholder="Médico de cabezera">
@@ -383,9 +379,9 @@ $(document).ready(function () {
 
     });
     $("#enfermedadesEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Información Médico',
             html: `<input type="input" id="enfermedades" class="swal2-input" placeholder="Enfermedades de base">`,
@@ -424,9 +420,9 @@ $(document).ready(function () {
 
     });
     $("#direccionEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: '¿Está seguro de cambiar la dirección?',
             showDenyButton: true,
@@ -477,9 +473,9 @@ $(document).ready(function () {
 
     });
     $("#educacionEdit").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Información Académica',
             html: `
@@ -574,9 +570,9 @@ $(document).ready(function () {
         $('.ocultar').show();
     });
     $("#guardarFamiliar").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         let datos = {
             parentesco: $('#parentesco').val(),
             nombre: $('#nombre').val(),
@@ -602,9 +598,9 @@ $(document).ready(function () {
     $('#idiomasTabla tbody').on("click", ".edit", function () {
         var data = $(this).closest("tr").data("id");
 
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
 
         Swal.fire({
             title: 'Ingrese nivel 1-100',
@@ -659,9 +655,9 @@ $(document).ready(function () {
     });
 
     $("#agregarIdioma").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         Swal.fire({
             title: 'Agregar Idioma',
             html: `<input type="input" id="idioma" class="swal2-input" placeholder="Idioma">
@@ -711,9 +707,9 @@ $(document).ready(function () {
     });
 
     $("#guardarEstudios").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+
+
+        var idRegistro=ID();
         let datos = {
             titulo: $('#titulo').val(),
             horario1: $('#hora1').val(),
@@ -1291,7 +1287,7 @@ function eliminarRegistro(id, tabla, campo, marca) {
                 });
             },
             success: function (respuesta) {
-    
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -1303,12 +1299,12 @@ function eliminarRegistro(id, tabla, campo, marca) {
                 cargarHistoriaFamiliar(datos.idEmpleado)
                 $('#actual').hide();
                 $('#noHayEstudios').show();
-    
-    
+
+
             },
         });
-        
-        
+
+
     } else {
         Swal.fire({
             title: '¿Estás seguro?',
@@ -1335,9 +1331,9 @@ function eliminarRegistro(id, tabla, campo, marca) {
                             'El registro ha sido eliminado.',
                             'success'
                         );
-                        const location = window.location.search;
-                        const elementos = location.split("&");
-                        const idRegistro = parseInt(elementos[1]);
+
+
+                        var idRegistro=ID();
                         if (tabla == 'historiaFamiliar') {
 
                             cargarHistoriaFamiliar(idRegistro)
@@ -1432,6 +1428,18 @@ function calcularEdad(fecha) {
         edad--;
     }
     return edad;
+}
+
+function ID(){
+    var idRegistro;
+    const location = window.location.search;
+    const elementos = location.split("&");
+    if (parseInt(elementos[1])) {
+        idRegistro = parseInt(elementos[1]);
+    } else {
+        idRegistro = $("#user-dropdown-toggle").data('id');
+    }
+    return idRegistro
 }
 
 

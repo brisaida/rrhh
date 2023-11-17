@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    const location = window.location.search;
-    const elementos = location.split("&");
-    const idRegistro = parseInt(elementos[1]);
+    
+    
+    const idRegistro = $("#user-dropdown-toggle").data('id');
     cargarEmpleado(idRegistro)
     $("#noHayFoto").hide();
     $("#noHayIdFront").hide();
@@ -30,9 +30,9 @@ $(document).ready(function () {
     });
 
     $("#editVencimientoCarro").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+        
+        
+        const idRegistro = $("#user-dropdown-toggle").data('id');
         Swal.fire({
             title: 'Ingrese fecha de vencimiento',
             input: 'date',
@@ -82,9 +82,9 @@ $(document).ready(function () {
         });
     });
     $("#editVencimientoMoto").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+        
+        
+        const idRegistro = $("#user-dropdown-toggle").data('id');
         Swal.fire({
             title: 'Ingrese fecha de vencimiento',
             input: 'date',
@@ -134,9 +134,9 @@ $(document).ready(function () {
         });
     });
     $("#editVencimientoPasaporte").click(function () {
-        const location = window.location.search;
-        const elementos = location.split("&");
-        const idRegistro = parseInt(elementos[1]);
+        
+        
+        const idRegistro = $("#user-dropdown-toggle").data('id');
         Swal.fire({
             title: 'Ingrese fecha de vencimiento',
             input: 'date',
@@ -190,10 +190,8 @@ $(document).ready(function () {
 
 
 $("#perfilPage").click(function () {
-    const location = window.location.search;
-    const elementos = location.split("&");
-    const idRegistro = parseInt(elementos[1]);
-    window.location.href = `?section=editar&${idRegistro}`
+    
+    window.location.href = `?section=editar`
 
 });
 
@@ -219,9 +217,9 @@ $('#fotoFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFoto(idRegistro);
                 }
             });
@@ -254,9 +252,9 @@ $('#idFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFotoId(idRegistro);
                 }
             });
@@ -290,9 +288,9 @@ $('#idBackFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFotoIdBack(idRegistro);
                 }
             });
@@ -326,9 +324,9 @@ $('#carroFrontFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFotoFrontCarro(idRegistro);
                 }
             });
@@ -362,9 +360,9 @@ $('#carroBacktFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFotoCarroBack(idRegistro);
                 }
             });
@@ -398,9 +396,9 @@ $('#motoFrontFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarMotoFront(idRegistro);
                 }
             });
@@ -434,9 +432,9 @@ $('#motoBackFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarMotoBack(idRegistro);
                 }
             });
@@ -469,9 +467,9 @@ $('#pasaporteFileInput').change(function () {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const location = window.location.search;
-                    const elementos = location.split("&");
-                    const idRegistro = parseInt(elementos[1]);
+                    
+                    
+                    const idRegistro = $("#user-dropdown-toggle").data('id');
                     guardarFotoPasaporte(idRegistro);
                 }
             });
@@ -504,9 +502,9 @@ $(document).on('change', '#cvFileInput', function () {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                const location = window.location.search;
-                const elementos = location.split("&");
-                const idRegistro = parseInt(elementos[1]);
+                
+                
+                const idRegistro = $("#user-dropdown-toggle").data('id');
                 guardarCV(idRegistro);
             }
         });
@@ -535,9 +533,9 @@ $(document).on('change', '#penFileInput', function () {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                const location = window.location.search;
-                const elementos = location.split("&");
-                const idRegistro = parseInt(elementos[1]);
+                
+                
+                const idRegistro = $("#user-dropdown-toggle").data('id');
                 guardarPen(idRegistro);
             }
         });
@@ -566,9 +564,9 @@ $(document).on('change', '#polFileInput', function () {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                const location = window.location.search;
-                const elementos = location.split("&");
-                const idRegistro = parseInt(elementos[1]);
+                
+                
+                const idRegistro = $("#user-dropdown-toggle").data('id');
                 guardarPol(idRegistro);
             }
         });

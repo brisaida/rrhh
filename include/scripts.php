@@ -75,7 +75,19 @@
 			echo '<script src="./sections/empleado/functions/historial.js"></script>';
 		}
 
-		/* Mantenimientos */ else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
+		/*Acción de personal */
+		else if ($_GET['section'] == 'solicitudAccion' || $_GET['section'] == 'solicitudAccion') {
+			echo '<script src="./sections/accionPersonal/functions/solicitudAccion.js"></script>';
+		}
+		else if ($_GET['section'] == 'estadoSolicitud' || $_GET['section'] == 'estadoSolicitud') {
+			echo '<script src="./sections/accionPersonal/functions/listadoSolicitudes.js"></script>';
+		}
+		else if ($_GET['section'] == 'aprobarSolicitudes' || $_GET['section'] == 'aprobarSolicitudes') {
+			echo '<script src="./sections/accionPersonal/functions/solicitudesPorAprobar.js"></script>';
+		}
+
+		/* Mantenimientos */ 
+		else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {
 			echo '<script src="./sections/empleado/functions/config.js"></script>';
 		} else if ($_GET['section'] == 'profesion' || $_GET['section'] == 'profesion') {
 			echo '<script src="./sections/empleado/functions/profesion.js"></script>';
