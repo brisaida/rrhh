@@ -326,17 +326,19 @@
         }
 
         function validarUsuarioSIMFCO($id){
-            $sql1 ="            SELECT	e.idEmpleado as id,
-                                        CONCAT(e.primerNombre,' ',e.primerApellido) AS nombreEmpleado,
-                                        h.codigoEmpleado,
-                                        e.telefono,
-                                        h.idUsuario,
-                                        h.superUsuario AS tipoAcceso,
-                                        u.accesoUsuario AS username
-                                FROM rrhh.empleados e
-                                LEFT JOIN rrhh.historial h on e.idEmpleado=h.idEmpleado
-                                LEFT JOIN seguridad.tblUsuarios u on u.idUsuario=h.idUsuario
-                                WHERE h.idUsuario=:id";
+            $sql1 ="SELECT	e.idEmpleado as id,
+                            CONCAT(e.primerNombre,' ',e.primerApellido) AS nombreEmpleado,
+                            h.codigoEmpleado,
+                            e.telefono,
+                            h.idUsuario,
+                            h.superUsuario AS tipoAcceso,
+                            u.accesoUsuario AS username,
+                            hd.manejaPersonal
+                    FROM rrhh.empleados e
+                    LEFT JOIN rrhh.historial h on e.idEmpleado=h.idEmpleado
+                    LEFT JOIN rrhh.historialDetalle hd on hd.idHistorial=h.idHistorial
+                    LEFT JOIN seguridad.tblUsuarios u on u.idUsuario=h.idUsuario
+                    WHERE h.idUsuario=:id";
             $stmt = $this->conn->prepare($sql1);
             $stmt->bindParam(":id", $id);          
 
@@ -359,8 +361,6 @@
 
             if($result){
                 foreach ($result as $usu) {              
-			
-                   
                         session_start();					
                         $_SESSION['id']=$usu['id'];
                         $_SESSION['username']=$usu['username'];
@@ -368,9 +368,9 @@
                         $_SESSION['telefono']=$usu['telefono'];
                         $_SESSION['Cargo']=$usu['Cargo'];
                         $_SESSION['tipoAcceso']=$usu['tipoAcceso'];		
+                        $_SESSION['manejaPersonal']=$usu['manejaPersonal'];		
                         $_SESSION['usuario']=$usu['id'];			
-                        $_SESSION['codigoEmpleado']=$usu['codigoEmpleado'];			
-                        $_SESSION['accionesPendientes']=$usu['accionesPendientes'];			
+                        $_SESSION['codigoEmpleado']=$usu['codigoEmpleado'];					
                    
                     
                 }

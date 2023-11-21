@@ -140,22 +140,27 @@ class mdlAccion
         return $resultado;
     }
 
-    public function cargasMisSolicitudesPorAprobar($id)
+    public function cargasMisSolicitudesPorAprobar($id,$estado)
     {
-        $sql = "SELECT	CONCAT(primerApellido,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
+        $sql = "SELECT	CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
                         idAccionPersonal,
                         fechaSolicitud,
                         cantidadDias,
                         desde,
-                        hasta
+                        hasta,
+                        ta.accion,
+                        a.estado,
+                        e.idEmpleado
                 FROM rrhh.accionPersonal a
                 INNER JOIN rrhh.empleados e on e.idEmpleado=a.idEmpleado
                 INNER JOIN rrhh.historial h on h.idEmpleado=e.idEmpleado
                 INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
-                WHERE idJefe=:id AND a.estado=1";
+                INNER JOIN rrhh.tipoAccion ta ON ta.idAccion=a.tipoAccion
+                WHERE idJefe=:id AND a.estado=:estado";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
         try {
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -183,5 +188,64 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+
+    public function cambiarEstado($id,$estado,$comentarios)
+    {
+        $sql = "UPDATE rrhh.accionPersonal
+                SET estado=:estado,
+                    ComentariosN1=:comentarios,
+                    AprobadoN1=:usuario
+                WHERE idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":usuario",$_SESSION['usuario']);
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function cargarSolicitudesPorId($id)
+    {
+        $sql = "SELECT	idAccionPersonal,
+                        fechaSolicitud,
+                        tipoAccion,
+                        tp.accion,
+                        cantidadDias,
+                        comentarios,
+                        desde,
+                        hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.idEmpleado) as empleado,
+                        ap.fechaCreado,
+                        ap.usuarioCreado,
+                        AprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.AprobadoN1) as jefeInmediato,
+                        AprobadoN2,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.AprobadoN2) as RHHH
+                FROM rrhh.accionPersonal ap
+                INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                WHERE ap.idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
     
 }

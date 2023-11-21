@@ -146,7 +146,7 @@ session_start();
                                     
                                     <li class="submenu-item "><a class="submenu-link" href="?section=editar">Perfil de empleado</a></li>
                                     <?php
-                                        if ($_SESSION['tipoAcceso'] == 1) {
+                                        if ($_SESSION['tipoAcceso'] == 1 ) {
                                             
                                             echo '<li class="submenu-item "><a class="submenu-link" href="?section=empleado">Agregar nuevo empleado</a></li>';
                                             echo "<li class='submenu-item '><a class='submenu-link' href='?section=listadoEmpleados'>Listado de Empleados</a></li>";
@@ -179,7 +179,7 @@ session_start();
                                     <li class="submenu-item"><a class="submenu-link" href="?section=solicitudAccion">Solicitud</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="?section=estadoSolicitud">Mis solicitudes</a></li>
                                     <?php
-                                        if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['accionesPendientes']>0) {
+                                        if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['manejaPersonal'] == 1) {
                                             echo '<li class="submenu-item"><a class="submenu-link" href="?section=aprobarSolicitudes">Arpobar solicitudes</a></li>';
                                             
                                         }

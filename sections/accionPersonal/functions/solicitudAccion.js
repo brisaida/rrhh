@@ -8,6 +8,18 @@ $(document).ready(function () {
 
     cargarEncabezado(idRegistro)
     cargarTipoAccion()
+
+
+    // Evento cuando cambia el valor de "desde" o "reanuda"
+    $('#desde, #reanuda').change(function () {
+        var desde = $('#desde').val();
+        var reanuda = $('#reanuda').val();
+
+        if (desde && reanuda) {
+            var diasHabiles = calcularDiasHabiles(desde, reanuda);
+            $("#diasTomar").val(diasHabiles);
+        }
+    });
 });
 
 
@@ -33,8 +45,20 @@ $("#guardarBtn").click(function () {
         correoJefe: $("#jefe").attr('emailjefe'),
     }
 
-    guardarAccion(accion)
-    //console.log(accion)
+    if (accion.tipo == '' ||
+        accion.desde == '' ||
+        accion.hasta == '' ||
+        accion.comentarios == '') {
+        Swal.fire({
+            title: "Acción de personal",
+            icon: "error",
+            text: `!Ups! Parece que falta información.`,
+            confirmButtonColor: "#3085d6",
+        });
+    } else {
+        guardarAccion(accion)
+        //console.log(accion)
+    }
 });
 
 
@@ -64,13 +88,13 @@ function cargarEncabezado(id) {
             if (respuesta.length > 0) {
                 $("#codigo").text(datos.codigoEmpleado);
                 $("#nombreCompleto").text(capitalizar(datos.nombreCompleto));
-                $("#nombreCompleto").attr('email',datos.correo);
+                $("#nombreCompleto").attr('email', datos.correo);
                 $("#ingreso").text(formatearFecha(datos.ingreso));
                 $("#cargo").text(datos.nombrePuesto);
                 $("#zona").text(capitalizar(datos.Descripcion));
                 $("#proyecto").text(datos.proyecto);
                 $("#jefe").text(capitalizar(datos.jefe));
-                $("#jefe").attr('emailJefe',(datos.emailJefe));
+                $("#jefe").attr('emailJefe', (datos.emailJefe));
 
 
 
@@ -171,3 +195,21 @@ function capitalizar(name) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
 }
+
+
+function calcularDiasHabiles(desde, reanuda) {
+    var start = moment(desde);
+    var end = moment(reanuda);
+    var weekdays = [1, 2, 3, 4, 5]; // Lunes a Viernes
+
+    var days = 0;
+    while (start.isBefore(end)) {
+        if (weekdays.indexOf(start.day()) !== -1) {
+            days++;
+        }
+        start.add(1, 'days');
+    }
+
+    return days;
+}
+

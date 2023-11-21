@@ -41,3 +41,18 @@ CREATE TABLE rrhh.tipoAccion (
 	usuarioModificado VARCHAR(100) NULL
 );
 GO
+
+
+CREATE TABLE rrhh.infoVacaciones (
+	id INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_idTablaVacaciones_id
+		PRIMARY KEY CLUSTERED (id),
+	tiempoAnio int NOT NULL,
+	vacaciones int NOT NULL,
+GO
+
+INSERT INTO rrhh.infoVacaciones (tiempoAnio, vacaciones) VALUES (1, 10);
+INSERT INTO rrhh.infoVacaciones (tiempoAnio, vacaciones) VALUES (2, 12);
+INSERT INTO rrhh.infoVacaciones (tiempoAnio, vacaciones) VALUES (3, 15);
+INSERT INTO rrhh.infoVacaciones (tiempoAnio, vacaciones) VALUES (4, 20);
+

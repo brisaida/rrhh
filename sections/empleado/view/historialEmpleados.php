@@ -83,6 +83,7 @@
 								<div>
 									<label for="TelefonoEmpresa">Usuario asignado</label>
 									<select class="form-select" id="usuarioAsignado"></select>
+
 									<div class="form-check form-switch form-check-reverse mt-2">
 										<input class="form-check-input" type="checkbox" id="superUsuario">
 										<label class="form-check-label" for="superUsuario">Super Usuario</label>
@@ -121,6 +122,10 @@
 														<select class="form-control" id="TDRSelect">
 
 														</select>
+														<div class="form-check form-switch form-check-reverse mt-2">
+															<input class="form-check-input" type="checkbox" id="superUsuario">
+															<label class="form-check-label" for="superUsuario">Maneja Personal</label>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -210,7 +215,9 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control text-end" id="emailAsignado">
 								</div>
+								
 							</div>
+
 						</div>
 
 						<!-- Botón para activar el modal -->

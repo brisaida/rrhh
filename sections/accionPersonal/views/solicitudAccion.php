@@ -87,11 +87,6 @@
 											</select>
 										</div>
 									</div>
-									<!-- Días a tomar -->
-									<div class="col-md-2">
-										<label for="diasTomar">Días a tomar</label>
-										<input type="number" class="form-control " id="diasTomar">
-									</div>
 									<!-- Rige desde -->
 									<div class="col-md">
 										<div class=" mb-3">
@@ -105,6 +100,11 @@
 											<label for="reanuda">Reanuda</label>
 											<input type="datetime-local" class="form-control " id="reanuda">
 										</div>
+									</div>
+									<!-- Días a tomar -->
+									<div class="col-md-2">
+										<label for="diasTomar">Días a tomar</label>
+										<input type="number" class="form-control " id="diasTomar">
 									</div>
 								</div>
 								<!-- ------------------------------------ -->
