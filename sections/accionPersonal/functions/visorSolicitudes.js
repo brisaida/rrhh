@@ -8,11 +8,9 @@ $(document).ready(function () {
         "pageLength": 25,
     });
     const idRegistro = $("#user-dropdown-toggle").data('id');
-
     //*MOSTRAR SOLICITUDES PENDIENTES
-    listarMisSolicitudPorAprobar(idRegistro, 1)
-
-
+    VerSolicitudes(idRegistro)
+   
 });
 
 //*ACCIONES DE LA TABLA
@@ -25,131 +23,14 @@ $('#solicitudes').on("click", ".btn-imprimir", function () {
     );
 });
 
-$('#solicitudes').on('click', '.aprobar', function () {
-    accionSeleccionada.id = $(this).data('id');
-    accionSeleccionada.estado = 2; // Estado para "aprobado"
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¿Quieres aprobar esta acción de personal?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, aprobar',
-        cancelButtonText: 'No',
-        input: 'textarea',
-        inputPlaceholder: 'Escribe tus comentarios aquí...',
-        inputAttributes: {
-            'aria-label': 'Escribe tus comentarios aquí'
-        }
-    }).then((result) => {
-        console.log('Accion ID:', accionSeleccionada.id, 'Estado:', accionSeleccionada.estado, 'Comentarios:', result.value);
-
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: "POST",
-                url: "./sections/accionPersonal/controller/cambiarEstado.php",
-                data: {
-                    id: accionSeleccionada.id,
-                    estado: accionSeleccionada.estado,
-                    comentarios: result.value
-                },
-                success: function (response) {
-                    var rowToRemove = $('#solicitudes').find('tr[data-id="' + accionSeleccionada.id + '"]');
-    
-                    console.log('Row to Remove:', rowToRemove);
-                
-                    rowToRemove.remove();
-
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Aprobado correctamente.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setTimeout(function() { 
-                        location.reload();
-                    }, 1500);
-                    
-                },
-                error: function (error) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "Parece que algo esta mal.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            });
-        }
-    });
-});
-
-$('#solicitudes').on('click', '.rechazar', function () {
-    accionSeleccionada.id = $(this).data('id');
-    accionSeleccionada.estado = 4; // Estado para "aprobado"
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¿Quieres cancelar esta acción de personal?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, cancelar',
-        cancelButtonText: 'No',
-        input: 'textarea',
-        inputPlaceholder: 'Escribe tus comentarios aquí...',
-        inputAttributes: {
-            'aria-label': 'Escribe tus comentarios aquí'
-        }
-    }).then((result) => {
-        console.log('Accion ID:', accionSeleccionada.id, 'Estado:', accionSeleccionada.estado, 'Comentarios:', result.value);
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: "POST",
-                url: "./sections/accionPersonal/controller/cambiarEstado.php",
-                data: {
-                    id: accionSeleccionada.id,
-                    estado: accionSeleccionada.estado,
-                    comentarios: result.value
-                },
-                success: function (response) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Aprobado correctamente.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                },
-                error: function (error) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "Parece que algo esta mal.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            });
-        }
-    });
-
-});
-
 
 //*LLENAR TABLAS
-function listarMisSolicitudPorAprobar(id, estado) {
+function VerSolicitudes(id) {
     $.ajax({
         type: "POST",
-        url: "./sections/accionPersonal/controller/cargarMisSolicitudesPorAprobar.php",
+        url: "./sections/accionPersonal/controller/visorSolicitudes.php",
         data: {
             id: id,
-            estado: estado,
         },
         error: function (error) {
             Swal.fire({
@@ -235,15 +116,15 @@ function listarMisSolicitudPorAprobar(id, estado) {
                                     break;
                                 case '2': estado = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check text-info" viewBox="0 0 16 16">
                                                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                                    </svg>Aprobado por Jefé inmediato`;
+                                                    </svg><span class="text-info">Aprobado por Jefe Inmediato<span>`;
                                     break;
                                 case '3': estado = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-all text-success" viewBox="0 0 16 16">
                                                         <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
-                                                    </svg>Aprobado por Recursos Humanos`;
+                                                    </svg><span class="text-success">Aprobado por RRHH<span>`;
                                     break;
-                                case '4': estado = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x text-warning" viewBox="0 0 16 16">
+                                case '4': estado = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>Cancelado`;
+                                                    </svg><span class="text-danger">Cancelado<span>`;
                                     break;
                             }
 
@@ -254,7 +135,19 @@ function listarMisSolicitudPorAprobar(id, estado) {
                         className: "text-left",
                         width: '5%',
                         render: function (data, types, full, meta) {
-                           
+                            var fechaActual = new Date();
+
+                            // Formatea la fecha manualmente (puedes ajustar el formato según tus necesidades)
+                            var dia = fechaActual.getDate();
+                            var mes = fechaActual.getMonth() + 1; // Los meses van de 0 a 11
+                            var año = fechaActual.getFullYear();
+                        
+                            // Añade un cero inicial si el día o el mes es menor a 10
+                            dia = dia < 10 ? '0' + dia : dia;
+                            mes = mes < 10 ? '0' + mes : mes;
+                        
+                            // Construye la cadena de fecha en el formato deseado
+                            var fechaFormateada =  año+ '-' + mes + '-' + dia;
                             let menu = `    <center>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -263,35 +156,33 @@ function listarMisSolicitudPorAprobar(id, estado) {
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                    <li>
-                                        <a class="dropdown-item bg-hover cursor-pointer aprobar" data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2 text-success" viewBox="0 0 16 16">
-                                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                            </svg>
-                                            Aprobar
-                                        </a>
-                                    </li>
-                                    <li>
+                                 `
+                            if (full.estado != 4 && full.desde > fechaFormateada) {
+                                menu += ` <li>
                                         <a class="dropdown-item bg-hover cursor-pointer rechazar"  data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg text-danger" viewBox="0 0 16 16">
                                                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                             </svg>
-                                            Denegar
+                                            Cancelar
                                         </a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <a class="dropdown-item bg-hover cursor-pointer btn-imprimir" data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
-                                                <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
-                                            </svg>
-                                            Imprimir (PDF)
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </center>`;
+                                    </li>`
+                            }
+
+
+                            menu += `
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item bg-hover cursor-pointer btn-imprimir" data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                                            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                                                            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
+                                                        </svg>
+                                                        Imprimir (PDF)
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </center>`;
 
                             return `${menu}`;
 
@@ -359,7 +250,7 @@ function cargarTabla(tableID, data, columns) {
                  visible: false */
             }
         ],
-        order: [[0, 'asc']]
+        order: [[0, 'desc']]
     };
 
     $(tableID).DataTable(params);
@@ -400,3 +291,23 @@ function capitalizar(name) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
 }
+
+function actualizarFecha() {
+    // Obtiene la fecha actual
+    var fechaActual = new Date();
+
+    // Formatea la fecha manualmente (puedes ajustar el formato según tus necesidades)
+    var dia = fechaActual.getDate();
+    var mes = fechaActual.getMonth() + 1; // Los meses van de 0 a 11
+    var año = fechaActual.getFullYear();
+
+    // Añade un cero inicial si el día o el mes es menor a 10
+    dia = dia < 10 ? '0' + dia : dia;
+    mes = mes < 10 ? '0' + mes : mes;
+
+    // Construye la cadena de fecha en el formato deseado
+    var fechaFormateada = dia + '/' + mes + '/' + año;
+
+    // Actualiza el elemento HTML con la fecha formateada
+    $('#fechaActual').text(fechaFormateada);
+  }

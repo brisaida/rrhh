@@ -111,6 +111,10 @@
 														<select class="form-select proyecto " id="proyectos">
 
 														</select>
+														<div class="form-check form-switch form-check-reverse mt-2">
+															<input class="form-check-input" type="checkbox" id="superUsuario">
+															<label class="form-check-label" for="superUsuario">RRHH</label>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -126,6 +130,7 @@
 															<input class="form-check-input" type="checkbox" id="superUsuario">
 															<label class="form-check-label" for="superUsuario">Maneja Personal</label>
 														</div>
+														
 													</div>
 												</div>
 											</div>
@@ -215,7 +220,7 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control text-end" id="emailAsignado">
 								</div>
-								
+
 							</div>
 
 						</div>

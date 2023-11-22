@@ -89,6 +89,9 @@
 		else if ($_GET['section'] == 'aprobarSolicitudes' || $_GET['section'] == 'aprobarSolicitudes') {
 			echo '<script src="./sections/accionPersonal/functions/solicitudesPorAprobar.js"></script>';
 		}
+		else if ($_GET['section'] == 'visorSolicitudes' || $_GET['section'] == 'visorSolicitudes') {
+			echo '<script src="./sections/accionPersonal/functions/visorSolicitudes.js"></script>';
+		}
 
 		/* Mantenimientos */ 
 		else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {

@@ -1,3 +1,4 @@
+//*Document.ready
 $(document).ready(function () {
     var hoy = new Date();
     var fecha = hoy.toISOString().substring(0, 10); // Formato aaaa-mm-dd
@@ -13,12 +14,47 @@ $(document).ready(function () {
     // Evento cuando cambia el valor de "desde" o "reanuda"
     $('#desde, #reanuda').change(function () {
         var desde = $('#desde').val();
+        var dias = parseInt($('#tipoAccion').find('option:selected').data('dias'));
         var reanuda = $('#reanuda').val();
 
-        if (desde && reanuda) {
+        console.log("Días a sumar: " + dias); // Para depuración
+
+        if (dias && !isNaN(dias)) {
+            var fechaDesde = new Date(desde);
+            var diasSumados = 0;
+
+            while (diasSumados < dias) {
+                fechaDesde.setDate(fechaDesde.getDate() + 1);
+
+                if (fechaDesde.getDay() !== 0 && fechaDesde.getDay() !== 6) {
+                    diasSumados++;
+                }
+            }
+            fechaDesde.setUTCHours(7, 0, 0, 0); // Ajuste de hora a UTC -6
+            var nuevaFecha = fechaDesde.toISOString().slice(0, 19);
+            $('#reanuda').val(nuevaFecha);
+            console.log("Nueva fecha: " + nuevaFecha);
+        } else if (desde && reanuda) {
             var diasHabiles = calcularDiasHabiles(desde, reanuda);
             $("#diasTomar").val(diasHabiles);
         }
+    });
+
+
+    /* Agregar la información de los dias de permiso dependiendo del tipo de acción */
+    $("#tipoAccion").change(function () {
+        var valorSeleccionado = $(this).val();
+        var dias = $(this).find('option:selected').data('dias');
+        if (dias !== null) {
+            $("#diasTomar").attr("disabled", "disabled")
+            $("#reanuda").attr("disabled", "disabled")
+            $("#diasTomar").val(dias)
+        } else {
+            $("#diasTomar").removeAttr("disabled")
+            $("#reanuda").removeAttr("disabled")
+            $("#diasTomar").val("")
+        }
+
     });
 });
 
@@ -26,10 +62,6 @@ $(document).ready(function () {
 //*Funciones FRONT
 $("#guardarBtn").click(function () {
     const idRegistro = $("#user-dropdown-toggle").data('id');
-
-
-
-
     var accion = {
         idEmpleado: idRegistro,
         solicitud: $("#fechaSolicitud").attr("fecha"),
@@ -45,7 +77,14 @@ $("#guardarBtn").click(function () {
         correoJefe: $("#jefe").attr('emailjefe'),
     }
 
-    if (accion.tipo == '' ||
+    if (accion.hasta < accion.desde) {
+        Swal.fire({
+            title: "Acción de personal",
+            icon: "error",
+            text: `¡Ups! Algo anda mal con las fechas `,
+            confirmButtonColor: "#3085d6",
+        });
+    } else if (accion.tipo == '' ||
         accion.desde == '' ||
         accion.hasta == '' ||
         accion.comentarios == '') {
@@ -57,11 +96,9 @@ $("#guardarBtn").click(function () {
         });
     } else {
         guardarAccion(accion)
-        //console.log(accion)
+
     }
 });
-
-
 
 
 //*Funciones de la base de datos
@@ -126,7 +163,7 @@ function cargarTipoAccion() {
                 $("#tipoAccion").html("<option>Seleccione</option>");
                 $.each(respuesta, function (index, registro) {
                     var contenido = `
-                                        <option value='${registro.idAccion}'>${capitalizar(registro.accion)}</option>
+                                        <option value='${registro.idAccion}' data-dias='${registro.diasPermiso}'>${capitalizar(registro.accion)}</option>
 								    `;
 
                     // Agregar el contenido al div 'espacioNotificaciones'
@@ -157,26 +194,22 @@ function guardarAccion(datos) {
         },
         success: function (respuesta) {
             Swal.fire({
-                title: "Acción de personal",
+                position: "top-end",
                 icon: "success",
-                text: `Guardado Exitosamente`,
-                confirmButtonColor: "#3085d6",
+                title: "Guardado exitosamente",
+                showConfirmButton: false,
+                timer: 1500
             });
+            setTimeout(function () {
+                window.location.href = '?section=estadoSolicitud';
+            }, 1500);
         },
     });
 }
 
 
 
-
-
-
-
-
-
-
-
-//Funciones operativas
+//*Funciones operativas
 function formatearFecha(fecha) {
     // Crear un objeto de fecha de JavaScript con la fecha dada
     var fechaObj = new Date(fecha);
@@ -195,7 +228,6 @@ function capitalizar(name) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
 }
-
 
 function calcularDiasHabiles(desde, reanuda) {
     var start = moment(desde);

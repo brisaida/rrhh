@@ -33,13 +33,16 @@ class mdlAccion
                         (SELECT emailAsignado FROM rrhh.historial WHERE idEmpleado=hd.idJefe) as emailJefe,
                         hd.idProyecto,
                         pro.nombre as proyecto,
-                        h.emailAsignado as correo
+                        h.emailAsignado as correo,
+						h.idUsuario,
+						u.accesoUsuario
                 FROM rrhh.empleados e
                 INNER JOIN rrhh.historial h ON h.idEmpleado=e.idEmpleado
                 INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
                 INNER JOIN rrhh.puestos p ON p.idPuesto=hd.idTDR
                 INNER JOIN configuracion.tblDepartamentosEstados dp ON dp.idDepartamento=hd.idDepartamento
                 INNER JOIN bosque.proyecto pro ON pro.id=hd.idProyecto
+				LEFT JOIN seguridad.tblUsuarios u ON u.idUsuario=h.idUsuario
                 WHERE e.idEmpleado=:id
          ";
 
@@ -127,7 +130,7 @@ class mdlAccion
     public function cargarTipoAccion()
     {
 
-        $sql = "SELECT idAccion,accion FROM rrhh.tipoAccion";
+        $sql = "SELECT idAccion,accion,diasPermiso FROM rrhh.tipoAccion";
 
         $stmt = $this->conn->prepare($sql);
         try {
@@ -156,11 +159,40 @@ class mdlAccion
                 INNER JOIN rrhh.historial h on h.idEmpleado=e.idEmpleado
                 INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
                 INNER JOIN rrhh.tipoAccion ta ON ta.idAccion=a.tipoAccion
-                WHERE idJefe=:id AND a.estado=:estado";
+                WHERE idJefe=:id AND a.estado=:estado ORDER BY a.fechaCreado DESC";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":estado", $estado);
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function visorSolicitudes($id)
+    {
+        $sql = "SELECT	CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
+                        idAccionPersonal,
+                        fechaSolicitud,
+                        cantidadDias,
+                        desde,
+                        hasta,
+                        ta.accion,
+                        a.estado,
+                        e.idEmpleado
+                FROM rrhh.accionPersonal a
+                INNER JOIN rrhh.empleados e on e.idEmpleado=a.idEmpleado
+                INNER JOIN rrhh.historial h on h.idEmpleado=e.idEmpleado
+                INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
+                INNER JOIN rrhh.tipoAccion ta ON ta.idAccion=a.tipoAccion
+                WHERE idJefe=:id AND a.estado!=1 ORDER BY a.fechaCreado DESC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
         try {
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -191,9 +223,11 @@ class mdlAccion
 
     public function cambiarEstado($id,$estado,$comentarios)
     {
+        $fechaHoraActual = date('Y-m-d H:i:s');
         $sql = "UPDATE rrhh.accionPersonal
                 SET estado=:estado,
                     ComentariosN1=:comentarios,
+                    fechaAprobadoN1=:fecha,
                     AprobadoN1=:usuario
                 WHERE idAccionPersonal=:id";
 
@@ -201,6 +235,7 @@ class mdlAccion
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":estado", $estado);
         $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":fecha", $fechaHoraActual);
         $stmt->bindParam(":usuario",$_SESSION['usuario']);
         try {
             $stmt->execute();
@@ -228,6 +263,8 @@ class mdlAccion
                         ap.usuarioCreado,
                         AprobadoN1,
                         (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.AprobadoN1) as jefeInmediato,
+                        fechaAprobadoN1,
+                        fechaAprobadoN2,
                         AprobadoN2,
                         (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.AprobadoN2) as RHHH
                 FROM rrhh.accionPersonal ap

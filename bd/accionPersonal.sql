@@ -11,9 +11,10 @@ CREATE TABLE rrhh.accionPersonal (
     hasta DATETIME NOT NULL,
 	AprobadoN1 INT NULL,
 	AprobadoN2 INT NULL,
+	fechaAprobadoN1 DATETIME NULL,
+	fechaAprobadoN2 DATETIME NULL,
 	estado INT NOT NULL DEFAULT 1,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
-	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
 	usuarioModificado VARCHAR(100) NULL
 );
@@ -39,6 +40,16 @@ CREATE TABLE rrhh.tipoAccion (
 	fechaModificado DATETIME NULL,
 	usuarioCreado VARCHAR(100) NOT NULL,
 	usuarioModificado VARCHAR(100) NULL
+);
+GO
+CREATE TABLE rrhh.vacaciones (
+	id INT IDENTITY (1,1) NOT NULL
+		CONSTRAINT PK_Vacaciones_id
+		PRIMARY KEY CLUSTERED (id),
+	idEmpelado INT NOT NULL,
+	vacacionesDisponibles INT NOT NULL,
+	vacacionesAcumuladas INT NOT NULL,
+	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
 );
 GO
 

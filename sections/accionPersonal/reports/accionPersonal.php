@@ -174,7 +174,7 @@
     $pdf->Cell(10, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
     $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Solicitado por' ), 'T', 0, 'C', 1);
     $pdf->Cell(30, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
-    $pdf->Cell(60, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Aprobado por Jefe Inmediato' ),'T', 0, 'C', 1);
+    $pdf->Cell(60, 6,iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Aprobado por Jefe' ),'T', 0, 'C', 1);
     $pdf->Cell(10, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
 
 
@@ -241,6 +241,47 @@
     $pdf->Cell(10, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
 
 
+    $pdf->AddPage();
+
+    /* FECHAS*/
+    $fila=50; 
+
+    $pdf->Ln();
+    $pdf->SetFillColor(209, 209, 209);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(20,$fila);
+    $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Solicitado por:' ), 1, 0, 'C', 1);
+    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetFont('Arial','',9);
+    $pdf->Cell(110, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($accionPersonal[0]['empleado']).' - '.formatearFechaEstampa($accionPersonal[0]['fechaCreado']) ), 1, 0, 'L', 1);
+
+
+    $fila+=6;
+    $pdf->Ln();
+    $pdf->SetFillColor(209, 209, 209);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(20,$fila);
+    $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Aprobado por jefe:' ), 1, 0, 'C', 1);
+    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetFont('Arial','',9);
+    $pdf->Cell(110, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($datosGenerales[0]['jefe']).' - '.formatearFechaEstampa($accionPersonal[0]['fechaAprobadoN1']) ), 1, 0, 'L', 1);
+
+    $fila+=6;
+    $pdf->Ln();
+    $pdf->SetFillColor(209, 209, 209);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(20,$fila);
+    $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Aprobado por RRHH:' ), 1, 0, 'C', 1);
+    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetFont('Arial','',9);
+    $pdf->Cell(110, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 1, 0, 'L', 1);
+    
 
 
 

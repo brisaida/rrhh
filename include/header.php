@@ -180,7 +180,8 @@ session_start();
                                     <li class="submenu-item"><a class="submenu-link" href="?section=estadoSolicitud">Mis solicitudes</a></li>
                                     <?php
                                         if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['manejaPersonal'] == 1) {
-                                            echo '<li class="submenu-item"><a class="submenu-link" href="?section=aprobarSolicitudes">Arpobar solicitudes</a></li>';
+                                            echo '<li class="submenu-item"><a class="submenu-link" href="?section=aprobarSolicitudes">Aprobar solicitudes</a></li>';
+                                            echo '<li class="submenu-item"><a class="submenu-link" href="?section=visorSolicitudes">Visor de Solicitudes</a></li>';
                                             
                                         }
                                     ?>

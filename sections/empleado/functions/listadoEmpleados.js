@@ -61,7 +61,6 @@ function listarEmpleados() {
         },
         success: function (respuesta) {
             const datos = JSON.parse(respuesta);
-            console.log(datos);
             if (datos.length > 0) {
                 var columns = [
                     {

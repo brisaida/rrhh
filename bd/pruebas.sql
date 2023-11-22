@@ -30,3 +30,17 @@ WHERE e.idEmpleado=4
 
 
 
+/* DIRECTOR DE PROYECTO */
+
+
+SELECT * FROM rrhh.historial WHERE idEmpleado=7
+
+SELECT idProyecto FROM rrhh.historialDetalle WHERE idHistorial=83
+
+SELECT *from rrhh.puestos where idProyecto=9 and nivel=1
+
+SELECT *FROM rrhh.historialDetalle where idTDR=46
+
+SELECT *FROM rrhh.historial where idHistorial=109
+
+SELECT *FROM rrhh.empleados where idEmpleado=36
