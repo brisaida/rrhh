@@ -30,10 +30,10 @@ class mdlEmpleado
                             nombrePuesto,
                             telefonoAsignado
                     FROM rrhh.empleados e
-                    INNER JOIN rrhh.historial h ON h.idEmpleado=e.idEmpleado
-                    INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
-                    INNER JOIN rrhh.puestos p on p.idPuesto=hd.idTDR
-                    INNER JOIN bosque.proyecto pro on p.idProyecto=pro.id
+                    LEFT JOIN rrhh.historial h ON h.idEmpleado=e.idEmpleado
+                    LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
+                    LEFT JOIN rrhh.puestos p on p.idPuesto=hd.idTDR
+                    LEFT JOIN bosque.proyecto pro on p.idProyecto=pro.id
                     WHERE e.estado=1
                     ORDER BY e.idEmpleado DESC";
 

@@ -2,6 +2,7 @@ var accionSeleccionada = {
     id: null,
     estado: null
 };
+const idRegistro = $("#user-dropdown-toggle").data('id');
 
 $(document).ready(function () {
     $('#solicitudes').DataTable({
@@ -47,43 +48,47 @@ $('#solicitudes').on('click', '.aprobar', function () {
 
         if (result.isConfirmed) {
 
-            $.ajax({
-                type: "POST",
-                url: "./sections/accionPersonal/controller/cambiarEstado.php",
-                data: {
-                    id: accionSeleccionada.id,
-                    estado: accionSeleccionada.estado,
-                    comentarios: result.value
-                },
-                success: function (response) {
-                    var rowToRemove = $('#solicitudes').find('tr[data-id="' + accionSeleccionada.id + '"]');
-    
-                    console.log('Row to Remove:', rowToRemove);
-                
-                    rowToRemove.remove();
+            
+                $.ajax({
+                    type: "POST",
+                    url: "./sections/accionPersonal/controller/cambiarEstado.php",
+                    data: {
+                        id: accionSeleccionada.id,
+                        estado: accionSeleccionada.estado,
+                        comentarios: result.value
+                    },
+                    success: function (response) {
+                        var rowToRemove = $('#solicitudes').find('tr[data-id="' + accionSeleccionada.id + '"]');
 
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Aprobado correctamente.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setTimeout(function() { 
-                        location.reload();
-                    }, 1500);
-                    
-                },
-                error: function (error) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "Parece que algo esta mal.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            });
+                        console.log('Row to Remove:', rowToRemove);
+
+                        rowToRemove.remove();
+
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Aprobado correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
+
+                    },
+                    error: function (error) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: "Parece que algo esta mal.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                });
+            
+
+
         }
     });
 });
@@ -121,7 +126,7 @@ $('#solicitudes').on('click', '.rechazar', function () {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Aprobado correctamente.",
+                        title: "Cancelado correctamente.",
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -254,7 +259,7 @@ function listarMisSolicitudPorAprobar(id, estado) {
                         className: "text-left",
                         width: '5%',
                         render: function (data, types, full, meta) {
-                           
+
                             let menu = `    <center>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">

@@ -30,29 +30,59 @@ function listarMisSolicitud(id) {
                     {
                         className: "text-center",
                         mDataProp: "idAccionPersonal",
-                        width: '10%',
+                        width: '5%',
                     },
                     {
                         mDataProp: "accion",
-                        width: '30%',
+                        width: '20%',
                     },
                     {
                         className: "text-center",
                         mDataProp: "fechaSolicitud",
-                        width: '25%',
+                        width: '15%',
                         render: function (data, type, full, meta) {
                             const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
                             const fecha = new Date(data);
                             const dia = fecha.getDate();
                             const mes = meses[fecha.getMonth()];
                             const año = fecha.getFullYear();
-                            return `${dia} / ${mes} / ${año}`;
+                            return `${dia}-${mes}-${año}`;
                         },
                     },
                     {
                         className: "text-center",
+                        mDataProp: "desde",
+                        width: '15%',
+                        render: function (data, type, full, meta) {
+                            const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+                            const fecha = new Date(data);
+                            const dia = fecha.getDate();
+                            const mes = meses[fecha.getMonth()];
+                            const año = fecha.getFullYear();
+                            return `${dia}-${mes}-${año}`;
+                        },
+                    },
+                    {
+                        className: "text-center",
+                        mDataProp: "hasta",
+                        width: '15%',
+                        render: function (data, type, full, meta) {
+                            const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+                            const fecha = new Date(data);
+                            const dia = fecha.getDate();
+                            const mes = meses[fecha.getMonth()];
+                            const año = fecha.getFullYear();
+                            return `${dia}-${mes}-${año}`;
+                        },
+                    },
+                    {
+                        mDataProp: "comentarios",
+                        width: '15%',
+                    },
+                    {
+                        className: "text-center",
                         mDataProp: "estado",
-                        width: '25%',
+                        width: '15%',
                         render: function (data, type, full, meta) {
                             let estado;
                             switch(full.estado) {
@@ -78,23 +108,7 @@ function listarMisSolicitud(id) {
                             return estado;
                         },
                     },
-                    {
-                        className: "text-left",
-                        width: '25%',
-                        render: function (data, types, full, meta) {
-                            let menu = ` <center>
-                                            <a class="btn app-btn-secondary" id="imprimir">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"></path>
-                                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"></path>
-                                                </svg>
-                                            </a>
-                                        </center>`;
-
-                            return `${menu}`;
-
-                        },
-                    },
+                   
                 ];
 
                 // Llamado a la función para crear la tabla con los datos
@@ -153,7 +167,7 @@ function cargarTabla(tableID, data, columns) {
                 visible: false */
             }
         ],
-        order: [[0, 'asc']]
+        order: [[0, 'desc']]
     };
 
     $(tableID).DataTable(params);

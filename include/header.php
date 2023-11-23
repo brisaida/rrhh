@@ -141,19 +141,18 @@ session_start();
                                 </span><!--//submenu-arrow-->
                             </a>
                             <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
-                        
+
                                 <ul class="submenu-list list-unstyled">
-                                    
+
                                     <li class="submenu-item "><a class="submenu-link" href="?section=editar">Perfil de empleado</a></li>
                                     <?php
-                                        if ($_SESSION['tipoAcceso'] == 1 ) {
-                                            
-                                            echo '<li class="submenu-item "><a class="submenu-link" href="?section=empleado">Agregar nuevo empleado</a></li>';
-                                            echo "<li class='submenu-item '><a class='submenu-link' href='?section=listadoEmpleados'>Listado de Empleados</a></li>";
-                                            
-                                        }
+                                    if ($_SESSION['tipoAcceso'] == 1) {
+
+                                        echo '<li class="submenu-item "><a class="submenu-link" href="?section=empleado">Agregar nuevo empleado</a></li>';
+                                        echo "<li class='submenu-item '><a class='submenu-link' href='?section=listadoEmpleados'>Listado de Empleados</a></li>";
+                                    }
                                     ?>
-                               
+
                                 </ul>
                             </div>
 
@@ -179,11 +178,16 @@ session_start();
                                     <li class="submenu-item"><a class="submenu-link" href="?section=solicitudAccion">Solicitud</a></li>
                                     <li class="submenu-item"><a class="submenu-link" href="?section=estadoSolicitud">Mis solicitudes</a></li>
                                     <?php
-                                        if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['manejaPersonal'] == 1) {
+                                    if ($_SESSION['RRHH'] == 1) {
+                                        echo '<li class="submenu-item"><a class="submenu-link" href="?section=solicitudesPendientes">Solicitudes pendientes</a></li>';
+                                        echo '<li class="submenu-item"><a class="submenu-link" href="?section=solicitudesPorAprobar">Solicitudes por Aprobar</a></li>';
+                                        echo '<li class="submenu-item"><a class="submenu-link" href="?section=verTodo">Visor de Solicitudes</a></li>';
+                                    } else if ($_SESSION['tipoAcceso'] == 1 || $_SESSION['manejaPersonal'] == 1) {
+                                        if ($_SESSION['RRHH'] !== 1) {
                                             echo '<li class="submenu-item"><a class="submenu-link" href="?section=aprobarSolicitudes">Aprobar solicitudes</a></li>';
                                             echo '<li class="submenu-item"><a class="submenu-link" href="?section=visorSolicitudes">Visor de Solicitudes</a></li>';
-                                            
                                         }
+                                    }
                                     ?>
                                 </ul>
                             </div>

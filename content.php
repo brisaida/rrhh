@@ -32,6 +32,9 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'estadoSolicitud' ? include "./sections/accionPersonal/views/estadoSolicitud.php" : false;
     $_GET['section'] == 'aprobarSolicitudes' ? include "./sections/accionPersonal/views/aprobarSolicitudes.php" : false;
     $_GET['section'] == 'visorSolicitudes' ? include "./sections/accionPersonal/views/visorSolicitudes.php" : false;
+    $_GET['section'] == 'solicitudesPendientes' ? include "./sections/accionPersonal/views/solicitudesPendientes.php" : false;
+    $_GET['section'] == 'solicitudesPorAprobar' ? include "./sections/accionPersonal/views/solicitudesPorAprobar.php" : false;
+    $_GET['section'] == 'verTodo' ? include "./sections/accionPersonal/views/verTodas.php" : false;
 
 
     /* Seguro Médico */

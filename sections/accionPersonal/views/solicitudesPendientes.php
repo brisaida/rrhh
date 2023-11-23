@@ -8,19 +8,11 @@
 				<div class="h5 pb-2  text-success border-bottom border-success">
 					<div class="row">
 						<div class="col-md d-flex align-items-center">
-							ACCIÓN DE PERSONAL
-						</div>
-						<div class="col-md d-flex align-items-center justify-content-end">
-							<small>VACACIONES DISPONIBLES: <span id="vacaciones"></span></small>
-						</div>
-						<div class="col-md-3 d-flex justify-content-end ">
-							<a class="btn app-btn-secondary" href="?section=solicitudAccion">
-								NUEVA SOLICITUD
-							</a>
+							SOLICITUDES PENDIENTES
 						</div>
 					</div>
 				</div>
-			
+
 
 
 
@@ -38,12 +30,12 @@
 								<thead>
 									<tr>
 										<th class="cell">No. de Solicitud</th>
+										<th class="cell">Empleado</th>
 										<th class="cell">Tipo de Solicitud</th>
 										<th class="cell">Fecha de Solicitud</th>
 										<th class="cell">Desde</th>
 										<th class="cell">Reanuda</th>
-										<th class="cell">Comentarios</th>
-										<th class="cell">Estado</th>
+										<th class="cell">Acciones</th>
 									</tr>
 
 								</thead>
@@ -59,6 +51,24 @@
 
 
 			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="detalleSolicitudModal" tabindex="-1" aria-labelledby="detalleSolicitudModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="noSolicitud"></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>

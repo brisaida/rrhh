@@ -333,7 +333,8 @@
                             h.idUsuario,
                             h.superUsuario AS tipoAcceso,
                             u.accesoUsuario AS username,
-                            hd.manejaPersonal
+                            hd.manejaPersonal,
+							hd.perteneceRRHH
                     FROM rrhh.empleados e
                     LEFT JOIN rrhh.historial h on e.idEmpleado=h.idEmpleado
                     LEFT JOIN rrhh.historialDetalle hd on hd.idHistorial=h.idHistorial
@@ -368,6 +369,7 @@
                         $_SESSION['telefono']=$usu['telefono'];
                         $_SESSION['Cargo']=$usu['Cargo'];
                         $_SESSION['tipoAcceso']=$usu['tipoAcceso'];		
+                        $_SESSION['RRHH']=$usu['perteneceRRHH'];		
                         $_SESSION['manejaPersonal']=$usu['manejaPersonal'];		
                         $_SESSION['usuario']=$usu['id'];			
                         $_SESSION['codigoEmpleado']=$usu['codigoEmpleado'];					

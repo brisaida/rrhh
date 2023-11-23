@@ -92,6 +92,9 @@
 		else if ($_GET['section'] == 'visorSolicitudes' || $_GET['section'] == 'visorSolicitudes') {
 			echo '<script src="./sections/accionPersonal/functions/visorSolicitudes.js"></script>';
 		}
+		else if ($_GET['section'] == 'solicitudesPendientes' || $_GET['section'] == 'solicitudesPendientes') {
+			echo '<script src="./sections/accionPersonal/functions/solicitudesPendientes.js"></script>';
+		}
 
 		/* Mantenimientos */ 
 		else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {

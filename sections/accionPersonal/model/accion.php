@@ -220,6 +220,44 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+    public function solicitudesPendientes()
+    {
+        $sql = "SELECT	ap.idAccionPersonal,
+                        ap.fechaSolicitud,
+                        ap.tipoAccion,
+                        tp.accion,
+                        ap.cantidadDias,
+                        ap.comentarios,
+                        ap.desde,
+                        ap.hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
+                        hd.idProyecto,
+                        p.nombre proyecto,
+                        hd.idJefe,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
+                        hd.idTDR,
+                        pu.nombrePuesto
+                FROM rrhh.accionPersonal ap
+                INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                LEFT JOIN rrhh.historial h ON h.idEmpleado	= e.idEmpleado
+                LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial= h.idHistorial
+                LEFT JOIN bosque.proyecto p ON p.id=hd.idProyecto
+                LEFT JOIN rrhh.puestos pu ON pu.idPuesto=hd.idTDR
+                WHERE ap.estado=1";
+
+        $stmt = $this->conn->prepare($sql);
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
 
     public function cambiarEstado($id,$estado,$comentarios)
     {
