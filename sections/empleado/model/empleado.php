@@ -191,7 +191,6 @@ class mdlEmpleado
                         codigoEmpleado,
                         codigoSAP,
                         ingreso,
-                        vacaciones,
                         telefonoAsignado,
                         idUsuario,
                         empleados.estado,

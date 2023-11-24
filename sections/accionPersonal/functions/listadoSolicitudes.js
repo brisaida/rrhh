@@ -5,6 +5,7 @@ $(document).ready(function(){
     const idRegistro = $("#user-dropdown-toggle").data('id');
 
     listarMisSolicitud(idRegistro)
+    cargarInfo(idRegistro); 
 });
 
 function listarMisSolicitud(id) {
@@ -171,4 +172,130 @@ function cargarTabla(tableID, data, columns) {
     };
 
     $(tableID).DataTable(params);
+}
+
+function cargarInfo(id) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/accionPersonal/controller/cargarVacaciones.php",
+        data: {
+            id: id
+        },
+        dataType: "json",
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Empleados",
+                icon: "error",
+                text: `Error`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+            if (respuesta.length > 0) {
+                let datos = respuesta[0];
+
+                
+                
+                
+             
+            
+                $("#ingreso").text(formatearFecha(datos.ingreso));
+                $("#aniosTrabajados").text(datos.TiempoServicioAnios);
+                $("#vacacionesDisponibles").text(datos.vacacionesDisponibles);
+                $("#vacacionesAcumuladas").text(datos.vacacionesAcumuladas);
+                if (datos.vacacionesDisponibles<0) {
+                    $("#vacacionesDisponibles").addClass("text-danger");
+                }
+
+consultarVacacionesAcumuladas(datos.TiempoServicioAnios)
+
+            } else {
+                console.log("No se cargaron los datos del empleado")
+            }
+
+
+        },
+    });
+}
+
+function consultarVacacionesAcumuladas(anios) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/accionPersonal/controller/vacacionesAcumuladas.php",
+        data: {
+            anios: anios
+        },
+        dataType: "json",
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Empleados",
+                icon: "error",
+                text: `Error`,
+                confirmButtonColor: "#3085d6",
+            });
+        },
+        success: function (respuesta) {
+
+            var anterior = $("#vacacionesAcumuladas").text();
+            var disponible = $("#vacacionesDisponibles").text();
+            var actual= respuesta[0].acumulado
+            const idRegistro = $("#user-dropdown-toggle").data('id');
+            if(anterior<actual){
+                $("#vacacionesAcumuladas").text(actual);
+                var nuevoDisponible=parseInt(actual)+parseInt(disponible);
+                $("#vacacionesDisponibles").text(nuevoDisponible);
+                if (nuevoDisponible>0) {
+                    $("#vacacionesDisponibles").addClass("text-success");
+                    $("#vacacionesDisponibles").removeClass("text-danger");
+                }else{
+                    $("#vacacionesDisponibles").addClass("text-danger");
+                    $("#vacacionesDisponibles").removeClass("text-success");
+                }
+
+                datos = {
+                    idEmpleado:idRegistro,
+                    vacacionesDisponibles:nuevoDisponible,
+                    vacacionesAcumuladas:actual,
+                }
+                guardarNuevaInfo(datos);
+
+            }else{
+                console.log("igual")
+            }
+      
+
+        },
+    });
+}
+
+function formatearFecha(fecha) {
+    var partesFecha = fecha.split('-');
+    if (partesFecha.length === 3) {
+        return partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+    } else {
+        return fecha; // Retorna la fecha original si no está en el formato esperado
+    }
+}
+
+function guardarNuevaInfo(datos) {
+    $.ajax({
+        type: "POST",
+        url: "./sections/accionPersonal/controller/agregarVacaciones.php",
+        data: {
+            datos: datos,
+        },
+        dataType: "json",
+        // Error en la petición
+        error: function (error) {
+            console.log(error);
+       
+        },
+        success: function (respuesta) {
+            console.log("Éxito!")
+        },
+    });
 }

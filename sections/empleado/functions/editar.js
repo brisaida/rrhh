@@ -653,7 +653,6 @@ $(document).ready(function () {
         });
 
     });
-
     $("#agregarIdioma").click(function () {
 
 
@@ -705,7 +704,6 @@ $(document).ready(function () {
         eliminarRegistro(data, "idiomas", "idIdioma", id)
 
     });
-
     $("#guardarEstudios").click(function () {
 
 
@@ -730,7 +728,6 @@ $(document).ready(function () {
             agregarEstudiosActuales(datos);
         }
     });
-
     $("#marcarFinalizado").click(function () {
         $("#marcarFinalizado").data("marca", "1");
         $("#educacionEdit").click();

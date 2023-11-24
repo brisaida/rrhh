@@ -95,6 +95,12 @@
 		else if ($_GET['section'] == 'solicitudesPendientes' || $_GET['section'] == 'solicitudesPendientes') {
 			echo '<script src="./sections/accionPersonal/functions/solicitudesPendientes.js"></script>';
 		}
+		else if ($_GET['section'] == 'solicitudesPorAprobar' || $_GET['section'] == 'solicitudesPorAprobar') {
+			echo '<script src="./sections/accionPersonal/functions/solicitudesPorAprobarRRHH.js"></script>';
+		}
+		else if ($_GET['section'] == 'verTodo' || $_GET['section'] == 'verTodo') {
+			echo '<script src="./sections/accionPersonal/functions/verTodas.js"></script>';
+		}
 
 		/* Mantenimientos */ 
 		else if ($_GET['section'] == 'historialEmpleado' || $_GET['section'] == 'historialEmpleado') {

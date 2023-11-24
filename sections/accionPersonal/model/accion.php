@@ -17,6 +17,40 @@ class mdlAccion
         }
     }
 
+    public function cargarVacaciones($id)
+    {
+
+        $sql = "EXEC rrhh.ObtenerUltimasVacacionesEmpleado @idEmpleado =:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function cargarVacacionesAcumuladas($anios)
+    {
+
+        $sql = "SELECT acumulado FROM rrhh.infoVacaciones WHERE tiempoAnio=:anios";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":anios", $anios);
+
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
     public function buscarInfo($id)
     {
 
@@ -85,46 +119,60 @@ class mdlAccion
 
             setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish');
             $desde = new DateTime($datos->desde); // o tu objeto DateTime existente
-            $desdeFormateado= strftime('%A, %d de %B de %Y', $desde->getTimestamp());
+            $desdeFormateado = strftime('%A, %d de %B de %Y', $desde->getTimestamp());
             $hasta = new DateTime($datos->hasta); // o tu objeto DateTime existente
-            $hastaFormateado= strftime('%A, %d de %B de %Y', $hasta->getTimestamp());
+            $hastaFormateado = strftime('%A, %d de %B de %Y', $hasta->getTimestamp());
             $solicitud = new DateTime($datos->solicitud); // o tu objeto DateTime existente
-            $solicitudFormateado= strftime('%A, %d de %B de %Y', $solicitud->getTimestamp());
+            $solicitudFormateado = strftime('%A, %d de %B de %Y', $solicitud->getTimestamp());
 
-            /* $desde = new DateTime($datos->desde);
-            $desdeFormateado = $desde->format('l, d F Y');
-            $hasta = new DateTime($datos->hasta);
-            $hastaFormateado = $hasta->format('l, d F Y');
- */
+
             $de = "rrhh@honducafeproyectos.com";
             $nombreDe = "Recursos Humanos Fundación COHONDUCAFE";
-            $para =  $datos->correo; 
-            $nombrePara =  $datos->nombreCompleto; 
+            $para =  $datos->correo;
+            $nombrePara =  $datos->nombreCompleto;
             $asunto = "Acción de Personal";
-            $nombreEmpleado =$datos->nombreCompleto; ;
-            $motivo=$datos->permiso; ;
-            $fechaDesde=$desdeFormateado; ;
-            $fechaHasta=$hastaFormateado; ;
-            $fechaSolicitud=$solicitudFormateado ;
-            $dias=$datos->dias; 
+            $nombreEmpleado = $datos->nombreCompleto;;
+            $motivo = $datos->permiso;;
+            $fechaDesde = $desdeFormateado;;
+            $fechaHasta = $hastaFormateado;;
+            $fechaSolicitud = $solicitudFormateado;
+            $dias = $datos->dias;
 
             include '../../../assets/sendGrid/enviar_correo.php';
 
             // Llama a la función enviarCorreo
-            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado,$motivo,$fechaDesde,$fechaHasta,$fechaSolicitud,$dias);
+            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
             $resultado = $resultadoCorreo;
-            $para =  $datos->correoJefe; 
-            $nombrePara =  $datos->nombreCompleto; 
-            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado,$motivo,$fechaDesde,$fechaHasta,$fechaSolicitud,$dias);
+            $para =  $datos->correoJefe;
+            $nombrePara =  $datos->nombreCompleto;
+            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
             $resultado = $resultadoCorreo;
-
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
         $stmt->closeCursor();
         return $resultado;
+    }
 
+    public function agregarVacaciones($datos)
+    {
 
+        $sql = "INSERT INTO rrhh.vacaciones(idEmpleado,vacacionesDisponibles,vacacionesAcumuladas)
+        VALUES (:id,:vacacionesDisponibles,:vacacionesAcumuladas)";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $datos->idEmpleado);
+        $stmt->bindParam(":vacacionesDisponibles", $datos->vacacionesDisponibles);
+        $stmt->bindParam(":vacacionesAcumuladas", $datos->vacacionesAcumuladas);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
     }
 
     public function cargarTipoAccion()
@@ -143,7 +191,7 @@ class mdlAccion
         return $resultado;
     }
 
-    public function cargasMisSolicitudesPorAprobar($id,$estado)
+    public function cargasMisSolicitudesPorAprobar($id, $estado)
     {
         $sql = "SELECT	CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
                         idAccionPersonal,
@@ -259,7 +307,121 @@ class mdlAccion
         return $resultado;
     }
 
-    public function cambiarEstado($id,$estado,$comentarios)
+    public function solicitudesPendientesPorArpobar()
+    {
+        $sql = "SELECT	ap.idAccionPersonal,
+                        ap.fechaSolicitud,
+                        ap.tipoAccion,
+                        tp.accion,
+                        ap.cantidadDias,
+                        ap.comentarios,
+                        ap.desde,
+                        ap.hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
+                        hd.idProyecto,
+                        p.nombre proyecto,
+                        hd.idJefe,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
+                        hd.idTDR,
+                        pu.nombrePuesto,
+                        ap.aprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as aprobadoPor,
+                        ap.comentariosN1
+                FROM rrhh.accionPersonal ap
+                INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                LEFT JOIN rrhh.historial h ON h.idEmpleado	= e.idEmpleado
+                LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial= h.idHistorial
+                LEFT JOIN bosque.proyecto p ON p.id=hd.idProyecto
+                LEFT JOIN rrhh.puestos pu ON pu.idPuesto=hd.idTDR
+                WHERE ap.estado=2";
+
+        $stmt = $this->conn->prepare($sql);
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    public function verTodas()
+    {
+        $sql = "SELECT	ap.idAccionPersonal,
+                        ap.fechaSolicitud,
+                        ap.tipoAccion,
+                        tp.accion,
+                        ap.cantidadDias,
+                        ap.comentarios,
+                        ap.desde,
+                        ap.hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
+                        hd.idProyecto,
+                        p.nombre proyecto,
+                        hd.idJefe,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
+                        hd.idTDR,
+                        pu.nombrePuesto,
+                        ap.aprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as aprobadoPor,
+                        ap.comentariosN1,
+                        ap.fechaAprobadoN1,
+                        ap.aprobadoN2,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN2) as aprobadoN2,
+                        ap.comentariosN2,
+                        ap.fechaAprobadoN2
+                FROM rrhh.accionPersonal ap
+                INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                LEFT JOIN rrhh.historial h ON h.idEmpleado	= e.idEmpleado
+                LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial= h.idHistorial
+                LEFT JOIN bosque.proyecto p ON p.id=hd.idProyecto
+                LEFT JOIN rrhh.puestos pu ON pu.idPuesto=hd.idTDR
+                WHERE ap.estado IN (3,4)";
+
+        $stmt = $this->conn->prepare($sql);
+        try {
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    public function cambiarEstadoN2($id, $estado, $comentarios)
+    {
+        $fechaHoraActual = date('Y-m-d H:i:s');
+        $sql = "UPDATE rrhh.accionPersonal
+                SET estado=:estado,
+                    ComentariosN2=:comentarios,
+                    fechaAprobadoN2=:fecha,
+                    AprobadoN2=:usuario
+                WHERE idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":fecha", $fechaHoraActual);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function cambiarEstado($id, $estado, $comentarios)
     {
         $fechaHoraActual = date('Y-m-d H:i:s');
         $sql = "UPDATE rrhh.accionPersonal
@@ -274,7 +436,7 @@ class mdlAccion
         $stmt->bindParam(":estado", $estado);
         $stmt->bindParam(":comentarios", $comentarios);
         $stmt->bindParam(":fecha", $fechaHoraActual);
-        $stmt->bindParam(":usuario",$_SESSION['usuario']);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
         try {
             $stmt->execute();
             $resultado = true;
@@ -321,6 +483,4 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
-
-    
 }
