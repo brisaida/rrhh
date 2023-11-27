@@ -12,28 +12,45 @@
 
 
 
-					<div class="app-card app-card-orders-table shadow-sm mb-5">
-						<div class="app-card-body">
-							<div class="table-responsive p-2">
-								<table class="table mb-3 text-left " id="solicitudes">
-									<thead>
-										<tr>
-											<th class="cell">No. de Solicitud</th>
-											<th class="cell">Empleado</th>
-											<th class="cell">Tipo de Solicitud</th>
-											<th class="cell">Desde</th>
-											<th class="cell">Reanuda</th>
-											<th class="cell">Cantidad Días</th>
-											<th class="cell">Estado</th>
-											<th class="cell text-center">Acciones</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
+			<div class="app-card app-card-orders-table shadow-sm mb-5">
+				<div class="app-card-body">
+					<div class="table-responsive p-2">
+						<table class="table mb-3 text-left " id="solicitudes">
+							<thead>
+								<tr>
+									<th class="cell">No. de Solicitud</th>
+									<th class="cell">Empleado</th>
+									<th class="cell">Tipo de Solicitud</th>
+									<th class="cell">Desde</th>
+									<th class="cell">Reanuda</th>
+									<th class="cell">Cantidad Días</th>
+									<th class="cell">Estado</th>
+									<th class="cell text-center">Acciones</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="detalleSolicitudModal" tabindex="-1" aria-labelledby="detalleSolicitudModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="noSolicitud"></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
 
 						</div>
-		
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

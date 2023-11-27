@@ -270,21 +270,43 @@ class mdlAccion
     /* Carga los listados de acciones de personal */
     public function cargasMisSolicitudesPorAprobar($id, $estado)
     {
-        $sql = "SELECT	CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
-                        idAccionPersonal,
-                        fechaSolicitud,
-                        cantidadDias,
-                        desde,
-                        hasta,
-                        ta.accion,
-                        a.estado,
-                        e.idEmpleado
-                FROM rrhh.accionPersonal a
-                INNER JOIN rrhh.empleados e on e.idEmpleado=a.idEmpleado
-                INNER JOIN rrhh.historial h on h.idEmpleado=e.idEmpleado
-                INNER JOIN rrhh.historialDetalle hd ON hd.idHistorial=h.idHistorial
-                INNER JOIN rrhh.tipoAccion ta ON ta.idAccion=a.tipoAccion
-                WHERE idJefe=:id AND a.estado=:estado ORDER BY a.fechaCreado DESC";
+        $sql = "SELECT	ap.idAccionPersonal,
+                        ap.fechaSolicitud,
+                        ap.tipoAccion,
+                        tp.accion,
+                        ap.cantidadDias,
+                        ap.comentarios,
+                        ap.desde,
+                        ap.hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        ap.aprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as nombreN1,
+                        ap.aprobadoN2,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN2) as nombreN2,
+                        ap.cancelado,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.cancelado) as nombrecancelado,
+                        ap.fechaAprobadoN1,
+                        ap.fechaAprobadoN2,
+                        ap.fechaCancelado,
+                        ap.comentariosN1,
+                        ap.comentariosN2,
+                        ap.comentariosCancelado,
+                        CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
+                        hd.idProyecto,
+                        p.nombre proyecto,
+                        hd.idJefe,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
+                        hd.idTDR,
+                        pu.nombrePuesto
+                FROM rrhh.accionPersonal ap
+                INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                LEFT JOIN rrhh.historial h ON h.idEmpleado	= e.idEmpleado
+                LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial= h.idHistorial
+                LEFT JOIN bosque.proyecto p ON p.id=hd.idProyecto
+                LEFT JOIN rrhh.puestos pu ON pu.idPuesto=hd.idTDR
+                WHERE idJefe=:id AND ap.estado=:estado ORDER BY ap.fechaCreado DESC";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $id);
