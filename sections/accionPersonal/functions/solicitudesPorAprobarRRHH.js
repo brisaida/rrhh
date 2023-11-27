@@ -275,7 +275,7 @@ function VerSolicitudesPendientesPorAprobar() {
         },
         success: function (respuesta) {
             const datos = JSON.parse(respuesta);
-
+            console.log(datos)
             if (datos.length > 0) {
                 var columns = [
 
@@ -303,12 +303,12 @@ function VerSolicitudesPendientesPorAprobar() {
                     },
                     {
                         className: "text-center",
-                        mDataProp: "fechaCreado",
+                        mDataProp: "fechaSolicitud",
 
                         width: '15%',
                         render: function (data, type, full, meta) {
                             const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-                            const fecha = new Date(full.desde);
+                            const fecha = new Date(full.fechaSolicitud);
                             const dia = fecha.getDate();
                             const mes = meses[fecha.getMonth()];
                             const año = fecha.getFullYear();
@@ -495,9 +495,9 @@ function capitalizar(name) {
 function convertirFecha(fechaOriginal) {
     // Mapeo de abreviaturas de mes a nombres completos
     var meses = {
-        'Jan': 'Enero', 'Feb': 'Febrero', 'Mar': 'Marzo', 'Apr': 'Abril',
-        'May': 'Mayo', 'Jun': 'Junio', 'Jul': 'Julio', 'Aug': 'Agosto',
-        'Sep': 'Septiembre', 'Oct': 'Octubre', 'Nov': 'Noviembre', 'Dec': 'Diciembre'
+        'Ene': 'Enero', 'Feb': 'Febrero', 'Mar': 'Marzo', 'Apr': 'Abril',
+        'May': 'Mayo', 'Jun': 'Junio', 'Jul': 'Julio', 'Ago': 'Agosto',
+        'Sep': 'Septiembre', 'Oct': 'Octubre', 'Nov': 'Noviembre', 'Dic': 'Diciembre'
     };
 
     // Divide la fecha original en componentes

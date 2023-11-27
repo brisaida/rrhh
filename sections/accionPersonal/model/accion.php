@@ -17,6 +17,10 @@ class mdlAccion
         }
     }
 
+
+
+
+    /* Vacaciones */
     public function cargarVacaciones($id)
     {
 
@@ -37,7 +41,7 @@ class mdlAccion
     public function cargarVacacionesAcumuladas($anios)
     {
 
-        $sql = "SELECT acumulado FROM rrhh.infoVacaciones WHERE tiempoAnio=:anios";
+        $sql = "SELECT acumulado,vacaciones FROM rrhh.infoVacaciones WHERE tiempoAnio=:anios";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":anios", $anios);
@@ -51,6 +55,29 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+    public function agregarVacaciones($datos)
+    {
+
+        $sql = "INSERT INTO rrhh.vacaciones(idEmpleado,vacacionesDisponibles,vacacionesAcumuladas)
+        VALUES (:id,:vacacionesDisponibles,:vacacionesAcumuladas)";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $datos->idEmpleado);
+        $stmt->bindParam(":vacacionesDisponibles", $datos->vacacionesDisponibles);
+        $stmt->bindParam(":vacacionesAcumuladas", $datos->vacacionesAcumuladas);
+
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+
+    /* Agregar Acción de personal */
     public function buscarInfo($id)
     {
 
@@ -141,40 +168,18 @@ class mdlAccion
             include '../../../assets/sendGrid/enviar_correo.php';
 
             // Llama a la función enviarCorreo
-            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
+            /*$resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
             $resultado = $resultadoCorreo;
             $para =  $datos->correoJefe;
             $nombrePara =  $datos->nombreCompleto;
             $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
-            $resultado = $resultadoCorreo;
+            $resultado = $resultadoCorreo; */
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
         $stmt->closeCursor();
         return $resultado;
     }
-
-    public function agregarVacaciones($datos)
-    {
-
-        $sql = "INSERT INTO rrhh.vacaciones(idEmpleado,vacacionesDisponibles,vacacionesAcumuladas)
-        VALUES (:id,:vacacionesDisponibles,:vacacionesAcumuladas)";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $datos->idEmpleado);
-        $stmt->bindParam(":vacacionesDisponibles", $datos->vacacionesDisponibles);
-        $stmt->bindParam(":vacacionesAcumuladas", $datos->vacacionesAcumuladas);
-
-        try {
-            $stmt->execute();
-            $resultado = true;
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-        return $resultado;
-    }
-
     public function cargarTipoAccion()
     {
 
@@ -190,7 +195,79 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+    public function cambiarEstadoN2($id, $estado, $comentarios)
+    {
+        $sql = "EXEC rrhh.actualizarAccionPersonalYVacaciones   @idAccionPersonal =:id,
+                                                                @estado =:estado,
+                                                                @comentarios =:comentarios,
+                                                                @usuario = :usuario";
 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function cambiarEstado($id, $estado, $comentarios)
+    {
+        $fechaHoraActual = date('Y-m-d H:i:s');
+        $sql = "UPDATE rrhh.accionPersonal
+                SET estado=:estado,
+                    ComentariosN1=:comentarios,
+                    fechaAprobadoN1=:fecha,
+                    AprobadoN1=:usuario
+                WHERE idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":fecha", $fechaHoraActual);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+    public function cancelarSolicitud($id, $estado, $comentarios)
+    {
+        $fechaHoraActual = date('Y-m-d H:i:s');
+        $sql = "UPDATE rrhh.accionPersonal
+                SET estado=:estado,
+                    comentariosCancelado=:comentarios,
+                    fechaCancelado=:fecha,
+                    cancelado=:usuario
+                WHERE idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":comentarios", $comentarios);
+        $stmt->bindParam(":fecha", $fechaHoraActual);
+        $stmt->bindParam(":usuario", $_SESSION['usuario']);
+        try {
+            $stmt->execute();
+            $resultado = true;
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+        $stmt->closeCursor();
+        return $resultado;
+    }
+
+    /* Carga los listados de acciones de personal */
     public function cargasMisSolicitudesPorAprobar($id, $estado)
     {
         $sql = "SELECT	CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) as nombreCompleto,
@@ -252,10 +329,43 @@ class mdlAccion
     }
     public function cargasMisSolicitudes($id)
     {
-        $sql = "SELECT idAccionPersonal,fechaSolicitud,tipoAccion,tp.accion,cantidadDias,comentarios,desde,hasta,estado
+        $sql = "SELECT	ap.idAccionPersonal,
+                        ap.fechaSolicitud,
+                        ap.tipoAccion,
+                        tp.accion,
+                        ap.cantidadDias,
+                        ap.comentarios,
+                        ap.desde,
+                        ap.hasta,
+                        ap.estado,
+                        ap.idEmpleado,
+                        ap.aprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as nombreN1,
+                        ap.aprobadoN2,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN2) as nombreN2,
+                        ap.cancelado,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.cancelado) as nombrecancelado,
+                        ap.fechaAprobadoN1,
+                        ap.fechaAprobadoN2,
+                        ap.fechaCancelado,
+                        ap.comentariosN1,
+                        ap.comentariosN2,
+                        ap.comentariosCancelado,
+                        CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
+                        hd.idProyecto,
+                        p.nombre proyecto,
+                        hd.idJefe,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
+                        hd.idTDR,
+                        pu.nombrePuesto
                 FROM rrhh.accionPersonal ap
                 INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
-                WHERE idEmpleado=:id";
+                INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
+                LEFT JOIN rrhh.historial h ON h.idEmpleado	= e.idEmpleado
+                LEFT JOIN rrhh.historialDetalle hd ON hd.idHistorial= h.idHistorial
+                LEFT JOIN bosque.proyecto p ON p.id=hd.idProyecto
+                LEFT JOIN rrhh.puestos pu ON pu.idPuesto=hd.idTDR
+                WHERE AP.idEmpleado=:id";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id", $id);
@@ -306,7 +416,6 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
-
     public function solicitudesPendientesPorArpobar()
     {
         $sql = "SELECT	ap.idAccionPersonal,
@@ -348,7 +457,6 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
-
     public function verTodas()
     {
         $sql = "SELECT	ap.idAccionPersonal,
@@ -389,57 +497,6 @@ class mdlAccion
         try {
             $stmt->execute();
             $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-        return $resultado;
-    }
-
-    public function cambiarEstadoN2($id, $estado, $comentarios)
-    {
-        $fechaHoraActual = date('Y-m-d H:i:s');
-        $sql = "UPDATE rrhh.accionPersonal
-                SET estado=:estado,
-                    ComentariosN2=:comentarios,
-                    fechaAprobadoN2=:fecha,
-                    AprobadoN2=:usuario
-                WHERE idAccionPersonal=:id";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":estado", $estado);
-        $stmt->bindParam(":comentarios", $comentarios);
-        $stmt->bindParam(":fecha", $fechaHoraActual);
-        $stmt->bindParam(":usuario", $_SESSION['usuario']);
-        try {
-            $stmt->execute();
-            $resultado = true;
-        } catch (PDOException $e) {
-            $resultado = $e->getMessage();
-        }
-        $stmt->closeCursor();
-        return $resultado;
-    }
-    public function cambiarEstado($id, $estado, $comentarios)
-    {
-        $fechaHoraActual = date('Y-m-d H:i:s');
-        $sql = "UPDATE rrhh.accionPersonal
-                SET estado=:estado,
-                    ComentariosN1=:comentarios,
-                    fechaAprobadoN1=:fecha,
-                    AprobadoN1=:usuario
-                WHERE idAccionPersonal=:id";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":estado", $estado);
-        $stmt->bindParam(":comentarios", $comentarios);
-        $stmt->bindParam(":fecha", $fechaHoraActual);
-        $stmt->bindParam(":usuario", $_SESSION['usuario']);
-        try {
-            $stmt->execute();
-            $resultado = true;
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }

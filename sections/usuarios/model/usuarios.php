@@ -348,6 +348,7 @@
 				$stmt->execute();
 				# solicitamos la consulta en un arreglo asociativo
 				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo $result;
 				
 			} catch (PDOException $e) {
 				# capturamos el error
