@@ -16,108 +16,135 @@ $(document).ready(function () {
 /* Detalla la información de la acción del personal seleccionada */
 $('#solicitudes').on('click', '.btn-verMas', function () {
     var idSolicitud = $(this).data('id');
-    var empleado = $(this).closest('tr').find('td:eq(1)').text();
-    var tipoSolicitud = $(this).closest('tr').find('td:eq(2)').text();
-    var fechaSolicitud = convertirFecha($(this).closest('tr').find('td:eq(3)').text());
+    var empleado = capitalizar($(this).data('nombre'));
+    var tipoSolicitud = $(this).closest('tr').find('td:eq(1)').text();
+    var fechaSolicitud =formatearFecha ($(this).data('solicitud'));
+    var desde = formatearFecha($(this).data('desde'));
+    var reanuda = formatearFecha($(this).data('hasta'));
     var proyecto = $(this).data('proyecto');
     var jefe = capitalizar($(this).data('jefe'));
     var cargo = $(this).data('cargo');
     var comentarios = $(this).data('comentarios');
-    var comentariosn1 = $(this).data('comentariosn1');
-    var fechan1 = $(this).data('fechan1');
-    var aprobado = capitalizar($(this).data('aprobado'));
-    var comentariosn2 = $(this).data('comentariosn2');
-    var fechan2 = $(this).data('fechan2');
-    var desde = $(this).data('desde');
-    var reanuda = $(this).data('reanuda');
-    var aprobadon2 = capitalizar($(this).data('aprobadon2'));
+    var comentariosN1 = $(this).data('comentariosn1');
+    var comentariosN2 = $(this).data('comentariosn2');
+    var comentariosC = $(this).data('comentariosc');
+    var nombreN1 = $(this).data('nombren1');
+    var nombreN2 = $(this).data('nombren2');
+    var nombrecancelado = capitalizar($(this).data('nombrecancelado'));
+    var fechaN1 = $(this).data('fechan1');
+    var fechaN2 = $(this).data('fechan2');
+    var fechaCancelado =  formatearFecha($(this).data('fechacancelado'));
+    var estado = $(this).data('estado');
 
     // Llenar el modal con la información
     var modalBody = $('#detalleSolicitudModal').find('.modal-body');
     $('#noSolicitud').text("SOLICITUD NO. " + idSolicitud);
-    modalBody.html(
-        `
-                             <div class="row">
-								
-                                <div class="row">
-                                <table class="table table-sm table-striped-columns">
+    var n1 = "";
+    var n2 = "";    
+    var cancelado = "";
+    if (estado !== 4) {
+        
+        if (nombreN1) {
+            n1 = `<tr>
+                <th>Aprobación Jefe Inmediato</th>
+                <td>${nombreN1}</td>
+            </tr>
+            <tr>
+                <th>Fecha de aprobación</th>
+                <td>${fechaN1}</td>
+            </tr>
+            <tr>
+                <th>Comentarios de Aprobación</th>
+                <td>${comentariosN1}</td>
+            </tr>`;
+        };
+        if (nombreN2) {
+            n2 = ` <tr>
+                    <th>Aprobación RRHH</th>
+                    <td>${nombreN2}</td>
+                </tr>
+                <tr>
+                    <th>Fecha de aprobación</th>
+                    <td>${fechaN2}</td>
+                </tr>
+                <tr>
+                    <th>Comentarios de Aprobación</th>
+                    <td>${comentariosN2}</td>
+                </tr>`;
+        }
+
+    }else if (estado==4) {
+        if (nombrecancelado) {
+            cancelado = ` <tr>
+                    <th>Cancelado por</th>
+                    <td>${nombrecancelado}</td>
+                </tr>
+                <tr>
+                    <th>Fecha de cancelación</th>
+                    <td>${fechaCancelado}</td>
+                </tr>
+                <tr>
+                    <th>Motivo de cancelación</th>
+                    <td>${comentariosC}</td>
+                </tr>`;
+        }
+    } 
+
+
+    var contenido = `<div class="row">			
+                        <div class="row">
+                            <table class="table table-sm table-striped-columns">
                                 <thead>
-                                <tr>
-                                    <th colspan="3" class="text-center">Empleado</th>
-                                </tr>
+                                    <tr>
+                                        <th colspan="3" class="text-center">Empleado</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td colspan="3" class="text-center">${empleado}</td>
-                                </tr>
-                                <tr>
-                                    <th>Cargo</th>
-                                    <td>${cargo}</td>
-                                </tr>
-                                <tr>
-                                    <th>Proyecto</th>
-                                    <td>${proyecto}</td>
-                                </tr>
-                                <tr>
-                                    <th>Jefe Inmediato</th>
-                                    <td>${jefe}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tipo de Acción</th>
-                                    <td>${tipoSolicitud}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de Solicitud</th>
-                                    <td>${fechaSolicitud}</td>
-                                </tr>
-                                <tr>
-                                    <th>Rige desde</th>
-                                    <td>${desde}</td>
-                                </tr>
-                                <tr>
-                                    <th>Reanuda</th>
-                                    <td>${reanuda}</td>
-                                </tr>
-                                <tr>
-                                    <th>Comentarios</th>
-                                    <td>${comentarios}</td>
-                                </tr>
-                                <tr>
-                                    <th>Aprobado por:</th>
-                                    <td>${aprobado}</td>
-                                </tr>
-                                <tr>
-                                    <th>Comentarios aprobación</th>
-                                    <td>${comentariosn1}</td>
-                                </tr>
-                                <tr>
-                                    <th>Fecha de aprobación</th>
-                                    <td>${fechan1}</td>SE
-                                </tr>
-                                <tr>
-                                    <th>Aprobado por:</th>
-                                    <td>${aprobadon2}</td>
-                                </tr>
-                                <tr>
-                                    <th>Comentarios aprobación</th>
-                                    <td>${comentariosn2}</td>
-                                </tr>
-                                <tr>
-                                    <th>Comentarios aprobación</th>
-                                    <td>${fechan2}</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-center">${empleado}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cargo</th>
+                                        <td>${cargo}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Proyecto</th>
+                                        <td>${proyecto}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jefe Inmediato</th>
+                                        <td>${jefe}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo de Acción</th>
+                                        <td>${tipoSolicitud}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de Solicitud</th>
+                                        <td>${fechaSolicitud}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rige desde</th>
+                                        <td>${desde}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Reanuda</th>
+                                        <td>${reanuda}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Comentarios</th>
+                                        <td>${comentarios}</td>
+                                    </tr>
+                                    ${n1}${n2}${cancelado}
                                 </tbody>
-                            </table>
-								
-							</div>
-							
-        `
-    );
+                            </table>						
+                        </div>`;
+
+    modalBody.html(contenido);
 
     // Mostrar el modal
     $('#detalleSolicitudModal').modal('show');
 });
-
 
 /* Permite cancelar la solicitud a un NIVEL 1 */
 $('#solicitudes').on('click', '.btn-rechazar', function () {
@@ -327,20 +354,26 @@ function VerSolicitudesAprobadasCanceladas() {
                                 
                                                         
                                                         <li>
-                                                            <a class="dropdown-item bg-hover cursor-pointer btn-verMas" 
+                                                            <a  class="dropdown-item bg-hover cursor-pointer btn-verMas" 
                                                                 data-id="${full.idAccionPersonal}" 
+                                                                data-nombre="${full.nombreCompleto}" 
+                                                                data-solicitud="${full.fechaSolicitud}" 
                                                                 data-comentarios="${full.comentarios}" 
+                                                                data-desde="${full.desde}" 
+                                                                data-hasta="${full.hasta}" 
                                                                 data-proyecto="${full.proyecto}" 
                                                                 data-jefe="${full.jefe}" 
+                                                                data-estado="${full.estado}" 
                                                                 data-cargo="${full.nombrePuesto}" 
-                                                                data-aprobado="${full.aprobadoPor}" 
-                                                                data-comentariosn1="${full.comentariosN1}" 
+                                                                data-nombren1="${full.nombreN1}" 
+                                                                data-nombren2="${full.nombreN2}" 
+                                                                data-nombrecancelado="${full.nombrecancelado}" 
                                                                 data-fechan1="${full.fechaAprobadoN1}" 
-                                                                data-aprobadon2="${full.aprobadoN2}" 
-                                                                data-comentariosn2="${full.comentariosN2}" 
                                                                 data-fechan2="${full.fechaAprobadoN2}" 
-                                                                data-desde="${full.desde}" 
-                                                                data-reanuda="${full.hasta}" 
+                                                                data-fechacancelado="${full.fechaCancelado}" 
+                                                                data-comentariosn1="${full.comentariosN1}" 
+                                                                data-comentariosn2="${full.comentariosN2}" 
+                                                                data-comentariosc="${full.comentariosCancelado}" 
                                                                 data-idEmpleado="${full.idEmpleado}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye text-primary" viewBox="0 0 16 16">
                                                                     <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
@@ -432,33 +465,64 @@ function cargarTabla(tableID, data, columns) {
 function capitalizar(name) {
     if (name) {
         return name.split(' ').map(function (word) {
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join(' '); 
-    }else{
-        return '-';
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }).join(' ');
     }
-   
+
 }
 
 function convertirFecha(fechaOriginal) {
     // Mapeo de abreviaturas de mes a nombres completos
-    var meses = {
-        'Jan': 'Enero', 'Feb': 'Febrero', 'Mar': 'Marzo', 'Apr': 'Abril',
-        'May': 'Mayo', 'Jun': 'Junio', 'Jul': 'Julio', 'Aug': 'Agosto',
-        'Sep': 'Septiembre', 'Oct': 'Octubre', 'Nov': 'Noviembre', 'Dec': 'Diciembre'
-    };
+    if (fechaOriginal) {
+        var meses = {
+            'Ene': 'Enero', 'Feb': 'Febrero', 'Mar': 'Marzo', 'Abr': 'Abril',
+            'May': 'Mayo', 'Jun': 'Junio', 'Jul': 'Julio', 'Ago': 'Agosto',
+            'Sep': 'Septiembre', 'Oct': 'Octubre', 'Nov': 'Noviembre', 'Dic': 'Diciembre'
+        };
 
-    // Divide la fecha original en componentes
-    var partes = fechaOriginal.split('-');
-    var dia = partes[0];
-    var mesAbreviado = partes[1];
-    var año = partes[2];
+        // Divide la fecha original en componentes
+        var partes = fechaOriginal.split('-');
+        var dia = partes[0];
+        var mesAbreviado = partes[1];
+        var año = partes[2];
 
-    // Convierte el mes a nombre completo
-    var mesCompleto = meses[mesAbreviado];
+        // Convierte el mes a nombre completo
+        var mesCompleto = meses[mesAbreviado];
 
-    // Reformatea la fecha
-    var fechaConvertida = dia + ' de ' + mesCompleto + ' del ' + año;
-    return fechaConvertida;
+        // Reformatea la fecha
+        var fechaConvertida = dia + ' de ' + mesCompleto + ' del ' + año;
+        return fechaConvertida;
+    }
+
+}
+
+function formatearFecha(fecha) {
+    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    var fechaObj = new Date(fecha);
+    var dia = fechaObj.getDate();
+    var mes = fechaObj.getMonth();
+    var año = fechaObj.getFullYear();
+
+    return dia + " de " + meses[mes] + " del " + año;
+}
+
+function actualizarFecha() {
+    // Obtiene la fecha actual
+    var fechaActual = new Date();
+
+    // Formatea la fecha manualmente (puedes ajustar el formato según tus necesidades)
+    var dia = fechaActual.getDate();
+    var mes = fechaActual.getMonth() + 1; // Los meses van de 0 a 11
+    var año = fechaActual.getFullYear();
+
+    // Añade un cero inicial si el día o el mes es menor a 10
+    dia = dia < 10 ? '0' + dia : dia;
+    mes = mes < 10 ? '0' + mes : mes;
+
+    // Construye la cadena de fecha en el formato deseado
+    var fechaFormateada = dia + '/' + mes + '/' + año;
+
+    // Actualiza el elemento HTML con la fecha formateada
+    $('#fechaActual').text(fechaFormateada);
 }
 

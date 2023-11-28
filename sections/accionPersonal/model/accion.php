@@ -77,6 +77,7 @@ class mdlAccion
     }
 
 
+    
     /* Agregar Acción de personal */
     public function buscarInfo($id)
     {
@@ -290,6 +291,8 @@ class mdlAccion
         return $resultado;
     }
 
+
+
     /* Carga los listados de acciones de personal */
     public function cargasMisSolicitudesPorAprobar($id, $estado)
     {
@@ -483,6 +486,7 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+
     public function solicitudesPendientesPorArpobar()
     {
         $sql = "SELECT	ap.idAccionPersonal,
@@ -524,6 +528,7 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+
     public function verTodas()
     {
         $sql = "SELECT	ap.idAccionPersonal,
@@ -536,21 +541,25 @@ class mdlAccion
                         ap.hasta,
                         ap.estado,
                         ap.idEmpleado,
+                        ap.aprobadoN1,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as nombreN1,
+                        ap.aprobadoN2,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN2) as nombreN2,
+                        ap.cancelado,
+                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.cancelado) as nombrecancelado,
+                        ap.fechaAprobadoN1,
+                        ap.fechaAprobadoN2,
+                        ap.fechaCancelado,
+                        ap.comentariosN1,
+                        ap.comentariosN2,
+                        ap.comentariosCancelado,
                         CONCAT (primerNombre,' ',segundoNombre,' ',primerApellido) AS nombreCompleto,
                         hd.idProyecto,
                         p.nombre proyecto,
                         hd.idJefe,
                         (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
                         hd.idTDR,
-                        pu.nombrePuesto,
-                        ap.aprobadoN1,
-                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN1) as aprobadoPor,
-                        ap.comentariosN1,
-                        ap.fechaAprobadoN1,
-                        ap.aprobadoN2,
-                        (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=ap.aprobadoN2) as aprobadoN2,
-                        ap.comentariosN2,
-                        ap.fechaAprobadoN2
+                        pu.nombrePuesto
                 FROM rrhh.accionPersonal ap
                 INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
                 INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
@@ -570,6 +579,7 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+
     public function cargarSolicitudesPorId($id)
     {
         $sql = "SELECT	idAccionPersonal,

@@ -14,31 +14,15 @@
 	        $this->Cell(300, 30, "", 0, 1, 'C', true);
 
         
-            $this->Image('../../../assets/images/brand/logo_cohonducafe.png', 70, 8, 80,25 );
-            $this->Ln(); 
 
-
-			/* $this->SetXY(75,40);
-            $this->SetFillColor(232,232,232);
-            $this->SetFont('Arial','B',14);
-            $this->Cell(200,10, iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'FICHA DE EMPLEADO')); */
         }
 		
         function Footer() {
-            /* $this->SetFont('Arial','',9);
-			$this->SetXY(10,250);
-			$this->MultiCell(250,75,'usario-sistema');
-			
-			$this->SetFont('Arial','B',10);
-			$this->SetXY(10,245);
-            $this->MultiCell(250,75,'Impreso por');
-			$this->setxy(143,230); */
 
 			
-			
 			$this->SetFont('Arial','I',9);
-			$this->setxy(15,275);
-			$this->Cell(0,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Página').$this->PageNo(),0,0,'C');
+			$this->setxy(15,266);
+			$this->Cell(170,10,iconv("UTF-8", "ISO-8859-1//TRANSLIT", 'Página').$this->PageNo(),0,0,'R');
         }
 
 

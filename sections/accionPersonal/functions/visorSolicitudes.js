@@ -27,8 +27,8 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var empleado = capitalizar($(this).data('nombre'));
     var tipoSolicitud = $(this).closest('tr').find('td:eq(1)').text();
     var fechaSolicitud =formatearFecha ($(this).data('solicitud'));
-    var desde = convertirFecha($(this).closest('tr').find('td:eq(3)').text());
-    var reanuda = convertirFecha($(this).closest('tr').find('td:eq(4)').text());
+    var desde = formatearFecha($(this).data('desde'));
+    var reanuda = formatearFecha($(this).data('hasta'));
     var proyecto = $(this).data('proyecto');
     var jefe = capitalizar($(this).data('jefe'));
     var cargo = $(this).data('cargo');
@@ -356,6 +356,8 @@ function VerSolicitudes(id) {
                                                 data-nombre="${full.nombreCompleto}" 
                                                 data-solicitud="${full.fechaSolicitud}" 
                                                 data-comentarios="${full.comentarios}" 
+                                                data-desde="${full.desde}" 
+                                                data-hasta="${full.hasta}" 
                                                 data-proyecto="${full.proyecto}" 
                                                 data-jefe="${full.jefe}" 
                                                 data-estado="${full.estado}" 
@@ -437,8 +439,6 @@ function VerSolicitudes(id) {
     });
 
 }
-
-
 
 function cargarTabla(tableID, data, columns) {
     $(tableID).dataTable().fnClearTable();
