@@ -25,7 +25,7 @@ CREATE TABLE rrhh.estadosAccion (
 		PRIMARY KEY CLUSTERED (id),
 	estado INT NOT NULL,
 	fechaCreado DATETIME NOT NULL DEFAULT GETDATE(),
-	fechaModificado DATETIME NULL,
+	fechaModificado DATETIME NULL,1530
 	usuarioCreado VARCHAR(100) NOT NULL,
 	usuarioModificado VARCHAR(100) NULL
 );

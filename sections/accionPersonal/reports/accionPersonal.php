@@ -257,7 +257,7 @@
     $pdf->Cell(10, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
     $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'Dania Nohemy Perdomo' ), 0, 0, 'C', 1);
     $pdf->Cell(30, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
-    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($datosGenerales[0]['jefe'])  ), 0, 0, 'C', 1);
+    $pdf->Cell(60, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($datosGenerales[0]['director'])  ), 0, 0, 'C', 1);
     $pdf->Cell(10, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'' ), 0, 0, 'C', 1);
 
     $pdf->SetFont('Arial','I',8);

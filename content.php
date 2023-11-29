@@ -5,6 +5,7 @@
 if (empty($_GET['section'])) {
     include "./sections/inicio.php";
 } else {
+    /* Empleados */
     $_GET['section'] == 'listadoEmpleados' ? include "./sections/empleado/view/listadoEmpleados.php" : false;
     $_GET['section'] == 'empleado' ? include "./sections/empleado/view/empleado.php" : false;
     $_GET['section'] == 'editar' ? include "./sections/empleado/view/empleadoEdit.php" : false;
@@ -25,6 +26,7 @@ if (empty($_GET['section'])) {
     $_GET['section'] == 'proyectos' ? include "./sections/mantenimientos/view/proyectos.php" : false;
     $_GET['section'] == 'condicionTrabajo' ? include "./sections/mantenimientos/view/condicionesTrabajo.php" : false;
     $_GET['section'] == 'remuneraciones' ? include "./sections/mantenimientos/view/remuneraciones.php" : false;
+    $_GET['section'] == 'permisos' ? include "./sections/mantenimientos/view/permisos.php" : false;
 
 
     /* Accion de personal */

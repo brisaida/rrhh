@@ -26,7 +26,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var idSolicitud = $(this).data('id');
     var empleado = capitalizar($(this).data('nombre'));
     var tipoSolicitud = $(this).closest('tr').find('td:eq(1)').text();
-    var fechaSolicitud =formatearFecha ($(this).data('solicitud'));
+    var fechaSolicitud = formatearFecha($(this).data('solicitud'));
     var desde = formatearFecha($(this).data('desde'));
     var reanuda = formatearFecha($(this).data('hasta'));
     var proyecto = $(this).data('proyecto');
@@ -41,17 +41,17 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var nombrecancelado = capitalizar($(this).data('nombrecancelado'));
     var fechaN1 = $(this).data('fechan1');
     var fechaN2 = $(this).data('fechan2');
-    var fechaCancelado =  formatearFecha($(this).data('fechacancelado'));
+    var fechaCancelado = formatearFecha($(this).data('fechacancelado'));
     var estado = $(this).data('estado');
 
     // Llenar el modal con la información
     var modalBody = $('#detalleSolicitudModal').find('.modal-body');
     $('#noSolicitud').text("SOLICITUD NO. " + idSolicitud);
     var n1 = "";
-    var n2 = "";    
+    var n2 = "";
     var cancelado = "";
     if (estado !== 4) {
-        
+
         if (nombreN1) {
             n1 = `<tr>
                 <th>Aprobación Jefe Inmediato</th>
@@ -81,7 +81,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                 </tr>`;
         }
 
-    }else if (estado==4) {
+    } else if (estado == 4) {
         if (nombrecancelado) {
             cancelado = ` <tr>
                     <th>Cancelado por</th>
@@ -96,7 +96,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                     <td>${comentariosC}</td>
                 </tr>`;
         }
-    } 
+    }
 
 
     var contenido = `<div class="row">			
@@ -189,7 +189,7 @@ $('#solicitudes').on('click', '.rechazar', function () {
                             title: "Cancelado correctamente.",
                             showConfirmButton: false,
                             timer: 1500
-                        }); 
+                        });
                         setTimeout(function () {
                             location.reload();
                         }, 1500);
@@ -202,15 +202,15 @@ $('#solicitudes').on('click', '.rechazar', function () {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                       
+
                     }
                 });
-            }else{
+            } else {
                 Swal.fire({
                     title: "¡Ups!",
                     text: "Todas las cancelaciones tienen que tener un comentario, intentalo de nuevo.",
                     icon: "error"
-                  });
+                });
             }
 
 
@@ -390,21 +390,21 @@ function VerSolicitudes(id) {
                                                     Imprimir (PDF)
                                                 </a>
                                             </li>`;
-                            } 
+                            }
                             if (full.estado == 2 || full.estado == 3) {
-                                if(full.hasta>fechaFormateada){
-                                 cancelar= ` <li>
+                                if (full.hasta > fechaFormateada) {
+                                    cancelar = ` <li>
                                         <a class="dropdown-item bg-hover cursor-pointer rechazar"  data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg text-danger" viewBox="0 0 16 16">
                                                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                             </svg>
                                             Cancelar
                                         </a>
-                                    </li>`   
+                                    </li>`
                                 }
-                                
+
                             }
-                        
+
                             let menu = `    <center>
                                                 <div class="dropdown">
                                                     <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -418,21 +418,21 @@ function VerSolicitudes(id) {
                                                 </div>
                                             </center>`;
 
-                return `${menu}`;
+                            return `${menu}`;
 
-            },
-        },
+                        },
+                    },
                 ];
 
-    // Llamado a la función para crear la tabla con los datos
-    cargarTabla("#solicitudes", datos, columns);
+                // Llamado a la función para crear la tabla con los datos
+                cargarTabla("#solicitudes", datos, columns);
 
 
 
-} else {
-    // swal.fire("Empleados","El productor no se encuentra registrado en sistema","info");
+            } else {
+                // swal.fire("Empleados","El productor no se encuentra registrado en sistema","info");
 
-}
+            }
 
 
         },

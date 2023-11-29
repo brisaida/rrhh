@@ -228,6 +228,14 @@ $('#solicitudes').on('click', '.btn-rechazar', function () {
     });
 });
 
+$('#solicitudes').on("click", ".btn-imprimir", function () {
+    var idAccion = $(this).data('id');
+    var idEmpleado = $(this).data('idempleado');
+    window.open(
+        `./sections/accionPersonal/reports/accionPersonal.php?id=${idAccion}&idE=${idEmpleado}`
+    );
+});
+
 
 
 /* Carga la tabla con todas las acciones de personal pendientes */
@@ -320,28 +328,79 @@ function VerSolicitudesAprobadasCanceladas() {
                         className: "text-left",
                         width: '5%',
                         render: function (data, types, full, meta) {
+                            var fechaActual = new Date();
 
-                            var desde=full.desde;
-                            var hoy = new Date(); 
-                            var cancelar="";
-                            desde = desde.split('T')[0];
-                            var fechaDesde = new Date(desde);
-                            hoy.setHours(0, 0, 0, 0);
-                        
-                            if (fechaDesde > hoy) {
-                                cancelar = `<li>
-                                                <a class="dropdown-item bg-hover cursor-pointer btn-rechazar" 
-                                                    data-id="${full.idAccionPersonal}" 
-                                                    data-idEmpleado="${full.idEmpleado}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg text-danger" viewBox="0 0 16 16">
-                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                            // Formatea la fecha manualmente (puedes ajustar el formato según tus necesidades)
+                            var dia = fechaActual.getDate();
+                            var mes = fechaActual.getMonth() + 1; // Los meses van de 0 a 11
+                            var año = fechaActual.getFullYear();
+
+                            // Añade un cero inicial si el día o el mes es menor a 10
+                            dia = dia < 10 ? '0' + dia : dia;
+                            mes = mes < 10 ? '0' + mes : mes;
+
+                            // Construye la cadena de fecha en el formato deseado
+                            var fechaFormateada = año + '-' + mes + '-' + dia;
+
+                            let verMas = "",
+                                imprimir = "",
+                                cancelar = "";
+
+                            if (full.estado == 2 || full.estado == 4) {
+                                verMas = `<li>
+                                            <a  class="dropdown-item bg-hover cursor-pointer btn-verMas"  
+                                                data-id="${full.idAccionPersonal}" 
+                                                data-nombre="${full.nombreCompleto}" 
+                                                data-solicitud="${full.fechaSolicitud}" 
+                                                data-comentarios="${full.comentarios}" 
+                                                data-desde="${full.desde}" 
+                                                data-hasta="${full.hasta}" 
+                                                data-proyecto="${full.proyecto}" 
+                                                data-jefe="${full.jefe}" 
+                                                data-estado="${full.estado}" 
+                                                data-cargo="${full.nombrePuesto}" 
+                                                data-nombren1="${full.nombreN1}" 
+                                                data-nombren2="${full.nombreN2}" 
+                                                data-nombrecancelado="${full.nombrecancelado}" 
+                                                data-fechan1="${full.fechaAprobadoN1}" 
+                                                data-fechan2="${full.fechaAprobadoN2}" 
+                                                data-fechacancelado="${full.fechaCancelado}" 
+                                                data-comentariosn1="${full.comentariosN1}" 
+                                                data-comentariosn2="${full.comentariosN2}" 
+                                                data-comentariosc="${full.comentariosCancelado}" 
+                                                data-idEmpleado="${full.idEmpleado}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                                </svg>
+                                                Ver Más
+                                            </a>
+                                        </li>`
+                            } else if (full.estado == 3) {
+                                imprimir = `  <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item bg-hover cursor-pointer btn-imprimir" data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                                                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                                                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
                                                     </svg>
-                                                    Cancelar
+                                                    Imprimir (PDF)
                                                 </a>
                                             </li>`;
                             }
-                           
+                            if (full.estado == 2 || full.estado == 3) {
+                                if (full.hasta > fechaFormateada) {
+                                    cancelar = ` <li>
+                                        <a class="dropdown-item bg-hover cursor-pointer rechazar"  data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg text-danger" viewBox="0 0 16 16">
+                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                            </svg>
+                                            Cancelar
+                                        </a>
+                                    </li>`
+                                }
 
+                            }
 
                             let menu = `    <center>
                                                 <div class="dropdown">
@@ -351,39 +410,7 @@ function VerSolicitudesAprobadasCanceladas() {
                                                         </svg>
                                                     </a>
                                                     <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                
-                                                        
-                                                        <li>
-                                                            <a  class="dropdown-item bg-hover cursor-pointer btn-verMas" 
-                                                                data-id="${full.idAccionPersonal}" 
-                                                                data-nombre="${full.nombreCompleto}" 
-                                                                data-solicitud="${full.fechaSolicitud}" 
-                                                                data-comentarios="${full.comentarios}" 
-                                                                data-desde="${full.desde}" 
-                                                                data-hasta="${full.hasta}" 
-                                                                data-proyecto="${full.proyecto}" 
-                                                                data-jefe="${full.jefe}" 
-                                                                data-estado="${full.estado}" 
-                                                                data-cargo="${full.nombrePuesto}" 
-                                                                data-nombren1="${full.nombreN1}" 
-                                                                data-nombren2="${full.nombreN2}" 
-                                                                data-nombrecancelado="${full.nombrecancelado}" 
-                                                                data-fechan1="${full.fechaAprobadoN1}" 
-                                                                data-fechan2="${full.fechaAprobadoN2}" 
-                                                                data-fechacancelado="${full.fechaCancelado}" 
-                                                                data-comentariosn1="${full.comentariosN1}" 
-                                                                data-comentariosn2="${full.comentariosN2}" 
-                                                                data-comentariosc="${full.comentariosCancelado}" 
-                                                                data-idEmpleado="${full.idEmpleado}">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye text-primary" viewBox="0 0 16 16">
-                                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-                                                                </svg>
-                                                                Ver más
-                                                            </a>
-                                                        </li>
-                                                        ${cancelar}
-                                                        
+                                                       ${verMas}${cancelar} ${imprimir}                                     
                                                     </ul>
                                                 </div>
                                             </center>`;

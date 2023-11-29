@@ -111,6 +111,8 @@
 			echo '<script src="./sections/mantenimientos/functions/tipoAccionPersonal.js"></script>';
 		} else if ($_GET['section'] == 'puestos' || $_GET['section'] == 'puestos') {
 			echo '<script src="./sections/mantenimientos/functions/puestos.js"></script>';
+		} else if ($_GET['section'] == 'permisos' || $_GET['section'] == 'permisos') {
+			echo '<script src="./sections/mantenimientos/functions/permisos.js"></script>';
 		} else if ($_GET['section'] == 'verPuestos' || $_GET['section'] == 'verPuestos') {
 			echo'<script src="https://d3js.org/d3.v7.min.js"></script>';
 			echo '<script src="./sections/mantenimientos/functions/puestos.js"></script>';
