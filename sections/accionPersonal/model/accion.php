@@ -149,15 +149,12 @@ class mdlAccion
             $resultado = true;
 
             setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish');
-
             $desde = new DateTime($datos->desde); // o tu objeto DateTime existente
-            $desdeFormateado = formatDateTime($desde);
-
+            $desdeFormateado = strftime('%A, %d de %B de %Y', $desde->getTimestamp());
             $hasta = new DateTime($datos->hasta); // o tu objeto DateTime existente
-            $hastaFormateado = formatDateTime($hasta);
-
+            $hastaFormateado = strftime('%A, %d de %B de %Y', $hasta->getTimestamp());
             $solicitud = new DateTime($datos->solicitud); // o tu objeto DateTime existente
-            $solicitudFormateado = formatDateTime($solicitud);
+            $solicitudFormateado = strftime('%A, %d de %B de %Y', $solicitud->getTimestamp());
 
             function formatDateTime($dateTime)
             {
