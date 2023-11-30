@@ -298,13 +298,13 @@
 		}
 
 
-        function vaidarPermiso($modulo){
+        function validarPermiso($modulo){
             if($_SESSION['tipoAcceso'] =='1'){
                 return true;
             }else{
-                $sql= "SELECT * FROM bosque.permisoUsuario 
-                            INNER JOIN bosque.submodulo ON bosque.permisoUsuario.submodulo = bosque.submodulo.id 
-                        WHERE usuario =:id and bosque.permisoUsuario.estado =1";
+                $sql= "SELECT *FROM rrhh.permisos p
+                        INNER JOIN rrhh.submodulo sm on sm.id=p.submodulo
+                        WHERE idEmpleado=:id AND p.estado=1";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(":id", $_SESSION['id']);
                 $stmt->execute();
@@ -318,7 +318,7 @@
                 $resultado = in_array($modulo,$arrayPermisos) == 1 ? true : false;
 
                 if($resultado == false){
-                    include "./modules/home/views/sinPermiso.php";
+                    include "./sections/home/views/sinPermiso.php";
                 }
             }
 

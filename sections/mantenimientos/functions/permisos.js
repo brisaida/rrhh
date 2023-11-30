@@ -32,13 +32,14 @@ $("#guardar").click(function () {
                 var submodulo = $(this).attr('submodulo');
                 var estado = $(this).is(':checked');;
                 var dataId = $("#empleados").find("option:selected").val();
-
+                
                 if (estado) {
                     estado = 1;
                 } else {
                     estado = 0;
                 }
-                guardarPermisos(submodulo, estado, dataId)
+               guardarPermisos(submodulo, estado, dataId)
+               //console.log(submodulo, estado, dataId)
             });
             Swal.fire("Guardado!", "", "success");
         } else if (result.isDenied) {
@@ -198,7 +199,7 @@ function cargarSubmodulo(id) {
                 $('.id' + id).html = '';
                 $.each(respuesta, function (index, registro) {
                     var contenido = `<div class="form-check form-switch mt-2">
-                                        <input class="form-check-input permiso subModulo${registro.id}" type="checkbox" id="${registro.ruta}" >
+                                        <input class="form-check-input permiso subModulo${registro.id}" type="checkbox" id="${registro.ruta}" subModulo=${registro.id}>
                                         <label class="form-check-label" for="ruta">${registro.nombre}</label>
                                     </div>
 								    `;
