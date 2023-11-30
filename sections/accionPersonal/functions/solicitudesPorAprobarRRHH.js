@@ -126,12 +126,19 @@ $('#solicitudes').on('click', '.btn-aprobar', function () {
             console.log(idRegistro)
             if (idEmpleado == idRegistro) {
                 Swal.fire({
-                    title:"¡Ups!",
+                    title: "¡Ups!",
                     text: "No puedes aprobar tu propia solicitud",
                     icon: "error"
-                  });
+                });
 
             } else {
+                // Primero, guardamos la referencia de la nueva ventana
+                var nuevaVentana = window.open(
+                    `./sections/accionPersonal/reports/accionPersonal.php?id=${accionSeleccionada.id}&idE=${idEmpleado}`
+                );
+                nuevaVentana.close();
+                window.history.back();
+                 
                 $.ajax({
                     type: "POST",
                     url: "./sections/accionPersonal/controller/cambiarEstadoN2.php",
@@ -156,7 +163,7 @@ $('#solicitudes').on('click', '.btn-aprobar', function () {
                         });
                         setTimeout(function () {
                             location.reload();
-                        }, 1500);
+                        }, 1500); 
 
                     },
                     error: function (error) {
@@ -169,7 +176,7 @@ $('#solicitudes').on('click', '.btn-aprobar', function () {
                         });
                     }
                 });
-            } 
+            }
         }
     });
 });
@@ -202,12 +209,12 @@ $('#solicitudes').on('click', '.btn-rechazar', function () {
             console.log(idRegistro)
             if (idEmpleado == idRegistro) {
                 Swal.fire({
-                    title:"¡Ups!",
+                    title: "¡Ups!",
                     text: "No puedes cancelar tu propia solicitud",
                     icon: "error"
-                  });
+                });
 
-            } else if(result.value!==''){
+            } else if (result.value !== '') {
                 $.ajax({
                     type: "POST",
                     url: "./sections/accionPersonal/controller/cambiarEstado.php",
@@ -247,10 +254,10 @@ $('#solicitudes').on('click', '.btn-rechazar', function () {
                 });
             } else {
                 Swal.fire({
-                    title:"¡Ups!",
+                    title: "¡Ups!",
                     text: "Los comentarios para cancelar una solicitud son importantes. Intenta de nuevo",
                     icon: "error"
-                  });
+                });
             }
         }
     });
@@ -348,13 +355,13 @@ function VerSolicitudesPendientesPorAprobar() {
                         width: '5%',
                         render: function (data, types, full, meta) {
 
-                            var desde=full.desde;
-                            var hoy = new Date(); 
-                            var aprobar="";
+                            var desde = full.desde;
+                            var hoy = new Date();
+                            var aprobar = "";
                             desde = desde.split('T')[0];
                             var fechaDesde = new Date(desde);
                             hoy.setHours(0, 0, 0, 0);
-                        
+
                             if (fechaDesde > hoy) {
                                 aprobar = `<li>
                                             <a class="dropdown-item bg-hover cursor-pointer btn-aprobar" 
@@ -367,7 +374,7 @@ function VerSolicitudesPendientesPorAprobar() {
                                             </a>
                                            </li>`;
                             }
-                           
+
 
 
                             let menu = `    <center>

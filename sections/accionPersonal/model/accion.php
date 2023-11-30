@@ -5,6 +5,7 @@ class mdlAccion
 
     // Variables globales
     public $conn;
+    public $infoEmail;
 
     // Constructores
     public function __construct()
@@ -77,7 +78,7 @@ class mdlAccion
     }
 
 
-    
+
     /* Agregar Acción de personal */
     public function buscarInfo($id)
     {
@@ -126,7 +127,6 @@ class mdlAccion
     public function agregarAccionPersonal($datos)
     {
 
-
         $desde = new DateTime($datos->desde);
         $desdeFormateado = $desde->format('Y-m-d H:i:s');
         $hasta = new DateTime($datos->hasta);
@@ -149,12 +149,26 @@ class mdlAccion
             $resultado = true;
 
             setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish');
+
             $desde = new DateTime($datos->desde); // o tu objeto DateTime existente
-            $desdeFormateado = strftime('%A, %d de %B de %Y', $desde->getTimestamp());
+            $desdeFormateado = formatDateTime($desde);
+
             $hasta = new DateTime($datos->hasta); // o tu objeto DateTime existente
-            $hastaFormateado = strftime('%A, %d de %B de %Y', $hasta->getTimestamp());
+            $hastaFormateado = formatDateTime($hasta);
+
             $solicitud = new DateTime($datos->solicitud); // o tu objeto DateTime existente
-            $solicitudFormateado = strftime('%A, %d de %B de %Y', $solicitud->getTimestamp());
+            $solicitudFormateado = formatDateTime($solicitud);
+
+            function formatDateTime($dateTime)
+            {
+                $formatter = new IntlDateFormatter(
+                    'es_ES',
+                    IntlDateFormatter::FULL,
+                    IntlDateFormatter::NONE
+                );
+                $formatter->setPattern('EEEE, dd \'de\' MMMM \'de\' yyyy');
+                return $formatter->format($dateTime);
+            }
 
 
             $de = "rrhh@honducafeproyectos.com";
@@ -172,12 +186,14 @@ class mdlAccion
             include '../../../assets/sendGrid/enviar_correo.php';
 
             // Llama a la función enviarCorreo
-            /*$resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
+            $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
             $resultado = $resultadoCorreo;
             $para =  $datos->correoJefe;
             $nombrePara =  $datos->nombreCompleto;
             $resultadoCorreo = enviarCorreo($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias);
-            $resultado = $resultadoCorreo; */
+            $resultado = $resultadoCorreo; 
+
+
         } catch (PDOException $e) {
             $resultado = $e->getMessage();
         }
@@ -199,6 +215,8 @@ class mdlAccion
         $stmt->closeCursor();
         return $resultado;
     }
+
+
     public function cambiarEstadoN2($id, $estado, $comentarios)
     {
         $sql = "EXEC rrhh.actualizarAccionPersonalYVacaciones   @idAccionPersonal =:id,
@@ -218,8 +236,65 @@ class mdlAccion
             $resultado = $e->getMessage();
         }
         $stmt->closeCursor();
-        return $resultado;
+      
+
+        /* Consulta para enviar el correo */
+        $sql = "SELECT * FROM rrhh.informacionCorreosN2 where idAccionPersonal=:id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        try {
+            $stmt->execute();
+            $infoEmail = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $resultado = $e->getMessage();
+        }
+
+        $stmt->closeCursor();
+
+
+        //echo($infoEmail[0]['idAccionPersonal']) ;
+
+        $de = "rrhh@honducafeproyectos.com";
+        $nombreDe = "Recursos Humanos Fundación COHONDUCAFE";
+        $para =  $infoEmail[0]['emailAsignado'];
+        $nombrePara =  $infoEmail[0]['nombreCompleto'] ;
+        $asunto = "Acción de Personal";
+        $nombreEmpleado = $infoEmail[0]['nombreCompleto'];
+        $motivo = $infoEmail[0]['accion'];
+        $fechaDesde = $infoEmail[0]['desde'];;
+        $fechaHasta = $infoEmail[0]['hasta'];;
+        $fechaSolicitud = $infoEmail[0]['fechaSolicitud'];
+        $dias = $infoEmail[0]['cantidadDias'];
+        $idAccion=intval($infoEmail[0]['idAccionPersonal']);
+        $idEmpledo=intval($infoEmail[0]['idEmpleado']);
+
+        include '../../../assets/sendGrid/enviar_correo_adjunto.php';
+
+        // Llama a la función enviarCorreo
+        $resultadoCorreo = enviarCorreoAdjunto($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias,$idAccion,$idEmpledo);
+        $resultado = $resultadoCorreo;
+       
+        
+        $para =  $infoEmail[0]['correoDirector'];
+        $nombrePara =  $infoEmail[0]['director'];
+        $resultadoCorreo = enviarCorreoAdjunto($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias,$idAccion,$idEmpledo);
+        $resultado = $resultadoCorreo;  
+ 
+
+
+
+
+        
+
     }
+
+
+
+
+
+
+
     public function cambiarEstado($id, $estado, $comentarios)
     {
         $fechaHoraActual = date('Y-m-d H:i:s');

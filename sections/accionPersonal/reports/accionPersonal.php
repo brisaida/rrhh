@@ -320,11 +320,13 @@
 
  
  
-    
+    $nombreArchivo = $accionPersonal[0]['idAccionPersonal'].".pdf";
+    $rutaArchivo = "../archivos/" . $nombreArchivo;
+    $pdf->Output('F', $rutaArchivo); // Guarda el archivo en el servidor
 
      
 
-    $pdf->Output('Acción de Personal - '.$nombreCompleto.'.pdf','I');
+    
 
 
 
