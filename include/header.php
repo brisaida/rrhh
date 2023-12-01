@@ -47,7 +47,7 @@ session_start();
                     <div class="row justify-content-between align-items-center">
 
                         <div class="col-auto">
-                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="inicio.php">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img">
                                     <title>Menu</title>
                                     <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>

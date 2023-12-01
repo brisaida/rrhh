@@ -20,22 +20,20 @@ $(document).ready(function () {
         var desde = $('#desde').val();
         var dias = parseInt($('#tipoAccion').find('option:selected').data('dias'));
         var reanuda = $('#reanuda').val();
-
-        console.log("Días a sumar: " + dias); // Para depuración
-
+    
         if (dias && !isNaN(dias)) {
             var fechaDesde = new Date(desde);
             var diasSumados = 0;
-
+    
             while (diasSumados < dias) {
                 fechaDesde.setDate(fechaDesde.getDate() + 1);
-
+    
                 if (fechaDesde.getDay() !== 0 && fechaDesde.getDay() !== 6) {
                     diasSumados++;
                 }
             }
-            fechaDesde.setUTCHours(7, 0, 0, 0); // Ajuste de hora a UTC -6
-            var nuevaFecha = fechaDesde.toISOString().slice(0, 19);
+    
+            var nuevaFecha = fechaDesde.toISOString().split('T')[0]; // Obteniendo solo la parte de la fecha
             $('#reanuda').val(nuevaFecha);
             console.log("Nueva fecha: " + nuevaFecha);
         } else if (desde && reanuda) {
@@ -43,6 +41,7 @@ $(document).ready(function () {
             $("#diasTomar").val(diasHabiles);
         }
     });
+    
 
 
     /* Agregar la información de los dias de permiso dependiendo del tipo de acción */
