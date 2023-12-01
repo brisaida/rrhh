@@ -4,18 +4,18 @@ require 'autoload.php';
 
 function enviarCorreoAdjunto($de, $nombreDe, $para, $nombrePara, $asunto, $nombreEmpleado, $motivo, $fechaDesde, $fechaHasta, $fechaSolicitud, $dias, $idAccion, $idEmpleado) {
     // Preparar el mensaje HTML
-    $mensaje = '  <h3><strong style="text-align:center">Solicitud de permiso</strong></h3>
-                  <p>Los detalles de la solicitud son los siguientes:</p>
+    $mensaje = '  <h3><strong style="text-align:center">PERMISO APROBADO</strong></h3>
+                  <p>Los detalles del la acción de personal son los siguientes:</p>
                   <ul>
                   <li><strong>Empleado: </strong>' . $nombreEmpleado . '. </li>
                   <li><strong>Tipo de Permiso: </strong>' . $motivo . '</li>
                   <li><strong>Cantidad de Días Solicitados: </strong>' . $dias . ' días</li><br>
                   <li><strong>Fecha de Inicio de Vacaciones: </strong>' . $fechaDesde . '</li>
-                  <li><strong>Fecha de Retorno Estimada: </strong>' . $fechaHasta . '</li>
+                  <li><strong>Fecha de Retorno: </strong>' . $fechaHasta . '</li>
                   <li><strong>Fecha de Solicitud: </strong>' . $fechaSolicitud . '</li>
                   </ul>
                   Esta solicitud se ha generado de acuerdo con las políticas y procedimientos internos de la empresa. <br>
-                  <p>No se requiere ninguna acción adicional por parte del empleado hasta recibir una confirmación o instrucciones adicionales.<br><br>';
+                  <p>Adjunto el formato de acción de personal el cuál deberá ser impreso, firmado y enviado a la persona encargada de RRHH.<br><br>';
 
     // Clave API de SendGrid
     $sendgridApiKey = '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'; 
