@@ -1,8 +1,17 @@
 $(document).ready(function () {
     
-    
-    const idRegistro = $("#user-dropdown-toggle").data('id');
+        var idRegistro;
+        const location = window.location.search;
+        const elementos = location.split("&");
+        if (parseInt(elementos[1])) {
+
+            idRegistro = parseInt(elementos[1]);
+        } else {
+            idRegistro = $("#user-dropdown-toggle").data('id');
+        }
+        
     cargarEmpleado(idRegistro)
+    console.log(idRegistro)
     $("#noHayFoto").hide();
     $("#noHayIdFront").hide();
     $("#noHayIdBack").hide();
@@ -190,8 +199,15 @@ $(document).ready(function () {
 
 
 $("#perfilPage").click(function () {
-    
-    window.location.href = `?section=editar`
+    var idRegistro;
+        const location = window.location.search;
+        const elementos = location.split("&");
+        if (parseInt(elementos[1])) {
+            idRegistro = parseInt(elementos[1]);
+            window.location.href = `?section=editar&${idRegistro}`
+        } else {
+            idRegistro = $("#user-dropdown-toggle").data('id');
+        }
 
 });
 

@@ -25,8 +25,17 @@ $(document).ready(function () {
 
     //* Llamados a la modificación de datos (Botones de modificar)
     $("#adjuntosPage").click(function () {
-
-        window.location.href = `?section=editarAdjuntos`
+        var idRegistro;
+        const location = window.location.search;
+        const elementos = location.split("&");
+        if (parseInt(elementos[1])) {
+            idRegistro = parseInt(elementos[1]);
+            window.location.href = `?section=editarAdjuntos&${idRegistro}`
+        } else {
+            idRegistro = $("#user-dropdown-toggle").data('id');
+        }
+        
+        
     });
     $("#telefonoEdit").click(function () {
 

@@ -309,7 +309,7 @@ function VerSolicitudesPendientes() {
                         width: '15%',
                         render: function (data, type, full, meta) {
                             const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-                            const fecha = new Date(full.desde);
+                            const fecha = new Date(full.fechaCreado);
                             const dia = fecha.getDate();
                             const mes = meses[fecha.getMonth()];
                             const año = fecha.getFullYear();

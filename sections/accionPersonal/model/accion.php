@@ -541,7 +541,8 @@ class mdlAccion
                         hd.idJefe,
                         (SELECT CONCAT(primerNombre,' ',segundoNombre,' ',primerApellido) FROM rrhh.empleados WHERE idEmpleado=hd.idJefe) as jefe,
                         hd.idTDR,
-                        pu.nombrePuesto
+                        pu.nombrePuesto,
+                        ap.fechaCreado
                 FROM rrhh.accionPersonal ap
                 INNER JOIN rrhh.tipoAccion tp ON tp.idAccion=ap.tipoAccion
                 INNER JOIN rrhh.empleados e ON e.idEmpleado=ap.idEmpleado
