@@ -310,9 +310,19 @@
     $pdf->SetFont('Arial','',9);
     $pdf->Cell(50, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",capitalizarPalabras($accionPersonal[0]['RHHH']) ), 'LTB', 0, 'L', 1);
     $pdf->Cell(50, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",formatearFechaEstampa($accionPersonal[0]['fechaAprobadoN2']) ), 'TRB', 0, 'L', 1);
- 
+
+
+
     
-    $pdf->Output('Accion de Personal '.capitalizarPalabras($datosGenerales[0]['nombreCompleto']).'.pdf','I');
+    
+
+
+
+ 
+ 
+    $nombreArchivo = $accionPersonal[0]['idAccionPersonal'].".pdf";
+    $rutaArchivo = "../archivos/" . $nombreArchivo;
+    $pdf->Output('F', $rutaArchivo); // Guarda el archivo en el servidor
 
      
 

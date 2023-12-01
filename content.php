@@ -45,6 +45,7 @@ if (empty($_GET['section'])) {
 
     /* Seguro Médico */
     $_GET['section'] == 'docs' && $permisos->validarPermiso('docs')  ?  include "./sections/seguro/views/docs.php" : false;
+    $_GET['section'] == 'prueba'   ?  include "./examples/guardarImagen.php" : false;
 }
 
 

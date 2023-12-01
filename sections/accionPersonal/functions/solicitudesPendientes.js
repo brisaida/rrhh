@@ -8,7 +8,13 @@ const idRegistro = $("#user-dropdown-toggle").data('id');
 
 //* DOCUMENT.READY
 $(document).ready(function () {
+
+
+
+
     VerSolicitudesPendientes()
+
+    
 });
 
 
@@ -24,6 +30,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var proyecto = $(this).data('proyecto');
     var jefe = capitalizar($(this).data('jefe'));
     var cargo = $(this).data('cargo');
+    var dias = $(this).data('dias');
     var comentarios = $(this).data('comentarios');
 
     // Llenar el modal con la información
@@ -71,6 +78,10 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                                 <tr>
                                     <th>Reanuda</th>
                                     <td>${reanuda}</td>
+                                </tr>
+                                <tr>
+                                    <th>Días ausente</th>
+                                    <td>${dias}</td>
                                 </tr>
                                 <tr>
                                     <th>Comentarios</th>
@@ -373,6 +384,7 @@ function VerSolicitudesPendientes() {
                                                         <li>
                                                             <a class="dropdown-item bg-hover cursor-pointer btn-verMas" 
                                                                 data-id="${full.idAccionPersonal}" 
+                                                                data-dias="${full.cantidadDias}" 
                                                                 data-comentarios="${full.comentarios}" 
                                                                 data-proyecto="${full.proyecto}" 
                                                                 data-jefe="${full.jefe}" 
@@ -429,6 +441,7 @@ function cargarTabla(tableID, data, columns) {
         aoColumns: columns,
         ordering: true,
         pageLength: 25,
+        "scrollY": "400px",
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",

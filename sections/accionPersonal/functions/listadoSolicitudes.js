@@ -31,6 +31,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var fechaN2 = $(this).data('fechan2');
     var fechaCancelado =  formatearFecha($(this).data('fechacancelado'));
     var estado = $(this).data('estado');
+    var dias = $(this).data('dias');
 
     // Llenar el modal con la información
     var modalBody = $('#detalleSolicitudModal').find('.modal-body');
@@ -126,6 +127,10 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                                     <tr>
                                         <th>Reanuda</th>
                                         <td>${reanuda}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dias ausente</th>
+                                        <td>${dias}</td>
                                     </tr>
                                     <tr>
                                         <th>Comentarios</th>
@@ -253,6 +258,7 @@ function listarMisSolicitud(id) {
                                         data-bs-placement="top" 
                                         title="Ver Más" 
                                         data-id="${full.idAccionPersonal}" 
+                                        data-dias="${full.cantidadDias}" 
                                         data-nombre="${full.nombreCompleto}" 
                                         data-comentarios="${full.comentarios}" 
                                         data-proyecto="${full.proyecto}" 
@@ -301,6 +307,7 @@ function cargarTabla(tableID, data, columns) {
     $(tableID).dataTable().fnDestroy();
     var params = {
         aaData: data,
+        
         aoColumns: columns,
         ordering: true,
         pageLength: 25,

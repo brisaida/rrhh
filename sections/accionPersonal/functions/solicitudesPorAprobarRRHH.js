@@ -26,6 +26,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
     var cargo = $(this).data('cargo');
     var comentarios = $(this).data('comentarios');
     var comentariosn1 = $(this).data('comentariosn1');
+    var dias = $(this).data('dias');
     var aprobado = capitalizar($(this).data('aprobado'));
 
     // Llenar el modal con la información
@@ -73,6 +74,10 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                                 <tr>
                                     <th>Reanuda</th>
                                     <td>${reanuda}</td>
+                                </tr>
+                                <tr>
+                                    <th>Días ausente</th>
+                                    <td>${dias}</td>
                                 </tr>
                                 <tr>
                                     <th>Comentarios</th>
@@ -134,10 +139,10 @@ $('#solicitudes').on('click', '.btn-aprobar', function () {
             } else {
                 // Primero, guardamos la referencia de la nueva ventana
                 var nuevaVentana = window.open(
-                    `./sections/accionPersonal/reports/accionPersonal.php?id=${accionSeleccionada.id}&idE=${idEmpleado}`
+                    `./sections/accionPersonal/reports/accionPersonalAdjunto.php?id=${accionSeleccionada.id}&idE=${idEmpleado}`
                 );
                 nuevaVentana.close();
-                window.history.back();
+                //window.history.back();
                  
                 $.ajax({
                     type: "POST",
@@ -162,7 +167,7 @@ $('#solicitudes').on('click', '.btn-aprobar', function () {
                             timer: 1500
                         });
                         setTimeout(function () {
-                            location.reload();
+                            location.reload("?section=solicitudesPorAprobar");
                         }, 1500); 
 
                     },
@@ -390,6 +395,7 @@ function VerSolicitudesPendientesPorAprobar() {
                                                         <li>
                                                             <a class="dropdown-item bg-hover cursor-pointer btn-verMas" 
                                                                 data-id="${full.idAccionPersonal}" 
+                                                                data-dias="${full.cantidadDias}" 
                                                                 data-comentarios="${full.comentarios}" 
                                                                 data-proyecto="${full.proyecto}" 
                                                                 data-jefe="${full.jefe}" 
@@ -448,6 +454,8 @@ function cargarTabla(tableID, data, columns) {
         aoColumns: columns,
         ordering: true,
         pageLength: 25,
+        "scrollY": "400px",
+
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",

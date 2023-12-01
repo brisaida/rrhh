@@ -91,14 +91,14 @@
 									<div class="col-md">
 										<div class=" mb-3">
 											<label for="desde">Rige desde</label>
-											<input type="datetime-local" class="form-control " id="desde">
+											<input type="date" class="form-control " id="desde">
 										</div>
 									</div>
 									<!-- Reanuda -->
 									<div class="col-md">
 										<div class=" mb-3">
 											<label for="reanuda">Reanuda</label>
-											<input type="datetime-local" class="form-control " id="reanuda">
+											<input type="date" class="form-control " id="reanuda">
 										</div>
 									</div>
 									<!-- Días a tomar -->

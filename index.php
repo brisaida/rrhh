@@ -3,7 +3,7 @@
 
 
 //$idUsuario =isset($_GET['i']) ? $_GET['i'] : null;
-$idUsuario = 171;
+$idUsuario = 170;
 
 if (intval($idUsuario) > 0) {
 

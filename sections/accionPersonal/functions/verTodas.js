@@ -283,7 +283,7 @@ function VerSolicitudesAprobadasCanceladas() {
                     },
                     {
                         className: "text-center",
-                        mDataProp: "fechaCreado",
+                        mDataProp: "desde",
 
                         width: '15%',
                         render: function (data, type, full, meta) {
@@ -293,6 +293,30 @@ function VerSolicitudesAprobadasCanceladas() {
                             const mes = meses[fecha.getMonth()];
                             const año = fecha.getFullYear();
                             return `${dia}-${mes}-${año}`;
+                        },
+                    },
+                    {
+                        className: "text-center",
+                        mDataProp: "hasta",
+
+                        width: '15%',
+                        render: function (data, type, full, meta) {
+                            const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+                            const fecha = new Date(full.desde);
+                            const dia = fecha.getDate();
+                            const mes = meses[fecha.getMonth()];
+                            const año = fecha.getFullYear();
+                            return `${dia}-${mes}-${año}`;
+                        },
+                    },
+                    {
+                        className: "text-center",
+                        mDataProp: "hasta",
+
+                        width: '15%',
+                        render: function (data, type, full, meta) {
+                            const dias = (full.cantidadDias);
+                            return `${dias} días`;
                         },
                     },
                     {
@@ -377,7 +401,36 @@ function VerSolicitudesAprobadasCanceladas() {
                                             </a>
                                         </li>`
                             } else if (full.estado == 3) {
-                                imprimir = `  <li><hr class="dropdown-divider"></li>
+                                imprimir = `  <li>
+                                <a  class="dropdown-item bg-hover cursor-pointer btn-verMas"  
+                                    data-id="${full.idAccionPersonal}" 
+                                    data-nombre="${full.nombreCompleto}" 
+                                    data-solicitud="${full.fechaSolicitud}" 
+                                    data-comentarios="${full.comentarios}" 
+                                    data-desde="${full.desde}" 
+                                    data-hasta="${full.hasta}" 
+                                    data-proyecto="${full.proyecto}" 
+                                    data-jefe="${full.jefe}" 
+                                    data-estado="${full.estado}" 
+                                    data-cargo="${full.nombrePuesto}" 
+                                    data-nombren1="${full.nombreN1}" 
+                                    data-nombren2="${full.nombreN2}" 
+                                    data-nombrecancelado="${full.nombrecancelado}" 
+                                    data-fechan1="${full.fechaAprobadoN1}" 
+                                    data-fechan2="${full.fechaAprobadoN2}" 
+                                    data-fechacancelado="${full.fechaCancelado}" 
+                                    data-comentariosn1="${full.comentariosN1}" 
+                                    data-comentariosn2="${full.comentariosN2}" 
+                                    data-comentariosc="${full.comentariosCancelado}" 
+                                    data-idEmpleado="${full.idEmpleado}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                    </svg>
+                                    Ver Más
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
                                             <li>
                                                 <a class="dropdown-item bg-hover cursor-pointer btn-imprimir" data-id="${full.idAccionPersonal}" data-idEmpleado="${full.idEmpleado}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
@@ -428,7 +481,6 @@ function VerSolicitudesAprobadasCanceladas() {
 
             } else {
                 // swal.fire("Empleados","El productor no se encuentra registrado en sistema","info");
-
             }
 
 
@@ -444,6 +496,8 @@ function cargarTabla(tableID, data, columns) {
         aoColumns: columns,
         ordering: true,
         pageLength: 25,
+        "scrollY": "400px",
+
         language: {
             sProcessing: "Procesando...",
             sLengthMenu: "Mostrar _MENU_ registros",

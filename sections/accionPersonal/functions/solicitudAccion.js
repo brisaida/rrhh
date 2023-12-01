@@ -10,6 +10,10 @@ $(document).ready(function () {
     cargarEncabezado(idRegistro)
     cargarTipoAccion()
 
+    $('#desde, #reanuda').on('keydown paste', function(event){
+        event.preventDefault(); // Esto evitará la entrada de teclado o pegado
+    });
+
 
     // Evento cuando cambia el valor de "desde" o "reanuda"
     $('#desde, #reanuda').change(function () {

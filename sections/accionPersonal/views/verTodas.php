@@ -32,7 +32,9 @@
 										<th class="cell">No. de Solicitud</th>
 										<th class="cell">Empleado</th>
 										<th class="cell">Tipo de Solicitud</th>
-										<th class="cell">Fecha de Solicitud</th>
+										<th class="cell">Desde</th>
+										<th class="cell">Reanuda</th>
+										<th class="cell">Cantidad de Días</th>
 										<th class="cell">Estado</th>
 										<th class="cell">Acciones</th>
 									</tr>

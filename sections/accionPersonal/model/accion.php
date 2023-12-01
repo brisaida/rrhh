@@ -128,9 +128,9 @@ class mdlAccion
     {
 
         $desde = new DateTime($datos->desde);
-        $desdeFormateado = $desde->format('Y-m-d H:i:s');
+        $desdeFormateado = $desde->format('Y-m-d');
         $hasta = new DateTime($datos->hasta);
-        $hastaFormateado = $hasta->format('Y-m-d H:i:s');
+        $hastaFormateado = $hasta->format('Y-m-d');
 
         $sql = "INSERT INTO rrhh.accionPersonal(idEmpleado,fechaSolicitud,tipoAccion,cantidadDias,Comentarios,desde,hasta,usuarioCreado)
                 VALUES(:id,:fechaSolicitud,:tipoAccion,:cantidadDias,:Comentarios,:desde,:hasta,:usuarioCreado)";

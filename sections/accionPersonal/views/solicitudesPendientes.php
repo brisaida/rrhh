@@ -26,7 +26,7 @@
 				<div class="app-card app-card-orders-table shadow-sm mb-5">
 					<div class="app-card-body">
 						<div class="table-responsive pt-3 ">
-							<table class="table mb-3 text-left  " id="solicitudes">
+							<table class="table mb-3 text-left  " id="solicitudes" >
 								<thead>
 									<tr>
 										<th class="cell">No. de Solicitud</th>
