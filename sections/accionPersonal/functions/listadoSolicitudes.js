@@ -129,7 +129,7 @@ $('#solicitudes').on('click', '.btn-verMas', function () {
                                         <td>${reanuda}</td>
                                     </tr>
                                     <tr>
-                                        <th>Dias ausente</th>
+                                        <th>Cantidad de días</th>
                                         <td>${dias}</td>
                                     </tr>
                                     <tr>
