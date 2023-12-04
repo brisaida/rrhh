@@ -94,7 +94,8 @@
 
     
     // Segunda celda con borde inferior y derecho
-    $pdf->Cell(80, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT", capitalizarPalabras($datosGenerales[0]['proyecto']) . ' - ' . capitalizarPalabras($datosGenerales[0]['Descripcion'])), 'BLR', 0, 'C', 1);
+    $cadena=capitalizarPalabras($datosGenerales[0]['proyecto']) . ' - ' . capitalizarPalabras($datosGenerales[0]['Descripcion']);
+    $pdf->Cell(80, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $cadena), 'BLR', 0, 'C', 1);
 
     
 
@@ -156,7 +157,7 @@
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
     $pdf->SetX(20);
-    $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",formatearFechaHR($accionPersonal[0]['desde']) ), 1, 0, 'C', 1);
+    $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",($accionPersonal[0]['desde']) ), 1, 0, 'C', 1);
     $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'7:00 AM' ), 1, 0, 'C', 1);
  
     $pdf->Ln();
@@ -172,7 +173,7 @@
     $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','',9);
     $pdf->SetX(20);
-    $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",formatearFechaHR($accionPersonal[0]['hasta']) ), 1, 0, 'C', 1);
+    $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",($accionPersonal[0]['hasta']) ), 1, 0, 'C', 1);
     $pdf->Cell(85, 6, iconv("UTF-8", "ISO-8859-1//TRANSLIT",'7:00 AM' ), 1, 0, 'C', 1);
 
  
